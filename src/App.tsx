@@ -3,7 +3,8 @@ import { Home } from "./components/Home";
 import { Catalog } from "./components/Catalog";
 import { AboutUs } from "./components/AboutUs";
 import { FeedbackRequestForm } from "./components/FeedbackRequestForm";
-import { HardDrive, HelpCircle, Mail, Phone, ExternalLink, ShieldAlert, Cpu } from "lucide-react";
+import { HardDrive, HelpCircle, Mail, Phone, ExternalLink, ShieldAlert } from "lucide-react";
+import { SkySwitchLogo } from "./components/SkySwitchLogo";
 
 type ActiveTab = "home" | "catalog" | "about" | "contact";
 
@@ -47,13 +48,11 @@ export default function App() {
           {/* Logo Brand Brand mark */}
           <button 
             onClick={() => scrollSection("hero-section")}
-            className="flex items-center gap-3 hover:opacity-90 transition-all text-left focus:outline-none cursor-pointer"
+            className="flex items-center gap-3 hover:opacity-90 transition-all text-left focus:outline-none cursor-pointer group"
           >
-            <div className="bg-gradient-to-tr from-blue-600 to-cyan-500 p-2.5 rounded-xl shadow-lg shadow-blue-500/10 text-slate-950">
-              <Cpu size={22} className="stroke-[2.5]" />
-            </div>
+            <SkySwitchLogo size={46} interactive={false} />
             <div>
-              <h1 className="text-white text-lg sm:text-xl font-extrabold font-display tracking-tight leading-none">
+              <h1 className="text-white text-lg sm:text-xl font-extrabold font-display tracking-tight leading-none group-hover:text-cyan-400 transition-colors">
                 SkySwitch
               </h1>
               <p className="text-[10px] text-cyan-400 font-mono tracking-widest uppercase mt-1">
@@ -173,9 +172,7 @@ export default function App() {
             {/* Logo description */}
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="bg-[#16223f] p-2 rounded-xl text-cyan-400">
-                  <Cpu size={16} />
-                </div>
+                <SkySwitchLogo size={36} interactive={false} />
                 <span className="text-white text-base font-extrabold font-display">SkySwitch Technologies</span>
               </div>
               <p className="text-xs leading-relaxed max-w-sm">
