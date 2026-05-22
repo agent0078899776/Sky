@@ -60,7 +60,7 @@ export const Catalog: React.FC<CatalogProps> = ({
   activeSearchQuery,
   setActiveSearchQuery,
 }) => {
-  // Collapsed categories state. Initially let all state be open
+  // Collapsed categories state. Initially let categories be collapsed by default
   const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
   // Selected models for comparison
   const [comparedModels, setComparedModels] = useState<Record<string, boolean>>({});
@@ -82,10 +82,13 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   // Toggle category fold
   const toggleCategory = (catId: string) => {
-    setCollapsedCategories((prev) => ({
-      ...prev,
-      [catId]: !prev[catId],
-    }));
+    setCollapsedCategories((prev) => {
+      const currentVal = prev[catId] ?? true;
+      return {
+        ...prev,
+        [catId]: !currentVal,
+      };
+    });
   };
 
   // Toggle model comparison selection
@@ -262,7 +265,7 @@ export const Catalog: React.FC<CatalogProps> = ({
           </div>
         ) : (
           filteredCategories.map((category) => {
-            const isFolded = collapsedCategories[category.id] || false;
+            const isFolded = collapsedCategories[category.id] ?? true;
             return (
               <div
                 key={category.id}
