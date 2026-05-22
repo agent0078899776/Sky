@@ -494,7 +494,7 @@ export const Catalog: React.FC<CatalogProps> = ({
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="relative w-full max-w-7xl bg-[#0d1527] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-5xl bg-[#0d1527] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
             >
               {/* Close pin */}
               <button
@@ -674,7 +674,7 @@ export const Catalog: React.FC<CatalogProps> = ({
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="relative w-full max-w-[75vw] xl:max-w-[1200px] bg-[#0d1527] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+              className="relative w-full max-w-4xl bg-[#0d1527] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
             >
               {/* Close pin */}
               <button
@@ -734,7 +734,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                 </div>
 
                 {/* Dynamic SVG Schematic Drawing Area */}
-                <div className="lg:col-span-7 bg-[#060a14] p-6 flex flex-col justify-between min-h-[420px]">
+                <div className="lg:col-span-7 bg-[#060a14] p-6 flex flex-col justify-between min-h-[480px]">
                   {/* Mode Selector Tabs */}
                   <div className="flex flex-wrap items-center justify-between gap-4 mb-4 border-b border-slate-800 pb-3">
                     <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
@@ -792,12 +792,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                   {specViewTab === "photo" ? (
                     <div className="flex-1 flex flex-col items-center justify-center p-4 bg-slate-950/40 rounded-xl border border-slate-800/60 min-h-[300px]">
                       {isPhotoAvailable ? (
-                        <div className="relative max-w-full max-h-[290px] rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-900 border border-slate-800">
+                        <div className="relative max-w-full max-h-[380px] rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-900 border border-slate-800">
                           <img
                             src={productPhotoUrl}
                             alt={`${activeSpecProduct.model} components view`}
                             referrerPolicy="no-referrer"
-                            className="max-h-[290px] max-w-full object-contain transition-transform duration-300 hover:scale-105"
+                            className="max-h-[380px] max-w-full object-contain transition-transform duration-300 hover:scale-105"
                             onError={() => {
                               setPhotoAttempt((prev) => {
                                 const stage = prev[currentModel] || "local";
@@ -838,12 +838,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                       className="origin-center flex items-center justify-center"
                     >
                       {activeSpecProduct && isSchematicImageAvailable ? (
-                        <div className="relative max-w-full max-h-[290px] rounded-lg overflow-hidden flex items-center justify-center bg-slate-950 p-2">
+                        <div className="relative max-w-full max-h-[380px] rounded-lg overflow-hidden flex items-center justify-center bg-slate-950 p-2">
                           <img
                             src={schematicUrl}
                             alt={`${currentModel} internal schematic`}
                             referrerPolicy="no-referrer"
-                            className="max-h-[290px] max-w-full object-contain select-none pointer-events-none"
+                            className="max-h-[380px] max-w-full object-contain select-none pointer-events-none"
                             onError={() => {
                               setSchematicAttempt((prev) => {
                                 const stage = prev[currentModel] || "plural";
