@@ -41,12 +41,12 @@ const renderTempRange = (tempStr: string) => {
     const val = parts.slice(1).join(":").trim();
     return (
       <div className="flex flex-col gap-0.5 leading-tight items-center text-center">
-        <span className="text-[10px] tracking-wider text-slate-400 font-sans truncate w-full" title={label}>{label}:</span>
-        <span className="font-mono text-xs text-slate-200 font-medium whitespace-nowrap">{val}</span>
+        <span className="text-xs tracking-wider text-slate-400 font-sans truncate w-full" title={label}>{label}:</span>
+        <span className="font-mono text-sm text-slate-200 font-medium whitespace-nowrap">{val}</span>
       </div>
     );
   }
-  return <span className="font-mono text-xs text-slate-200 font-medium whitespace-nowrap text-center block w-full">{tempStr}</span>;
+  return <span className="font-mono text-sm text-slate-200 font-medium whitespace-nowrap text-center block w-full">{tempStr}</span>;
 };
 
 interface CatalogProps {
@@ -307,18 +307,18 @@ export const Catalog: React.FC<CatalogProps> = ({
                     >
                       <table className="w-full text-left border-collapse min-w-[1150px] table-fixed">
                         <thead>
-                          <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-xs font-semibold tracking-wider">
+                          <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
                             <th className="py-3.5 px-1.5 w-[36px] text-center align-middle" title="Compare">
                               <Shuffle size={12} className="mx-auto opacity-80" />
                             </th>
-                            <th className="py-3.5 px-3 w-[115px] text-center align-middle">Product Model</th>
-                            <th className="py-3.5 px-3 w-[145px] text-center align-middle">Dimensions (mm)</th>
-                            <th className="py-3.5 px-3 w-[115px] text-center align-middle">Temperature range (℃)</th>
-                            <th className="py-3.5 px-3 w-[85px] text-center align-middle">Contact Form</th>
-                            <th className="py-3.5 px-3 w-[280px] text-center align-middle">Vibration</th>
-                            <th className="py-3.5 px-3 w-[165px] text-center align-middle">Contact Load & Lifetime</th>
-                            <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
-                            <th className="py-3.5 px-1.5 text-center w-[90px] align-middle">Action</th>
+                            <th className="py-3.5 px-3 w-[125px] text-center align-middle">Product Model</th>
+                            <th className="py-3.5 px-3 w-[155px] text-center align-middle">Dimensions (mm)</th>
+                            <th className="py-3.5 px-3 w-[125px] text-center align-middle">Temperature range (℃)</th>
+                            <th className="py-3.5 px-3 w-[95px] text-center align-middle">Contact Form</th>
+                            <th className="py-3.5 px-3 w-[290px] text-center align-middle">Vibration</th>
+                            <th className="py-3.5 px-3 w-[175px] text-center align-middle">Contact Load & Lifetime</th>
+                            <th className="py-3.5 px-3 w-[135px] text-center align-middle">Benchmarking Model</th>
+                            <th className="py-3.5 px-1.5 text-center w-[100px] align-middle">Action</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30 text-sm">
@@ -359,7 +359,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                         />
                                       </div>
                                     )}
-                                    <span className="text-xs">{p.model}</span>
+                                    <span className="text-sm">{p.model}</span>
                                   </div>
                                 </td>
 
@@ -369,8 +369,8 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     const { size, desc } = formatDimensions(p.dimensions);
                                     return (
                                       <div className="flex flex-col items-center text-center">
-                                        <span className="font-mono font-bold text-white text-xs whitespace-nowrap">{size || p.dimensions}</span>
-                                        {size && <span className="text-[10px] text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
+                                        <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || p.dimensions}</span>
+                                        {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                       </div>
                                     );
                                   })()}
@@ -382,7 +382,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 </td>
 
                                 {/* Contact configuration */}
-                                <td className="py-3.5 px-3 text-slate-200 text-xs font-medium whitespace-nowrap align-middle text-center">
+                                <td className="py-3.5 px-3 text-slate-200 text-sm font-semibold whitespace-nowrap align-middle text-center">
                                   {cleanContactForm(p.contactForm)}
                                 </td>
 
@@ -390,7 +390,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 <td className="py-3.5 px-3 align-middle text-center">
                                   <div className="flex flex-col gap-1 items-center text-center max-w-full">
                                     {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
-                                      <span key={idx} className="text-[11px] text-slate-300 leading-tight font-sans block">
+                                      <span key={idx} className="text-xs sm:text-sm text-slate-300 leading-tight font-sans block">
                                         {vPart}
                                       </span>
                                     ))}
@@ -404,18 +404,18 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     return (
                                       <div className="flex flex-col gap-1 items-center text-center max-w-full">
                                         {load.split(/\s*\|\s*/).map((loadPart, idx) => (
-                                          <span key={idx} className="font-sans text-xs text-white font-semibold leading-tight block">
+                                          <span key={idx} className="font-sans text-sm text-white font-semibold leading-tight block">
                                             {loadPart}
                                           </span>
                                         ))}
-                                        {life && <span className="text-[10px] text-slate-400 mt-0.5 font-mono leading-tight block">{life}</span>}
+                                        {life && <span className="text-xs text-slate-400 mt-0.5 font-mono leading-tight block">{life}</span>}
                                       </div>
                                     );
                                   })()}
                                 </td>
 
                                 {/* Benchmarking crosses */}
-                                <td className="py-3.5 px-3 text-slate-300 text-xs italic font-sans align-middle text-center" title={p.benchmarking}>
+                                <td className="py-3.5 px-3 text-slate-300 text-sm italic font-sans align-middle text-center" title={p.benchmarking}>
                                   {p.benchmarking}
                                 </td>
 
@@ -426,7 +426,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                       setActiveSpecProduct(p);
                                       resetZoomAndDrag();
                                     }}
-                                    className="inline-flex items-center justify-center w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-[11px] font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
+                                    className="inline-flex items-center justify-center w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
                                   >
                                     View Specs
                                   </button>
@@ -520,9 +520,9 @@ export const Catalog: React.FC<CatalogProps> = ({
 
               {/* Param table */}
               <div className="overflow-auto flex-1 p-6">
-                <table className="w-full border-collapse border border-slate-800/90 font-sans text-xs table-fixed">
+                <table className="w-full border-collapse border border-slate-800/90 font-sans text-sm table-fixed">
                   <thead>
-                    <tr className="bg-slate-900/90 border-b border-slate-800 text-slate-400 font-mono tracking-wider text-[11px] uppercase">
+                    <tr className="bg-slate-900/90 border-b border-slate-800 text-slate-400 font-mono tracking-wider text-xs uppercase">
                       <th className="p-4 border-r border-slate-800 w-[180px] text-center align-middle">Parameters</th>
                       {selectedProductsForComparison.map((p) => {
                         const colWidth = `calc((100% - 180px) / ${selectedProductsForComparison.length})`;
@@ -596,7 +596,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                         >
                           <div className="flex flex-col items-center justify-center text-center gap-1">
                             {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
-                              <span key={idx} className="block text-[11px] leading-tight">
+                              <span key={idx} className="block text-xs leading-tight">
                                 {vPart}
                               </span>
                             ))}
@@ -619,11 +619,11 @@ export const Catalog: React.FC<CatalogProps> = ({
                           >
                             <div className="flex flex-col items-center justify-center text-center gap-1">
                               {load.split(/\s*\|\s*/).map((loadPart, idx) => (
-                                <span key={idx} className="font-sans text-xs font-semibold leading-tight block">
+                                <span key={idx} className="font-sans text-sm font-semibold leading-tight block">
                                   {loadPart}
                                 </span>
                               ))}
-                              {life && <span className="text-[10px] text-slate-400 font-mono leading-tight block">{life}</span>}
+                              {life && <span className="text-xs text-slate-400 font-mono leading-tight block">{life}</span>}
                             </div>
                           </td>
                         );
