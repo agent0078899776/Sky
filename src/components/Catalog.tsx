@@ -402,9 +402,13 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   {(() => {
                                     const { load, life } = formatContactLoad(p.contactLoad);
                                     return (
-                                      <div className="flex flex-col items-center text-center">
-                                        <span className="font-sans text-xs text-white font-semibold whitespace-nowrap">{load}</span>
-                                        {life && <span className="text-[10px] text-slate-400 mt-0.5 font-mono whitespace-nowrap">{life}</span>}
+                                      <div className="flex flex-col gap-1 items-center text-center max-w-full">
+                                        {load.split(/\s*\|\s*/).map((loadPart, idx) => (
+                                          <span key={idx} className="font-sans text-xs text-white font-semibold leading-tight block">
+                                            {loadPart}
+                                          </span>
+                                        ))}
+                                        {life && <span className="text-[10px] text-slate-400 mt-0.5 font-mono leading-tight block">{life}</span>}
                                       </div>
                                     );
                                   })()}
@@ -613,9 +617,13 @@ export const Catalog: React.FC<CatalogProps> = ({
                               mismatchKeys.contactLoad ? "text-amber-400 font-bold" : "text-white"
                             }`}
                           >
-                            <div className="flex flex-col items-center justify-center text-center gap-0.5">
-                              <span className="font-sans text-xs font-semibold">{load}</span>
-                              {life && <span className="text-[10px] text-slate-400 font-mono">{life}</span>}
+                            <div className="flex flex-col items-center justify-center text-center gap-1">
+                              {load.split(/\s*\|\s*/).map((loadPart, idx) => (
+                                <span key={idx} className="font-sans text-xs font-semibold leading-tight block">
+                                  {loadPart}
+                                </span>
+                              ))}
+                              {life && <span className="text-[10px] text-slate-400 font-mono leading-tight block">{life}</span>}
                             </div>
                           </td>
                         );
