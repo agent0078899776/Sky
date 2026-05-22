@@ -308,7 +308,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J3Z25A",
-        image: "https://imgur.com/DYeovLh.jpg",
+        image: "https://imgur.com/DYevLh2.jpg",
         dimensions: "26.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "3PDT (3 Form C)",
@@ -669,7 +669,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J1H100A",
-        image: "https://imgur.com/YVNPEcF.jpg",
+        image: "https://imgur.com/YVNPecF.jpg",
         dimensions: "70.0 x 42.5 x 68.0 Heavy Hermetic",
         tempRange: "-55°C ~ 85°C",
         contactForm: "1H (1 Form A)",
@@ -916,7 +916,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1D50-0.2A",
-        image: "https://imgur.com/OWROBMe.jpg",
+        image: "https://imgur.com/OWORBMe.jpg",
         dimensions: "5.20 x 7.60 x 4.20 Ceramic DIP4 Hermetic",
         tempRange: "-55°C ~ 105°C",
         contactForm: "1 Form B (SPST-NC)",
