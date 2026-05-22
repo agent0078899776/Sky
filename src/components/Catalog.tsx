@@ -305,20 +305,20 @@ export const Catalog: React.FC<CatalogProps> = ({
                       transition={{ duration: 0.2 }}
                       className="overflow-x-auto border-t border-slate-800/80"
                     >
-                      <table className="w-full text-left border-collapse min-w-[1150px] table-fixed">
+                      <table className="w-full text-left border-collapse min-w-[1070px] table-fixed">
                         <thead>
                           <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
                             <th className="py-3.5 px-1.5 w-[36px] text-center align-middle" title="Compare">
                               <Shuffle size={12} className="mx-auto opacity-80" />
                             </th>
-                            <th className="py-3.5 px-3 w-[125px] text-center align-middle">Product Model</th>
-                            <th className="py-3.5 px-3 w-[155px] text-center align-middle">Dimensions (mm)</th>
-                            <th className="py-3.5 px-3 w-[125px] text-center align-middle">Temperature range (℃)</th>
-                            <th className="py-3.5 px-3 w-[95px] text-center align-middle">Contact Form</th>
-                            <th className="py-3.5 px-3 w-[290px] text-center align-middle">Vibration</th>
-                            <th className="py-3.5 px-3 w-[175px] text-center align-middle">Contact Load & Lifetime</th>
-                            <th className="py-3.5 px-3 w-[135px] text-center align-middle">Benchmarking Model</th>
-                            <th className="py-3.5 px-1.5 text-center w-[100px] align-middle">Action</th>
+                            <th className="py-3.5 px-3 w-[115px] text-center align-middle">Product Model</th>
+                            <th className="py-3.5 px-3 w-[130px] text-center align-middle">Dimensions (mm)</th>
+                            <th className="py-3.5 px-3 w-[115px] text-center align-middle">Temperature range (℃)</th>
+                            <th className="py-3.5 px-3 w-[80px] text-center align-middle">Contact Form</th>
+                            <th className="py-3.5 px-3 w-[230px] text-center align-middle">Vibration</th>
+                            <th className="py-3.5 px-3 w-[150px] text-center align-middle">Contact Load & Lifetime</th>
+                            <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
+                            <th className="py-3.5 px-1.5 text-center w-[90px] align-middle">Action</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30 text-sm">
@@ -426,7 +426,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                       setActiveSpecProduct(p);
                                       resetZoomAndDrag();
                                     }}
-                                    className="inline-flex items-center justify-center w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
+                                    className="inline-flex items-center justify-center w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-[11px] font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
                                   >
                                     View Specs
                                   </button>
