@@ -31,6 +31,9 @@ export const Catalog: React.FC<CatalogProps> = ({
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [specViewTab, setSpecViewTab] = useState<"photo" | "schematic">("photo");
+  const [photoAttempt, setPhotoAttempt] = useState<Record<string, "local" | "fallback" | "failed">>({});
+  const [schematicAttempt, setSchematicAttempt] = useState<Record<string, "plural" | "singular" | "failed">>({});
 
   // Toggle category fold
   const toggleCategory = (catId: string) => {
@@ -134,7 +137,31 @@ export const Catalog: React.FC<CatalogProps> = ({
     setZoomScale(1);
     setDragPos({ x: 0, y: 0 });
     setSimulatedCoilOn(false);
+    setSpecViewTab("photo");
   };
+
+  const currentModel = activeSpecProduct?.model || "";
+  const currentPhotoStage = photoAttempt[currentModel] || "local";
+
+  let productPhotoUrl = "";
+  if (currentPhotoStage === "local") {
+    productPhotoUrl = `/Sky/images/${currentModel}.webp`;
+  } else if (currentPhotoStage === "fallback") {
+    productPhotoUrl = activeSpecProduct?.image || "";
+  }
+
+  const isPhotoAvailable = activeSpecProduct ? (currentPhotoStage !== "failed" && (currentPhotoStage !== "fallback" || !!activeSpecProduct.image)) : false;
+
+  const currentSchematicStage = schematicAttempt[currentModel] || "plural";
+
+  let schematicUrl = "";
+  if (currentSchematicStage === "plural") {
+    schematicUrl = `/Sky/schematics/${currentModel}.webp`;
+  } else if (currentSchematicStage === "singular") {
+    schematicUrl = `/Sky/schematic/${currentModel}.webp`;
+  }
+
+  const isSchematicImageAvailable = activeSpecProduct ? (currentSchematicStage !== "failed") : false;
 
   return (
     <div className="space-y-8">
@@ -271,7 +298,19 @@ export const Catalog: React.FC<CatalogProps> = ({
 
                                 {/* Model identifier */}
                                 <td className="py-3px px-4 font-mono font-bold text-cyan-400 select-all">
-                                  {p.model}
+                                  <div className="flex items-center gap-2">
+                                    {p.image && (
+                                      <div className="h-8 w-8 rounded bg-slate-900 border border-slate-800 overflow-hidden flex items-center justify-center shrink-0">
+                                        <img
+                                          src={p.image}
+                                          alt={p.model}
+                                          referrerPolicy="no-referrer"
+                                          className="object-cover h-full w-full"
+                                        />
+                                      </div>
+                                    )}
+                                    <span>{p.model}</span>
+                                  </div>
                                 </td>
 
                                 {/* Package designators */}
@@ -555,7 +594,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                 <X size={20} />
               </button>
 
-              <div className="p-5 sm:p-6 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="p-5 sm:p-6 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pr-16 sm:pr-20">
                 <div>
                   <span className="inline-flex items-center gap-1 bg-blue-500/10 text-blue-400 text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded font-bold font-mono">
                     Specifications simulation
@@ -627,197 +666,280 @@ export const Catalog: React.FC<CatalogProps> = ({
                 </div>
 
                 {/* Dynamic SVG Schematic Drawing Area */}
-                <div className="lg:col-span-7 bg-[#060a14] p-6 flex flex-col justify-between min-h-[350px]">
-                  {/* Schematic controllers */}
-                  <div className="flex items-center justify-between gap-4 mb-4">
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-wider font-mono">Vector Schematic (Scalable)</p>
-                    <div className="flex items-center gap-1.5 bg-[#0d1527] p-1 rounded-lg border border-slate-800">
+                <div className="lg:col-span-7 bg-[#060a14] p-6 flex flex-col justify-between min-h-[420px]">
+                  {/* Mode Selector Tabs */}
+                  <div className="flex flex-wrap items-center justify-between gap-4 mb-4 border-b border-slate-800 pb-3">
+                    <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
                       <button
-                        onClick={() => setZoomScale((z) => Math.max(0.5, z - 0.1))}
-                        className="p-1 hover:bg-[#16223f] text-slate-300 rounded transition-colors"
-                        title="Zoom out"
+                        onClick={() => setSpecViewTab("photo")}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                          specViewTab === "photo" ? "bg-cyan-500 text-slate-950 font-bold" : "text-slate-400 hover:text-white"
+                        }`}
                       >
-                        <ZoomOut size={14} />
-                      </button>
-                      <span className="text-[11px] font-mono text-slate-400 px-1">{Math.round(zoomScale * 100)}%</span>
-                      <button
-                        onClick={() => setZoomScale((z) => Math.min(2.5, z + 0.1))}
-                        className="p-1 hover:bg-[#16223f] text-slate-300 rounded transition-colors"
-                        title="Zoom in"
-                      >
-                        <ZoomIn size={14} />
+                        <Eye size={13} />
+                        Component Photo
                       </button>
                       <button
-                        onClick={() => {
-                          setZoomScale(1);
-                          setDragPos({ x: 0, y: 0 });
-                        }}
-                        className="p-1 text-[10px] font-mono hover:bg-[#16223f] text-slate-400 rounded transition-all px-1.5"
+                        onClick={() => setSpecViewTab("schematic")}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                          specViewTab === "schematic" ? "bg-cyan-500 text-slate-950 font-bold" : "text-slate-400 hover:text-white"
+                        }`}
                       >
-                        Reset
+                        <Zap size={13} />
+                        Internal Schematic
                       </button>
                     </div>
+
+                    {specViewTab === "schematic" && (
+                      <div className="flex items-center gap-1.5 bg-[#0d1527] p-1 rounded-lg border border-slate-800">
+                        <button
+                          onClick={() => setZoomScale((z) => Math.max(0.5, z - 0.1))}
+                          className="p-1 hover:bg-[#16223f] text-slate-300 rounded transition-colors"
+                          title="Zoom out"
+                        >
+                          <ZoomOut size={14} />
+                        </button>
+                        <span className="text-[11px] font-mono text-slate-400 px-1">{Math.round(zoomScale * 100)}%</span>
+                        <button
+                          onClick={() => setZoomScale((z) => Math.min(2.5, z + 0.1))}
+                          className="p-1 hover:bg-[#16223f] text-slate-300 rounded transition-colors"
+                          title="Zoom in"
+                        >
+                          <ZoomIn size={14} />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setZoomScale(1);
+                            setDragPos({ x: 0, y: 0 });
+                          }}
+                          className="p-1 text-[10px] font-mono hover:bg-[#16223f] text-slate-400 rounded transition-all px-1.5"
+                        >
+                          Reset
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   {/* Rendering SVG depending on active component logic */}
-                  <div
-                    onMouseDown={handleSchematicMouseDown}
-                    onMouseMove={handleSchematicMouseMove}
-                    onMouseUp={handleSchematicMouseUp}
-                    onMouseLeave={handleSchematicMouseUp}
-                    className="relative flex-1 bg-slate-950/60 border border-slate-800/80 rounded-xl overflow-hidden flex items-center justify-center cursor-move"
-                  >
+                  {specViewTab === "photo" ? (
+                    <div className="flex-1 flex flex-col items-center justify-center p-4 bg-slate-950/40 rounded-xl border border-slate-800/60 min-h-[300px]">
+                      {isPhotoAvailable ? (
+                        <div className="relative max-w-full max-h-[290px] rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-900 border border-slate-800">
+                          <img
+                            src={productPhotoUrl}
+                            alt={`${activeSpecProduct.model} components view`}
+                            referrerPolicy="no-referrer"
+                            className="max-h-[290px] max-w-full object-contain transition-transform duration-300 hover:scale-105"
+                            onError={() => {
+                              setPhotoAttempt((prev) => {
+                                const stage = prev[currentModel] || "local";
+                                if (stage === "local") {
+                                  return { ...prev, [currentModel]: "fallback" };
+                                } else {
+                                  return { ...prev, [currentModel]: "failed" };
+                                }
+                              });
+                            }}
+                          />
+                          <div className="absolute bottom-2.5 right-2.5 bg-slate-950/80 backdrop-blur-md px-2 py-1 rounded text-[9px] font-mono text-cyan-400 uppercase tracking-wider border border-slate-800">
+                            Optical Grade Photo
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-slate-500 text-xs text-center py-12">
+                          No physical product photo available of this components package.
+                        </div>
+                      )}
+                      
+                      {activeSpecProduct.benchmarking && (
+                        <p className="text-[10px] text-slate-400 mt-4 text-center italic font-mono bg-slate-900/60 p-2 rounded-lg border border-slate-800 leading-normal max-w-md">
+                          Cross-reference analogue configuration: {activeSpecProduct.benchmarking}
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <div
+                      onMouseDown={handleSchematicMouseDown}
+                      onMouseMove={handleSchematicMouseMove}
+                      onMouseUp={handleSchematicMouseUp}
+                      onMouseLeave={handleSchematicMouseUp}
+                      className="relative flex-1 bg-slate-950/60 border border-slate-800/80 rounded-xl overflow-hidden flex items-center justify-center cursor-move"
+                    >
                     <div
                       style={{
                         transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(${zoomScale})`,
                         transition: isDragging ? "none" : "transform 0.15s ease-out",
                       }}
-                      className="origin-center"
+                      className="origin-center flex items-center justify-center"
                     >
-                      {/* Let's render the exact Relay state inside vector blocks */}
-                      <svg width="220" height="220" viewBox="0 0 220 220" className="select-none">
-                        {/* Box layout */}
-                        <rect x="10" y="10" width="200" height="200" rx="10" fill="#0d1527" stroke="#1e293b" strokeWidth="2" />
-                        <line x1="10" x2="210" y1="50" y2="50" stroke="#1e293b" strokeDasharray="3 3" />
-                        <text x="110" y="32" fill="#94a3b8" textAnchor="middle" fontSize="10" fontFamily="monospace" fontWeight="bold">
-                          INTERNAL SPEC SCHEMA
-                        </text>
+                      {activeSpecProduct && isSchematicImageAvailable ? (
+                        <div className="relative max-w-full max-h-[290px] rounded-lg overflow-hidden flex items-center justify-center bg-slate-950 p-2">
+                          <img
+                            src={schematicUrl}
+                            alt={`${currentModel} internal schematic`}
+                            referrerPolicy="no-referrer"
+                            className="max-h-[290px] max-w-full object-contain select-none pointer-events-none"
+                            onError={() => {
+                              setSchematicAttempt((prev) => {
+                                const stage = prev[currentModel] || "plural";
+                                if (stage === "plural") {
+                                  return { ...prev, [currentModel]: "singular" };
+                                } else {
+                                  return { ...prev, [currentModel]: "failed" };
+                                }
+                              });
+                            }}
+                          />
+                        </div>
+                      ) : (
+                        /* Let's render the exact Relay state inside vector blocks */
+                        <svg width="220" height="220" viewBox="0 0 220 220" className="select-none">
+                          {/* Box layout */}
+                          <rect x="10" y="10" width="200" height="200" rx="10" fill="#0d1527" stroke="#1e293b" strokeWidth="2" />
+                          <line x1="10" x2="210" y1="50" y2="50" stroke="#1e293b" strokeDasharray="3 3" />
+                          <text x="110" y="32" fill="#94a3b8" textAnchor="middle" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                            INTERNAL SPEC SCHEMA
+                          </text>
 
-                        {/* If solid state / Mos relay */}
-                        {activeSpecProduct.model.includes("JG") ? (
-                          <g>
-                            {/* LED emitter side */}
-                            <circle cx="50" cy="110" r="16" fill={simulatedCoilOn ? "#0e7490" : "#1e293b"} stroke="#0891b2" strokeWidth="2" />
-                            {/* Diode triangle */}
-                            <path d="M42,118 L58,110 L42,102 Z" fill="#fff" />
-                            <line x1="58" y1="102" x2="58" y2="118" stroke="#fff" strokeWidth="2" />
-                            {/* Optical Coupling waves */}
-                            <g className={simulatedCoilOn ? "animate-pulse" : "opacity-30"}>
-                              <path d="M 80,102 Q 88,110 80,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
-                              <path d="M 94,102 Q 102,110 94,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
-                            </g>
-                            {/* MOSFET output channels */}
-                            <rect
-                              x="120"
-                              y="90"
-                              width="50"
-                              height="40"
-                              rx="4"
-                              fill={simulatedCoilOn ? "#0284c7" : "#1e293b"}
-                              stroke="#0284c7"
-                              strokeWidth="2"
-                              className="transition-colors duration-300"
-                            />
-                            {/* Output switch status wire */}
-                            <circle cx="145" cy="110" r="5" fill={simulatedCoilOn ? "#22c55e" : "#e2e8f0"} />
-                            <text x="145" y="145" fill="#e2e8f0" textAnchor="middle" fontSize="9" fontFamily="monospace">
-                              {simulatedCoilOn ? "MOS CONDUCTING" : "MOS CUTOFF"}
-                            </text>
-
-                            {/* Pins text */}
-                            <text x="25" y="113" fill="#64748b" fontSize="8">1</text>
-                            <text x="180" y="113" fill="#64748b" fontSize="8">2</text>
-                          </g>
-                        ) : activeSpecProduct.model.includes("11JP") ? (
-                          /* RF Switches / High isolation paths */
-                          <g>
-                            {/* Ground shielding plane */}
-                            <rect x="40" y="80" width="140" height="70" rx="6" fill="#16223f" stroke="#334155" />
-                            <text x="110" y="95" fill="#38bdf8" textAnchor="middle" fontSize="8" fontWeight="bold">50Ω COAX SWITCH</text>
-
-                            {/* RF input lines */}
-                            <line x1="30" y1="120" x2="70" y2="120" stroke="#f43f5e" strokeWidth="3" />
-                            <circle cx="30" cy="120" r="4" fill="#f43f5e" />
-                            <text x="30" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">IN</text>
-
-                            {/* Swivelling RF armature */}
-                            <g transform={`rotate(${simulatedCoilOn ? 25 : 0}, 70, 120)`} className="transition-transform duration-300">
-                              <line x1="70" y1="120" x2="140" y2="120" stroke="#22c55e" strokeWidth="3" />
-                              <circle cx="140" cy="120" r="4" fill="#22c55e" />
-                            </g>
-
-                            {/* Output ports */}
-                            <line x1="140" y1="120" x2="190" y2="120" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
-                            <circle cx="190" cy="120" r="4" fill="#38bdf8" />
-                            <text x="190" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT A</text>
-
-                            <line x1="140" y1="145" x2="190" y2="145" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
-                            <circle cx="190" cy="145" r="4" fill="#38bdf8" />
-                            <text x="190" y="160" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT B</text>
-
-                            <g className="opacity-90">
-                              <text x="110" y="165" fill="#f43f5e" fontSize="8" textAnchor="middle" fontWeight="bold">
-                                {simulatedCoilOn ? "ISOLATION B: >50dB" : "ISOLATION A: >50dB"}
+                          {/* If solid state / Mos relay */}
+                          {activeSpecProduct.model.includes("JG") ? (
+                            <g>
+                              {/* LED emitter side */}
+                              <circle cx="50" cy="110" r="16" fill={simulatedCoilOn ? "#0e7490" : "#1e293b"} stroke="#0891b2" strokeWidth="2" />
+                              {/* Diode triangle */}
+                              <path d="M42,118 L58,110 L42,102 Z" fill="#fff" />
+                              <line x1="58" y1="102" x2="58" y2="118" stroke="#fff" strokeWidth="2" />
+                              {/* Optical Coupling waves */}
+                              <g className={simulatedCoilOn ? "animate-pulse" : "opacity-30"}>
+                                <path d="M 80,102 Q 88,110 80,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
+                                <path d="M 94,102 Q 102,110 94,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
+                              </g>
+                              {/* MOSFET output channels */}
+                              <rect
+                                x="120"
+                                y="90"
+                                width="50"
+                                height="40"
+                                rx="4"
+                                fill={simulatedCoilOn ? "#0284c7" : "#1e293b"}
+                                stroke="#0284c7"
+                                strokeWidth="2"
+                                className="transition-colors duration-300"
+                              />
+                              {/* Output switch status wire */}
+                              <circle cx="145" cy="110" r="5" fill={simulatedCoilOn ? "#22c55e" : "#e2e8f0"} />
+                              <text x="145" y="145" fill="#e2e8f0" textAnchor="middle" fontSize="9" fontFamily="monospace">
+                                {simulatedCoilOn ? "MOS CONDUCTING" : "MOS CUTOFF"}
                               </text>
+
+                              {/* Pins text */}
+                              <text x="25" y="113" fill="#64748b" fontSize="8">1</text>
+                              <text x="180" y="113" fill="#64748b" fontSize="8">2</text>
                             </g>
-                          </g>
-                        ) : (
-                          /* Standard Coil Relay / Contactor configuration */
-                          <g>
-                            {/* Coil component */}
-                            <g transform="translate(45, 95)">
-                              <rect x="0" y="0" width="30" height="50" rx="3" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
-                              <path d="M 0,10 L 30,15 M 0,20 L 30,25 M 0,30 L 30,35 M 0,40 L 30,45" stroke="#f59e0b" strokeWidth="1.5" />
-                              <text x="15" y="-5" fill="#64748b" fontSize="8" textAnchor="middle">COIL</text>
-                              {simulatedCoilOn && (
-                                <circle cx="15" cy="25" r="8" fill="#eab308" className="animate-ping opacity-25" />
-                              )}
+                          ) : activeSpecProduct.model.includes("11JP") ? (
+                            /* RF Switches / High isolation paths */
+                            <g>
+                              {/* Ground shielding plane */}
+                              <rect x="40" y="80" width="140" height="70" rx="6" fill="#16223f" stroke="#334155" />
+                              <text x="110" y="95" fill="#38bdf8" textAnchor="middle" fontSize="8" fontWeight="bold">50Ω COAX SWITCH</text>
+
+                              {/* RF input lines */}
+                              <line x1="30" y1="120" x2="70" y2="120" stroke="#f43f5e" strokeWidth="3" />
+                              <circle cx="30" cy="120" r="4" fill="#f43f5e" />
+                              <text x="30" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">IN</text>
+
+                              {/* Swivelling RF armature */}
+                              <g transform={`rotate(${simulatedCoilOn ? 25 : 0}, 70, 120)`} className="transition-transform duration-300">
+                                <line x1="70" y1="120" x2="140" y2="120" stroke="#22c55e" strokeWidth="3" />
+                                <circle cx="140" cy="120" r="4" fill="#22c55e" />
+                              </g>
+
+                              {/* Output ports */}
+                              <line x1="140" y1="120" x2="190" y2="120" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
+                              <circle cx="190" cy="120" r="4" fill="#38bdf8" />
+                              <text x="190" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT A</text>
+
+                              <line x1="140" y1="145" x2="190" y2="145" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
+                              <circle cx="190" cy="145" r="4" fill="#38bdf8" />
+                              <text x="190" y="160" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT B</text>
+
+                              <g className="opacity-90">
+                                <text x="110" y="165" fill="#f43f5e" fontSize="8" textAnchor="middle" fontWeight="bold">
+                                  {simulatedCoilOn ? "ISOLATION B: >50dB" : "ISOLATION A: >50dB"}
+                                </text>
+                              </g>
                             </g>
+                          ) : (
+                            /* Standard Coil Relay / Contactor configuration */
+                            <g>
+                              {/* Coil component */}
+                              <g transform="translate(45, 95)">
+                                <rect x="0" y="0" width="30" height="50" rx="3" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
+                                <path d="M 0,10 L 30,15 M 0,20 L 30,25 M 0,30 L 30,35 M 0,40 L 30,45" stroke="#f59e0b" strokeWidth="1.5" />
+                                <text x="15" y="-5" fill="#64748b" fontSize="8" textAnchor="middle">COIL</text>
+                                {simulatedCoilOn && (
+                                  <circle cx="15" cy="25" r="8" fill="#eab308" className="animate-ping opacity-25" />
+                                )}
+                              </g>
 
-                            {/* Connection coil wires to inputs */}
-                            <line x1="25" y1="105" x2="45" y2="105" stroke="#64748b" strokeWidth="1.5" />
-                            <line x1="25" y1="135" x2="45" y2="135" stroke="#64748b" strokeWidth="1.5" />
-                            <circle cx="25" cy="105" r="3" fill="#64748b" />
-                            <circle cx="25" cy="135" r="3" fill="#64748b" />
-                            <text x="18" y="108" fill="#94a3b8" fontSize="8">X1</text>
-                            <text x="18" y="138" fill="#94a3b8" fontSize="8">X2</text>
+                              {/* Connection coil wires to inputs */}
+                              <line x1="25" y1="105" x2="45" y2="105" stroke="#64748b" strokeWidth="1.5" />
+                              <line x1="25" y1="135" x2="45" y2="135" stroke="#64748b" strokeWidth="1.5" />
+                              <circle cx="25" cy="105" r="3" fill="#64748b" />
+                              <circle cx="25" cy="135" r="3" fill="#64748b" />
+                              <text x="18" y="108" fill="#94a3b8" fontSize="8">X1</text>
+                              <text x="18" y="138" fill="#94a3b8" fontSize="8">X2</text>
 
-                            {/* Armature linkage dashed line */}
-                            <line
-                              x1="75"
-                              y1="120"
-                              x2="135"
-                              y2="120"
-                              stroke={simulatedCoilOn ? "#eab308" : "#475569"}
-                              strokeWidth="1.5"
-                              strokeDasharray="3 3"
-                            />
+                              {/* Armature linkage dashed line */}
+                              <line
+                                x1="75"
+                                y1="120"
+                                x2="135"
+                                y2="120"
+                                stroke={simulatedCoilOn ? "#eab308" : "#475569"}
+                                strokeWidth="1.5"
+                                strokeDasharray="3 3"
+                              />
 
-                            {/* Switch Armature Logic */}
-                            <circle cx="135" cy="120" r="3" fill="#3b82f6" />
-                            {/* Swing arm */}
-                            <g
-                              transform={`rotate(${simulatedCoilOn ? 18 : 0}, 135, 120)`}
-                              className="transition-transform duration-300 origin-[135px_120px]"
-                            >
-                              <line x1="135" y1="120" x2="175" y2="120" stroke="#f1f5f9" strokeWidth="3" />
-                              <circle cx="175" cy="120" r="4" fill="#f1f5f9" />
+                              {/* Switch Armature Logic */}
+                              <circle cx="135" cy="120" r="3" fill="#3b82f6" />
+                              {/* Swing arm */}
+                              <g
+                                transform={`rotate(${simulatedCoilOn ? 18 : 0}, 135, 120)`}
+                                className="transition-transform duration-300 origin-[135px_120px]"
+                              >
+                                <line x1="135" y1="120" x2="175" y2="120" stroke="#f1f5f9" strokeWidth="3" />
+                                <circle cx="175" cy="120" r="4" fill="#f1f5f9" />
+                              </g>
+
+                              {/* NC Terminal */}
+                              <circle cx="175" cy="105" r="4.5" fill={simulatedCoilOn ? "#1e293b" : "#22c55e"} stroke="#475569" />
+                              <line x1="175" y1="105" x2="195" y2="105" stroke="#64748b" strokeWidth="1.5" />
+                              <text x="188" y="100" fill="#94a3b8" fontSize="8">NC</text>
+
+                              {/* NO Terminal */}
+                              <circle cx="179" cy="132" r="4.5" fill={simulatedCoilOn ? "#22c55e" : "#1e293b"} stroke="#475569" />
+                              <line x1="179" y1="132" x2="195" y2="132" stroke="#64748b" strokeWidth="1.5" />
+                              <text x="188" y="142" fill="#94a3b8" fontSize="8">NO</text>
+
+                              {/* COM Terminal */}
+                              <line x1="115" y1="120" x2="135" y2="120" stroke="#64748b" strokeWidth="1.5" />
+                              <circle cx="115" cy="120" r="3" fill="#64748b" />
+                              <text x="115" y="112" fill="#94a3b8" fontSize="8">COM</text>
                             </g>
-
-                            {/* NC Terminal */}
-                            <circle cx="175" cy="105" r="4.5" fill={simulatedCoilOn ? "#1e293b" : "#22c55e"} stroke="#475569" />
-                            <line x1="175" y1="105" x2="195" y2="105" stroke="#64748b" strokeWidth="1.5" />
-                            <text x="188" y="100" fill="#94a3b8" fontSize="8">NC</text>
-
-                            {/* NO Terminal */}
-                            <circle cx="179" cy="132" r="4.5" fill={simulatedCoilOn ? "#22c55e" : "#1e293b"} stroke="#475569" />
-                            <line x1="179" y1="132" x2="195" y2="132" stroke="#64748b" strokeWidth="1.5" />
-                            <text x="188" y="142" fill="#94a3b8" fontSize="8">NO</text>
-
-                            {/* COM Terminal */}
-                            <line x1="115" y1="120" x2="135" y2="120" stroke="#64748b" strokeWidth="1.5" />
-                            <circle cx="115" cy="120" r="3" fill="#64748b" />
-                            <text x="115" y="112" fill="#94a3b8" fontSize="8">COM</text>
-                          </g>
-                        )}
-                      </svg>
+                          )}
+                        </svg>
+                      )}
                     </div>
                   </div>
+                )}
 
                   {/* Manual Sim Controllers */}
-                  <div className="mt-4 flex items-center justify-between">
+                  <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <p className="text-[10px] text-slate-500 font-mono">
-                      Drag container to pan drawing area. Use plus / minus to scale.
+                      {specViewTab === "schematic"
+                        ? "Drag canvas to pan drawing area. Use plus / minus to scale."
+                        : "High-resolution package physical outline. Click 'Internal Schematic' to check active circuitry."}
                     </p>
                     <button
                       onClick={() => {
