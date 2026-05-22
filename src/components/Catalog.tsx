@@ -4,6 +4,30 @@ import { ProductRec, CatalogCategory } from "../types";
 import { Search, ChevronDown, ChevronRight, X, Shuffle, CheckCircle, ZoomIn, ZoomOut, Zap, Eye, HelpCircle, CornerDownRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+// Helper to separate physical dimensions from mounting description
+const formatDimensions = (dimStr: string) => {
+  const match = dimStr.match(/^(\d+(?:\.\d+)?\s*x\s*\d+(?:\.\d+)?(?:\s*x\s*\d+(?:\.\d+)?)?)\s*(.*)$/i);
+  if (match) {
+    return {
+      size: match[1].trim(),
+      desc: match[2].trim()
+    };
+  }
+  return { size: "", desc: dimStr };
+};
+
+// Helper to separate contact rating from electrical life cycles
+const formatContactLoad = (loadStr: string) => {
+  const match = loadStr.match(/^(.*?)\s*\((.*?)\)$/);
+  if (match) {
+    return {
+      load: match[1].trim(),
+      life: match[2].trim()
+    };
+  }
+  return { load: loadStr, life: "" };
+};
+
 interface CatalogProps {
   onSelectedRequestProducts: (models: string[]) => void;
   activeSearchQuery: string;
@@ -257,18 +281,18 @@ export const Catalog: React.FC<CatalogProps> = ({
                       transition={{ duration: 0.2 }}
                       className="overflow-x-auto border-t border-slate-800/80"
                     >
-                      <table className="w-full text-left border-collapse min-w-[900px]">
+                      <table className="w-full text-left border-collapse min-w-[1250px]">
                         <thead>
-                          <tr className="bg-slate-900/40 border-b border-slate-800/70 text-slate-400 text-[11px] uppercase font-mono tracking-wider">
-                            <th className="py-3 px-4 w-12 text-center">Compare</th>
-                            <th className="py-3 px-4">Product Model</th>
-                            <th className="py-3 px-4">Dimensions / Package</th>
-                            <th className="py-3 px-4">Range (°C)</th>
-                            <th className="py-3 px-4">Contact Logic</th>
-                            <th className="py-3 px-4">Shock & Vibration</th>
-                            <th className="py-3 px-4">Contact Rating / Life</th>
-                            <th className="py-3 px-4">Analog Cross-Ref</th>
-                            <th className="py-3 px-4 text-center">Simulation</th>
+                          <tr className="bg-slate-900/45 border-b border-slate-800 text-slate-400 text-[11px] uppercase font-mono tracking-wider">
+                            <th className="py-3.5 px-4 w-[60px] text-center">Compare</th>
+                            <th className="py-3.5 px-4 w-[160px]">Product Model</th>
+                            <th className="py-3.5 px-4 w-[240px]">Dimensions / Package</th>
+                            <th className="py-3.5 px-4 w-[120px]">Range (°C)</th>
+                            <th className="py-3.5 px-4 w-[155px]">Contact Logic</th>
+                            <th className="py-3.5 px-4 w-[250px]">Shock & Vibration</th>
+                            <th className="py-3.5 px-4 w-[160px]">Contact Rating / Life</th>
+                            <th className="py-3.5 px-4 w-[145px]">Analog Cross-Ref</th>
+                            <th className="py-3.5 px-4 text-center w-[120px]">Simulation</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30 text-sm">
@@ -297,7 +321,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 </td>
 
                                 {/* Model identifier */}
-                                <td className="py-3px px-4 font-mono font-bold text-cyan-400 select-all">
+                                <td className="py-3.5 px-4 font-mono font-bold text-cyan-400 select-all">
                                   <div className="flex items-center gap-2">
                                     {p.image && (
                                       <div className="h-8 w-8 rounded bg-slate-900 border border-slate-800 overflow-hidden flex items-center justify-center shrink-0">
@@ -314,32 +338,54 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 </td>
 
                                 {/* Package designators */}
-                                <td className="py-3px px-4 text-slate-300 font-sans text-xs group-hover:text-white transition-colors leading-relaxed">
-                                  {p.dimensions}
+                                <td className="py-3.5 px-4">
+                                  {(() => {
+                                    const { size, desc } = formatDimensions(p.dimensions);
+                                    return (
+                                      <div className="flex flex-col">
+                                        <span className="font-mono font-semibold text-white text-xs whitespace-nowrap">{size || p.dimensions}</span>
+                                        {size && <span className="text-[10px] text-[#94a3b8] mt-0.5 leading-relaxed font-sans">{desc}</span>}
+                                      </div>
+                                    );
+                                  })()}
                                 </td>
 
                                 {/* Heat specs */}
-                                <td className="py-3px px-4 text-slate-300 font-mono text-xs">
+                                <td className="py-3.5 px-4 text-slate-300 font-mono text-xs whitespace-nowrap">
                                   {p.tempRange}
                                 </td>
 
                                 {/* Contact configuration */}
-                                <td className="py-3px px-4 text-slate-200 text-xs font-semibold">
+                                <td className="py-3.5 px-4 text-slate-200 text-xs font-semibold">
                                   {p.contactForm}
                                 </td>
 
-                                {/* Shocks */}
-                                <td className="py-3px px-4 text-slate-400 text-xs max-w-xs truncate" title={p.vibration}>
-                                  {p.vibration}
+                                {/* Shocks & Vibration */}
+                                <td className="py-3.5 px-4">
+                                  <div className="flex flex-col gap-0.5 max-w-[230px]">
+                                    {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
+                                      <span key={idx} className="text-[10px] text-slate-400 font-mono leading-normal">
+                                        {vPart}
+                                      </span>
+                                    ))}
+                                  </div>
                                 </td>
 
                                 {/* Rated power profile */}
-                                <td className="py-3px px-4 text-slate-300 text-xs font-mono">
-                                  {p.contactLoad}
+                                <td className="py-3.5 px-4">
+                                  {(() => {
+                                    const { load, life } = formatContactLoad(p.contactLoad);
+                                    return (
+                                      <div className="flex flex-col">
+                                        <span className="font-mono text-xs text-white font-semibold">{load}</span>
+                                        {life && <span className="text-[10px] text-slate-400 mt-0.5 font-mono">{life}</span>}
+                                      </div>
+                                    );
+                                  })()}
                                 </td>
 
                                 {/* Benchmarking crosses */}
-                                <td className="py-3px px-4 text-slate-400 text-xs italic font-sans max-w-[150px] truncate" title={p.benchmarking}>
+                                <td className="py-3.5 px-4 text-slate-400 text-xs italic font-sans max-w-[145px] truncate" title={p.benchmarking}>
                                   {p.benchmarking}
                                 </td>
 
@@ -961,4 +1007,3 @@ export const Catalog: React.FC<CatalogProps> = ({
     </div>
   );
 };
-
