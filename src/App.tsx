@@ -12,11 +12,21 @@ export default function App() {
   const [contactFormSelectedModels, setContactFormSelectedModels] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const scrollSection = (id: string) => {
+    setActiveTab("home");
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 150);
+  };
+
   const handleSelectedRequestProducts = (models: string[]) => {
     setContactFormSelectedModels(models);
-    setActiveTab("contact");
-    // Scroll smoothly to coordinate
-    window.scrollTo({ top: 300, behavior: "smooth" });
+    scrollSection("quotation-section");
   };
 
   const handleHeroNavigateToCatalog = () => {
@@ -25,20 +35,19 @@ export default function App() {
   };
 
   const handleHeroNavigateToContact = () => {
-    setActiveTab("contact");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollSection("quotation-section");
   };
 
   return (
     <div className="min-h-screen bg-[#060a14] text-slate-300 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900">
       {/* Sleek corporate Header */}
       <header className="sticky top-0 z-30 bg-[#060a14]/80 backdrop-blur-xl border-b border-slate-900 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           
           {/* Logo Brand Brand mark */}
           <button 
-            onClick={() => setActiveTab("home")}
-            className="flex items-center gap-3 hover:opacity-90 transition-all text-left focus:outline-none"
+            onClick={() => scrollSection("hero-section")}
+            className="flex items-center gap-3 hover:opacity-90 transition-all text-left focus:outline-none cursor-pointer"
           >
             <div className="bg-gradient-to-tr from-blue-600 to-cyan-500 p-2.5 rounded-xl shadow-lg shadow-blue-500/10 text-slate-950">
               <Cpu size={22} className="stroke-[2.5]" />
@@ -56,8 +65,8 @@ export default function App() {
           {/* Navigation selectors */}
           <nav className="hidden md:flex items-center gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-900">
             <button
-              onClick={() => setActiveTab("home")}
-              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all ${
+              onClick={() => scrollSection("hero-section")}
+              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                 activeTab === "home" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -65,25 +74,21 @@ export default function App() {
             </button>
             <button
               onClick={() => setActiveTab("catalog")}
-              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all ${
+              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                 activeTab === "catalog" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
               Component Explorer
             </button>
             <button
-              onClick={() => setActiveTab("about")}
-              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all ${
-                activeTab === "about" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
-              }`}
+              onClick={() => scrollSection("about-section")}
+              className="px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Organization Profile
             </button>
             <button
-              onClick={() => setActiveTab("contact")}
-              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all ${
-                activeTab === "contact" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
-              }`}
+              onClick={() => scrollSection("quotation-section")}
+              className="px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Quotation Desk
             </button>
@@ -94,9 +99,9 @@ export default function App() {
             <button
               onClick={() => {
                 setContactFormSelectedModels([]);
-                setActiveTab("contact");
+                scrollSection("quotation-section");
               }}
-              className="px-4.5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 text-xs font-extrabold rounded-lg shadow-sm transition-all focus:outline-none"
+              className="px-4.5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 text-xs font-extrabold rounded-lg shadow-sm transition-all focus:outline-none cursor-pointer"
             >
               Request Offer
             </button>
@@ -107,8 +112,8 @@ export default function App() {
         <div className="md:hidden bg-slate-950 border-t border-slate-900 py-2.5 px-4 overflow-x-auto scrollbar-none">
           <div className="flex items-center gap-1.5 min-w-[340px]">
             <button
-              onClick={() => setActiveTab("home")}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all ${
+              onClick={() => scrollSection("hero-section")}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all cursor-pointer ${
                 activeTab === "home" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -119,25 +124,21 @@ export default function App() {
                 setActiveTab("catalog");
                 setSearchQuery("");
               }}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all ${
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all cursor-pointer ${
                 activeTab === "catalog" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
               Component Explorer
             </button>
             <button
-              onClick={() => setActiveTab("about")}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all ${
-                activeTab === "about" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
-              }`}
+              onClick={() => scrollSection("about-section")}
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Profile
             </button>
             <button
-              onClick={() => setActiveTab("contact")}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all ${
-                activeTab === "contact" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
-              }`}
+              onClick={() => scrollSection("quotation-section")}
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer font-sans"
             >
               Quotation Desk
             </button>
@@ -146,11 +147,12 @@ export default function App() {
       </header>
 
       {/* Main Page Layout Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 min-h-[70vh]">
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 min-h-[70vh]">
         {activeTab === "home" && (
           <Home
             onNavigateToCatalog={handleHeroNavigateToCatalog}
             onNavigateToContact={handleHeroNavigateToContact}
+            contactFormSelectedModels={contactFormSelectedModels}
           />
         )}
 
@@ -161,17 +163,11 @@ export default function App() {
             setActiveSearchQuery={setSearchQuery}
           />
         )}
-
-        {activeTab === "about" && <AboutUs />}
-
-        {activeTab === "contact" && (
-          <FeedbackRequestForm initialSelectedModels={contactFormSelectedModels} />
-        )}
       </main>
 
       {/* Corporate Solid Footer */}
       <footer className="bg-slate-950 border-t border-slate-900 text-slate-400 text-sm mt-12 py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pb-12 border-b border-slate-900">
             
             {/* Logo description */}
