@@ -77,13 +77,13 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest font-mono">
+            <span className="text-sm font-bold text-cyan-400 uppercase tracking-widest font-mono">
               Quotation Desk (Formspree Integrated)
             </span>
-            <h2 className="text-xl sm:text-2xl font-bold font-display text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-white tracking-tight">
               Request Technical Offer & Specifications
             </h2>
-            <p className="text-slate-400 text-xs sm:text-sm">
+            <p className="text-slate-400 text-sm sm:text-base">
               Our engineering support team can provide solid models, 3D CAD step files, detailed chemical sealing tests, and quantity discounts.
             </p>
           </div>
@@ -91,7 +91,7 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Name Input */}
             <div className="space-y-2">
-              <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider font-mono">
+              <label className="block text-slate-400 text-sm font-semibold uppercase tracking-wider font-mono">
                 Your Professional Name
               </label>
               <div className="relative">
@@ -109,7 +109,7 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
 
             {/* Email Input */}
             <div className="space-y-2">
-              <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider font-mono">
+              <label className="block text-slate-400 text-sm font-semibold uppercase tracking-wider font-mono">
                 Corporate Email Address
               </label>
               <div className="relative">
@@ -128,10 +128,10 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
 
           {/* Connected Models Selectors */}
           <div className="space-y-3 bg-[#060a14] p-4 rounded-2xl border border-slate-800">
-            <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider font-mono">
+            <label className="block text-slate-400 text-sm font-semibold uppercase tracking-wider font-mono">
               Associated Product Models (Optional)
             </label>
-            <p className="text-slate-400 text-[10px] sm:text-xs">
+            <p className="text-slate-400 text-xs sm:text-sm">
               Models checked in the Component Explorer are automatically included below. You can append more as needed.
             </p>
 
@@ -141,7 +141,7 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
                 {selectedModels.map((m) => (
                   <span
                     key={m}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 font-mono text-xs font-bold bg-[#16223f] text-cyan-400 rounded-lg border border-cyan-400/20 shadow-sm"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 font-mono text-sm font-bold bg-[#16223f] text-cyan-400 rounded-lg border border-cyan-400/20 shadow-sm"
                   >
                     {m}
                     <button
@@ -155,7 +155,7 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
                 ))}
               </div>
             ) : (
-              <div className="text-slate-500 text-xs py-1 italic">No models selected currently. Quote applies to primary request description.</div>
+              <div className="text-slate-500 text-sm py-1 italic">No models selected currently. Quote applies to primary request description.</div>
             )}
 
             {/* Interactive Model Autocomplete Input */}
@@ -166,22 +166,22 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
                 value={searchModelQuery}
                 onChange={(e) => setSearchModelQuery(e.target.value)}
                 placeholder="Type and check to append models..."
-                className="w-full bg-[#16223f]/80 text-white placeholder-slate-600 pl-9 pr-4 py-1.5 rounded-xl border border-slate-800 focus:outline-none focus:border-cyan-500 text-xs transition-all font-mono"
+                className="w-full bg-[#16223f]/80 text-white placeholder-slate-600 pl-9 pr-4 py-1.5 rounded-xl border border-slate-800 focus:outline-none focus:border-cyan-500 text-sm transition-all font-mono"
               />
               {searchModelQuery && (
                 <div className="absolute left-0 right-0 top-full mt-1.5 bg-[#16223f] border border-slate-700/80 rounded-xl max-h-40 overflow-y-auto z-10 shadow-xl divide-y divide-slate-800">
                   {filteredDatalist.length === 0 ? (
-                    <div className="p-2 text-slate-400 text-xs italic">No matching model found</div>
+                    <div className="p-2 text-slate-400 text-sm italic">No matching model found</div>
                   ) : (
                     filteredDatalist.map((m) => (
                       <button
                         type="button"
                         key={m}
                         onClick={() => addModelToSelection(m)}
-                        className="w-full text-left px-3 py-2 text-xs font-mono text-cyan-400 hover:bg-slate-800 transition-colors flex items-center justify-between"
+                        className="w-full text-left px-3 py-2 text-sm font-mono text-cyan-400 hover:bg-slate-800 transition-colors flex items-center justify-between"
                       >
                         <span>{m}</span>
-                        <span className="text-[10px] text-slate-500 italic">Click to append</span>
+                        <span className="text-xs text-slate-500 italic">Click to append</span>
                       </button>
                     ))
                   )}
@@ -192,7 +192,7 @@ export const FeedbackRequestForm: React.FC<FeedbackRequestFormProps> = ({
 
           {/* Custom specifications / message text area */}
           <div className="space-y-2">
-            <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider font-mono">
+            <label className="block text-slate-400 text-sm font-semibold uppercase tracking-wider font-mono">
               Your Requirements / Specification Details
             </label>
             <textarea
