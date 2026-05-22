@@ -31,7 +31,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
             transition={{ duration: 0.5 }}
             className="space-y-4"
           >
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-cyan-400 bg-cyan-400/10 rounded-full border border-cyan-400/20">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-semibold text-cyan-400 bg-cyan-400/10 rounded-full border border-cyan-400/20">
               <Shield size={12} className="text-cyan-400" /> Hermetically Sealed Assemblies
             </span>
             <h1 className="text-4xl sm:text-6xl font-bold font-display tracking-tight text-white leading-[1.1]">
@@ -40,7 +40,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
                 Sealed Relays & Contactors
               </span>
             </h1>
-            <p className="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed font-sans">
+            <p className="text-slate-300 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed font-sans">
               Engineering extreme environmental switching systems for critical aviation, aerospace telemetry, railway signalling, and defense applications.
             </p>
           </motion.div>
@@ -69,19 +69,19 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
           <div className="pt-8 border-t border-slate-800/60 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
             <div className="text-center">
               <p className="text-xl sm:text-3xl font-extrabold font-display text-white">MIL-STD</p>
-              <p className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-mono mt-0.5">Specifications Certified</p>
+              <p className="text-xs sm:text-sm text-slate-400 uppercase tracking-wider font-mono mt-0.5">Specifications Certified</p>
             </div>
             <div className="text-center border-l border-slate-800">
               <p className="text-xl sm:text-3xl font-extrabold font-display text-white">&lt;0.5ms</p>
-              <p className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-mono mt-0.5">Bounce Timing</p>
+              <p className="text-xs sm:text-sm text-slate-400 uppercase tracking-wider font-mono mt-0.5">Bounce Timing</p>
             </div>
             <div className="text-center border-l border-slate-800">
               <p className="text-xl sm:text-3xl font-extrabold font-display text-white">600A</p>
-              <p className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-mono mt-0.5">Peak Conduction load</p>
+              <p className="text-xs sm:text-sm text-slate-400 uppercase tracking-wider font-mono mt-0.5">Peak Conduction load</p>
             </div>
             <div className="text-center border-l border-slate-800">
               <p className="text-xl sm:text-3xl font-extrabold font-display text-white">100%</p>
-              <p className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-mono mt-0.5">Hermetic Quality Tested</p>
+              <p className="text-xs sm:text-sm text-slate-400 uppercase tracking-wider font-mono mt-0.5">Hermetic Quality Tested</p>
             </div>
           </div>
         </div>
@@ -90,13 +90,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
       {/* About Section */}
       <div id="about" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-6 space-y-6">
-          <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest font-mono">
+          <span className="text-sm font-bold text-cyan-400 uppercase tracking-widest font-mono">
             Professional Engineering
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold font-display text-white tracking-tight">
             Sealing Technology Designed for Extreme Operating Conditions
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
             SkySwitch Technologies specializes in the active development and local manufacture of highly reliable sealed relays and contactors. Our products strictly comply with military and aerospace parameters, serving failure-proof loops internationally.
           </p>
 
@@ -107,8 +107,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
                   {idx === 0 ? <Shield size={18} /> : idx === 1 ? <Star size={18} /> : <HardDrive size={18} />}
                 </div>
                 <div>
-                  <h4 className="text-white text-sm font-bold font-display">{item.title}</h4>
-                  <p className="text-slate-400 text-xs mt-1 leading-relaxed">{item.description}</p>
+                  <h4 className="text-white text-base font-bold font-display">{item.title}</h4>
+                  <p className="text-slate-400 text-sm mt-1 leading-relaxed">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -125,7 +125,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
                 className="w-full h-full object-cover filter brightness-[0.7] group-hover:scale-105 transition-all duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-4 flex items-end">
-                <p className="text-xs font-semibold text-white font-mono uppercase tracking-wider">Clean-Room Assembly</p>
+                <p className="text-sm font-semibold text-white font-mono uppercase tracking-wider">Clean-Room Assembly</p>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden aspect-[1/1] group border border-slate-800">
@@ -135,7 +135,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
                 className="w-full h-full object-cover filter brightness-[0.7] group-hover:scale-105 transition-all duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-4 flex items-end">
-                <p className="text-xs font-semibold text-white font-mono uppercase tracking-wider">Parametric Evaluation</p>
+                <p className="text-sm font-semibold text-white font-mono uppercase tracking-wider">Parametric Evaluation</p>
               </div>
             </div>
           </div>
@@ -147,7 +147,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
                 className="w-full h-full object-cover filter brightness-[0.7] group-hover:scale-105 transition-all duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-4 flex items-end">
-                <p className="text-xs font-semibold text-white font-mono uppercase tracking-wider">Military Calibration</p>
+                <p className="text-sm font-semibold text-white font-mono uppercase tracking-wider">Military Calibration</p>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] group border border-slate-800">
@@ -157,7 +157,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
                 className="w-full h-full object-cover filter brightness-[0.7] group-hover:scale-105 transition-all duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-4 flex items-end">
-                <p className="text-xs font-semibold text-white font-mono uppercase tracking-wider">Engineering R&D</p>
+                <p className="text-sm font-semibold text-white font-mono uppercase tracking-wider">Engineering R&D</p>
               </div>
             </div>
           </div>
@@ -167,9 +167,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
       {/* Applications list section */}
       <div id="applications" className="space-y-8 bg-gradient-to-b from-[#0d1527] to-[#0a0f1d] border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-inner">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-bold text-cyan-400 lg:text-sm uppercase tracking-widest font-mono">Mission Critical Deployments</span>
-          <h2 className="text-2xl sm:text-3xl font-bold font-display text-white tracking-tight">Standard Application Categories</h2>
-          <p className="text-slate-400 text-xs sm:text-sm">
+          <span className="text-sm font-bold text-cyan-400 lg:text-base uppercase tracking-widest font-mono">Mission Critical Deployments</span>
+          <h2 className="text-3xl sm:text-4xl font-bold font-display text-white tracking-tight">Standard Application Categories</h2>
+          <p className="text-slate-400 text-sm sm:text-base">
             Proven performance on demanding landscapes, preserving signal switching integrity without dropouts.
           </p>
         </div>
@@ -182,10 +182,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigateToCatalog, onNavigateToCon
             >
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 bg-blue-500/10 text-cyan-400 text-xs font-mono font-bold rounded">0{idx + 1}</span>
-                  <h4 className="text-white text-base font-bold font-display">{area.title}</h4>
+                  <span className="px-2 py-0.5 bg-blue-500/10 text-cyan-400 text-sm font-mono font-bold rounded">0{idx + 1}</span>
+                  <h4 className="text-white text-lg font-bold font-display">{area.title}</h4>
                 </div>
-                <p className="text-slate-300 text-xs leading-relaxed">{area.description}</p>
+                <p className="text-slate-300 text-sm leading-relaxed">{area.description}</p>
               </div>
               <div className="relative h-32 rounded-xl overflow-hidden border border-slate-800">
                 <img
