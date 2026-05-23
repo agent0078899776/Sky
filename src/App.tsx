@@ -52,20 +52,20 @@ export default function App() {
           >
             <SkySwitchLogo size={46} interactive={false} />
             <div>
-              <h1 className="text-white text-lg sm:text-xl font-extrabold font-display tracking-tight leading-none group-hover:text-cyan-400 transition-colors">
+              <h1 className="text-white text-xl sm:text-2xl font-extrabold font-display tracking-tight leading-none group-hover:text-cyan-400 transition-colors">
                 SkySwitch
               </h1>
-              <p className="text-[10px] text-cyan-400 font-mono tracking-widest uppercase mt-1">
+              <p className="text-xs sm:text-sm text-cyan-400 font-mono tracking-widest uppercase mt-1">
                 Technologies
               </p>
             </div>
           </button>
 
           {/* Navigation selectors */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-900">
+          <nav className="hidden md:flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-900">
             <button
               onClick={() => scrollSection("hero-section")}
-              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+              className={`px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all cursor-pointer ${
                 activeTab === "home" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -73,7 +73,7 @@ export default function App() {
             </button>
             <button
               onClick={() => setActiveTab("catalog")}
-              className={`px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+              className={`px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all cursor-pointer ${
                 activeTab === "catalog" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -81,13 +81,13 @@ export default function App() {
             </button>
             <button
               onClick={() => scrollSection("about-section")}
-              className="px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
+              className="px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Organization Profile
             </button>
             <button
               onClick={() => scrollSection("quotation-section")}
-              className="px-4 py-2 font-display text-xs font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
+              className="px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Quotation Desk
             </button>
@@ -100,7 +100,7 @@ export default function App() {
                 setContactFormSelectedModels([]);
                 scrollSection("quotation-section");
               }}
-              className="px-4.5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 text-xs font-extrabold rounded-lg shadow-sm transition-all focus:outline-none cursor-pointer"
+              className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 text-sm font-extrabold rounded-lg shadow-sm transition-all focus:outline-none cursor-pointer"
             >
               Request Offer
             </button>
@@ -112,7 +112,7 @@ export default function App() {
           <div className="flex items-center gap-1.5 min-w-[340px]">
             <button
               onClick={() => scrollSection("hero-section")}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all cursor-pointer ${
+              className={`px-3.5 py-2 text-sm font-semibold rounded-lg shrink-0 transition-all cursor-pointer ${
                 activeTab === "home" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -123,7 +123,7 @@ export default function App() {
                 setActiveTab("catalog");
                 setSearchQuery("");
               }}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all cursor-pointer ${
+              className={`px-3.5 py-2 text-sm font-semibold rounded-lg shrink-0 transition-all cursor-pointer ${
                 activeTab === "catalog" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -131,13 +131,13 @@ export default function App() {
             </button>
             <button
               onClick={() => scrollSection("about-section")}
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer"
+              className="px-3.5 py-2 text-sm font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Profile
             </button>
             <button
               onClick={() => scrollSection("quotation-section")}
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer font-sans"
+              className="px-3.5 py-2 text-sm font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer font-sans"
             >
               Quotation Desk
             </button>
@@ -165,22 +165,22 @@ export default function App() {
       </main>
 
       {/* Corporate Solid Footer */}
-      <footer className="bg-slate-950 border-t border-slate-900 text-slate-400 text-sm mt-12 py-12 sm:py-16">
+      <footer className="bg-slate-950 border-t border-slate-900 text-slate-350 text-base mt-12 py-12 sm:py-16">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pb-12 border-b border-slate-900">
             
             {/* Logo description */}
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center gap-3">
-                <SkySwitchLogo size={36} interactive={false} />
-                <span className="text-white text-base font-extrabold font-display">SkySwitch Technologies</span>
+                <SkySwitchLogo size={42} interactive={false} />
+                <span className="text-white text-lg sm:text-xl font-extrabold font-display">SkySwitch Technologies</span>
               </div>
-              <p className="text-xs leading-relaxed max-w-sm">
+              <p className="text-sm leading-relaxed max-w-sm text-slate-400">
                 SkySwitch stands at the forefront of sealed switching infrastructure. Supporting critical aerospace, defense, marine, and high-frequency arrays since 2026.
               </p>
-              <div className="flex items-center gap-4 text-xs font-mono text-cyan-400">
+              <div className="flex items-center gap-4 text-sm font-mono text-cyan-400">
                 <span className="flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 bg-green-500 rounded-full inline-block" /> QA Lab Operational
+                  <span className="h-1.5 w-1.5 bg-green-500 rounded-full inline-block animate-pulse" /> QA Lab Operational
                 </span>
                 <span>•</span>
                 <span>Active UTC: 2026-05-22</span>
@@ -189,30 +189,30 @@ export default function App() {
 
             {/* Links Block */}
             <div className="md:col-span-3 space-y-4">
-              <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono">Component Navigator</h4>
-              <ul className="space-y-2 text-xs">
+              <h4 className="text-white text-sm font-bold uppercase tracking-wider font-mono">Component Navigator</h4>
+              <ul className="space-y-2 text-sm">
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery(""); }} className="hover:text-white transition-colors">
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery(""); }} className="hover:text-white transition-colors text-slate-400">
                     Electromagnetic Relays
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("latching"); }} className="hover:text-white transition-colors">
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("latching"); }} className="hover:text-white transition-colors text-slate-400">
                     Magnetic Holding Latching
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("radio"); }} className="hover:text-white transition-colors">
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("radio"); }} className="hover:text-white transition-colors text-slate-400">
                     RF Coaxial Switches
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("contactor"); }} className="hover:text-white transition-colors">
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("contactor"); }} className="hover:text-white transition-colors text-slate-400">
                     Heavy Duty Power Contactors
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("solid"); }} className="hover:text-white transition-colors">
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("solid"); }} className="hover:text-white transition-colors text-slate-400">
                     Optoelectronic Solid State
                   </button>
                 </li>
@@ -221,20 +221,20 @@ export default function App() {
 
             {/* Corporate Profile Block */}
             <div className="md:col-span-2 space-y-4">
-              <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono">Corporate Portal</h4>
-              <ul className="space-y-2 text-xs">
+              <h4 className="text-white text-sm font-bold uppercase tracking-wider font-mono">Corporate Portal</h4>
+              <ul className="space-y-2 text-sm">
                 <li>
-                  <button onClick={() => setActiveTab("home")} className="hover:text-white transition-colors">
+                  <button onClick={() => setActiveTab("home")} className="hover:text-white transition-colors text-slate-400">
                     Enterprise Home
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => setActiveTab("about")} className="hover:text-white transition-colors">
+                  <button onClick={() => scrollSection("about-section")} className="hover:text-white transition-colors text-slate-400">
                     Organization Mission
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => setActiveTab("contact")} className="hover:text-white transition-colors">
+                  <button onClick={() => scrollSection("quotation-section")} className="hover:text-white transition-colors text-slate-400">
                     Request Custom Quote
                   </button>
                 </li>
@@ -243,12 +243,12 @@ export default function App() {
 
             {/* Direct Contact desk */}
             <div className="md:col-span-2 space-y-4">
-              <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono">Direct Technical Contacts</h4>
-              <div className="space-y-2 text-xs">
-                <a href="mailto:dent@aerospace-co.com" className="block hover:text-white transition-colors font-mono tracking-wide">
+              <h4 className="text-white text-sm font-bold uppercase tracking-wider font-mono">Direct Technical Contacts</h4>
+              <div className="space-y-2 text-sm">
+                <a href="mailto:nskraynov007@gmail.com" className="block text-cyan-400 hover:text-cyan-300 transition-colors font-mono tracking-wide text-sm">
                   nskraynov007@gmail.com
                 </a>
-                <span className="block text-[#64748b] leading-tight text-[11px]">
+                <span className="block text-[#64748b] leading-tight text-xs">
                   Send design briefs directly to our engineering coordinators.
                 </span>
               </div>
@@ -256,9 +256,9 @@ export default function App() {
 
           </div>
 
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
             <p>© 2026 SkySwitch Technologies. High-Reliability hermetic sealed systems. All Rights Reserved.</p>
-            <div className="flex items-center gap-4 text-slate-500 text-[10px]">
+            <div className="flex items-center gap-4 text-slate-500 text-xs">
               <a href="#" className="hover:text-slate-400">Security Parameters</a>
               <span>•</span>
               <a href="#" className="hover:text-slate-400">Class MIL-STD compliance docs</a>
