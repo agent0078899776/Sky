@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 interface SkySwitchLogoProps {
   size?: number;
@@ -9,167 +10,387 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
   size = 40, 
   interactive = true 
 }) => {
-  return (
-    <div 
-      className={`relative inline-block select-none ${
-        interactive ? "hover:scale-105 transition-transform duration-300 active:scale-95 cursor-pointer" : ""
-      }`}
-      style={{ width: size, height: size }}
+  // 3D Tilt variables
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth spring physics for 3D rotation feel
+  const springConfig = { damping: 18, stiffness: 160, mass: 0.5 };
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [15, -15]), springConfig);
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-15, 15]), springConfig);
+
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!interactive) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    
+    // Compute normalized coordinates from -0.5 to 0.5
+    const relativeX = (e.clientX - rect.left) / width - 0.5;
+    const relativeY = (e.clientY - rect.top) / height - 0.5;
+    
+    x.set(relativeX);
+    y.set(relativeY);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+    x.set(0);
+    y.set(0);
+  };
+
+  const handleMouseEnter = () => {
+    if (interactive) setHovered(true);
+  };
+
+  const logoContent = (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 200 200"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="filter drop-shadow-[0_4px_16px_rgba(56,189,248,0.3)]"
     >
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 120 120"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-[0_0_12px_rgba(6,182,212,0.3)] animate-pulse-subtle"
-        style={{ animationDuration: "5s" }}
+      <defs>
+        {/* SkySwitch Royal Sky Blue metallic chrome gradient */}
+        <linearGradient id="skySwitchCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#7dd3fc" /> {/* Sky 300 */}
+          <stop offset="45%" stopColor="#38bdf8" /> {/* Sky 400 (Exact core color in image) */}
+          <stop offset="80%" stopColor="#0284c7" /> {/* Sky 600 */}
+          <stop offset="100%" stopColor="#0c4a6e" /> {/* Sky 900 */}
+        </linearGradient>
+
+        {/* Outer concentric neon glow gradient */}
+        <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
+        </linearGradient>
+
+        {/* Glossy overlay for physical 3D glass dome look */}
+        <radialGradient id="glassSphereGrad" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.28" />
+          <stop offset="40%" stopColor="#ffffff" stopOpacity="0.04" />
+          <stop offset="70%" stopColor="#000000" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#000000" stopOpacity="0.6" />
+        </radialGradient>
+
+        {/* Underlying active plate glow */}
+        <radialGradient id="cyberPlateSphere" cx="50%" cy="50%" r="50%">
+          <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+        </radialGradient>
+
+        {/* Dropshadow filter to simulate physical depth profile */}
+        <filter id="traceDepthShadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="1.5" dy="3.5" stdDeviation="2" floodColor="#020617" floodOpacity="0.75" />
+        </filter>
+      </defs>
+
+      {/* 3D Ambient shadow sphere */}
+      <circle cx="100" cy="103" r="92" fill="#020617" opacity="0.5" />
+      <circle cx="100" cy="100" r="92" fill="url(#cyberPlateSphere)" />
+
+      {/* Glass Base platter */}
+      <circle cx="100" cy="100" r="90" fill="#060b18" stroke="url(#skySwitchCyanGrad)" strokeWidth="1" />
+
+      {/* --- RECREATED ORIGINAL GEOMETRY DESIGN (100% FAITHFUL TO THE LOGO VECTOR SEEN IN THE IMAGE) --- */}
+      
+      {/* --- GEOMETRIC INTENSITY CONCENTRIC RADAR RINGS (ELEGANT ROTATIONAL MOTIONS) --- */}
+      
+      {/* 1. Outer Concentric Bezel Ring - slowly rotating clockwise */}
+      <motion.g
+        animate={{ rotate: 360 }}
+        transition={{ duration: 36, ease: "linear", repeat: Infinity }}
+        style={{ transformOrigin: "100px 100px" }}
       >
-        <defs>
-          {/* Cyan 3D metallic plastic shading gradient */}
-          <linearGradient id="cyanRibbon" x1="15%" y1="15%" x2="85%" y2="85%">
-            <stop offset="0%" stopColor="#22d3ee" /> {/* Cyan 400 */}
-            <stop offset="35%" stopColor="#0ea5e9" /> {/* Sky 500 */}
-            <stop offset="70%" stopColor="#2563eb" /> {/* Blue 600 */}
-            <stop offset="100%" stopColor="#1e3a8a" /> {/* Blue 900 */}
-          </linearGradient>
-
-          {/* Lime Green to Emerald 3D metallic shading gradient */}
-          <linearGradient id="greenRibbon" x1="15%" y1="15%" x2="85%" y2="85%">
-            <stop offset="0%" stopColor="#a3e635" /> {/* Lime 400 */}
-            <stop offset="40%" stopColor="#84cc16" /> {/* Lime 500 */}
-            <stop offset="75%" stopColor="#16a34a" /> {/* Green 600 */}
-            <stop offset="100%" stopColor="#14532d" /> {/* Green 900 */}
-          </linearGradient>
-
-          {/* Golden Orange high-intensity active core indicator */}
-          <linearGradient id="goldIndicator" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fbbf24" />
-            <stop offset="100%" stopColor="#ea580c" />
-          </linearGradient>
-
-          {/* Deep dark backing for contrasting 3D depth */}
-          <radialGradient id="innerDepthShadow" cx="50%" cy="50%" r="50%">
-            <stop offset="70%" stopColor="#020617" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#060a14" stopOpacity="0" />
-          </radialGradient>
-
-          {/* Glass-reflection white-to-transparent overlay */}
-          <linearGradient id="glassReflection" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.35" />
-            <stop offset="40%" stopColor="#ffffff" stopOpacity="0.05" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </linearGradient>
-
-          {/* 3D Drop Shadow filter */}
-          <filter id="meshShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="2" dy="5" stdDeviation="3" floodColor="#020617" floodOpacity="0.85" />
-          </filter>
-
-          {/* Neon inner edge glow filter */}
-          <filter id="neonGlow" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feComponentTransfer in="blur" result="boost">
-              <feFuncA type="linear" slope="2" />
-            </feComponentTransfer>
-            <feMerge>
-              <feMergeNode in="boost" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* 1. Underlying dark perspective shadow */}
-        <circle cx="60" cy="65" r="45" fill="url(#innerDepthShadow)" />
-
-        {/* 2. Outer Glassmorphic Chrome Orbital Ring (Representing the Sky/Atmosphere) */}
-        <circle
-          cx="60"
-          cy="60"
-          r="48"
-          stroke="url(#cyanRibbon)"
-          strokeWidth="6"
-          strokeOpacity="0.65"
-          filter="url(#meshShadow)"
+        <circle 
+          cx="100" 
+          cy="100" 
+          r="86" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="1.2" 
+          strokeOpacity="0.4" 
         />
-        {/* Subtle glowing highlights on the orbital ring */}
-        <circle
-          cx="60"
-          cy="60"
-          r="48"
-          stroke="#ffffff"
-          strokeWidth="1.5"
-          strokeDasharray="40 180"
-          strokeLinecap="round"
-          className="animate-spin"
-          style={{ animationDuration: "14s" }}
+        <circle 
+          cx="100" 
+          cy="100" 
+          r="86" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="2.8" 
+          strokeOpacity="0.7" 
+          strokeDasharray="14 100 30 70"
         />
-
-        {/* 3. Outer Neon Edge Shield Tracker */}
-        <circle
-          cx="60"
-          cy="60"
-          r="54"
-          stroke="#00A3E0"
-          strokeWidth="1"
-          strokeDasharray="4 8"
-          strokeOpacity="0.4"
+        <circle 
+          cx="100" 
+          cy="100" 
+          r="86" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="3.5" 
+          strokeOpacity="0.95" 
+          strokeDasharray="4 176"
         />
+      </motion.g>
 
-        {/* --- DYNAMIC INTERWOVEN S-SHAPED 3D RIBBONS --- */}
-        <g filter="url(#meshShadow)">
-          {/* Blue/Cyan Left Ribbon (Dynamic swoop upward & overlapping) */}
-          <path
-            d="M 28,75 
-               C 22,55 35,32 58,32 
-               C 74,32 86,44 86,58
-               C 86,66 78,75 66,75
-               C 58,75 52,69 52,62
-               C 52,55 58,49 66,49
-               C 70,49 74,52 74,56"
-            stroke="url(#cyanRibbon)"
-            strokeWidth="12"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+      {/* 2. Inner Concentric Ring - slowly rotating counter-clockwise */}
+      <motion.g
+        animate={{ rotate: -360 }}
+        transition={{ duration: 48, ease: "linear", repeat: Infinity }}
+        style={{ transformOrigin: "100px 100px" }}
+      >
+        <circle 
+          cx="100" 
+          cy="100" 
+          r="75" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="1" 
+          strokeOpacity="0.3" 
+        />
+        <circle 
+          cx="100" 
+          cy="100" 
+          r="75" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="1.8" 
+          strokeOpacity="0.65" 
+          strokeDasharray="20 40 40 50"
+        />
+        <circle 
+          cx="100" 
+          cy="100" 
+          r="75" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="2.5" 
+          strokeOpacity="0.8" 
+          strokeDasharray="2 58"
+        />
+      </motion.g>
 
-          {/* Lime Green Right Ribbon (Interlocking swoop downward with distinct Z-depth) */}
-          <path
-            d="M 92,45 
-               C 98,65 85,88 62,88 
-               C 46,88 34,76 34,62
-               C 34,54 42,45 54,45
-               C 62,45 68,51 68,58
-               C 68,65 62,71 54,71
-               C 50,71 46,68 46,64"
-            stroke="url(#greenRibbon)"
-            strokeWidth="12"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            opacity="0.95"
-          />
-        </g>
-
-        {/* 4. Glass Shield Glossy Arc (Creates 3D refraction glare) */}
+      {/* 3. Center Interlocking Circuit "S" Traces (Exact mathematical vector reproduction of https://imgur.com/5jlSX4v) */}
+      <g filter="url(#traceDepthShadow)">
+        {/* Core Underlying Paths (Perfect Original Base Vectors) */}
+        
+        {/* Upper S-Curve Ribbon */}
         <path
-          d="M 20,40 C 35,22 85,22 100,40 C 80,30 40,30 20,40 Z"
-          fill="url(#glassReflection)"
-          opacity="0.8"
+          id="upper-s-base"
+          d="M 78,44 H 112 A 22,22 0 0,1 134,66 V 92 A 22,22 0 0,1 112,114 H 84 A 22,22 0 0,0 62,136 A 22,22 0 0,0 84,158 H 118"
+          stroke="url(#skySwitchCyanGrad)"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          opacity="0.85"
         />
 
-        {/* 5. Center Core Contact Bead (Tactical switch status node) */}
-        <circle
-          cx="60"
-          cy="60"
-          r="5.5"
-          fill="url(#goldIndicator)"
-          stroke="#ffffff"
-          strokeWidth="1.5"
-          filter="url(#neonGlow)"
-          className="animate-pulse"
-          style={{ animationDuration: "1.5s" }}
+        {/* Lower S-Curve Ribbon (Perfect rotated twin) */}
+        <path
+          id="lower-s-base"
+          d="M 122,156 H 88 A 22,22 0 0,1 66,134 V 108 A 22,22 0 0,1 88,86 H 116 A 22,22 0 0,0 138,64 A 22,22 0 0,0 116,42 H 82"
+          stroke="url(#skySwitchCyanGrad)"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          opacity="0.85"
         />
-      </svg>
+
+        {/* Horizontal right stem */}
+        <path
+          id="right-stem-base"
+          d="M 121,66 H 158"
+          stroke="url(#skySwitchCyanGrad)"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          fill="none"
+          opacity="0.85"
+        />
+
+        {/* Horizontal left stem */}
+        <path
+          id="left-stem-base"
+          d="M 79,134 H 42"
+          stroke="url(#skySwitchCyanGrad)"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          fill="none"
+          opacity="0.85"
+        />
+
+        {/* Hollow Circle contact pads with breathing intensity */}
+        <motion.circle 
+          cx="100" 
+          cy="66" 
+          r="11" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="5" 
+          fill="none" 
+          animate={{
+            strokeWidth: [5, 6, 5],
+            opacity: [0.85, 1, 0.85]
+          }}
+          transition={{
+            duration: 2.2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.circle 
+          cx="100" 
+          cy="134" 
+          r="11" 
+          stroke="url(#skySwitchCyanGrad)" 
+          strokeWidth="5" 
+          fill="none" 
+          animate={{
+            strokeWidth: [5, 6, 5],
+            opacity: [0.85, 1, 0.85]
+          }}
+          transition={{
+            duration: 2.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.1
+          }}
+        />
+
+        {/* Hologram core inner pins */}
+        <circle cx="100" cy="66" r="3.2" fill="#38bdf8" opacity="0.9" />
+        <circle cx="100" cy="134" r="3.2" fill="#38bdf8" opacity="0.9" />
+
+        {/* --- DYNAMIC GLOWING MOTION CURRENT FLOWS (LASER ELECTRON STREAMS) --- */}
+        
+        {/* Upper S-Curve Current Pulse */}
+        <motion.path
+          d="M 78,44 H 112 A 22,22 0 0,1 134,66 V 92 A 22,22 0 0,1 112,114 H 84 A 22,22 0 0,0 62,136 A 22,22 0 0,0 84,158 H 118"
+          stroke="#38bdf8"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          initial={{ strokeDasharray: "40 220", strokeDashoffset: 0 }}
+          animate={{ strokeDashoffset: -260 }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ filter: "drop-shadow(0 0 4px #38bdf8)", mixBlendMode: "screen" }}
+        />
+
+        {/* Lower S-Curve Current Pulse */}
+        <motion.path
+          d="M 122,156 H 88 A 22,22 0 0,1 66,134 V 108 A 22,22 0 0,1 88,86 H 116 A 22,22 0 0,0 138,64 A 22,22 0 0,0 116,42 H 82"
+          stroke="#38bdf8"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          initial={{ strokeDasharray: "40 220", strokeDashoffset: 130 }}
+          animate={{ strokeDashoffset: -130 }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ filter: "drop-shadow(0 0 4px #38bdf8)", mixBlendMode: "screen" }}
+        />
+
+        {/* Right Stem Current Pulse */}
+        <motion.path
+          d="M 121,66 H 158"
+          stroke="#38bdf8"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          fill="none"
+          initial={{ strokeDasharray: "12 25", strokeDashoffset: -12 }}
+          animate={{ strokeDashoffset: -49 }}
+          transition={{
+            duration: 1.8,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ filter: "drop-shadow(0 0 3px #38bdf8)", mixBlendMode: "screen" }}
+        />
+
+        {/* Left Stem Current Pulse */}
+        <motion.path
+          d="M 79,134 H 42"
+          stroke="#38bdf8"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          fill="none"
+          initial={{ strokeDasharray: "12 25", strokeDashoffset: 0 }}
+          animate={{ strokeDashoffset: 37 }}
+          transition={{
+            duration: 1.8,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ filter: "drop-shadow(0 0 3px #38bdf8)", mixBlendMode: "screen" }}
+        />
+      </g>
+
+      {/* --- PREMIUM 3D HIGHLIGHTS & MIRROR REFLECTION --- */}
+      {/* Volumetric gloss capsule overlay */}
+      <circle cx="100" cy="100" r="86" fill="url(#glassSphereGrad)" pointerEvents="none" />
+
+      {/* 3D dynamic specular accent reflecting off the round bezel */}
+      <path
+        d="M 22,55 C 38,30 80,24 115,26"
+        stroke="#ffffff"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        opacity="0.25"
+        pointerEvents="none"
+      />
+    </svg>
+  );
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative flex items-center justify-center animate-fade-in"
+      style={{ 
+        width: size, 
+        height: size,
+        perspective: 1000
+      }}
+    >
+      <motion.div
+        style={{
+          width: "100%",
+          height: "100%",
+          transformStyle: "preserve-3d",
+          rotateX: interactive ? rotateX : 0,
+          rotateY: interactive ? rotateY : 0,
+        }}
+        animate={{
+          scale: hovered ? 1.05 : 1,
+          y: hovered ? -2 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+        className="w-full h-full relative"
+      >
+        {/* Dynamic back-glow matching the tilt angle */}
+        {hovered && (
+          <motion.div 
+            className="absolute -inset-2 rounded-full bg-sky-500/20 blur-md pointer-events-none z-0"
+            style={{
+              x: useTransform(x, [-0.5, 0.5], [-8, 8]),
+              y: useTransform(y, [-0.5, 0.5], [-8, 8]),
+            }}
+          />
+        )}
+        
+        {/* True Vector Graphics Markup */}
+        <div className="relative z-10 w-full h-full">
+          {logoContent}
+        </div>
+      </motion.div>
     </div>
   );
 };
