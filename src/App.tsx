@@ -50,7 +50,7 @@ export default function App() {
             onClick={() => scrollSection("hero-section")}
             className="flex items-center gap-3 hover:opacity-90 transition-all text-left focus:outline-none cursor-pointer group"
           >
-            <SkySwitchLogo size={46} interactive={false} />
+            <SkySwitchLogo size={64} interactive={false} />
             <div>
               <h1 className="text-white text-xl sm:text-2xl font-extrabold font-display tracking-tight leading-none group-hover:text-cyan-400 transition-colors">
                 SkySwitch
