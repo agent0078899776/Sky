@@ -166,8 +166,8 @@ export const Home: React.FC<HomeProps> = ({
         </div>
       </div>
 
-      {/* Tactical Avionics Telemetry Sidebar (Fixed on the left as shown in the screenshot) */}
-      <div className="hidden md:flex fixed left-5 lg:left-[5%] xl:left-[8%] top-[28%] flex-col items-center gap-4 z-20 pointer-events-none select-none w-44">
+      {/* Floating Avionics Telemetry Sidebar starting from the very beginning of the page */}
+      <div className="hidden lg:flex flex-col items-center gap-4 z-25 pointer-events-none select-none fixed left-4 xl:left-8 2xl:left-16 top-32 pt-4">
         <div className="relative w-full flex flex-col items-center gap-4">
           {/* Tactical trajectory guide dashed line */}
           <div className="absolute top-[-500px] bottom-[-500px] w-[2px] bg-gradient-to-b from-cyan-500/0 via-cyan-500/35 to-cyan-500/0 dash-line z-0" />
@@ -192,7 +192,7 @@ export const Home: React.FC<HomeProps> = ({
 
           {/* Tactical Avionics Pilot HUD Card */}
           <div 
-            className="bg-[#0b0f1d]/90 border border-cyan-500/30 rounded-xl p-3 font-mono text-[10px] text-cyan-400 space-y-1.5 backdrop-blur-md shadow-xl w-36 z-10 transition-all duration-300 pointer-events-auto"
+            className="bg-[#0b0f1d]/95 border border-cyan-500/30 rounded-xl p-3 font-mono text-[10px] text-cyan-400 space-y-1.5 backdrop-blur-md shadow-xl w-36 z-10 transition-all duration-300 pointer-events-auto"
           >
             <div className="flex items-center justify-between border-b border-cyan-500/20 pb-1">
               <span className="font-extrabold tracking-wider flex items-center gap-1">
@@ -237,8 +237,13 @@ export const Home: React.FC<HomeProps> = ({
         </div>
       </div>
 
-      {/* Centered Content Columns */}
-      <div className="max-w-4xl mx-auto w-full px-4 space-y-24">
+      {/* =========================================================
+          TACTICAL CONTROL DESK GRID SYSTEM (CENTERED COLUMN LAYOUT)
+          ========================================================= */}
+      <div className="max-w-4xl mx-auto px-4 relative w-full space-y-24">
+
+        {/* Centered Content Modules */}
+        <div className="space-y-24 w-full max-w-full">
 
           {/* =========================================================
               SECTION 1: OUR AEROSPACE HERITAGE / ABOUT US (REVEALING EFFECT)
@@ -437,5 +442,7 @@ export const Home: React.FC<HomeProps> = ({
       </div>
 
     </div>
-  );
+
+  </div>
+);
 };
