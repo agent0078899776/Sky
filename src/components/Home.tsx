@@ -240,7 +240,7 @@ export const Home: React.FC<HomeProps> = ({
       {/* =========================================================
           TACTICAL CONTROL DESK GRID SYSTEM (CENTERED COLUMN LAYOUT)
           ========================================================= */}
-      <div className="max-w-4xl mx-auto px-4 relative w-full space-y-24">
+      <div className="max-w-4xl lg:max-w-5xl xl:max-w-[1400px] mx-auto px-4 relative w-full space-y-24">
 
         {/* Centered Content Modules */}
         <div className="space-y-24 w-full max-w-full">
@@ -271,7 +271,7 @@ export const Home: React.FC<HomeProps> = ({
                 )}
               </AnimatePresence>
 
-              <div className="max-w-4xl space-y-4">
+              <div className="max-w-5xl space-y-4">
                 <div className="flex items-center gap-2 text-cyan-400 font-mono tracking-widest text-sm uppercase font-bold">
                   <span>TARGET ACQUIRED: ABOUT PROFILE</span>
                   <span className="h-1.5 w-1.5 bg-green-500 rounded-full animate-ping" />
