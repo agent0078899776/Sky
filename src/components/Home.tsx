@@ -245,7 +245,7 @@ export const Home: React.FC<HomeProps> = ({
       <div 
         id="about-section" 
         ref={aboutRef}
-        className={`relative transition-all duration-1000 ease-out sm:pl-16 md:pl-48 lg:pl-56 ${
+        className={`relative transition-all duration-1000 ease-out max-w-5xl mx-auto w-full ${
           unlockedAbout ? "opacity-100 translate-y-0" : "opacity-30 translate-y-12"
         }`}
       >
@@ -344,7 +344,7 @@ export const Home: React.FC<HomeProps> = ({
       <div 
         id="applications-section" 
         ref={appsRef}
-        className={`relative transition-all duration-1000 ease-out sm:pl-16 md:pl-48 lg:pl-56 ${
+        className={`relative transition-all duration-1000 ease-out max-w-5xl mx-auto w-full ${
           unlockedApps ? "opacity-100 translate-y-0" : "opacity-30 translate-y-12"
         }`}
       >
@@ -413,7 +413,7 @@ export const Home: React.FC<HomeProps> = ({
       <div 
         id="quotation-section" 
         ref={contactRef}
-        className={`relative transition-all duration-1000 ease-out sm:pl-16 md:pl-48 lg:pl-56 ${
+        className={`relative transition-all duration-1000 ease-out max-w-5xl mx-auto w-full ${
           unlockedContact ? "opacity-100 translate-y-0" : "opacity-30 translate-y-12"
         }`}
       >
