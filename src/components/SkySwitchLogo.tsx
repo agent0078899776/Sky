@@ -170,12 +170,12 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
 
       {/* 3. Center Interlocking Circuit "S" Traces (Exact mathematical vector reproduction of https://imgur.com/5jlSX4v) */}
       <g filter="url(#traceDepthShadow)">
-        {/* Core Underlying Paths (Perfect Original Base Vectors) */}
+        {/* Core Underlying Paths (Perfect Original Base Vectors (Mirrored horizontally for correct S orientation)) */}
         
         {/* Upper S-Curve Ribbon */}
         <path
           id="upper-s-base"
-          d="M 78,44 H 112 A 22,22 0 0,1 134,66 V 92 A 22,22 0 0,1 112,114 H 84 A 22,22 0 0,0 62,136 A 22,22 0 0,0 84,158 H 118"
+          d="M 122,44 H 88 A 22,22 0 0,0 66,66 V 92 A 22,22 0 0,0 88,114 H 116 A 22,22 0 0,1 138,136 A 22,22 0 0,1 116,158 H 82"
           stroke="url(#skySwitchCyanGrad)"
           strokeWidth="5.5"
           strokeLinecap="round"
@@ -184,10 +184,10 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
           opacity="0.85"
         />
 
-        {/* Lower S-Curve Ribbon (Perfect rotated twin) */}
+        {/* Lower S-Curve Ribbon (Perfect rotated twin, mirrored) */}
         <path
           id="lower-s-base"
-          d="M 122,156 H 88 A 22,22 0 0,1 66,134 V 108 A 22,22 0 0,1 88,86 H 116 A 22,22 0 0,0 138,64 A 22,22 0 0,0 116,42 H 82"
+          d="M 78,156 H 112 A 22,22 0 0,0 134,134 V 108 A 22,22 0 0,0 112,86 H 84 A 22,22 0 0,1 62,64 A 22,22 0 0,1 84,42 H 118"
           stroke="url(#skySwitchCyanGrad)"
           strokeWidth="5.5"
           strokeLinecap="round"
@@ -196,10 +196,10 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
           opacity="0.85"
         />
 
-        {/* Horizontal right stem */}
+        {/* Horizontal left stem (mirrored from y=134 right side to y=66 left side) */}
         <path
-          id="right-stem-base"
-          d="M 121,66 H 158"
+          id="left-stem-base"
+          d="M 79,66 H 42"
           stroke="url(#skySwitchCyanGrad)"
           strokeWidth="5.5"
           strokeLinecap="round"
@@ -207,10 +207,10 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
           opacity="0.85"
         />
 
-        {/* Horizontal left stem */}
+        {/* Horizontal right stem (mirrored from y=66 left side to y=134 right side) */}
         <path
-          id="left-stem-base"
-          d="M 79,134 H 42"
+          id="right-stem-base"
+          d="M 121,134 H 158"
           stroke="url(#skySwitchCyanGrad)"
           strokeWidth="5.5"
           strokeLinecap="round"
@@ -261,9 +261,9 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
 
         {/* --- DYNAMIC GLOWING MOTION CURRENT FLOWS (LASER ELECTRON STREAMS) --- */}
         
-        {/* Upper S-Curve Current Pulse */}
+        {/* Upper S-Curve Current Pulse (mirrored) */}
         <motion.path
-          d="M 78,44 H 112 A 22,22 0 0,1 134,66 V 92 A 22,22 0 0,1 112,114 H 84 A 22,22 0 0,0 62,136 A 22,22 0 0,0 84,158 H 118"
+          d="M 122,44 H 88 A 22,22 0 0,0 66,66 V 92 A 22,22 0 0,0 88,114 H 116 A 22,22 0 0,1 138,136 A 22,22 0 0,1 116,158 H 82"
           stroke="#38bdf8"
           strokeWidth="5.5"
           strokeLinecap="round"
@@ -279,9 +279,9 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
           style={{ filter: "drop-shadow(0 0 4px #38bdf8)", mixBlendMode: "screen" }}
         />
 
-        {/* Lower S-Curve Current Pulse */}
+        {/* Lower S-Curve Current Pulse (mirrored) */}
         <motion.path
-          d="M 122,156 H 88 A 22,22 0 0,1 66,134 V 108 A 22,22 0 0,1 88,86 H 116 A 22,22 0 0,0 138,64 A 22,22 0 0,0 116,42 H 82"
+          d="M 78,156 H 112 A 22,22 0 0,0 134,134 V 108 A 22,22 0 0,0 112,86 H 84 A 22,22 0 0,1 62,64 A 22,22 0 0,1 84,42 H 118"
           stroke="#38bdf8"
           strokeWidth="5.5"
           strokeLinecap="round"
@@ -297,9 +297,9 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
           style={{ filter: "drop-shadow(0 0 4px #38bdf8)", mixBlendMode: "screen" }}
         />
 
-        {/* Right Stem Current Pulse */}
+        {/* Left Stem Current Pulse (mirrored, y=66) */}
         <motion.path
-          d="M 121,66 H 158"
+          d="M 79,66 H 42"
           stroke="#38bdf8"
           strokeWidth="5.5"
           strokeLinecap="round"
@@ -314,9 +314,9 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
           style={{ filter: "drop-shadow(0 0 3px #38bdf8)", mixBlendMode: "screen" }}
         />
 
-        {/* Left Stem Current Pulse */}
+        {/* Right Stem Current Pulse (mirrored, y=134) */}
         <motion.path
-          d="M 79,134 H 42"
+          d="M 121,134 H 158"
           stroke="#38bdf8"
           strokeWidth="5.5"
           strokeLinecap="round"
