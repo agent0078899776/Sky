@@ -308,6 +308,61 @@ export const Home: React.FC<HomeProps> = ({
                 </div>
               </div>
 
+              {/* Production & Engineering Facility Gallery */}
+              <div className="border-t border-slate-800/80 mt-12 pt-10 space-y-6">
+                <h3 className="text-xl font-bold font-display text-white text-center">Production & Engineering Facility</h3>
+                <p className="text-slate-400 text-xs sm:text-sm text-center max-w-2xl mx-auto leading-relaxed">
+                  A glimpse into our high-precision manufacturing pipelines, cleanroom assembly lines, advanced test environments, and final hermetic products.
+                </p>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+                  <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
+                    <img 
+                      src="https://imgur.com/FATAxET.png" 
+                      alt="Production 1" 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 to-transparent p-2.5 pt-5 text-[10px] sm:text-[11px] text-slate-300 font-medium">
+                      Aerospace Production Line
+                    </div>
+                  </div>
+                  <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
+                    <img 
+                      src="https://imgur.com/2eXw16n.png" 
+                      alt="Production 2" 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 to-transparent p-2.5 pt-5 text-[10px] sm:text-[11px] text-slate-300 font-medium">
+                      Precision Coil Winding
+                    </div>
+                  </div>
+                  <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
+                    <img 
+                      src="https://imgur.com/9BtVTip.png" 
+                      alt="Testing Laboratory" 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 to-transparent p-2.5 pt-5 text-[10px] sm:text-[11px] text-slate-300 font-medium">
+                      QA Testing Laboratory
+                    </div>
+                  </div>
+                  <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
+                    <img 
+                      src="https://imgur.com/2AVNQD4.png" 
+                      alt="Products" 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 to-transparent p-2.5 pt-5 text-[10px] sm:text-[11px] text-slate-300 font-medium">
+                      Hermetic Component Parts
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Environmental Laboratories specs */}
               <div className="border-t border-slate-800/80 mt-12 pt-10 space-y-6">
                 <h3 className="text-xl font-bold font-display text-white text-center">Quality Assurance Laboratories</h3>
