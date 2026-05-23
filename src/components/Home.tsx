@@ -453,14 +453,14 @@ export const Home: React.FC<HomeProps> = ({
                     </div>
                     
                     {/* Physical component photo display */}
-                    <div className="relative h-32 rounded-xl overflow-hidden border border-slate-800">
+                    <div className="relative h-44 sm:h-48 md:h-52 rounded-xl overflow-hidden border border-slate-800">
                       <img
                         src={area.image}
                         alt={area.title}
                         referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover filter brightness-[0.6] group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover filter brightness-[0.95] group-hover:brightness-100 group-hover:scale-[1.03] transition-all duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/10 to-transparent opacity-60" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-40 pointer-events-none" />
                     </div>
                   </div>
                 ))}
