@@ -320,7 +320,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                       transition={{ duration: 0.2 }}
                       className="overflow-x-auto border-t border-slate-800/80"
                     >
-                      <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" ? "min-w-[1200px]" : "min-w-[1070px]"}`}>
+                      <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" || category.id === "time_relays" ? "min-w-[1240px]" : "min-w-[1070px]"}`}>
                         <thead>
                           {category.id === "plastic_photorelay" ? (
                             <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
@@ -332,6 +332,18 @@ export const Catalog: React.FC<CatalogProps> = ({
                               <th className="py-3.5 px-3 w-[120px] text-center align-middle">Output Current</th>
                               <th className="py-3.5 px-3 w-[110px] text-center align-middle">On-Resistance</th>
                               <th className="py-3.5 px-3 w-[225px] text-center align-middle">Panasonic and Omron Benchmarking Models</th>
+                              <th className="py-3.5 px-1.5 text-center w-[95px] align-middle">Action</th>
+                            </tr>
+                          ) : category.id === "time_relays" ? (
+                            <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
+                              <th className="py-3.5 px-3 w-[150px] text-center align-middle">Product Model</th>
+                              <th className="py-3.5 px-3 w-[120px] text-center align-middle">Product Picture</th>
+                              <th className="py-3.5 px-3 w-[180px] text-center align-middle">Dimensions (mm) and Package</th>
+                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Temperature Range (℃)</th>
+                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">Number of Output Groups</th>
+                              <th className="py-3.5 px-3 w-[230px] text-center align-middle">Vibration</th>
+                              <th className="py-3.5 px-3 w-[170px] text-center align-middle">Contact Load and Lifetime</th>
+                              <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
                               <th className="py-3.5 px-1.5 text-center w-[95px] align-middle">Action</th>
                             </tr>
                           ) : (
@@ -450,6 +462,114 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Panasonic & Omron Benchmarking */}
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle">
+                                      {p.benchmarking}
+                                    </td>
+
+                                    {/* Specs Action Button */}
+                                    <td className="py-3.5 px-1.5 text-center align-middle">
+                                      <button
+                                        onClick={() => {
+                                          setActiveSpecProduct(p);
+                                          resetZoomAndDrag();
+                                        }}
+                                        className="inline-flex items-center justify-center w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-[11px] font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
+                                      >
+                                        View Specs
+                                      </button>
+                                    </td>
+                                  </tr>
+                                );
+                              }
+
+                              if (category.id === "time_relays") {
+                                return (
+                                  <tr
+                                    key={p.model}
+                                    className={`group hover:bg-slate-800/30 transition-all ${
+                                      isChecked ? "bg-cyan-950/20" : pIdx % 2 === 0 ? "bg-slate-900/10" : "bg-slate-900/20"
+                                    }`}
+                                  >
+                                    {/* Product Model Column with Checkbox inside */}
+                                    <td className="py-3.5 px-3 align-middle text-left font-mono font-bold text-cyan-400">
+                                      <div className="flex items-center gap-3 justify-start pl-1">
+                                        <label className="relative inline-flex items-center justify-center cursor-pointer h-5 w-5 shrink-0">
+                                          <input
+                                            type="checkbox"
+                                            checked={isChecked}
+                                            onChange={() => toggleModelCompare(p.model)}
+                                            className="sr-only peer"
+                                          />
+                                          <div className="w-4.5 h-4.5 border border-slate-600 rounded bg-slate-950 peer-checked:bg-cyan-500 peer-checked:border-cyan-500 transition-all flex items-center justify-center">
+                                            {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
+                                          </div>
+                                        </label>
+                                        <span className="text-sm select-all whitespace-normal break-words leading-tight">{p.model}</span>
+                                      </div>
+                                    </td>
+
+                                    {/* Product Picture Column */}
+                                    <td className="py-2.5 px-2 text-center align-middle">
+                                      {p.image && (
+                                        <div className="h-14 w-14 rounded-lg bg-slate-900 border border-slate-800 shadow-inner overflow-hidden flex items-center justify-center mx-auto p-1 hover:scale-105 transition-transform duration-200">
+                                          <img
+                                            src={resolveImagePath(p.image)}
+                                            alt={`${p.model} photo`}
+                                            referrerPolicy="no-referrer"
+                                            className="object-contain h-full w-full"
+                                          />
+                                        </div>
+                                      )}
+                                    </td>
+
+                                    {/* Dimensions and Package */}
+                                    <td className="py-3.5 px-3 align-middle text-center">
+                                      {(() => {
+                                        const { size, desc } = formatDimensions(p.dimensions || "");
+                                        return (
+                                          <div className="flex flex-col items-center text-center">
+                                            <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || p.dimensions}</span>
+                                            {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
+                                          </div>
+                                        );
+                                      })()}
+                                    </td>
+
+                                    {/* Temperature range (℃) */}
+                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
+                                      {renderTempRange(p.tempRange || "")}
+                                    </td>
+
+                                    {/* Number of Output Groups */}
+                                    <td className="py-3.5 px-3 text-slate-200 text-sm font-semibold whitespace-nowrap align-middle text-center font-mono">
+                                      {p.contactForm}
+                                    </td>
+
+                                    {/* Vibration */}
+                                    <td className="py-3.5 px-3 align-middle text-center">
+                                      <div className="flex flex-col gap-1 items-center text-center max-w-full">
+                                        {(p.vibration || "").split(/\s*\|\s*/).map((vPart, idx) => (
+                                          <span key={idx} className="text-xs sm:text-xs text-slate-300 leading-tight font-sans block">
+                                            {vPart}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </td>
+
+                                    {/* Contact Load and Lifetime */}
+                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
+                                      {(() => {
+                                        const { load, life } = formatContactLoad(p.contactLoad || "");
+                                        return (
+                                          <div className="flex flex-col gap-0.5 items-center leading-tight">
+                                            <span className="font-sans font-medium text-slate-200">{load || p.contactLoad}</span>
+                                            {life && <span className="font-mono text-[11px] text-slate-400">{life}</span>}
+                                          </div>
+                                        );
+                                      })()}
+                                    </td>
+
+                                    {/* Benchmarking Model */}
                                     <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle">
                                       {p.benchmarking}
                                     </td>
