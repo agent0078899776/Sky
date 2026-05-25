@@ -18,7 +18,7 @@ const formatDimensions = (dimStr: string) => {
 const resolveImagePath = (src: string) => {
   if (!src) return "";
   if (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("data:")) {
-    return src; // Абсолютные внешние ссылки (например, с Imgur) остаются нетронутыми
+    return src; 
   }
   const base = (import.meta as any).env?.BASE_URL || "/Sky/";
   const cleanSrc = src.startsWith("/") ? src.slice(1) : src;
@@ -202,9 +202,9 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   let productPhotoUrl = "";
   if (currentPhotoStage === "local") {
-    productPhotoUrl = `/Sky/images/${currentModel}.webp`;
+    productPhotoUrl = resolveImagePath(`/images/${currentModel}.webp`);
   } else if (currentPhotoStage === "fallback") {
-    productPhotoUrl = activeSpecProduct?.image || "";
+    productPhotoUrl = resolveImagePath(activeSpecProduct?.image || "");
   }
 
   const isPhotoAvailable = activeSpecProduct ? (currentPhotoStage !== "failed" && (currentPhotoStage !== "fallback" || !!activeSpecProduct.image)) : false;
@@ -213,9 +213,9 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   let schematicUrl = "";
   if (currentSchematicStage === "plural") {
-    schematicUrl = `/Sky/schematics/${currentModel}.webp`;
+    schematicUrl = resolveImagePath(`/schematics/${currentModel}.webp`);
   } else if (currentSchematicStage === "singular") {
-    schematicUrl = `/Sky/schematic/${currentModel}.webp`;
+    schematicUrl = resolveImagePath(`/schematic/${currentModel}.webp`);
   }
 
   const isSchematicImageAvailable = activeSpecProduct ? (currentSchematicStage !== "failed") : false;
@@ -361,7 +361,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     {p.image && (
                                       <div className="h-8 w-8 rounded bg-slate-900 border border-slate-850 overflow-hidden flex items-center justify-center shrink-0">
                                         <img
-                                          src={p.image}
+                                          src={resolveImagePath(p.image)}
                                           alt={p.model}
                                           referrerPolicy="no-referrer"
                                           className="object-cover h-full w-full"
