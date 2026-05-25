@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 // Helper to separate physical dimensions from mounting description
 const formatDimensions = (dimStr: string) => {
-  const match = dimStr.match(/^(\d+(?:\.\d+)?\s*x\s*\d+(?:\.\d+)?(?:\s*x\s*\d+(?:\.\d+)?)?)\s*(.*)$/i);
+  const match = dimStr.match(/^([^\d\s]*\s*\d+(?:\.\d+)?\s*x\s*\d+(?:\.\d+)?(?:\s*x\s*\d+(?:\.\d+)?)?)\s*(.*)$/i);
   if (match) {
     return {
       size: match[1].trim(),
