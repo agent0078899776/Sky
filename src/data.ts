@@ -8,7 +8,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "1J1Z1A",
-        image: "https://imgur.com/PQCZJCx.jpg",
+        image: "/images/1J1Z1A.png", 
         dimensions: "Φ8.5 x 7.1 Resistance sealing welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -18,7 +18,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J2Z1A",
-        image: "https://imgur.com/PQCZJCx.jpg",
+        image: "/images/xxx.png",
         dimensions: "Φ8.5 x 7.1 Resistance sealing welding",
         tempRange: "-55°C ~ 85°C",
         contactForm: "2PDT",
@@ -28,7 +28,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J2Z1AG",
-        image: "https://imgur.com/GoMs0Nz.jpg",
+        image: "/images/xxx.png",
         dimensions: "Φ8.5 x 9.53 Resistance sealing welding",
         tempRange: "-55°C ~ 85°C",
         contactForm: "2PDT",
@@ -38,7 +38,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J2Z05AFD",
-        image: "https://imgur.com/7b6Jhl9.jpg",
+        image: "/images/xxx.png",
         dimensions: "8.5 x 8.5 x 7.3 Built-in transient suppression for resistance sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -48,7 +48,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J2Z1AFG",
-        image: "https://imgur.com/pziFX0e.jpg",
+        image: "/images/xxx.png",
         dimensions: "8.5 x 8.5 x 10.0 Resistance sealing welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -58,7 +58,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J2Z1AFGD",
-        image: "https://imgur.com/pziFX0e.jpg",
+        image: "/images/xxx.png",
         dimensions: "8.5 x 8.5 x 10.0 Built-in transient suppression for resistance sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -68,7 +68,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2J1Z1A",
-        image: "https://imgur.com/Av1JfUW.jpg",
+        image: "/images/xxx.png",
         dimensions: "10.5 x 5.5 x 13 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -78,7 +78,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2J1Z2A",
-        image: "https://imgur.com/u3IqJlC.jpg",
+        image: "/images/xxx.png",
         dimensions: "10.5 x 6 x 13 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -88,7 +88,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2J2Z1AT",
-        image: "https://imgur.com/DaX8m6x.jpg",
+        image: "/images/xxx.png",
         dimensions: "10.5 x 5.5 x 10.8 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -98,7 +98,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "3J2Z2A",
-        image: "https://imgur.com/Lr51RoE.jpg",
+        image: "/images/xxx.png",
         dimensions: "15.5 x 8.2 x 8.2 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -108,7 +108,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "3J2Z2AT",
-        image: "https://imgur.com/rlepfTw.jpg",
+        image: "/images/xxx.png",
         dimensions: "15.5 x 8.2 x 8.2 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -118,7 +118,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "3J2Z5A",
-        image: "https://imgur.com/Qqdbbgo.jpg",
+        image: "/images/xxx.png",
         dimensions: "15.5 x 8.2 x 10.0 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -128,7 +128,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J1Z10A",
-        image: "https://imgur.com/SIk65sb.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -138,7 +138,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J1Z15A",
-        image: "https://imgur.com/nPAFoMB.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -148,7 +148,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J2Z2A",
-        image: "https://imgur.com/bfYj8Nd.jpg",
+        image: "/images/xxx.png",
         dimensions: "21.0 x 11.0 x 11.0 Laser sealing and welding",
         tempRange: "-55°C ~ 85°C",
         contactForm: "2PDT",
@@ -158,7 +158,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J2Z5A",
-        image: "https://imgur.com/kFVE4Jg.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -168,7 +168,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J2Z8A",
-        image: "https://imgur.com/xQ8SmiB.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -178,7 +178,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J2Z10A",
-        image: "https://imgur.com/srKLYyG.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -188,7 +188,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6J1Z10A",
-        image: "https://imgur.com/oX44INt.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 10.5 x 17.0 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -198,7 +198,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6J1Z15A",
-        image: "https://imgur.com/oX44INt.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 10.5 x 17.0 Laser sealing welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -208,7 +208,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6J2Z5A",
-        image: "https://imgur.com/wVUBILQ.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 10.6 x 16.8 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -218,7 +218,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6J3Z10AD",
-        image: "https://imgur.com/lClkVc8.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 20.6 x 16.3 Built-in transient suppression for laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "3PDT",
@@ -228,7 +228,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6J4Z5AD",
-        image: "https://imgur.com/Z7qtI6o.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 10.6 x 16.8 Built-in transient suppression for laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "4PDT",
@@ -238,7 +238,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6J4Z10A",
-        image: "https://imgur.com/LJ2d6Xp.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 20.6 x 16.3 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "4PDT",
@@ -248,7 +248,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7J1Z25A",
-        image: "https://imgur.com/lvgPN81.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65°C ~ 125°C",
         contactForm: "1PDT",
@@ -258,7 +258,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7J1Z25AD",
-        image: "https://imgur.com/CZV4eu2.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 13.5 x 26.0 Built-in transient suppression for laser sealing and welding ",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -268,7 +268,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7J1Z40A",
-        image: "https://imgur.com/JbnWUyF.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "1PDT",
@@ -278,7 +278,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7J2Z12A",
-        image: "https://imgur.com/YCLu5P1.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -288,7 +288,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7J2Z10AD",
-        image: "https://imgur.com/yaxFMjQ.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 13.5 x 26.0 Built-in transient suppression for laser sealing and welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT",
@@ -298,7 +298,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7J2Z15A",
-        image: "https://imgur.com/m4GmyJ1.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "2PDT",
@@ -308,7 +308,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J3Z25A",
-        image: "https://imgur.com/DYevLh2.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "3PDT",
@@ -318,7 +318,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J3Z30A",
-        image: "https://imgur.com/vZKEIzc.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "3PDT",
@@ -328,7 +328,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J4Z10A",
-        image: "https://imgur.com/OhmAKVM.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "4PDT",
@@ -338,7 +338,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J4Z10AD",
-        image: "https://imgur.com/1J27JtX.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 26.0 Built-in transient suppression for laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
@@ -348,7 +348,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J4Z20A",
-        image: "https://imgur.com/wH0NI4D.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
@@ -358,7 +358,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J1Z50A",
-        image: "https://imgur.com/Iv8b4mV.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 30.0 Laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
@@ -368,7 +368,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J1Z50AD",
-        image: "https://imgur.com/K8rpLS9.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 30.0 Built-in transient suppression for laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
@@ -378,7 +378,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J1H75A",
-        image: "https://imgur.com/g0AcGF1.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 28.5 Laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "1H",
@@ -388,7 +388,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J2Z30A",
-        image: "https://imgur.com/1PhVIJB.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 30.0 Laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
@@ -398,7 +398,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J2Z30AD",
-        image: "https://imgur.com/X79sLtC.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 30.0 Built-in transient suppression for laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
@@ -408,7 +408,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "9J6Z2A",
-        image: "https://imgur.com/wzpsNBc.jpg",
+        image: "/images/xxx.png",
         dimensions: "Φ30 x 34.0 Tin seal",
         tempRange: "-55 ~ 85",
         contactForm: "6PDT",
@@ -418,7 +418,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "10J4Z25A",
-        image: "https://imgur.com/6qmroXg.jpg",
+        image: "/images/xxx.png",
         dimensions: "36.0 x 26.0 x 26.0 Laser sealing and welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
@@ -428,7 +428,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "10J6Z15A",
-        image: "https://imgur.com/6qmroXg.jpg",
+        image: "/images/xxx.png",
         dimensions: "36.0 x 26.0 x 26.0 Laser sealing and welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "6PDT",
@@ -445,7 +445,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "1JM2Z1A",
-        image: "https://imgur.com/XewESbZ.jpg",
+        image: "/images/xxx.png",
         dimensions: "Φ8.5 x 7.1",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
@@ -455,7 +455,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4JM2Z2A",
-        image: "https://imgur.com/zQ8TVvI.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.5 x 10.5 x 10.5",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
@@ -465,7 +465,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "5JM2Z2A",
-        image: "https://imgur.com/goBURm9.jpg",
+        image: "/images/xxx.png",
         dimensions: "21.0 x 11.0 x 24.0",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
@@ -475,7 +475,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6JM1Z10A",
-        image: "https://imgur.com/w18deez.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 10.6 x 17.0",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
@@ -485,7 +485,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6JM2Z5A",
-        image: "https://imgur.com/BkAN7tZ.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 10.6 x 16.8",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
@@ -495,7 +495,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6JM3Z10A",
-        image: "https://imgur.com/mcZ6FSy.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 20.6 x 18.2",
         tempRange: "-65 ~ 125",
         contactForm: "3PDT",
@@ -505,7 +505,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6JM4Z5A",
-        image: "https://imgur.com/6oaBkua.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 20.6 x 17.0",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
@@ -515,7 +515,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7JM1Z25A",
-        image: "https://imgur.com/hor80UI.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 13.5 x 26.0",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
@@ -525,7 +525,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7JM2Z10A",
-        image: "https://imgur.com/KsshWDS.jpg",
+        image: "/images/7JM2Z10A.png",
         dimensions: "26.0 x 13.5 x 26.0",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
@@ -545,7 +545,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8JM3Z25A",
-        image: "https://imgur.com/rLuWcgj.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 26.0 Latching type",
         tempRange: "-65°C ~ 125°C",
         contactForm: "3PDT (3 Form C)",
@@ -555,7 +555,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8JM4Z15A",
-        image: "https://imgur.com/lYkuwTI.jpg",
+        image: "/images/xxx.png",
         dimensions: "26.0 x 26.0 x 26.0 Latching type",
         tempRange: "-65°C ~ 125°C",
         contactForm: "4PDT (4 Form C)",
@@ -565,7 +565,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "9JM12Z2A",
-        image: "https://imgur.com/U7NyYpP.jpg",
+        image: "/images/xxx.png",
         dimensions: "54.0 x 41.0 x 41.0 Heavy multi-channel latching",
         tempRange: "-65°C ~ 85°C",
         contactForm: "12PDT (12 Form C)",
@@ -582,7 +582,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "11JPT-SPDT50S",
-        image: "https://imgur.com/xf2Qnlr.jpg",
+        image: "/images/xxx.png",
         dimensions: "34.0 x 12.7 x 34.3 Closed type",
         tempRange: "-55°C ~ 85°C",
         contactForm: "1PDT (SPDT)",
@@ -592,7 +592,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "11JPT-DPDT50S",
-        image: "https://imgur.com/osbITDa.jpg",
+        image: "/images/xxx.png",
         dimensions: "33.0 x 33.0 x 48.0 Closed type",
         tempRange: "-55°C ~ 85°C",
         contactForm: "2PDT (DPDT)",
@@ -602,7 +602,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "11JPT-SPDT50N",
-        image: "https://imgur.com/THkHaYM.jpg",
+        image: "/images/xxx.png",
         dimensions: "67.0 x 24.0 x 48.0 Closed type",
         tempRange: "-55°C ~ 85°C",
         contactForm: "1PDT (SPDT)",
@@ -612,7 +612,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "11JPT-DPDT50N",
-        image: "https://imgur.com/kIsZHZE.jpg",
+        image: "/images/xxx.png",
         dimensions: "44.5 x 44.5 x 58.5 Closed type",
         tempRange: "-55°C ~ 85°C",
         contactForm: "2PDT (DPDT)",
@@ -622,7 +622,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "11JPTSPDT75S",
-        image: "https://imgur.com/1mWw27m.jpg",
+        image: "/images/xxx.png",
         dimensions: "32.0 x 28.0 x 12.0 Coaxial RF",
         tempRange: "-55°C ~ 85°C",
         contactForm: "1PDT (SPDT)",
@@ -632,7 +632,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "11JPT-2Z50C",
-        image: "https://imgur.com/xloA2n2.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.6 x 10.5 x 11.5 Resistance sealing welding",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT (DPDT)",
@@ -649,7 +649,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "1J1H50A",
-        image: "https://imgur.com/cUV3diw.jpg",
+        image: "/images/xxx.png",
         dimensions: "60.0 x 38.0 x 53.5 Hermetic Contactor",
         tempRange: "-55°C ~ 90°C",
         contactForm: "1H (1 Form A)",
@@ -659,7 +659,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J1H50A-I",
-        image: "https://imgur.com/IqrlakE.jpg",
+        image: "/images/xxx.png",
         dimensions: "56.0 x 38.5 x 54.0 Hermetic Contactor",
         tempRange: "-55°C ~ 85°C",
         contactForm: "1H (1 Form A)",
@@ -669,7 +669,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J1H100A",
-        image: "https://imgur.com/YVNPecF.jpg",
+        image: "/images/xxx.png",
         dimensions: "70.0 x 42.5 x 68.0 Heavy Hermetic",
         tempRange: "-55°C ~ 85°C",
         contactForm: "1H (1 Form A)",
@@ -679,7 +679,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J1H200A",
-        image: "https://imgur.com/gaNBQaJ.jpg",
+        image: "/images/xxx.png",
         dimensions: "81.4 x 50.4 x 83.0 Heavy Contactor",
         tempRange: "-55°C ~ 85°C",
         contactForm: "1H (1 Form A)",
@@ -689,7 +689,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J3H3D25A",
-        image: "https://imgur.com/Tb2RPRw.jpg",
+        image: "/images/xxx.png",
         dimensions: "87.5 x 44.0 x 83.0 3-Phase Contactor",
         tempRange: "-55°C ~ 85°C",
         contactForm: "3H3D (3 Form A, 3 Form B)",
@@ -699,7 +699,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1J3H100A",
-        image: "https://imgur.com/mny3VL2.jpg",
+        image: "/images/xxx.png",
         dimensions: "117.0 x 69.0 x 95.0 3-Phase Heavy",
         tempRange: "-55°C ~ 85°C",
         contactForm: "3H (3 Form A)",
@@ -709,7 +709,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2J1H100A",
-        image: "https://imgur.com/ogS0tmj.jpg",
+        image: "/images/xxx.png",
         dimensions: "81.0 x 48.0 x 36.0 Auxiliary-equipped",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H (1 Form A) | Aux: 1H1D",
@@ -719,7 +719,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2J1H200A",
-        image: "https://imgur.com/BE4m7ds.jpg",
+        image: "/images/xxx.png",
         dimensions: "96.0 x 65.0 x 42.0 Auxiliary-equipped",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H (1 Form A) | Aux: 1H1D",
@@ -729,7 +729,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2J3H3D30A",
-        image: "https://imgur.com/2MEWGqx.jpg",
+        image: "/images/xxx.png",
         dimensions: "80.8 x 95.0 x 85.0 3-Phase Auxiliary",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 3H3D | Aux: 1H1D",
@@ -739,7 +739,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2J3H3D150A",
-        image: "https://imgur.com/FmIIQOU.jpg",
+        image: "/images/xxx.png",
         dimensions: "116.0 x 80.0 x 105.0 3-Phase Heavy",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 3H3D | Aux: 3H3D",
@@ -749,7 +749,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "3J1H200A",
-        image: "https://imgur.com/bdt1vjk.jpg",
+        image: "/images/xxx.png",
         dimensions: "87.0 x 35.5 x 71.5 Closed Type Contactor",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H | Aux: 3Z (Changeover)",
@@ -759,7 +759,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "3J1H400A",
-        image: "https://imgur.com/oO2kwT1.jpg",
+        image: "/images/xxx.png",
         dimensions: "72.0 x 35.5 x 91.0 Closed Type Contactor",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H | Aux: 3Z",
@@ -769,7 +769,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "3J3H100A",
-        image: "https://imgur.com/XMYQ2eb.jpg",
+        image: "/images/xxx.png",
         dimensions: "60.0 x 59.0 x 81.0 3-Phase Closed",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 3H | Aux: 4Z",
@@ -779,7 +779,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "3J3H375A",
-        image: "https://imgur.com/bI1MxwI.jpg",
+        image: "/images/xxx.png",
         dimensions: "109.0 x 93.0 x 111.0 3-Phase Ultimate",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 3H | Aux: 8Z",
@@ -789,7 +789,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J1H150A",
-        image: "https://imgur.com/GfgjePD.jpg",
+        image: "/images/xxx.png",
         dimensions: "60.5 x 60.5 x 70.0 High-voltage Hermetic",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H | Aux: 1H",
@@ -799,7 +799,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J1H350A",
-        image: "https://imgur.com/OBuIrnh.jpg",
+        image: "/images/xxx.png",
         dimensions: "96.0 x 80.0 x 100.0 High-voltage Hermetic",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H | Aux: 1H",
@@ -809,7 +809,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J1H400AI",
-        image: "https://imgur.com/pRVWyye.jpg",
+        image: "/images/xxx.png",
         dimensions: "108.0 x 52.0 x 105.0 Ultimate Power Controller",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H | Aux: 1H",
@@ -819,7 +819,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "4J1H600AI",
-        image: "https://imgur.com/kFEyPaD.jpg",
+        image: "/images/xxx.png",
         dimensions: "105.0 x 71.0 x 106.0 Ultimate Power Contactor",
         tempRange: "-55°C ~ 85°C",
         contactForm: "Main: 1H | Aux: 1H",
@@ -836,7 +836,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "1JG1H50-2A",
-        image: "https://imgur.com/r9hSofP.jpg",
+        image: "/images/xxx.png",
         dimensions: "4.70 x 6.45 x 2.70 CSOP6 Ceramic hermetic opto-MOS",
         tempRange: "-55°C ~ 125°C",
         contactForm: "1 Form A (SPST-NO)",
@@ -846,7 +846,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1JG1H80-1.6A",
-        image: "https://imgur.com/dCULjlN.jpg",
+        image: "/images/xxx.png",
         dimensions: "4.70 x 6.45 x 2.70 CSOP6 Ceramic hermetic Opto-MOS",
         tempRange: "-55°C ~ 125°C",
         contactForm: "1 Form A (SPST-NO)",
@@ -856,7 +856,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1JG2H330-0.1A",
-        image: "https://imgur.com/Go5ACDI.jpg",
+        image: "/images/xxx.png",
         dimensions: "6.00 x 6.45 x 2.70 CSOP8 Dual Ceramic Hermetic",
         tempRange: "-55°C ~ 125°C",
         contactForm: "2 Form A (DPST-NO)",
@@ -866,7 +866,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1JG2H80-0.6A",
-        image: "https://imgur.com/gnPkgnt.jpg",
+        image: "/images/xxx.png",
         dimensions: "6.00 x 6.45 x 2.70 CSOP8 Dual Hermetic",
         tempRange: "-55°C ~ 125°C",
         contactForm: "2 Form A (DPST-NO)",
@@ -876,7 +876,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "1JG2H80-2.5A",
-        image: "https://imgur.com/EGs05Hn.jpg",
+        image: "/images/xxx.png",
         dimensions: "6.00 x 6.45 x 2.70 CSOP8 Hermetic Power MOS",
         tempRange: "-55°C ~ 125°C",
         contactForm: "2 Form A (DPST-NO)",
@@ -886,7 +886,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1H330-0.1A",
-        image: "https://imgur.com/T3cEqmy.jpg",
+        image: "/images/xxx.png",
         dimensions: "4.70 x 6.45 x 2.70 CSOP6 Low Leakage",
         tempRange: "-55°C ~ 125°C",
         contactForm: "1 Form A (SPST-NO)",
@@ -896,7 +896,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1H80-0.6A",
-        image: "https://imgur.com/T3cEqmy.jpg",
+        image: "/images/xxx.png",
         dimensions: "10.70 x 6.45 x 2.70 CSOP16 Ceramic high insulation",
         tempRange: "-55°C ~ 125°C",
         contactForm: "4 Form A",
@@ -906,7 +906,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1H80-2.5A",
-        image: "https://imgur.com/Q52PmF3.jpg",
+        image: "/images/xxx.png",
         dimensions: "10.50 x 6.40 x 2.30 CSOP16 Quad configuration",
         tempRange: "-55°C ~ 125°C",
         contactForm: "4 Form A",
@@ -916,7 +916,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1D50-0.2A",
-        image: "https://imgur.com/OWORBMe.jpg",
+        image: "/images/xxx.png",
         dimensions: "5.20 x 7.60 x 4.20 Ceramic DIP4 Hermetic",
         tempRange: "-55°C ~ 105°C",
         contactForm: "1 Form B (SPST-NC)",
@@ -926,7 +926,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1D180-0.3A",
-        image: "https://imgur.com/o7YeVjJ.jpg",
+        image: "/images/xxx.png",
         dimensions: "9.90 x 7.60 x 4.20 Ceramic DIP8 Hermetic LCC",
         tempRange: "-55°C ~ 105°C",
         contactForm: "1 Form B (SPST-NC)",
@@ -936,7 +936,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG2D50-0.3A",
-        image: "https://imgur.com/xmougrI.jpg",
+        image: "/images/xxx.png",
         dimensions: "9.90 x 7.60 x 4.20 DIP8 Ceramic Hermetic",
         tempRange: "-55°C ~ 105°C",
         contactForm: "2 Form B",
@@ -956,7 +956,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1H80-5A",
-        image: "https://imgur.com/IXiHcuj.jpg",
+        image: "/images/xxx.png",
         dimensions: "5.20 x 7.60 x 4.20 DIP4/LCC4 High current",
         tempRange: "-55°C ~ 125°C",
         contactForm: "1 Form A (SPST-NO)",
@@ -966,7 +966,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1H80-8A",
-        image: "https://imgur.com/8v5m9K3.jpg",
+        image: "/images/xxx.png",
         dimensions: "9.90 x 7.60 x 3.20 LCC4 Low profile power",
         tempRange: "-55°C ~ 125°C",
         contactForm: "1 Form A (SPST-NO)",
@@ -976,7 +976,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG1H80-20A",
-        image: "https://imgur.com/XVotKjN.jpg",
+        image: "/images/xxx.png",
         dimensions: "12.00 x 10.00 x 3.20 High current LCC",
         tempRange: "-55°C ~ 125°C",
         contactForm: "1 Form A (SPST-NO)",
@@ -986,7 +986,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG2H80-2A",
-        image: "https://imgur.com/A6Wvowo.jpg",
+        image: "/images/xxx.png",
         dimensions: "9.91 x 7.60 x 4.20 DIP8 dual hermetic",
         tempRange: "-55°C ~ 125°C",
         contactForm: "2 Form A (DPST-NO)",
@@ -996,7 +996,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG4H80-2A",
-        image: "https://imgur.com/DD31MLg.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.50 x 7.60 x 4.20 DIP16 Ceramic Hermetic",
         tempRange: "-55°C ~ 125°C",
         contactForm: "4 Form A",
@@ -1006,7 +1006,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG4H80-3A",
-        image: "https://imgur.com/7T7WZTC.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.50 x 7.60 x 3.20 LCC16 matrix profile",
         tempRange: "-55°C ~ 125°C",
         contactForm: "4 Form A",
@@ -1016,7 +1016,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "2JG4H80-5A",
-        image: "https://imgur.com/nfuXyps.jpg",
+        image: "/images/xxx.png",
         dimensions: "20.50 x 7.60 x 3.20 LCC16 high heat dissipation",
         tempRange: "-55°C ~ 125°C",
         contactForm: "4 Form A",
