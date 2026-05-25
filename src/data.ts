@@ -535,7 +535,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "7JM2Z15A",
-        image: "/images/7JM2Z10A.png",
+        image: "agent0078899776/Sky/public/images/7JM2Z10A.png",
         dimensions: "26.0 x 13.5 x 26.0",
         tempRange: "-65°C ~ 125°C",
         contactForm: "2PDT (2 Form C)",
