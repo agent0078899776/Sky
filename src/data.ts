@@ -39,7 +39,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "1J2Z05AFD",
         image: "/images/1J2Z05.png",
-        dimensions: "8.5 x 8.5 x 7.3 Built-in transient suppression for resistance sealing and welding",
+        dimensions: "8.5 x 8.5 x 7.3 Built-in transient suppression for resistance sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -59,7 +59,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "1J2Z1AFGD",
         image: "/images/1J2Z1AG.png",
-        dimensions: "8.5 x 8.5 x 10.0 Built-in transient suppression for resistance sealing and welding",
+        dimensions: "8.5 x 8.5 x 10.0 Built-in transient suppression for resistance sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -69,7 +69,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "2J1Z1A",
         image: "/images/2J1Z1A.png",
-        dimensions: "10.5 x 5.5 x 13 Laser sealing and welding",
+        dimensions: "10.5 x 5.5 x 13 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -79,7 +79,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "2J1Z2A",
         image: "/images/2J1Z2A.png",
-        dimensions: "10.5 x 6 x 13 Laser sealing and welding",
+        dimensions: "10.5 x 6 x 13 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -89,7 +89,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "2J2Z1AT",
         image: "/images/2J2Z1AT.png",
-        dimensions: "10.5 x 5.5 x 10.8 Laser sealing and welding",
+        dimensions: "10.5 x 5.5 x 10.8 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -99,7 +99,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "3J2Z2A",
         image: "/images/3J2Z2A.png",
-        dimensions: "15.5 x 8.2 x 8.2 Laser sealing and welding",
+        dimensions: "15.5 x 8.2 x 8.2 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -109,7 +109,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "3J2Z2AT",
         image: "/images/3J2Z2AT.png",
-        dimensions: "15.5 x 8.2 x 8.2 Laser sealing and welding",
+        dimensions: "15.5 x 8.2 x 8.2 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -119,7 +119,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "3J2Z5A",
         image: "/images/3J2Z5A.png",
-        dimensions: "15.5 x 8.2 x 10.0 Laser sealing and welding",
+        dimensions: "15.5 x 8.2 x 10.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 196m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -129,7 +129,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "4J1Z10A",
         image: "/images/4J1Z10A.png",
-        dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
+        dimensions: "20.5 x 10.5 x 11.5 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -139,7 +139,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "4J1Z15A",
         image: "/images/4J1Z15A.png",
-        dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
+        dimensions: "20.5 x 10.5 x 11.5 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -149,7 +149,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "4J2Z2A",
         image: "/images/4J2Z2A.png",
-        dimensions: "21.0 x 11.0 x 11.0 Laser sealing and welding",
+        dimensions: "21.0 x 11.0 x 11.0 Laser sealing welding",
         tempRange: "-55 ~ 85",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 147m/s² 10~2000Hz",
@@ -159,7 +159,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "4J2Z5A",
         image: "/images/4J2Z5A.png",
-        dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
+        dimensions: "20.5 x 10.5 x 11.5 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz",
@@ -169,7 +169,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "4J2Z8A",
         image: "/images/4J2Z8A.png",
-        dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
+        dimensions: "20.5 x 10.5 x 11.5 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz",
@@ -179,7 +179,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "4J2Z10A",
         image: "/images/4J2Z10A.png",
-        dimensions: "20.5 x 10.5 x 11.5 Laser sealing and welding",
+        dimensions: "20.5 x 10.5 x 11.5 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -189,7 +189,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "6J1Z10A",
         image: "/images/6J1Z10A.png",
-        dimensions: "20.6 x 10.5 x 17.0 Laser sealing and welding",
+        dimensions: "20.6 x 10.5 x 17.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz",
@@ -209,7 +209,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "6J2Z5A",
         image: "/images/6J2Z5A.png",
-        dimensions: "20.6 x 10.6 x 16.8 Laser sealing and welding",
+        dimensions: "20.6 x 10.6 x 16.8 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz",
@@ -219,7 +219,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "6J3Z10AD",
         image: "/images/6J3Z10AD.png",
-        dimensions: "20.6 x 20.6 x 16.3 Built-in transient suppression for laser sealing and welding",
+        dimensions: "20.6 x 20.6 x 16.3 Built-in transient suppression for laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "3PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -229,7 +229,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "6J4Z5AD",
         image: "/images/6J4Z5AD.png",
-        dimensions: "20.6 x 10.6 x 16.8 Built-in transient suppression for laser sealing and welding",
+        dimensions: "20.6 x 10.6 x 16.8 Built-in transient suppression for laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -239,7 +239,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "6J4Z10A",
         image: "/images/6J4Z10A.png",
-        dimensions: "20.6 x 20.6 x 16.3 Laser sealing and welding",
+        dimensions: "20.6 x 20.6 x 16.3 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -249,7 +249,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "7J1Z25A",
         image: "/images/7J1Z25A.png",
-        dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 13.5 x 26.0 Laser sealing welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 98÷294m/s² 10~1000÷3000Hz | Random: 119.5÷239.1m/s² 10÷40(m/s²)²/Hz",
@@ -259,7 +259,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "7J1Z25AD",
         image: "/images/7J1Z25AD.png",
-        dimensions: "26.0 x 13.5 x 26.0 Built-in transient suppression for laser sealing and welding ",
+        dimensions: "26.0 x 13.5 x 26.0 Built-in transient suppression for laser sealing welding ",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -269,7 +269,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "7J1Z40A",
         image: "/images/7J1Z40A.png",
-        dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 13.5 x 26.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -279,7 +279,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "7J2Z12A",
         image: "/images/7J2Z12A.png",
-        dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 13.5 x 26.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 245m/s² 10~3000Hz",
@@ -289,7 +289,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "7J2Z10AD",
         image: "/images/7J2Z10AD.png",
-        dimensions: "26.0 x 13.5 x 26.0 Built-in transient suppression for laser sealing and welding",
+        dimensions: "26.0 x 13.5 x 26.0 Built-in transient suppression for laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 245m/s² 10~3000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -299,7 +299,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "7J2Z15A",
         image: "/images/7J2Z15A.png",
-        dimensions: "26.0 x 13.5 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 13.5 x 26.0 Laser sealing welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 98÷294m/s² 10~1000÷3000Hz | Random: 119.5÷239.1 m/s² 10÷40(m/s²)²/Hz",
@@ -309,7 +309,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J3Z25A",
         image: "/images/8J3Z25A.png",
-        dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "3PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1 m/s² 20(m/s²)²/Hz",
@@ -319,7 +319,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J3Z30A",
         image: "/images/8J3Z30A.png",
-        dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "3PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -329,7 +329,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J4Z10A",
         image: "/images/8J4Z10A.png",
-        dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "4PDT",
         vibration: "Sinusoidal: 147÷294m/s² 10~1000÷3000Hz | Random: 119.5~239.1m/s² 10÷40(m/s²)²/Hz",
@@ -339,7 +339,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J4Z10AD",
         image: "/images/8J4Z10AD.png",
-        dimensions: "26.0 x 26.0 x 26.0 Built-in transient suppression for laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 26.0 Built-in transient suppression for laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -349,7 +349,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J4Z20A",
         image: "/images/xx8J4Z20Ax.png",
-        dimensions: "26.0 x 26.0 x 26.0 Laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
         vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
@@ -359,7 +359,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J1Z50A",
         image: "/images/8J1Z50A.png",
-        dimensions: "26.0 x 26.0 x 30.0 Laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 30.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 196 m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -369,7 +369,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J1Z50AD",
         image: "/images/8J1Z50AD.png",
-        dimensions: "26.0 x 26.0 x 30.0 Built-in transient suppression for laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 30.0 Built-in transient suppression for laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -379,7 +379,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J1H75A",
         image: "/images/8J1H75A.png",
-        dimensions: "26.0 x 26.0 x 28.5 Laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 28.5 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1H",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -389,7 +389,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J2Z30A",
         image: "/images/8J2Z30A.png",
-        dimensions: "26.0 x 26.0 x 30.0 Laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 30.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -399,7 +399,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "8J2Z30AD",
         image: "/images/8J2Z30AD.png",
-        dimensions: "26.0 x 26.0 x 30.0 Built-in transient suppression for laser sealing and welding",
+        dimensions: "26.0 x 26.0 x 30.0 Built-in transient suppression for laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
@@ -419,7 +419,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "10J4Z25A",
         image: "/images/10J4Z25A.png",
-        dimensions: "36.0 x 26.0 x 26.0 Laser sealing and welding",
+        dimensions: "36.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 119.5m/s² 10(m/s²)²/Hz",
@@ -429,7 +429,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "10J6Z15A",
         image: "/images/10J6Z15A.png",
-        dimensions: "36.0 x 26.0 x 26.0 Laser sealing and welding",
+        dimensions: "36.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "6PDT",
         vibration: "Sinusoidal: 98÷294m/s² 10~1000÷3000Hz | Random: 119.5÷239.1m/s² 10÷40(m/s²)²/Hz",
@@ -581,6 +581,46 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     subheading: "Sealed coaxial and radio frequency switches designed to maintain signal integrity up to 3 GHz",
     products: [
       {
+        model: "9JPK1H",
+        image: "/images/9JPK1H.png",
+        dimensions: "Φ16.5 x 55.4 Closed type",
+        tempRange: "-65 ~ 125",
+        contactForm: "SPST 1H",
+        vibration: "98m/s² 10~2000Hz",
+        contactLoad: "25A (1,000,000 cycles)",
+        benchmarking: "Gigavac: G43A, Kilovac: K43A",
+      },
+      {
+        model: "9JPK1D",
+        image: "/images/9JPK1D.png",
+        dimensions: "Φ16.5 x 55.4 Closed type",
+        tempRange: "-65 ~ 125",
+        contactForm: "SPST 1D",
+        vibration: "98m/s² 10~2000Hz",
+        contactLoad: "25A (1,000,000 cycles)",
+        benchmarking: "Gigavac: G43B, Kilovac: K43B",
+      },
+      {
+        model: "9JPK1Z",
+        image: "/images/9JPK1Z.png",
+        dimensions: "Φ16.5 x 66.5 Closed type",
+        tempRange: "-65 ~ 125",
+        contactForm: "1PDT",
+        vibration: "98m/s² 10~2000Hz",
+        contactLoad: "25A (1,000,000 cycles)",
+        benchmarking: "Gigavac: G43C, Kilovac: K43C",
+      },
+      {
+        model: "11JPT-SPDT50S",
+        image: "/images/11JPT-SPDT50S.png",
+        dimensions: "34.0 x 12.7 x 34.3 Closed type",
+        tempRange: "-55 ~ 85",
+        contactForm: "1PDT",
+        vibration: "98m/s² 10~2000Hz",
+        contactLoad: "100W @ 1GHz (1,000,000 cycles)",
+        benchmarking: "Radiall: 570413000, Teledyne: CCS-33S, Dowkey: 401T-20802",
+      },
+      {
         model: "11JPT-SPDT50S",
         image: "/images/11JPT-SPDT50S.png",
         dimensions: "34.0 x 12.7 x 34.3 Closed type",
@@ -596,7 +636,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         dimensions: "33.0 x 33.0 x 48.0 Closed type",
         tempRange: "-55 ~ 85",
         contactForm: "2PDT",
-        vibration: "Vibration up to 98m/s² 10~2000Hz",
+        vibration: "98m/s² 10~2000Hz",
         contactLoad: "100W @ 1GHz (1,000,000 cycles)",
         benchmarking: "Radiall: 577412000, Teledyne: CCS-37S, Dowkey: 411CT-230802",
       },
@@ -605,8 +645,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/11JPT-SPDT50N.png",
         dimensions: "67.0 x 24.0 x 48.0 Closed type",
         tempRange: "-55 ~ 85",
-        contactForm: "1PDT (SPDT)",
-        vibration: "Vibration up to 98m/s² (10~2000Hz)",
+        contactForm: "1PDT",
+        vibration: "98m/s² (10~2000Hz)",
         contactLoad: "150W @ 3GHz (1,000,000 cycles)",
         benchmarking: "Radiall: 570013000, Teledyne: CCS-32, Dowkey: 402T-330102",
       },
@@ -615,37 +655,37 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/11JPTDPDT50N.png",
         dimensions: "44.5 x 44.5 x 58.5 Closed type",
         tempRange: "-55 ~ 85",
-        contactForm: "2PDT (DPDT)",
-        vibration: "Vibration up to 98m/s² (10~2000Hz)",
+        contactForm: "2PDT",
+        vibration: "98m/s² 10~2000Hz",
         contactLoad: "800W @ 30MHz (1,000,000 cycles)",
         benchmarking: "Radiall: 577113000, Teledyne: CCS-47, Dowkey: 412T-230102",
       },
       {
         model: "11JPT-SPDT75S",
         image: "/images/11JPTSPDT75S.png",
-        dimensions: "32.0 x 28.0 x 12.0 Coaxial RF",
-        tempRange: "-55°C ~ 85°C",
-        contactForm: "1PDT (SPDT)",
-        vibration: "Coaxial RF standard 98m/s²",
+        dimensions: "32.0 x 28.0 x 12.0xial Closed type",
+        tempRange: "-55 ~ 85",
+        contactForm: "1PDT",
+        vibration: "Coaxial RF standard 98m/s² 10~2000Hz",
         contactLoad: "24W @ 500MHz (1,000,000 cycles)",
-        benchmarking: "P5/7-PC4.521.326 Military Switch",
+        benchmarking: "PΠB5/7-PC4.521.326",
       },
       {
         model: "11JPT-2Z50C",
         image: "/images/11JPT-2Z50C.png",
         dimensions: "20.6 x 10.5 x 11.5 Resistance sealing welding",
         tempRange: "-65°C ~ 125°C",
-        contactForm: "2PDT (DPDT)",
-        vibration: "Vibration up to 196m/s²",
-        contactLoad: "2A RF (100,000 cycles)",
-        benchmarking: "Military Coaxial Type-K",
+        contactForm: "2PDT",
+        vibration: "196m/s² 10~2000Hz",
+        contactLoad: "2A 28Vd.c. (100,000 cycles)",
+        benchmarking: "—",
       }
     ]
   },
   {
     id: "contactors",
-    name: "Heavy Duty Contactors",
-    subheading: "High-capacity switching systems handling from 50 A up to 600 A under intense pressure",
+    name: "Contactors",
+    subheading: "High-capacity switching systems handling from 25 A up to 600 A under intense pressure",
     products: [
       {
         model: "1J1H50A",
