@@ -1290,50 +1290,50 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "BC2213",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD7.png",
         dimensions: "SMD7/DIP7",
         tempRange: "600V",
-        contactForm: "1a",
+        contactForm: "1 Form A",
         vibration: "—",
         contactLoad: "0.9A",
         benchmarking: "AQH2213(A)"
       },
       {
         model: "BC3213",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD7.png",
         dimensions: "SMD7/DIP7",
         tempRange: "600V",
-        contactForm: "1a",
+        contactForm: "1 Form A",
         vibration: "—",
         contactLoad: "1.2A",
         benchmarking: "AQH3213(A)"
       },
       {
         model: "BC5213",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD7.png",
         dimensions: "SMD7/DIP7",
         tempRange: "600V",
-        contactForm: "1a",
+        contactForm: "1 Form A",
         vibration: "—",
         contactLoad: "2A",
         benchmarking: "—"
       },
       {
         model: "BC2223",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD7.png",
         dimensions: "SMD7/DIP7",
         tempRange: "600V",
-        contactForm: "1a",
+        contactForm: "1 Form A",
         vibration: "—",
         contactLoad: "0.9A",
         benchmarking: "AQH2223(A)"
       },
       {
         model: "BC3223 / BC5223",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD7.png",
         dimensions: "SMD7/DIP7",
         tempRange: "600V",
-        contactForm: "1a",
+        contactForm: "1 Form A",
         vibration: "—",
         contactLoad: "1.2A / 2A",
         benchmarking: "AQH3223(A)"

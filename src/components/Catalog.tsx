@@ -346,12 +346,25 @@ export const Catalog: React.FC<CatalogProps> = ({
                         </thead>
                         <tbody className="divide-y divide-slate-800/30 text-sm">
                           {(() => {
-                            // Dynamic image grouping helper for photoMOS relays
-                            const isSmd = (prod: ProductRec) => prod.image.includes("smd7");
-                            const firstSmdIndex = category.id === "plastic_photorelay" ? category.products.findIndex(isSmd) : -1;
-                            const firstDipIndex = category.id === "plastic_photorelay" ? category.products.findIndex(p => !isSmd(p)) : -1;
-                            const visibleSmdCount = category.id === "plastic_photorelay" ? category.products.filter(isSmd).length : 0;
-                            const visibleDipCount = category.id === "plastic_photorelay" ? category.products.filter(p => !isSmd(p)).length : 0;
+                            // Dynamic image grouping helper for photoMOS relays based on image path
+                            const imageSpans: { [key: number]: number } = {};
+                            let currentIdx = 0;
+                            while (currentIdx < category.products.length) {
+                              const img = category.products[currentIdx].image;
+                              let count = 1;
+                              while (
+                                currentIdx + count < category.products.length &&
+                                category.products[currentIdx + count].image === img
+                              ) {
+                                count++;
+                              }
+                              imageSpans[currentIdx] = count;
+                              currentIdx += count;
+                            }
+                            
+                            
+                            
+                            
 
                             return category.products.map((p, pIdx) => {
                               const isChecked = comparedModels[p.model] || false;
@@ -390,32 +403,24 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Dynamic RowSpan Product Images */}
-                                    {isSmd(p) ? (
-                                      pIdx === firstSmdIndex && (
-                                        <td rowSpan={visibleSmdCount} className="py-2 px-1.5 text-center align-middle border-x border-slate-850/80 bg-slate-950/20">
-                                          <div className="flex flex-col items-center justify-center bg-slate-900/60 p-2 rounded-lg border border-slate-800 shadow-inner max-w-[110px] mx-auto" style={{ height: `${visibleSmdCount * 65}px`, minHeight: '80px', maxHeight: '200px' }}>
-                                            <img
-                                              src={resolveImagePath(p.image)}
-                                              alt="SMD7 package photorelays representation"
-                                              referrerPolicy="no-referrer"
-                                              className="object-contain max-h-[170px] w-full"
-                                            />
-                                          </div>
-                                        </td>
-                                      )
-                                    ) : (
-                                      pIdx === firstDipIndex && (
-                                        <td rowSpan={visibleDipCount} className="py-2 px-1.5 text-center align-middle border-x border-slate-850/80 bg-slate-950/20">
-                                          <div className="flex flex-col items-center justify-center bg-slate-900/60 p-2 rounded-lg border border-slate-800 shadow-inner max-w-[110px] mx-auto" style={{ height: `${visibleDipCount * 65}px`, minHeight: '80px', maxHeight: '130px' }}>
-                                            <img
-                                              src={resolveImagePath(p.image)}
-                                              alt="DIP7 package photorelays representation"
-                                              referrerPolicy="no-referrer"
-                                              className="object-contain max-h-[110px] w-full"
-                                            />
-                                          </div>
-                                        </td>
-                                      )
+                                    {imageSpans[pIdx] !== undefined && (
+                                      <td rowSpan={imageSpans[pIdx]} className="py-2 px-1.5 text-center align-middle border-x border-slate-850/80 bg-slate-950/20">
+                                        <div 
+                                          className="flex flex-col items-center justify-center bg-slate-900/60 p-2 rounded-lg border border-slate-800 shadow-inner max-w-[110px] mx-auto" 
+                                          style={{ 
+                                            height: `${Math.min(350, imageSpans[pIdx] * 52)}px`, 
+                                            minHeight: '80px', 
+                                            maxHeight: `${imageSpans[pIdx] * 62}px` 
+                                          }}
+                                        >
+                                          <img
+                                            src={resolveImagePath(p.image)}
+                                            alt={`${p.dimensions} package photorelays representation`}
+                                            referrerPolicy="no-referrer"
+                                            className="object-contain w-full h-full max-h-[90%]"
+                                          />
+                                        </div>
+                                      </td>
                                     )}
 
                                     {/* Number of Output Groups */}
@@ -571,6 +576,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                               );
                             });
                           })()}
+                        </tbody>
                       </table>
                     </motion.div>
                   )}
@@ -701,7 +707,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                         {/* Temp range / Output Voltage */}
                         <tr className={mismatchKeys.tempRange ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
                           <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
-                            {isComparingPhotoRelays ? "Output Voltage / Transient" : "Operating Temperature"}
+                            {isComparingPhotoRelays ? "Output Voltage / Transient Voltage" : "Operating Temperature"}
                           </td>
                           {selectedProductsForComparison.map((p) => (
                             <td
@@ -793,7 +799,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                         {/* Benchmarking Crosses */}
                         <tr className={mismatchKeys.benchmarking ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
                           <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
-                            {isComparingPhotoRelays ? "Panasonic & Omron Equivalents" : "Cross-reference Analogs"}
+                            {isComparingPhotoRelays ? "Panasonic and Omron Benchmarking Models" : "Cross-reference Analogs"}
                           </td>
                           {selectedProductsForComparison.map((p) => (
                             <td
@@ -880,13 +886,13 @@ export const Catalog: React.FC<CatalogProps> = ({
                         <div className="divide-y divide-slate-800/60 w-full max-w-sm mx-auto">
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
-                              {isPhotoRelay ? "Package Style" : "Housing details"}
+                              {isPhotoRelay ? "Package" : "Housing details"}
                             </div>
                             <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.dimensions}</div>
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
-                              {isPhotoRelay ? "Output / Transient Voltage" : "Temp Range"}
+                              {isPhotoRelay ? "Output Voltage / Transient Voltage" : "Temp Range"}
                             </div>
                             <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.tempRange}</div>
                           </div>
@@ -914,7 +920,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
-                              {isPhotoRelay ? "Panasonic & Omron Benchmarking" : "Benchmark Cross"}
+                              {isPhotoRelay ? "Panasonic and Omron Benchmarking Models" : "Benchmark Cross"}
                             </div>
                             <div className="text-xs text-slate-300 italic font-medium">{activeSpecProduct.benchmarking}</div>
                           </div>
@@ -1058,7 +1064,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                           </text>
 
                           {/* If solid state / Mos relay */}
-                          {activeSpecProduct.model.includes("JG") ? (
+                          {(activeSpecProduct.model.includes("JG") || activeSpecProduct.model.startsWith("BC")) ? (
                             <g>
                               {/* LED emitter side */}
                               <circle cx="50" cy="110" r="16" fill={simulatedCoilOn ? "#0e7490" : "#1e293b"} stroke="#0891b2" strokeWidth="2" />
