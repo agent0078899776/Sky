@@ -122,12 +122,12 @@ export const Catalog: React.FC<CatalogProps> = ({
       const matchCategoryName = category.name.toLowerCase().includes(query) || category.subheading?.toLowerCase().includes(query);
       const filteredProducts = category.products.filter((p) => {
         return (
-          p.model.toLowerCase().includes(query) ||
-          p.contactForm.toLowerCase().includes(query) ||
-          p.benchmarking.toLowerCase().includes(query) ||
-          p.tempRange.toLowerCase().includes(query) ||
-          p.contactLoad.toLowerCase().includes(query) ||
-          p.dimensions.toLowerCase().includes(query)
+          (p.model || "").toLowerCase().includes(query) ||
+          (p.contactForm || p.outputGroups || "").toLowerCase().includes(query) ||
+          (p.benchmarking || "").toLowerCase().includes(query) ||
+          (p.tempRange || p.outputVoltage || "").toLowerCase().includes(query) ||
+          (p.contactLoad || p.outputCurrent || "").toLowerCase().includes(query) ||
+          (p.dimensions || p.packageStyle || "").toLowerCase().includes(query)
         );
       });
 
@@ -157,17 +157,23 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   // Detect which spec fields carry mismatching indices across selected items
   const mismatchKeys = useMemo(() => {
-    const keys: Array<keyof ProductRec> = ["dimensions", "tempRange", "contactForm", "vibration", "contactLoad", "benchmarking"];
     const mismatches: Record<string, boolean> = {};
 
     if (selectedProductsForComparison.length < 2) return mismatches;
 
-    keys.forEach((key) => {
-      const uniqueVals = new Set(selectedProductsForComparison.map((p) => p[key]));
-      if (uniqueVals.size > 1) {
-        mismatches[key] = true;
-      }
-    });
+    const uniqueDimensions = new Set(selectedProductsForComparison.map((p) => p.packageStyle || p.dimensions || ""));
+    const uniqueTempRange = new Set(selectedProductsForComparison.map((p) => p.outputVoltage || p.tempRange || ""));
+    const uniqueContactForm = new Set(selectedProductsForComparison.map((p) => p.outputGroups || p.contactForm || ""));
+    const uniqueVibration = new Set(selectedProductsForComparison.map((p) => p.onResistance || p.vibration || ""));
+    const uniqueContactLoad = new Set(selectedProductsForComparison.map((p) => p.outputCurrent || p.contactLoad || ""));
+    const uniqueBenchmarking = new Set(selectedProductsForComparison.map((p) => p.benchmarking || ""));
+
+    if (uniqueDimensions.size > 1) mismatches["dimensions"] = true;
+    if (uniqueTempRange.size > 1) mismatches["tempRange"] = true;
+    if (uniqueContactForm.size > 1) mismatches["contactForm"] = true;
+    if (uniqueVibration.size > 1) mismatches["vibration"] = true;
+    if (uniqueContactLoad.size > 1) mismatches["contactLoad"] = true;
+    if (uniqueBenchmarking.size > 1) mismatches["benchmarking"] = true;
 
     return mismatches;
   }, [selectedProductsForComparison]);
@@ -399,7 +405,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
                                     {/* Package */}
                                     <td className="py-3.5 px-3 text-slate-300 font-mono text-center align-middle">
-                                      {p.dimensions}
+                                      {p.packageStyle || p.dimensions}
                                     </td>
 
                                     {/* Dynamic RowSpan Product Images */}
@@ -415,7 +421,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                         >
                                           <img
                                             src={resolveImagePath(p.image)}
-                                            alt={`${p.dimensions} package photorelays representation`}
+                                            alt={`${p.packageStyle || p.dimensions} package photorelays representation`}
                                             referrerPolicy="no-referrer"
                                             className="object-contain w-full h-full max-h-[90%]"
                                           />
@@ -425,22 +431,22 @@ export const Catalog: React.FC<CatalogProps> = ({
 
                                     {/* Number of Output Groups */}
                                     <td className="py-3.5 px-3 text-slate-300 text-center font-mono align-middle">
-                                      {p.contactForm}
+                                      {p.outputGroups || p.contactForm}
                                     </td>
 
                                     {/* Output voltage / Transient voltage */}
                                     <td className="py-3.5 px-3 text-slate-300 text-center font-mono font-bold align-middle">
-                                      {p.tempRange}
+                                      {p.outputVoltage || p.tempRange}
                                     </td>
 
                                     {/* Output Current */}
                                     <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
-                                      {p.contactLoad}
+                                      {p.outputCurrent || p.contactLoad}
                                     </td>
 
                                     {/* On-Resistance */}
                                     <td className="py-3.5 px-3 text-slate-400 text-center font-mono align-middle">
-                                      {p.vibration}
+                                      {p.onResistance || p.vibration}
                                     </td>
 
                                     {/* Panasonic & Omron Benchmarking */}
@@ -699,7 +705,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 mismatchKeys.dimensions ? "text-amber-400 font-bold" : "text-white"
                               }`}
                             >
-                              {p.dimensions}
+                              {p.packageStyle || p.dimensions}
                             </td>
                           ))}
                         </tr>
@@ -717,9 +723,9 @@ export const Catalog: React.FC<CatalogProps> = ({
                               }`}
                             >
                               {isComparingPhotoRelays ? (
-                                <span className="font-mono font-bold text-center block text-sm">{p.tempRange}</span>
+                                <span className="font-mono font-bold text-center block text-sm">{p.outputVoltage || p.tempRange}</span>
                               ) : (
-                                renderTempRange(p.tempRange)
+                                renderTempRange(p.tempRange || "")
                               )}
                             </td>
                           ))}
@@ -737,7 +743,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 mismatchKeys.contactForm ? "text-amber-400 font-bold" : "text-white"
                               }`}
                             >
-                              {isComparingPhotoRelays ? p.contactForm : cleanContactForm(p.contactForm)}
+                              {isComparingPhotoRelays ? (p.outputGroups || p.contactForm) : cleanContactForm(p.contactForm || "")}
                             </td>
                           ))}
                         </tr>
@@ -755,7 +761,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                               }`}
                             >
                               <div className="flex flex-col items-center justify-center text-center gap-1">
-                                {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
+                                {(p.onResistance || p.vibration || "").split(/\s*\|\s*/).map((vPart, idx) => (
                                   <span key={idx} className="block text-xs leading-tight">
                                     {vPart}
                                   </span>
@@ -771,7 +777,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                             {isComparingPhotoRelays ? "Output Current" : "Contact Rating & Life"}
                           </td>
                           {selectedProductsForComparison.map((p) => {
-                            const { load, life } = formatContactLoad(p.contactLoad);
+                            const { load, life } = formatContactLoad(p.outputCurrent || p.contactLoad || "");
                             return (
                               <td
                                 key={p.model}
@@ -780,7 +786,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 }`}
                               >
                                 {isComparingPhotoRelays ? (
-                                  <span className="font-semibold block">{p.contactLoad}</span>
+                                  <span className="font-semibold block">{p.outputCurrent || p.contactLoad}</span>
                                 ) : (
                                   <div className="flex flex-col items-center justify-center text-center gap-1">
                                     {load.split(/\s*\|\s*/).map((loadPart, idx) => (
@@ -869,7 +875,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                   </span>
                   <h3 className="text-2xl font-bold font-display text-white mt-1 flex items-center gap-2">
                     {activeSpecProduct.model}
-                    <span className="text-sm text-slate-400 font-mono font-normal">({activeSpecProduct.contactForm})</span>
+                    <span className="text-sm text-slate-400 font-mono font-normal">({activeSpecProduct.outputGroups || activeSpecProduct.contactForm})</span>
                   </h3>
                 </div>
               </div>
@@ -888,26 +894,26 @@ export const Catalog: React.FC<CatalogProps> = ({
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "Package" : "Housing details"}
                             </div>
-                            <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.dimensions}</div>
+                            <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.packageStyle || activeSpecProduct.dimensions}</div>
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "Output Voltage / Transient Voltage" : "Temp Range"}
                             </div>
-                            <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.tempRange}</div>
+                            <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.outputVoltage || activeSpecProduct.tempRange}</div>
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "Number of Output Groups" : "Contact Form"}
                             </div>
-                            <div className="text-xs text-cyan-400 font-bold tracking-wide">{activeSpecProduct.contactForm}</div>
+                            <div className="text-xs text-cyan-400 font-bold tracking-wide">{activeSpecProduct.outputGroups || activeSpecProduct.contactForm}</div>
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "On-Resistance" : "Vibration"}
                             </div>
                             <div className="text-xs text-slate-300 leading-normal font-medium text-center">
-                              {activeSpecProduct.vibration.split(/\s*\|\s*/).map((v, idx) => (
+                              {(activeSpecProduct.onResistance || activeSpecProduct.vibration || "").split(/\s*\|\s*/).map((v, idx) => (
                                 <span key={idx} className="block">{v}</span>
                               ))}
                             </div>
@@ -916,7 +922,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "Output Current" : "Load profile"}
                             </div>
-                            <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.contactLoad}</div>
+                            <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.outputCurrent || activeSpecProduct.contactLoad}</div>
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
