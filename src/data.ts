@@ -1547,6 +1547,226 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "20Ω",
         outputCurrent: "120mA",
         benchmarking: "—"
+      },
+      {
+        model: "BCV278",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD5/DIP5",
+        outputVoltage: "1700V",
+        outputGroups: "1a",
+        onResistance: "200Ω",
+        outputCurrent: "30mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW251",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "40V",
+        outputGroups: "2a",
+        onResistance: "0.06Ω",
+        outputCurrent: "2A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW251G",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "40V",
+        outputGroups: "2a",
+        onResistance: "0.05Ω",
+        outputCurrent: "2.5A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW212E",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "60V",
+        outputGroups: "2a",
+        onResistance: "2Ω",
+        outputCurrent: "200mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW212",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "60V",
+        outputGroups: "2a",
+        onResistance: "1Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQW212EH, G3VM-62C1, G3VM-62F1"
+      },
+      {
+        model: "BCW252",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "60V",
+        outputGroups: "2a",
+        onResistance: "0.27Ω",
+        outputCurrent: "1.1A",
+        benchmarking: "AQW212"
+      },
+      {
+        model: "BCW252G",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "60V",
+        outputGroups: "2a",
+        onResistance: "0.07Ω",
+        outputCurrent: "2A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW215",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "100V",
+        outputGroups: "2a",
+        onResistance: "0.27Ω",
+        outputCurrent: "500mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW255",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "100V",
+        outputGroups: "2a",
+        onResistance: "0.27Ω",
+        outputCurrent: "1.1A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW217",
+        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "200V",
+        outputGroups: "2a",
+        onResistance: "5Ω",
+        outputCurrent: "180mA",
+        benchmarking: "AQW217"
+      },
+      {
+        model: "BCW212S1",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "60V",
+        outputGroups: "2a",
+        onResistance: "2Ω",
+        outputCurrent: "200mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW212S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "60V",
+        outputGroups: "2a",
+        onResistance: "0.8Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQW212S"
+      },
+      {
+        model: "BCW212GS",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "60V",
+        outputGroups: "2a",
+        onResistance: "0.15Ω",
+        outputCurrent: "1.1A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW215S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "100V",
+        outputGroups: "2a",
+        onResistance: "0.15Ω",
+        outputCurrent: "1.1A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW217S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "200V",
+        outputGroups: "2a",
+        onResistance: "5Ω",
+        outputCurrent: "180mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW214S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "400V",
+        outputGroups: "2a",
+        onResistance: "13Ω",
+        outputCurrent: "120mA",
+        benchmarking: "AQW214S"
+      },
+      {
+        model: "BCW216S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "600V",
+        outputGroups: "2a",
+        onResistance: "28Ω",
+        outputCurrent: "80mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCW412S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "60V",
+        outputGroups: "2b",
+        onResistance: "2Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQW412S"
+      },
+      {
+        model: "BCW414S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "400V",
+        outputGroups: "2b",
+        onResistance: "20Ω",
+        outputCurrent: "100mA",
+        benchmarking: "AQW414S"
+      },
+      {
+        model: "BCW612S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "60V",
+        outputGroups: "1a/1b",
+        onResistance: "1Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQW612S"
+      },
+      {
+        model: "BCW614S",
+        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        packageStyle: "SOP8",
+        outputVoltage: "400V",
+        outputGroups: "1a/1b",
+        onResistance: "20Ω",
+        outputCurrent: "100mA",
+        benchmarking: "AQW614S"
+      },
+      {
+        model: "BCS225S",
+        image: "/src/assets/images/sop16_photomos_1779716395149.png",
+        packageStyle: "SOP16",
+        outputVoltage: "100V",
+        outputGroups: "4a",
+        onResistance: "0.3Ω",
+        outputCurrent: "100mA",
+        benchmarking: "AQS225R2S"
       }
     ]
   }
