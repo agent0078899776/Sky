@@ -1,13 +1,22 @@
 export interface ProductRec {
   model: string;
   image: string;
-  dimensions: string;
-  tempRange: string;
-  contactForm: string;
-  vibration: string;
-  contactLoad: string;
   benchmarking: string;
   schematic?: string; // zoomed schematic layout path/info
+
+  // Electromagnetic/RF relays standard fields
+  dimensions?: string;
+  tempRange?: string;
+  contactForm?: string;
+  vibration?: string;
+  contactLoad?: string;
+
+  // Plastic photorelays fields
+  packageStyle?: string;
+  outputGroups?: string;
+  outputVoltage?: string;
+  outputCurrent?: string;
+  onResistance?: string;
 }
 
 export interface CatalogCategory {
