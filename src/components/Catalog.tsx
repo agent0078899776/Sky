@@ -314,136 +314,263 @@ export const Catalog: React.FC<CatalogProps> = ({
                       transition={{ duration: 0.2 }}
                       className="overflow-x-auto border-t border-slate-800/80"
                     >
-                      <table className="w-full text-left border-collapse min-w-[1070px] table-fixed">
+                      <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" ? "min-w-[1200px]" : "min-w-[1070px]"}`}>
                         <thead>
-                          <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
-                            <th className="py-3.5 px-1.5 w-[36px] text-center align-middle" title="Compare">
-                              <Shuffle size={12} className="mx-auto opacity-80" />
-                            </th>
-                            <th className="py-3.5 px-3 w-[115px] text-center align-middle">Product Model</th>
-                            <th className="py-3.5 px-3 w-[130px] text-center align-middle">Dimensions (mm)</th>
-                            <th className="py-3.5 px-3 w-[115px] text-center align-middle">Temperature range (℃)</th>
-                            <th className="py-3.5 px-3 w-[80px] text-center align-middle">Contact Form</th>
-                            <th className="py-3.5 px-3 w-[230px] text-center align-middle">Vibration</th>
-                            <th className="py-3.5 px-3 w-[150px] text-center align-middle">Contact Load & Lifetime</th>
-                            <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
-                            <th className="py-3.5 px-1.5 text-center w-[90px] align-middle">Action</th>
-                          </tr>
+                          {category.id === "plastic_photorelay" ? (
+                            <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
+                              <th className="py-3.5 px-3 w-[160px] text-center align-middle">Model</th>
+                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">Package</th>
+                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Product Image</th>
+                              <th className="py-3.5 px-3 w-[160px] text-center align-middle">Number of Output Groups</th>
+                              <th className="py-3.5 px-3 w-[180px] text-center align-middle">Output Voltage / Transient Voltage</th>
+                              <th className="py-3.5 px-3 w-[120px] text-center align-middle">Output Current</th>
+                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">On-Resistance</th>
+                              <th className="py-3.5 px-3 w-[225px] text-center align-middle">Panasonic and Omron Benchmarking Models</th>
+                              <th className="py-3.5 px-1.5 text-center w-[95px] align-middle">Action</th>
+                            </tr>
+                          ) : (
+                            <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
+                              <th className="py-3.5 px-1.5 w-[36px] text-center align-middle" title="Compare">
+                                <Shuffle size={12} className="mx-auto opacity-80" />
+                              </th>
+                              <th className="py-3.5 px-3 w-[115px] text-center align-middle">Product Model</th>
+                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Dimensions (mm)</th>
+                              <th className="py-3.5 px-3 w-[115px] text-center align-middle">Temperature range (℃)</th>
+                              <th className="py-3.5 px-3 w-[80px] text-center align-middle">Contact Form</th>
+                              <th className="py-3.5 px-3 w-[230px] text-center align-middle">Vibration</th>
+                              <th className="py-3.5 px-3 w-[150px] text-center align-middle">Contact Load & Lifetime</th>
+                              <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
+                              <th className="py-3.5 px-1.5 text-center w-[90px] align-middle">Action</th>
+                            </tr>
+                          )}
                         </thead>
                         <tbody className="divide-y divide-slate-800/30 text-sm">
-                          {category.products.map((p, pIdx) => {
-                            const isChecked = comparedModels[p.model] || false;
-                            return (
-                              <tr
-                                key={p.model}
-                                className={`group hover:bg-slate-800/30 transition-all ${
-                                  isChecked ? "bg-cyan-950/20" : pIdx % 2 === 0 ? "bg-slate-900/10" : "bg-slate-900/20"
-                                }`}
-                              >
-                                {/* Checkbox Selector  */}
-                                <td className="py-3.5 px-1.5 text-center align-middle">
-                                  <label className="relative inline-flex items-center justify-center cursor-pointer h-5 w-5 mx-auto">
-                                    <input
-                                      type="checkbox"
-                                      checked={isChecked}
-                                      onChange={() => toggleModelCompare(p.model)}
-                                      className="sr-only peer"
-                                    />
-                                    <div className="w-4.5 h-4.5 border border-slate-600 rounded bg-slate-950 peer-checked:bg-cyan-500 peer-checked:border-cyan-500 transition-all flex items-center justify-center">
-                                      {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
-                                    </div>
-                                  </label>
-                                </td>
+                          {(() => {
+                            // Dynamic image grouping helper for photoMOS relays
+                            const isSmd = (prod: ProductRec) => prod.image.includes("smd7");
+                            const firstSmdIndex = category.id === "plastic_photorelay" ? category.products.findIndex(isSmd) : -1;
+                            const firstDipIndex = category.id === "plastic_photorelay" ? category.products.findIndex(p => !isSmd(p)) : -1;
+                            const visibleSmdCount = category.id === "plastic_photorelay" ? category.products.filter(isSmd).length : 0;
+                            const visibleDipCount = category.id === "plastic_photorelay" ? category.products.filter(p => !isSmd(p)).length : 0;
 
-                                {/* Model identifier */}
-                                <td className="py-3.5 px-3 font-mono font-bold text-cyan-400 select-all align-middle">
-                                  <div className="flex items-center justify-center gap-1.5">
-                                    {p.image && (
-                                      <div className="h-8 w-8 rounded bg-slate-900 border border-slate-850 overflow-hidden flex items-center justify-center shrink-0">
-                                        <img
-                                          src={resolveImagePath(p.image)}
-                                          alt={p.model}
-                                          referrerPolicy="no-referrer"
-                                          className="object-cover h-full w-full"
-                                        />
-                                      </div>
-                                    )}
-                                    <span className="text-sm">{p.model}</span>
-                                  </div>
-                                </td>
-
-                                {/* Package designators */}
-                                <td className="py-3.5 px-3 align-middle text-center">
-                                  {(() => {
-                                    const { size, desc } = formatDimensions(p.dimensions);
-                                    return (
-                                      <div className="flex flex-col items-center text-center">
-                                        <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || p.dimensions}</span>
-                                        {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
-                                      </div>
-                                    );
-                                  })()}
-                                </td>
-
-                                {/* Heat specs */}
-                                <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
-                                  {renderTempRange(p.tempRange)}
-                                </td>
-
-                                {/* Contact configuration */}
-                                <td className="py-3.5 px-3 text-slate-200 text-sm font-semibold whitespace-nowrap align-middle text-center">
-                                  {cleanContactForm(p.contactForm)}
-                                </td>
-
-                                {/* Shocks & Vibration */}
-                                <td className="py-3.5 px-3 align-middle text-center">
-                                  <div className="flex flex-col gap-1 items-center text-center max-w-full">
-                                    {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
-                                      <span key={idx} className="text-xs sm:text-sm text-slate-300 leading-tight font-sans block">
-                                        {vPart}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </td>
-
-                                {/* Rated power profile */}
-                                <td className="py-3.5 px-3 align-middle text-center">
-                                  {(() => {
-                                    const { load, life } = formatContactLoad(p.contactLoad);
-                                    return (
-                                      <div className="flex flex-col gap-1 items-center text-center max-w-full">
-                                        {load.split(/\s*\|\s*/).map((loadPart, idx) => (
-                                          <span key={idx} className="font-sans text-sm text-white font-semibold leading-tight block">
-                                            {loadPart}
-                                          </span>
-                                        ))}
-                                        {life && <span className="text-xs text-slate-400 mt-0.5 font-mono leading-tight block">{life}</span>}
-                                      </div>
-                                    );
-                                  })()}
-                                </td>
-
-                                {/* Benchmarking crosses */}
-                                <td className="py-3.5 px-3 text-slate-300 text-sm italic font-sans align-middle text-center" title={p.benchmarking}>
-                                  {p.benchmarking}
-                                </td>
-
-                                {/* Expand Details View */}
-                                <td className="py-3.5 px-1.5 text-center align-middle">
-                                  <button
-                                    onClick={() => {
-                                      setActiveSpecProduct(p);
-                                      resetZoomAndDrag();
-                                    }}
-                                    className="inline-flex items-center justify-center w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-[11px] font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
+                            return category.products.map((p, pIdx) => {
+                              const isChecked = comparedModels[p.model] || false;
+                              
+                              if (category.id === "plastic_photorelay") {
+                                return (
+                                  <tr
+                                    key={p.model}
+                                    className={`group hover:bg-slate-800/30 transition-all ${
+                                      isChecked ? "bg-cyan-950/20" : pIdx % 2 === 0 ? "bg-slate-900/10" : "bg-slate-900/20"
+                                    }`}
                                   >
-                                    View Specs
-                                  </button>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
+                                    {/* Model identifier with internal checkbox */}
+                                    <td className="py-3.5 px-3 align-middle text-left">
+                                      <div className="flex items-center gap-3 justify-start pl-1">
+                                        <label className="relative inline-flex items-center justify-center cursor-pointer h-5 w-5 shrink-0">
+                                          <input
+                                            type="checkbox"
+                                            checked={isChecked}
+                                            onChange={() => toggleModelCompare(p.model)}
+                                            className="sr-only peer"
+                                          />
+                                          <div className="w-4.5 h-4.5 border border-slate-600 rounded bg-slate-940 peer-checked:bg-cyan-500 peer-checked:border-cyan-500 transition-all flex items-center justify-center">
+                                            {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
+                                          </div>
+                                        </label>
+                                        <span className="font-mono font-bold text-cyan-400 select-all whitespace-normal break-words leading-tight text-sm">
+                                          {p.model}
+                                        </span>
+                                      </div>
+                                    </td>
+
+                                    {/* Package */}
+                                    <td className="py-3.5 px-3 text-slate-300 font-mono text-center align-middle">
+                                      {p.dimensions}
+                                    </td>
+
+                                    {/* Dynamic RowSpan Product Images */}
+                                    {isSmd(p) ? (
+                                      pIdx === firstSmdIndex && (
+                                        <td rowSpan={visibleSmdCount} className="py-2 px-1.5 text-center align-middle border-x border-slate-850/80 bg-slate-950/20">
+                                          <div className="flex flex-col items-center justify-center bg-slate-900/60 p-2 rounded-lg border border-slate-800 shadow-inner max-w-[110px] mx-auto" style={{ height: `${visibleSmdCount * 65}px`, minHeight: '80px', maxHeight: '200px' }}>
+                                            <img
+                                              src={resolveImagePath(p.image)}
+                                              alt="SMD7 package photorelays representation"
+                                              referrerPolicy="no-referrer"
+                                              className="object-contain max-h-[170px] w-full"
+                                            />
+                                          </div>
+                                        </td>
+                                      )
+                                    ) : (
+                                      pIdx === firstDipIndex && (
+                                        <td rowSpan={visibleDipCount} className="py-2 px-1.5 text-center align-middle border-x border-slate-850/80 bg-slate-950/20">
+                                          <div className="flex flex-col items-center justify-center bg-slate-900/60 p-2 rounded-lg border border-slate-800 shadow-inner max-w-[110px] mx-auto" style={{ height: `${visibleDipCount * 65}px`, minHeight: '80px', maxHeight: '130px' }}>
+                                            <img
+                                              src={resolveImagePath(p.image)}
+                                              alt="DIP7 package photorelays representation"
+                                              referrerPolicy="no-referrer"
+                                              className="object-contain max-h-[110px] w-full"
+                                            />
+                                          </div>
+                                        </td>
+                                      )
+                                    )}
+
+                                    {/* Number of Output Groups */}
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-mono align-middle">
+                                      {p.contactForm}
+                                    </td>
+
+                                    {/* Output voltage / Transient voltage */}
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-mono font-bold align-middle">
+                                      {p.tempRange}
+                                    </td>
+
+                                    {/* Output Current */}
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
+                                      {p.contactLoad}
+                                    </td>
+
+                                    {/* On-Resistance */}
+                                    <td className="py-3.5 px-3 text-slate-400 text-center font-mono align-middle">
+                                      {p.vibration}
+                                    </td>
+
+                                    {/* Panasonic & Omron Benchmarking */}
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle">
+                                      {p.benchmarking}
+                                    </td>
+
+                                    {/* Specs Action Button */}
+                                    <td className="py-3.5 px-1.5 text-center align-middle">
+                                      <button
+                                        onClick={() => {
+                                          setActiveSpecProduct(p);
+                                          resetZoomAndDrag();
+                                        }}
+                                        className="inline-flex items-center justify-center w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-[11px] font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
+                                      >
+                                        View Specs
+                                      </button>
+                                    </td>
+                                  </tr>
+                                );
+                              }
+
+                              // Standard row layout
+                              return (
+                                <tr
+                                  key={p.model}
+                                  className={`group hover:bg-slate-800/30 transition-all ${
+                                    isChecked ? "bg-cyan-950/20" : pIdx % 2 === 0 ? "bg-slate-900/10" : "bg-slate-900/20"
+                                  }`}
+                                >
+                                  {/* Checkbox Selector  */}
+                                  <td className="py-3.5 px-1.5 text-center align-middle">
+                                    <label className="relative inline-flex items-center justify-center cursor-pointer h-5 w-5 mx-auto">
+                                      <input
+                                        type="checkbox"
+                                        checked={isChecked}
+                                        onChange={() => toggleModelCompare(p.model)}
+                                        className="sr-only peer"
+                                      />
+                                      <div className="w-4.5 h-4.5 border border-slate-600 rounded bg-slate-950 peer-checked:bg-cyan-500 peer-checked:border-cyan-500 transition-all flex items-center justify-center">
+                                        {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
+                                      </div>
+                                    </label>
+                                  </td>
+
+                                  {/* Model identifier */}
+                                  <td className="py-3.5 px-3 font-mono font-bold text-cyan-400 select-all align-middle">
+                                    <div className="flex items-center justify-center gap-1.5">
+                                      {p.image && (
+                                        <div className="h-8 w-8 rounded bg-slate-900 border border-slate-850 overflow-hidden flex items-center justify-center shrink-0">
+                                          <img
+                                            src={resolveImagePath(p.image)}
+                                            alt={p.model}
+                                            referrerPolicy="no-referrer"
+                                            className="object-cover h-full w-full"
+                                          />
+                                        </div>
+                                      )}
+                                      <span className="text-sm">{p.model}</span>
+                                    </div>
+                                  </td>
+
+                                  {/* Package designators */}
+                                  <td className="py-3.5 px-3 align-middle text-center">
+                                    {(() => {
+                                      const { size, desc } = formatDimensions(p.dimensions);
+                                      return (
+                                        <div className="flex flex-col items-center text-center">
+                                          <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || p.dimensions}</span>
+                                          {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
+                                        </div>
+                                      );
+                                    })()}
+                                  </td>
+
+                                  {/* Heat specs */}
+                                  <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
+                                    {renderTempRange(p.tempRange)}
+                                  </td>
+
+                                  {/* Contact configuration */}
+                                  <td className="py-3.5 px-3 text-slate-200 text-sm font-semibold whitespace-nowrap align-middle text-center">
+                                    {cleanContactForm(p.contactForm)}
+                                  </td>
+
+                                  {/* Shocks & Vibration */}
+                                  <td className="py-3.5 px-3 align-middle text-center">
+                                    <div className="flex flex-col gap-1 items-center text-center max-w-full">
+                                      {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
+                                        <span key={idx} className="text-xs sm:text-sm text-slate-300 leading-tight font-sans block">
+                                          {vPart}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </td>
+
+                                  {/* Rated power profile */}
+                                  <td className="py-3.5 px-3 align-middle text-center">
+                                    {(() => {
+                                      const { load, life } = formatContactLoad(p.contactLoad);
+                                      return (
+                                        <div className="flex flex-col gap-1 items-center text-center max-w-full">
+                                          {load.split(/\s*\|\s*/).map((loadPart, idx) => (
+                                            <span key={idx} className="font-sans text-sm text-white font-semibold leading-tight block">
+                                              {loadPart}
+                                            </span>
+                                          ))}
+                                          {life && <span className="text-xs text-slate-400 mt-0.5 font-mono leading-tight block">{life}</span>}
+                                        </div>
+                                      );
+                                    })()}
+                                  </td>
+
+                                  {/* Benchmarking crosses */}
+                                  <td className="py-3.5 px-3 text-slate-300 text-sm italic font-sans align-middle text-center" title={p.benchmarking}>
+                                    {p.benchmarking}
+                                  </td>
+
+                                  {/* Expand Details View */}
+                                  <td className="py-3.5 px-1.5 text-center align-middle">
+                                    <button
+                                      onClick={() => {
+                                        setActiveSpecProduct(p);
+                                        resetZoomAndDrag();
+                                      }}
+                                      className="inline-flex items-center justify-center w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-[11px] font-semibold tracking-wide transition-all shadow-md active:scale-95 whitespace-nowrap"
+                                    >
+                                      View Specs
+                                    </button>
+                                  </td>
+                                </tr>
+                              );
+                            });
+                          })()}
                       </table>
                     </motion.div>
                   )}
