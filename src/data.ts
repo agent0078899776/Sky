@@ -1293,7 +1293,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "0.9A",
         benchmarking: "AQH2213(A)"
@@ -1303,7 +1303,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "1.2A",
         benchmarking: "AQH3213(A)"
@@ -1313,7 +1313,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "2A",
         benchmarking: "—"
@@ -1323,7 +1323,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/DIP7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "0.9A",
         benchmarking: "AQH2223(A)"
@@ -1333,7 +1333,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/DIP7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "1.2A / 2A",
         benchmarking: "AQH3223(A)"
@@ -1343,7 +1343,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "40V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.06Ω",
         outputCurrent: "2A",
         benchmarking: "AQY211G2S, G3VM-41GR8"
@@ -1353,7 +1353,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "2Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
@@ -1363,7 +1363,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.8Ω",
         outputCurrent: "500mA",
         benchmarking: "AQY212S, G3VM-61G2"
@@ -1373,7 +1373,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.22Ω",
         outputCurrent: "800mA",
         benchmarking: "—"
@@ -1383,7 +1383,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.15Ω",
         outputCurrent: "1.3A",
         benchmarking: "—"
@@ -1393,7 +1393,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.07Ω",
         outputCurrent: "2A",
         benchmarking: "—"
@@ -1403,7 +1403,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "100V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.15Ω",
         outputCurrent: "1.25A",
         benchmarking: "AQY225R1S, G3VM-81G1"
@@ -1413,7 +1413,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "200V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "5Ω",
         outputCurrent: "180mA",
         benchmarking: "—"
@@ -1423,7 +1423,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "200V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "1.25Ω",
         outputCurrent: "400mA",
         benchmarking: "—"
@@ -1433,7 +1433,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "400V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "14Ω",
         outputCurrent: "120mA",
         benchmarking: "AQY214S, G3VM-401G"
@@ -1443,7 +1443,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "400V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "14.5Ω",
         outputCurrent: "120mA",
         benchmarking: "—"
@@ -1453,7 +1453,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "2Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
@@ -1463,7 +1463,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "1Ω",
         outputCurrent: "500mA",
         benchmarking: "AQY212EH"
@@ -1473,7 +1473,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "40V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.04Ω",
         outputCurrent: "3A",
         benchmarking: "—"
@@ -1483,7 +1483,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.27Ω",
         outputCurrent: "1.1A",
         benchmarking: "AQY212GH"
@@ -1493,7 +1493,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "100V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "0.15Ω",
         outputCurrent: "1.3A",
         benchmarking: "—"
@@ -1503,7 +1503,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "200V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "5Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
@@ -1513,7 +1513,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "400V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "14Ω",
         outputCurrent: "140mA",
         benchmarking: "AQY214EH, G3VM-401A, G3VM-401D"
@@ -1523,7 +1523,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "600V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "28Ω",
         outputCurrent: "80mA",
         benchmarking: "AQY216EH"
@@ -1533,7 +1533,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
-        outputGroups: "1b",
+        outputGroups: "1 Form B",
         onResistance: "2Ω",
         outputCurrent: "500mA",
         benchmarking: "—"
@@ -1543,7 +1543,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "400V",
-        outputGroups: "1b",
+        outputGroups: "1 Form B",
         onResistance: "20Ω",
         outputCurrent: "120mA",
         benchmarking: "—"
@@ -1553,7 +1553,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD5DIP5.png",
         packageStyle: "SMD5/DIP5",
         outputVoltage: "1700V",
-        outputGroups: "1a",
+        outputGroups: "1 Form A",
         onResistance: "200Ω",
         outputCurrent: "30mA",
         benchmarking: "—"
@@ -1563,7 +1563,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "40V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.06Ω",
         outputCurrent: "2A",
         benchmarking: "—"
@@ -1573,7 +1573,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "40V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.05Ω",
         outputCurrent: "2.5A",
         benchmarking: "—"
@@ -1583,7 +1583,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "2Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
@@ -1593,7 +1593,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "1Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW212EH, G3VM-62C1, G3VM-62F1"
@@ -1603,7 +1603,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.27Ω",
         outputCurrent: "1.1A",
         benchmarking: "AQW212"
@@ -1613,7 +1613,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.07Ω",
         outputCurrent: "2A",
         benchmarking: "—"
@@ -1623,7 +1623,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "100V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.27Ω",
         outputCurrent: "500mA",
         benchmarking: "—"
@@ -1633,7 +1633,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "100V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.27Ω",
         outputCurrent: "1.1A",
         benchmarking: "—"
@@ -1643,7 +1643,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "200V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "5Ω",
         outputCurrent: "180mA",
         benchmarking: "AQW217"
@@ -1653,7 +1653,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "2Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
@@ -1663,7 +1663,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.8Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW212S"
@@ -1673,7 +1673,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.15Ω",
         outputCurrent: "1.1A",
         benchmarking: "—"
@@ -1683,7 +1683,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "100V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "0.15Ω",
         outputCurrent: "1.1A",
         benchmarking: "—"
@@ -1693,7 +1693,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "200V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "5Ω",
         outputCurrent: "180mA",
         benchmarking: "—"
@@ -1703,7 +1703,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "400V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "13Ω",
         outputCurrent: "120mA",
         benchmarking: "AQW214S"
@@ -1713,7 +1713,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "600V",
-        outputGroups: "2a",
+        outputGroups: "2 Form A",
         onResistance: "28Ω",
         outputCurrent: "80mA",
         benchmarking: "—"
@@ -1723,7 +1723,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
-        outputGroups: "2b",
+        outputGroups: "2 Form B",
         onResistance: "2Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW412S"
@@ -1733,7 +1733,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "400V",
-        outputGroups: "2b",
+        outputGroups: "2 Form B",
         onResistance: "20Ω",
         outputCurrent: "100mA",
         benchmarking: "AQW414S"
@@ -1743,7 +1743,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
-        outputGroups: "1a/1b",
+        outputGroups: "1 Form A/1 Form B",
         onResistance: "1Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW612S"
