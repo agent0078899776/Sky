@@ -1290,7 +1290,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "BC2213",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
         outputGroups: "1a",
@@ -1300,7 +1300,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BC3213",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
         outputGroups: "1a",
@@ -1310,7 +1310,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BC5213",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
         outputGroups: "1a",
@@ -1320,7 +1320,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BC2223",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/DIP7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
         outputGroups: "1a",
@@ -1330,7 +1330,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BC3223 / BC5223",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/DIP7.png",
         packageStyle: "SMD7/DIP7",
         outputVoltage: "600V",
         outputGroups: "1a",
@@ -1340,7 +1340,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY211S",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "40V",
         outputGroups: "1a",
@@ -1350,7 +1350,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY212S1",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1360,7 +1360,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY212S",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1370,7 +1370,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY212G1S",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1380,7 +1380,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY212G2S",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1390,7 +1390,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY212GS",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1400,7 +1400,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY215S",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "100V",
         outputGroups: "1a",
@@ -1410,7 +1410,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY217S",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "200V",
         outputGroups: "1a",
@@ -1420,7 +1420,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY217GS",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "200V",
         outputGroups: "1a",
@@ -1430,7 +1430,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY214S",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "400V",
         outputGroups: "1a",
@@ -1440,7 +1440,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY214ES",
-        image: "/src/assets/images/sop4_photomos_1779714119553.png",
+        image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "400V",
         outputGroups: "1a",
@@ -1450,7 +1450,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY212E",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1460,7 +1460,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY212",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1470,7 +1470,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY211G",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "40V",
         outputGroups: "1a",
@@ -1480,7 +1480,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY252",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
         outputGroups: "1a",
@@ -1490,7 +1490,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY252G",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "100V",
         outputGroups: "1a",
@@ -1500,7 +1500,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY217",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "200V",
         outputGroups: "1a",
@@ -1510,7 +1510,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY214",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "400V",
         outputGroups: "1a",
@@ -1520,7 +1520,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY216",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "600V",
         outputGroups: "1a",
@@ -1530,7 +1530,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY412",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "60V",
         outputGroups: "1b",
@@ -1540,7 +1540,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCY414",
-        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        image: "/images/SMD4.png",
         packageStyle: "SMD4/DIP4",
         outputVoltage: "400V",
         outputGroups: "1b",
@@ -1550,7 +1550,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCV278",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD5DIP5.png",
         packageStyle: "SMD5/DIP5",
         outputVoltage: "1700V",
         outputGroups: "1a",
@@ -1560,7 +1560,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW251",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "40V",
         outputGroups: "2a",
@@ -1570,7 +1570,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW251G",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "40V",
         outputGroups: "2a",
@@ -1580,7 +1580,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW212E",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
         outputGroups: "2a",
@@ -1590,7 +1590,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW212",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
         outputGroups: "2a",
@@ -1600,7 +1600,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW252",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
         outputGroups: "2a",
@@ -1610,7 +1610,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW252G",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "60V",
         outputGroups: "2a",
@@ -1620,7 +1620,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW215",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "100V",
         outputGroups: "2a",
@@ -1630,7 +1630,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW255",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "100V",
         outputGroups: "2a",
@@ -1640,7 +1640,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW217",
-        image: "/src/assets/images/dip7_photomos_1779713805835.png",
+        image: "/images/SMD8.png",
         packageStyle: "SMD8/DIP8",
         outputVoltage: "200V",
         outputGroups: "2a",
@@ -1650,7 +1650,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW212S1",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
         outputGroups: "2a",
@@ -1660,7 +1660,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW212S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
         outputGroups: "2a",
@@ -1670,7 +1670,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW212GS",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
         outputGroups: "2a",
@@ -1680,7 +1680,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW215S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "100V",
         outputGroups: "2a",
@@ -1690,7 +1690,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW217S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "200V",
         outputGroups: "2a",
@@ -1700,7 +1700,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW214S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "400V",
         outputGroups: "2a",
@@ -1710,7 +1710,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW216S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "600V",
         outputGroups: "2a",
@@ -1720,7 +1720,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW412S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
         outputGroups: "2b",
@@ -1730,7 +1730,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW414S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "400V",
         outputGroups: "2b",
@@ -1740,7 +1740,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW612S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "60V",
         outputGroups: "1a/1b",
@@ -1750,7 +1750,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCW614S",
-        image: "/src/assets/images/sop8_photomos_1779716376565.png",
+        image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "400V",
         outputGroups: "1a/1b",
@@ -1760,7 +1760,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "BCS225S",
-        image: "/src/assets/images/sop16_photomos_1779716395149.png",
+        image: "/images/SOP16.png",
         packageStyle: "SOP16",
         outputVoltage: "100V",
         outputGroups: "4a",
@@ -1777,7 +1777,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "6JS2Z1-2A",
-        image: "/src/assets/images/timer_relay_metal_1779716591499.png",
+        image: "/images/8J4Z10A.png",
         dimensions: "20.5 x 10.5 x 15.5 Metal seal",
         tempRange: "-55 ~ 125",
         contactForm: "2a",
@@ -1787,7 +1787,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6JS4Z1-4A",
-        image: "/src/assets/images/timer_relay_flanged_1779716609508.png",
+        image: "/images/8J4Z20A.png",
         dimensions: "26 x 26 x 26 Metal seal",
         tempRange: "-55 ~ 85",
         contactForm: "4a",
@@ -1797,7 +1797,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6JS1Z1-10A",
-        image: "/src/assets/images/timer_relay_metal_1779716591499.png",
+        image: "/images/8J4Z10AD.png",
         dimensions: "20.5 x 10.5 x 17 Metal seal",
         tempRange: "-55 ~ 85",
         contactForm: "1a",
@@ -1807,13 +1807,60 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6JS2Z1-10A",
-        image: "/src/assets/images/timer_relay_flanged_1779716609508.png",
+        image: "/images/8JM4Z15A.png",
         dimensions: "26 x 13.5 x 31 Metal seal",
         tempRange: "-55 ~ 85",
         contactForm: "2a",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz",
         contactLoad: "10A, 28Vd.c. (50,000 cycles)",
         benchmarking: "—"
+      }
+    ]
+  },
+  {
+    id: "sealed_optocouplers",
+    name: "Sealed Optocouplers",
+    subheading: "Hermetically sealed high-isolation ceramic optocouplers designed for failsafe signal isolation in aerospace, space, and rugged control systems",
+    products: [
+      {
+        model: "5GH1H3202Z",
+        image: "/images/DIP4.png",
+        dimensions: "7.62 x 5.0 x 2.8 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "2a",
+        vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
+        contactLoad: "Single channel; CTR: ≥50%; BVCES: 100Vd.c.",
+        benchmarking: "TOSHIBA TLP521-1"
+      },
+      {
+        model: "5GH2H3201Z",
+        image: "/images/DIP8.png",
+        dimensions: "11.50 x 7.62 x 2.8 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "2a",
+        vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
+        contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
+        benchmarking: "TOSHIBA TLP521-2"
+      },
+      {
+        model: "5GH4H3201Z",
+        image: "/images/SOP16.png",
+        dimensions: "22.0 x 7.62 x 3.5 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "4a",
+        vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
+        contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
+        benchmarking: "TOSHIBA TLP521-4"
+      },
+      {
+        model: "5GH1H3201J",
+        image: "/images/SMD4.png",
+        dimensions: "4.5 x 3.4 x 2.3 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "1a",
+        vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
+        contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
+        benchmarking: "TOSHIBA TLP281"
       }
     ]
   }
