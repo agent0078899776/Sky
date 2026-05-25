@@ -656,132 +656,160 @@ export const Catalog: React.FC<CatalogProps> = ({
 
               {/* Param table */}
               <div className="overflow-auto flex-1 p-6">
-                <table className="w-full border-collapse border border-slate-800/90 font-sans text-sm table-fixed">
-                  <thead>
-                    <tr className="bg-slate-900/90 border-b border-slate-800 text-slate-400 font-mono tracking-wider text-xs uppercase">
-                      <th className="p-4 border-r border-slate-800 w-[180px] text-center align-middle">Parameters</th>
-                      {selectedProductsForComparison.map((p) => {
-                        const colWidth = `calc((100% - 180px) / ${selectedProductsForComparison.length})`;
-                        return (
-                          <th
-                            key={p.model}
-                            style={{ width: colWidth }}
-                            className="p-4 border-r border-slate-800 text-cyan-400 font-bold font-mono text-sm text-center align-middle"
-                          >
-                            {p.model}
-                          </th>
-                        );
-                      })}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800/60">
-                    {/* Package */}
-                    <tr className={mismatchKeys.dimensions ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
-                      <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">Package & Dimensions</td>
-                      {selectedProductsForComparison.map((p) => (
-                        <td
-                          key={p.model}
-                          className={`p-4 border-r border-slate-800 font-mono leading-relaxed text-center align-middle ${
-                            mismatchKeys.dimensions ? "text-amber-400 font-bold" : "text-white"
-                          }`}
-                        >
-                          {p.dimensions}
-                        </td>
-                      ))}
-                    </tr>
+                {(() => {
+                  const isComparingPhotoRelays = selectedProductsForComparison.length > 0 && selectedProductsForComparison.every(
+                    (p) => CATALOG_CATEGORIES.find(c => c.products.some(pr => pr.model === p.model))?.id === "plastic_photorelay"
+                  );
 
-                    {/* Temp range */}
-                    <tr className={mismatchKeys.tempRange ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
-                      <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">Operating Temperature</td>
-                      {selectedProductsForComparison.map((p) => (
-                        <td
-                          key={p.model}
-                          className={`p-4 border-r border-slate-800 text-center align-middle ${
-                            mismatchKeys.tempRange ? "text-amber-400 font-bold" : "text-white"
-                          }`}
-                        >
-                          {renderTempRange(p.tempRange)}
-                        </td>
-                      ))}
-                    </tr>
-
-                    {/* Contact Form */}
-                    <tr className={mismatchKeys.contactForm ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
-                      <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">Contact Configuration</td>
-                      {selectedProductsForComparison.map((p) => (
-                        <td
-                          key={p.model}
-                          className={`p-4 border-r border-slate-800 font-semibold text-center align-middle ${
-                            mismatchKeys.contactForm ? "text-amber-400 font-bold" : "text-white"
-                          }`}
-                        >
-                          {cleanContactForm(p.contactForm)}
-                        </td>
-                      ))}
-                    </tr>
-
-                    {/* Vibration */}
-                    <tr className={mismatchKeys.vibration ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
-                      <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">Vibration Tolerance</td>
-                      {selectedProductsForComparison.map((p) => (
-                        <td
-                          key={p.model}
-                          className={`p-4 border-r border-slate-800 leading-relaxed text-center align-middle ${
-                            mismatchKeys.vibration ? "text-amber-400 font-bold" : "text-slate-300"
-                          }`}
-                        >
-                          <div className="flex flex-col items-center justify-center text-center gap-1">
-                            {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
-                              <span key={idx} className="block text-xs leading-tight">
-                                {vPart}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                      ))}
-                    </tr>
-
-                    {/* Load rating */}
-                    <tr className={mismatchKeys.contactLoad ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
-                      <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">Contact Rating & Life</td>
-                      {selectedProductsForComparison.map((p) => {
-                        const { load, life } = formatContactLoad(p.contactLoad);
-                        return (
-                          <td
-                            key={p.model}
-                            className={`p-4 border-r border-slate-800 text-center align-middle ${
-                              mismatchKeys.contactLoad ? "text-amber-400 font-bold" : "text-white"
-                            }`}
-                          >
-                            <div className="flex flex-col items-center justify-center text-center gap-1">
-                              {load.split(/\s*\|\s*/).map((loadPart, idx) => (
-                                <span key={idx} className="font-sans text-sm font-semibold leading-tight block">
-                                  {loadPart}
-                                </span>
-                              ))}
-                              {life && <span className="text-xs text-slate-400 font-mono leading-tight block">{life}</span>}
-                            </div>
+                  return (
+                    <table className="w-full border-collapse border border-slate-800/90 font-sans text-sm table-fixed">
+                      <thead>
+                        <tr className="bg-slate-900/90 border-b border-slate-800 text-slate-400 font-mono tracking-wider text-xs uppercase">
+                          <th className="p-4 border-r border-slate-800 w-[180px] text-center align-middle">Parameters</th>
+                          {selectedProductsForComparison.map((p) => {
+                            const colWidth = `calc((100% - 180px) / ${selectedProductsForComparison.length})`;
+                            return (
+                              <th
+                                key={p.model}
+                                style={{ width: colWidth }}
+                                className="p-4 border-r border-slate-800 text-cyan-400 font-bold font-mono text-sm text-center align-middle"
+                              >
+                                {p.model}
+                              </th>
+                            );
+                          })}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-800/60">
+                        {/* Package */}
+                        <tr className={mismatchKeys.dimensions ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
+                          <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
+                            {isComparingPhotoRelays ? "Package Style" : "Package & Dimensions"}
                           </td>
-                        );
-                      })}
-                    </tr>
+                          {selectedProductsForComparison.map((p) => (
+                            <td
+                              key={p.model}
+                              className={`p-4 border-r border-slate-800 font-mono leading-relaxed text-center align-middle ${
+                                mismatchKeys.dimensions ? "text-amber-400 font-bold" : "text-white"
+                              }`}
+                            >
+                              {p.dimensions}
+                            </td>
+                          ))}
+                        </tr>
 
-                    {/* Benchmarking Crosses */}
-                    <tr className={mismatchKeys.benchmarking ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
-                      <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">Cross-reference Analogs</td>
-                      {selectedProductsForComparison.map((p) => (
-                        <td
-                          key={p.model}
-                          className={`p-4 border-r border-slate-800 italic text-center align-middle ${
-                            mismatchKeys.benchmarking ? "text-amber-400 font-bold" : "text-slate-300"
-                          }`}
-                        >
-                          {p.benchmarking}
-                        </td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
+                        {/* Temp range / Output Voltage */}
+                        <tr className={mismatchKeys.tempRange ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
+                          <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
+                            {isComparingPhotoRelays ? "Output Voltage / Transient" : "Operating Temperature"}
+                          </td>
+                          {selectedProductsForComparison.map((p) => (
+                            <td
+                              key={p.model}
+                              className={`p-4 border-r border-slate-800 text-center align-middle ${
+                                mismatchKeys.tempRange ? "text-amber-400 font-bold" : "text-white"
+                              }`}
+                            >
+                              {isComparingPhotoRelays ? (
+                                <span className="font-mono font-bold text-center block text-sm">{p.tempRange}</span>
+                              ) : (
+                                renderTempRange(p.tempRange)
+                              )}
+                            </td>
+                          ))}
+                        </tr>
+
+                        {/* Contact Form / Groups */}
+                        <tr className={mismatchKeys.contactForm ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
+                          <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
+                            {isComparingPhotoRelays ? "Number of Output Groups" : "Contact Configuration"}
+                          </td>
+                          {selectedProductsForComparison.map((p) => (
+                            <td
+                              key={p.model}
+                              className={`p-4 border-r border-slate-800 font-semibold text-center align-middle ${
+                                mismatchKeys.contactForm ? "text-amber-400 font-bold" : "text-white"
+                              }`}
+                            >
+                              {isComparingPhotoRelays ? p.contactForm : cleanContactForm(p.contactForm)}
+                            </td>
+                          ))}
+                        </tr>
+
+                        {/* Vibration / On-Resistance */}
+                        <tr className={mismatchKeys.vibration ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
+                          <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
+                            {isComparingPhotoRelays ? "On-Resistance" : "Vibration Tolerance"}
+                          </td>
+                          {selectedProductsForComparison.map((p) => (
+                            <td
+                              key={p.model}
+                              className={`p-4 border-r border-slate-800 leading-relaxed text-center align-middle ${
+                                mismatchKeys.vibration ? "text-amber-400 font-bold" : "text-slate-300"
+                              }`}
+                            >
+                              <div className="flex flex-col items-center justify-center text-center gap-1">
+                                {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
+                                  <span key={idx} className="block text-xs leading-tight">
+                                    {vPart}
+                                  </span>
+                                ))}
+                              </div>
+                            </td>
+                          ))}
+                        </tr>
+
+                        {/* Load rating / Output Current */}
+                        <tr className={mismatchKeys.contactLoad ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
+                          <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
+                            {isComparingPhotoRelays ? "Output Current" : "Contact Rating & Life"}
+                          </td>
+                          {selectedProductsForComparison.map((p) => {
+                            const { load, life } = formatContactLoad(p.contactLoad);
+                            return (
+                              <td
+                                key={p.model}
+                                className={`p-4 border-r border-slate-800 text-center align-middle ${
+                                  mismatchKeys.contactLoad ? "text-amber-400 font-bold" : "text-white"
+                                }`}
+                              >
+                                {isComparingPhotoRelays ? (
+                                  <span className="font-semibold block">{p.contactLoad}</span>
+                                ) : (
+                                  <div className="flex flex-col items-center justify-center text-center gap-1">
+                                    {load.split(/\s*\|\s*/).map((loadPart, idx) => (
+                                      <span key={idx} className="font-sans text-sm font-semibold leading-tight block">
+                                        {loadPart}
+                                      </span>
+                                    ))}
+                                    {life && <span className="text-xs text-slate-400 font-mono leading-tight block">{life}</span>}
+                                  </div>
+                                )}
+                              </td>
+                            );
+                          })}
+                        </tr>
+
+                        {/* Benchmarking Crosses */}
+                        <tr className={mismatchKeys.benchmarking ? "bg-amber-500/[0.04]" : "hover:bg-slate-900/30"}>
+                          <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
+                            {isComparingPhotoRelays ? "Panasonic & Omron Equivalents" : "Cross-reference Analogs"}
+                          </td>
+                          {selectedProductsForComparison.map((p) => (
+                            <td
+                              key={p.model}
+                              className={`p-4 border-r border-slate-800 italic text-center align-middle ${
+                                mismatchKeys.benchmarking ? "text-amber-400 font-bold" : "text-slate-300"
+                              }`}
+                            >
+                              {p.benchmarking}
+                            </td>
+                          ))}
+                        </tr>
+                      </tbody>
+                    </table>
+                  );
+                })()}
               </div>
 
               {/* Actions Footer */}
@@ -844,37 +872,56 @@ export const Catalog: React.FC<CatalogProps> = ({
               <div className="grid grid-cols-1 lg:grid-cols-12 overflow-y-auto">
                 {/* Tech parameter checklist */}
                 <div className="lg:col-span-5 p-6 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-slate-800">
-                  <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono text-slate-400 text-center mb-4">Product Attributes</h4>
-                  <div className="divide-y divide-slate-800/60 w-full max-w-sm mx-auto">
-                    <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">Housing details</div>
-                      <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.dimensions}</div>
-                    </div>
-                    <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">Temp Range</div>
-                      <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.tempRange}</div>
-                    </div>
-                    <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">Contact Form</div>
-                      <div className="text-xs text-cyan-400 font-bold tracking-wide">{activeSpecProduct.contactForm}</div>
-                    </div>
-                    <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">Vibration</div>
-                      <div className="text-xs text-slate-300 leading-normal font-medium text-center">
-                        {activeSpecProduct.vibration.split(/\s*\|\s*/).map((v, idx) => (
-                          <span key={idx} className="block">{v}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">Load profile</div>
-                      <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.contactLoad}</div>
-                    </div>
-                    <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">Benchmark Cross</div>
-                      <div className="text-xs text-slate-300 italic font-medium">{activeSpecProduct.benchmarking}</div>
-                    </div>
-                  </div>
+                  {(() => {
+                    const isPhotoRelay = CATALOG_CATEGORIES.find(c => c.products.some(pr => pr.model === activeSpecProduct.model))?.id === "plastic_photorelay";
+                    return (
+                      <>
+                        <h4 className="text-white text-xs font-bold uppercase tracking-wider font-mono text-slate-400 text-center mb-4">Product Attributes</h4>
+                        <div className="divide-y divide-slate-800/60 w-full max-w-sm mx-auto">
+                          <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+                              {isPhotoRelay ? "Package Style" : "Housing details"}
+                            </div>
+                            <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.dimensions}</div>
+                          </div>
+                          <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+                              {isPhotoRelay ? "Output / Transient Voltage" : "Temp Range"}
+                            </div>
+                            <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.tempRange}</div>
+                          </div>
+                          <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+                              {isPhotoRelay ? "Number of Output Groups" : "Contact Form"}
+                            </div>
+                            <div className="text-xs text-cyan-400 font-bold tracking-wide">{activeSpecProduct.contactForm}</div>
+                          </div>
+                          <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+                              {isPhotoRelay ? "On-Resistance" : "Vibration"}
+                            </div>
+                            <div className="text-xs text-slate-300 leading-normal font-medium text-center">
+                              {activeSpecProduct.vibration.split(/\s*\|\s*/).map((v, idx) => (
+                                <span key={idx} className="block">{v}</span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+                              {isPhotoRelay ? "Output Current" : "Load profile"}
+                            </div>
+                            <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.contactLoad}</div>
+                          </div>
+                          <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+                              {isPhotoRelay ? "Panasonic & Omron Benchmarking" : "Benchmark Cross"}
+                            </div>
+                            <div className="text-xs text-slate-300 italic font-medium">{activeSpecProduct.benchmarking}</div>
+                          </div>
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
 
                 {/* Dynamic SVG Schematic Drawing Area */}
