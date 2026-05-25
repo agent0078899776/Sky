@@ -1447,6 +1447,106 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "14.5Ω",
         outputCurrent: "120mA",
         benchmarking: "—"
+      },
+      {
+        model: "BCY212E",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "60V",
+        outputGroups: "1a",
+        onResistance: "2Ω",
+        outputCurrent: "200mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCY212",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "60V",
+        outputGroups: "1a",
+        onResistance: "1Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQY212EH"
+      },
+      {
+        model: "BCY211G",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "40V",
+        outputGroups: "1a",
+        onResistance: "0.04Ω",
+        outputCurrent: "3A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCY252",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "60V",
+        outputGroups: "1a",
+        onResistance: "0.27Ω",
+        outputCurrent: "1.1A",
+        benchmarking: "AQY212GH"
+      },
+      {
+        model: "BCY252G",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "100V",
+        outputGroups: "1a",
+        onResistance: "0.15Ω",
+        outputCurrent: "1.3A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCY217",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "200V",
+        outputGroups: "1a",
+        onResistance: "5Ω",
+        outputCurrent: "200mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCY214",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "400V",
+        outputGroups: "1a",
+        onResistance: "14Ω",
+        outputCurrent: "140mA",
+        benchmarking: "AQY214EH, G3VM-401A, G3VM-401D"
+      },
+      {
+        model: "BCY216",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "600V",
+        outputGroups: "1a",
+        onResistance: "28Ω",
+        outputCurrent: "80mA",
+        benchmarking: "AQY216EH"
+      },
+      {
+        model: "BCY412",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "60V",
+        outputGroups: "1b",
+        onResistance: "2Ω",
+        outputCurrent: "500mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCY414",
+        image: "/src/assets/images/smd7_photomos_1779713786354.png",
+        packageStyle: "SMD4/DIP4",
+        outputVoltage: "400V",
+        outputGroups: "1b",
+        onResistance: "20Ω",
+        outputCurrent: "120mA",
+        benchmarking: "—"
       }
     ]
   }
