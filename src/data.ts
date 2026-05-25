@@ -1439,19 +1439,49 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         benchmarking: "AQY214S, G3VM-401G"
       },
       {
-        model: "BCY214ES",
+        model: "BCY214GS",
         image: "/images/SOP4.png",
         packageStyle: "SOP4",
         outputVoltage: "400V",
         outputGroups: "1 Form A",
-        onResistance: "14.5Ω",
-        outputCurrent: "120mA",
+        onResistance: "9Ω",
+        outputCurrent: "180mA",
         benchmarking: "—"
       },
       {
+        model: "BCY216S",
+        image: "/images/SOP4.png",
+        packageStyle: "SOP4",
+        outputVoltage: "600V",
+        outputGroups: "1 Form A",
+        onResistance: "28Ω",
+        outputCurrent: "80mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCY412S",
+        image: "/images/SOP4.png",
+        packageStyle: "SOP4",
+        outputVoltage: "400V",
+        outputGroups: "1 Form A",
+        onResistance: "2Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQY412S, G3VM-63G"
+      },
+      {
+        model: "BCY414S",
+        image: "/images/SOP4.png",
+        packageStyle: "SOP4",
+        outputVoltage: "400V",
+        outputGroups: "1 Form A",
+        onResistance: "20Ω",
+        outputCurrent: "100mA",
+        benchmarking: "AQY414S"
+      },
+      {
         model: "BCY212E",
-        image: "/images/SMD4.png",
-        packageStyle: "SMD4/DIP4",
+        image: "/images/SOP4.png",
+        packageStyle: "SOP4",
         outputVoltage: "60V",
         outputGroups: "1 Form A",
         onResistance: "2Ω",
@@ -1547,6 +1577,126 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "20Ω",
         outputCurrent: "120mA",
         benchmarking: "—"
+      },
+      {
+        model: "BCV211G4",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "40V",
+        outputGroups: "1 Form A",
+        onResistance: "0.033Ω",
+        outputCurrent: "4.5A",
+        benchmarking: "AQV101"
+      },
+      {
+        model: "BCV212",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "60V",
+        outputGroups: "1 Form A",
+        onResistance: "1Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQV212"
+      },
+      {
+        model: "BCV212G",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "60V",
+        outputGroups: "1 Form A",
+        onResistance: "0.27Ω",
+        outputCurrent: "1.3A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCV215",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "100V",
+        outputGroups: "1 Form A",
+        onResistance: "0.27Ω",
+        outputCurrent: "500mA",
+        benchmarking: "—"
+      },
+      {
+        model: "BCV215G1",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "100V",
+        outputGroups: "1 Form A",
+        onResistance: "0.15Ω",
+        outputCurrent: "1.3A",
+        benchmarking: "—"
+      },
+      {
+        model: "BCV215G2",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "100V",
+        outputGroups: "1 Form A",
+        onResistance: "0.15Ω",
+        outputCurrent: "2A",
+        benchmarking: "AQV215"
+      },
+      {
+        model: "BCV217",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "200V",
+        outputGroups: "1 Form A",
+        onResistance: "5Ω",
+        outputCurrent: "200mA",
+        benchmarking: "AQV257"
+      },
+      {
+        model: "BCV214",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "400V",
+        outputGroups: "1 Form A",
+        onResistance: "14Ω",
+        outputCurrent: "140mA",
+        benchmarking: "AQV214"
+      },
+      {
+        model: "BCV216",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "600V",
+        outputGroups: "1 Form A",
+        onResistance: "35Ω",
+        outputCurrent: "80mA",
+        benchmarking: "AQV216"
+      },
+      {
+        model: "BCV258",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "1500V",
+        outputGroups: "1 Form A",
+        onResistance: "14Ω",
+        outputCurrent: "45mA",
+        benchmarking: "AQV258"
+      },
+      {
+        model: "BCV412",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "60V",
+        outputGroups: "1 Form B",
+        onResistance: "2Ω",
+        outputCurrent: "500mA",
+        benchmarking: "AQV412EH"
+      },
+      {
+        model: "BCV414",
+        image: "/images/SMD6.png",
+        packageStyle: "SMD6/DIP6",
+        outputVoltage: "400V",
+        outputGroups: "1 Form B",
+        onResistance: "20Ω",
+        outputCurrent: "100mA",
+        benchmarking: "AQV414"
       },
       {
         model: "BCV278",
@@ -1647,6 +1797,36 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "5Ω",
         outputCurrent: "180mA",
         benchmarking: "AQW217"
+      },
+      {
+        model: "BCW214",
+        image: "/images/SMD8.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "400V",
+        outputGroups: "2 Form A",
+        onResistance: "14Ω",
+        outputCurrent: "140mA",
+        benchmarking: "AQW214, G3VM-402C, G3VM-402F"
+      },
+      {
+        model: "BCW216",
+        image: "/images/SMD8.png",
+        packageStyle: "SMD8/DIP8",
+        outputVoltage: "600V",
+        outputGroups: "2 Form A",
+        onResistance: "28Ω",
+        outputCurrent: "80mA",
+        benchmarking: "AQW216"
+      },
+      {
+        model: "BCW211GS",
+        image: "/images/SOP8.png",
+        packageStyle: "SOP8",
+        outputVoltage: "40V",
+        outputGroups: "2 Form A",
+        onResistance: "0.06Ω",
+        outputCurrent: "2A",
+        benchmarking: "—"
       },
       {
         model: "BCW212S1",
@@ -1753,7 +1933,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP8.png",
         packageStyle: "SOP8",
         outputVoltage: "400V",
-        outputGroups: "1a/1b",
+        outputGroups: "1 Form A/1 Form B",
         onResistance: "20Ω",
         outputCurrent: "100mA",
         benchmarking: "AQW614S"
@@ -1763,7 +1943,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         image: "/images/SOP16.png",
         packageStyle: "SOP16",
         outputVoltage: "100V",
-        outputGroups: "4a",
+        outputGroups: "4 Form A",
         onResistance: "0.3Ω",
         outputCurrent: "100mA",
         benchmarking: "AQS225R2S"
