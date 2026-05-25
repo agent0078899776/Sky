@@ -15,7 +15,16 @@ const formatDimensions = (dimStr: string) => {
   }
   return { size: "", desc: dimStr };
 };
-
+const resolveImagePath = (src: string) => {
+  if (!src) return "";
+  if (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("data:")) {
+    return src; // Абсолютные внешние ссылки (например, с Imgur) остаются нетронутыми
+  }
+  const base = (import.meta as any).env?.BASE_URL || "/Sky/";
+  const cleanSrc = src.startsWith("/") ? src.slice(1) : src;
+  const cleanBase = base.endsWith("/") ? base : `${base}/`;
+  return `${cleanBase}${cleanSrc}`;
+};
 // Helper to separate contact rating from electrical life cycles
 const formatContactLoad = (loadStr: string) => {
   const match = loadStr.match(/^(.*?)\s*\((.*?)\)$/);
