@@ -1769,6 +1769,53 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         benchmarking: "AQS225R2S"
       }
     ]
+  },
+  {
+    id: "time_relays",
+    name: "Time Relays",
+    subheading: "Hermetically sealed precision time-delay electromagnetic relays designed for military, aviation, and extreme industrial control systems",
+    products: [
+      {
+        model: "6JS2Z1-2A",
+        image: "/src/assets/images/timer_relay_metal_1779716591499.png",
+        dimensions: "20.5 x 10.5 x 15.5 Metal seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "2a",
+        vibration: "Sinusoidal: 196m/s² 10~3000Hz | Random: 40(m/s²)²/Hz",
+        contactLoad: "2A, 28Vd.c. (100,000 cycles)",
+        benchmarking: "—"
+      },
+      {
+        model: "6JS4Z1-4A",
+        image: "/src/assets/images/timer_relay_flanged_1779716609508.png",
+        dimensions: "26 x 26 x 26 Metal seal",
+        tempRange: "-55 ~ 85",
+        contactForm: "4a",
+        vibration: "Sinusoidal: 196m/s² 10~2000Hz",
+        contactLoad: "4A, 28Vd.c. (20,000 cycles)",
+        benchmarking: "—"
+      },
+      {
+        model: "6JS1Z1-10A",
+        image: "/src/assets/images/timer_relay_metal_1779716591499.png",
+        dimensions: "20.5 x 10.5 x 17 Metal seal",
+        tempRange: "-55 ~ 85",
+        contactForm: "1a",
+        vibration: "Sinusoidal: 196m/s² 10~2000Hz",
+        contactLoad: "10A, 28Vd.c. (20,000 cycles)",
+        benchmarking: "—"
+      },
+      {
+        model: "6JS2Z1-10A",
+        image: "/src/assets/images/timer_relay_flanged_1779716609508.png",
+        dimensions: "26 x 13.5 x 31 Metal seal",
+        tempRange: "-55 ~ 85",
+        contactForm: "2a",
+        vibration: "Sinusoidal: 196m/s² 10~2000Hz",
+        contactLoad: "10A, 28Vd.c. (50,000 cycles)",
+        benchmarking: "—"
+      }
+    ]
   }
 ];
 
