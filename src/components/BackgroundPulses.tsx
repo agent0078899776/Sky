@@ -32,12 +32,14 @@ export const BackgroundPulses: React.FC = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Dynamic Laser Beams Shooting Downwards (Sparsely distributed for a premium feel) */}
-      <div className="absolute inset-0">
+      {/* Dynamic Laser Beams Shooting Downwards (Framing the viewport edges beautifully, hidden on narrow screens to avoid text overlap) */}
+      <div className="absolute inset-0 hidden lg:block">
         {[...Array(6)].map((_, i) => {
-          const left = 15 + i * 16 + Math.sin(i) * 5; // spacing out
-          const delay = i * 4.5;
-          const duration = 12 + i * 3;
+          // 3 lines on the left margin, 3 lines on the right margin
+          const positions = [1.5, 4.5, 7.5, 92.5, 95.5, 98.5];
+          const left = positions[i];
+          const delay = i * 4.2;
+          const duration = 15 + i * 3.5;
           return (
             <div
               key={`beam-${i}`}
