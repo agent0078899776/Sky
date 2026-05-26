@@ -652,7 +652,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "11JPT-DPDT50N",
-        image: "/images/11JPTDPDT50N.png",
+        image: "/images/11JPTDPD50N.png",
         dimensions: "44.5 x 44.5 x 58.5 Closed type",
         tempRange: "-55 ~ 85",
         contactForm: "2PDT",
@@ -760,7 +760,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "2J1H200A",
         image: "/images/2J1H200A.png",
-        dimensions: "96.0 x 65.0 x 42.0 Auxiliary-equipped",
+        dimensions: "96.0 x 65.0 x 42.0",
         tempRange: "-55 ~ 85",
         contactForm: "Main: 1H (1 Form A), Aux: 1H1D",
         vibration: "Sinusoidal: 98m/s² 10~2000Hz | Random: 4(m/s²)²/Hz",
@@ -800,7 +800,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       {
         model: "3J1H400A",
         image: "/images/3J1H400A.png",
-        dimensions: "72.0 x 35.5 x 91.0 Closed Type Contactor",
+        dimensions: "72.0 x 35.5 x 91.0",
         tempRange: "-55 ~ 85",
         contactForm: "Main: 1H, Aux: 3PDT",
         vibration: "Sinusoidal: 98m/s² 10~2000Hz | Random: 10(m/s²)²/Hz",
@@ -1992,7 +1992,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         tempRange: "-55 ~ 85",
         contactForm: "2 Form A",
         vibration: "Sinusoidal: 147m/s² 10~2000Hz",
-        contactLoad: "1A, 28Vd.c., 2A, 28Vd.c. | (100,000 cycles), (20,000 cycles)",
+        contactLoad: "1A, 28Vd.c. | 2A, 28Vd.c. (100,000 cycles), (20,000 cycles)",
         benchmarking: "—"
       },
       {
