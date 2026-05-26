@@ -90,7 +90,7 @@ export const Home: React.FC<HomeProps> = ({
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1581092160607-2c1b8d2c9c3d"
-            alt="Aerospace defense manufacturing cleanroom grid"
+            alt=""
             className="w-full h-full object-cover object-center opacity-15 filter grayscale"
           />
           {/* Blueprint schematic grid mask overlay */}
