@@ -37,6 +37,57 @@ const formatContactLoad = (loadStr: string) => {
   return { load: loadStr, life: "" };
 };
 
+// Helper to render contact loads cleanly and handle both single and multiple load/life mappings
+const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignment = "items-center text-center") => {
+  if (!loadStr) return null;
+
+  const parts = loadStr.split(/\s*\|\s*/);
+  const parsedParts = parts.map((part) => {
+    const pMatch = part.match(/^(.*?)\s*\((.*?)\)$/);
+    if (pMatch) {
+      return {
+        load: pMatch[1].trim(),
+        life: pMatch[2].trim()
+      };
+    }
+    return {
+      load: part.trim(),
+      life: null
+    };
+  });
+
+  const onlyLastHasLife = parsedParts.length > 1 && parsedParts[parsedParts.length - 1].life !== null && parsedParts.slice(0, -1).every(p => p.life === null);
+
+  if (onlyLastHasLife) {
+    const commonLife = parsedParts[parsedParts.length - 1].life;
+    return (
+      <div className={`flex flex-col gap-0.5 ${alignment} max-w-full leading-tight`}>
+        {parsedParts.map((p, idx) => (
+          <span key={idx} className={`font-sans ${textClass} text-slate-200 font-semibold block`}>
+            {p.load}
+          </span>
+        ))}
+        <span className="text-xs text-slate-400 mt-1 font-mono leading-tight block">({commonLife})</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`flex flex-col gap-2 ${alignment} max-w-full`}>
+      {parsedParts.map((p, idx) => (
+        <div key={idx} className={`flex flex-col gap-0.5 ${alignment} leading-tight`}>
+          <span className={`font-sans ${textClass} text-slate-200 font-semibold block`}>
+            {p.load}
+          </span>
+          {p.life && (
+            <span className="text-xs text-slate-400 mt-0.5 font-mono leading-tight block">({p.life})</span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 // Helper to strip parentheses and descriptions from Contact Form
 const cleanContactForm = (formStr: string) => {
   return formStr.replace(/\s*\([^)]*\)/g, "").trim();
@@ -570,15 +621,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
                                     {/* Contact Load and Lifetime */}
                                     <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
-                                      {(() => {
-                                        const { load, life } = formatContactLoad(p.contactLoad || "");
-                                        return (
-                                          <div className="flex flex-col gap-0.5 items-center leading-tight">
-                                            <span className="font-sans font-medium text-slate-200">{load || p.contactLoad}</span>
-                                            {life && <span className="font-mono text-[11px] text-slate-400">{life}</span>}
-                                          </div>
-                                        );
-                                      })()}
+                                      {renderContactLoadHelper(p.contactLoad || "")}
                                     </td>
 
                                     {/* Benchmarking Model */}
@@ -790,19 +833,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
                                   {/* Rated power profile */}
                                   <td className="py-3.5 px-3 align-middle text-center">
-                                    {(() => {
-                                      const { load, life } = formatContactLoad(p.contactLoad);
-                                      return (
-                                        <div className="flex flex-col gap-1 items-center text-center max-w-full">
-                                          {load.split(/\s*\|\s*/).map((loadPart, idx) => (
-                                            <span key={idx} className="font-sans text-sm text-white font-semibold leading-tight block">
-                                              {loadPart}
-                                            </span>
-                                          ))}
-                                          {life && <span className="text-xs text-slate-400 mt-0.5 font-mono leading-tight block">{life}</span>}
-                                        </div>
-                                      );
-                                    })()}
+                                    {renderContactLoadHelper(p.contactLoad)}
                                   </td>
 
                                   {/* Benchmarking crosses */}
@@ -1021,7 +1052,6 @@ export const Catalog: React.FC<CatalogProps> = ({
                             {isComparingPhotoRelays ? "Output Current" : "Contact Rating & Life"}
                           </td>
                           {selectedProductsForComparison.map((p) => {
-                            const { load, life } = formatContactLoad(p.outputCurrent || p.contactLoad || "");
                             return (
                               <td
                                 key={p.model}
@@ -1032,14 +1062,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                 {isComparingPhotoRelays ? (
                                   <span className="font-semibold block">{p.outputCurrent || p.contactLoad}</span>
                                 ) : (
-                                  <div className="flex flex-col items-center justify-center text-center gap-1">
-                                    {load.split(/\s*\|\s*/).map((loadPart, idx) => (
-                                      <span key={idx} className="font-sans text-sm font-semibold leading-tight block">
-                                        {loadPart}
-                                      </span>
-                                    ))}
-                                    {life && <span className="text-xs text-slate-400 font-mono leading-tight block">{life}</span>}
-                                  </div>
+                                  renderContactLoadHelper(p.outputCurrent || p.contactLoad || "")
                                 )}
                               </td>
                             );
@@ -1166,7 +1189,11 @@ export const Catalog: React.FC<CatalogProps> = ({
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "Output Current" : "Load profile"}
                             </div>
-                            <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.outputCurrent || activeSpecProduct.contactLoad}</div>
+                            {isPhotoRelay ? (
+                              <div className="text-xs text-white font-mono font-medium">{activeSpecProduct.outputCurrent || activeSpecProduct.contactLoad}</div>
+                            ) : (
+                              renderContactLoadHelper(activeSpecProduct.contactLoad || "", "text-xs")
+                            )}
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
