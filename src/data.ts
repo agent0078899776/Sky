@@ -1957,42 +1957,62 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "6JS2Z1-2A",
-        image: "/images/8J4Z10A.png",
+        image: "/images/6JS2Z1-2A.png",
         dimensions: "20.5 x 10.5 x 15.5 Metal seal",
         tempRange: "-55 ~ 125",
-        contactForm: "2a",
+        contactForm: "2 Form A",
         vibration: "Sinusoidal: 196m/s² 10~3000Hz | Random: 40(m/s²)²/Hz",
         contactLoad: "2A, 28Vd.c. (100,000 cycles)",
         benchmarking: "—"
       },
       {
         model: "6JS4Z1-4A",
-        image: "/images/8J4Z20A.png",
+        image: "/images/6JS4Z1-4A.png",
         dimensions: "26 x 26 x 26 Metal seal",
         tempRange: "-55 ~ 85",
-        contactForm: "4a",
+        contactForm: "4 Form A",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz",
         contactLoad: "4A, 28Vd.c. (20,000 cycles)",
         benchmarking: "—"
       },
       {
         model: "6JS1Z1-10A",
-        image: "/images/8J4Z10AD.png",
-        dimensions: "20.5 x 10.5 x 17 Metal seal",
+        image: "/images/6JS1Z1-10A.png",
+        dimensions: "20.5 x 10.5 x 17.0 Metal seal",
         tempRange: "-55 ~ 85",
-        contactForm: "1a",
+        contactForm: "1 Form A",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz",
         contactLoad: "10A, 28Vd.c. (20,000 cycles)",
         benchmarking: "—"
       },
       {
-        model: "6JS2Z1-10A",
-        image: "/images/8JM4Z15A.png",
-        dimensions: "26 x 13.5 x 31 Metal seal",
+        model: "6JS2Z3-1A",
+        image: "/images/6JS2Z3-1A.png",
+        dimensions: "28.0 x 13.5 x 34.5 Metal seal",
         tempRange: "-55 ~ 85",
-        contactForm: "2a",
+        contactForm: "2 Form A",
+        vibration: "Sinusoidal: 147m/s² 10~2000Hz",
+        contactLoad: "1A, 28Vd.c. (100,000 cycles) | 2A, 28Vd.c. (20,000 cycles)",
+        benchmarking: "—"
+      },
+      {
+        model: "6JS2Z3-5A",
+        image: "/images/6JS2Z3-5A.png",
+        dimensions: "28.0 x 13.5 x 34.5 Metal seal",
+        tempRange: "-55 ~ 85",
+        contactForm: "2 Form A",
         vibration: "Sinusoidal: 196m/s² 10~2000Hz",
-        contactLoad: "10A, 28Vd.c. (50,000 cycles)",
+        contactLoad: "5A, 28Vd.c. (10,000 cycles)",
+        benchmarking: "—"
+      },
+      {
+        model: "6JS2Z4-2A",
+        image: "/images/8JM4Z15A.png",
+        dimensions: "20.5 x 10.5 x 15.5 Metal seal",
+        tempRange: "-55 ~ 85",
+        contactForm: "2 Form A",
+        vibration: "Sinusoidal: 196m/s² 10~2000Hz",
+        contactLoad: "2A, 28Vd.c. (50,000 cycles)",
         benchmarking: "—"
       }
     ]
@@ -2004,43 +2024,133 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "5GH1H3202Z",
-        image: "/images/DIP4.png",
-        dimensions: "7.62 x 5.0 x 2.8 Ceramic seal",
+        image: "/images/5GH1H3202Z.png",
+        dimensions: "7.62 x 5.00 x 2.80 Ceramic seal",
         tempRange: "-55 ~ 125",
-        contactForm: "2a",
-        vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
-        contactLoad: "Single channel; CTR: ≥50%; BVCES: 100Vd.c.",
-        benchmarking: "TOSHIBA TLP521-1"
+        contactForm: "2 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "Single channel; Current transmission ratio (CTR): ≥50%; Collector-emitter breakdown voltage (BVCES): 100Vd.c.",
+        benchmarking: "TOSHIBA (TLP521-1)"
       },
       {
         model: "5GH2H3201Z",
-        image: "/images/DIP8.png",
-        dimensions: "11.50 x 7.62 x 2.8 Ceramic seal",
+        image: "/images/5GH2H3201Z.png",
+        dimensions: "11.50 x 7.62 x 2.80 Ceramic seal",
         tempRange: "-55 ~ 125",
-        contactForm: "2a",
+        contactForm: "2 Form A",
         vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
         contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
-        benchmarking: "TOSHIBA TLP521-2"
+        benchmarking: "TOSHIBA (TLP521-2)"
       },
       {
         model: "5GH4H3201Z",
-        image: "/images/SOP16.png",
-        dimensions: "22.0 x 7.62 x 3.5 Ceramic seal",
+        image: "/images/5GH4H3201Z.png",
+        dimensions: "22.00 x 7.62 x 3.50 Ceramic seal",
         tempRange: "-55 ~ 125",
-        contactForm: "4a",
-        vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
+        contactForm: "4 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
         contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
-        benchmarking: "TOSHIBA TLP521-4"
+        benchmarking: "TOSHIBA (TLP521-4)"
       },
       {
         model: "5GH1H3201J",
-        image: "/images/SMD4.png",
+        image: "/images/5GH1H3201J.png",
         dimensions: "4.5 x 3.4 x 2.3 Ceramic seal",
         tempRange: "-55 ~ 125",
-        contactForm: "1a",
-        vibration: "Random: 239.1m/s² | 40(m/s²)²/Hz",
+        contactForm: "1 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
         contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
-        benchmarking: "TOSHIBA TLP281"
+        benchmarking: "TOSHIBA (TLP281)"
+      },
+      {
+        model: "5GH2H3201J",
+        image: "/images/5GH2H3201J.png",
+        dimensions: "5.3 x 5.3 x 2.4 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "2 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
+        benchmarking: "TOSH1BA (TLP281-2)"
+      },
+      {
+        model: "5GH4H3201J",
+        image: "/images/5GH4H3201J.png",
+        dimensions: "10.32 x 5.4 x 2.3 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "4 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
+        benchmarking: "TOSHIBA (TLP281-4)"
+      },
+      {
+        model: "5GH1H181",
+        image: "/images/5GH1H181.png",
+        dimensions: "5.40 x 4.00 x 2.65 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "1 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "CTR: ≥50%; BVCES: 100Vd.c.",
+        benchmarking: "TOSHIBA (TLP181)"
+      },
+      {
+        model: "5GH1H2502",
+        image: "/images/5GH1H2502.png",
+        dimensions: "7.62 x 5.00 x 4.60 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "1 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "Single channel; Rated voltage: 5V; CTR: 1000 ~ 4000%",
+        benchmarking: "ISOCOM (PS2502-1)"
+      },
+      {
+        model: "5GH2H2502",
+        image: "/images/5GH2H2502.png",
+        dimensions: "12.00 x 7.62 x 4.60 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "2 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "Single channel; Rated voltage: 5V; CTR: 1000 ~ 4000%",
+        benchmarking: "ISOCOM (PS2502-2)"
+      },
+      {
+        model: "5GH4H2502",
+        image: "/images/5GH4H2502.png",
+        dimensions: "23.00 x 7.62 x 4.60 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "4 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "Single channel; Rated voltage: 5V; CTR: 1000 ~ 4000%",
+        benchmarking: "ISOCOM (PS2502-4)"
+      },
+      {
+        model: "5GH1H0601",
+        image: "/images/5GH1H0601.png",
+        dimensions: "5.7 x 5.7 x 2.6 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "1 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "Single channel; Rated voltage: 5V; Output current: ≤ 25mA; Maximum rate: 10Mbit/s",
+        benchmarking: "FAIRCHILD (HCPL0601)"
+      },
+      {
+        model: "5GH2H0631",
+        image: "/images/5GH2H0631.png",
+        dimensions: "5.1 x 5.1 x 2.6 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "2 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "Single channel; Rated voltage: 5V; Output current: ≤ 25mA; Maximum rate: 10Mbit/s",
+        benchmarking: "AVAGO (HCPL0630)"
+      },
+      {
+        model: "5GH4H6651",
+        image: "/images/5GH4H6651.png",
+        dimensions: "11.1 x 7.1 x 2.5 Ceramic seal",
+        tempRange: "-55 ~ 125",
+        contactForm: "4 Form A",
+        vibration: "Random: 239.1m/s² 40(m/s²)²/Hz",
+        contactLoad: "Single channel; Rated voltage: 5V; Output current: ≤ 25mA; Maximum rate: 10Mbit/s",
+        benchmarking: "AVAGO (HCPL-6651)"
       }
     ]
   }
