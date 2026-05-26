@@ -2175,16 +2175,16 @@ export const APPLICATION_AREAS = [
   {
     title: "Aviation & Aerospace",
     description: "Avionics arrays, radar telemetry feeds, complex control panels, and fail-safe spacecraft supply distribution loops.",
-    image: "https://imgur.com/6T5S3XQ.png",
+    image: "/images/6T5S3XQ.png",
   },
   {
     title: "Railway Systems",
     description: "Fail-safe signalling controls, automated cabin safety interlocks, auxiliary transformers, and high G-force rolling stock equipment.",
-    image: "https://imgur.com/FI5HY9r.png",
+    image: "/images/FI5HY9r.png",
   },
   {
     title: "Advanced Technics",
     description: "Rugged land vehicles, heavy maritime automation grids, and high-frequency communication transmitters facing extreme temperatures.",
-    image: "https://imgur.com/NUd0jt2.png",
+    image: "/images/3UBkt.png",
   }
 ];
