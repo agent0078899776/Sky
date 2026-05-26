@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { CATALOG_CATEGORIES } from "../data";
 import { ProductRec, CatalogCategory } from "../types";
-import { Search, ChevronDown, ChevronRight, X, Shuffle, CheckCircle, ZoomIn, ZoomOut, Zap, Eye, HelpCircle, CornerDownRight, Layers } from "lucide-react";
+import { Search, ChevronDown, ChevronRight, X, Shuffle, CheckCircle, ZoomIn, ZoomOut, Zap, Eye, HelpCircle, CornerDownRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { playRelayClick, playTechBeep, playSparkCrackle, setCoilHumActive } from "../utils/audio";
 
 // Helper to separate physical dimensions from mounting description
 const formatDimensions = (dimStr: string) => {
@@ -88,38 +89,6 @@ const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignme
   );
 };
 
-// Detailed Technical Specs for Hermetic Relay Cutaway
-const CUTAWAY_PARTS = {
-  case: {
-    titleRu: "Герметичный Корпус-Кожух",
-    titleEn: "Hermetic Protective Shielding Case",
-    material: "Ковар (Fe-Ni-Co) / Никелированная Сталь",
-    specs: "Толщина стенок 0.6 мм; Скорость утечки гелия < 1×10⁻⁸ Па·м³/с",
-    desc: "Прочная внешняя капсула, изолирующая внутренние чувствительные контакты от окружающей среды. Внутренняя полость заполняется ультрасухим азотом с примесью гелия (9:1) при избыточном давлении для тушения электрической дуги и контроля герметичности лазерного шва."
-  },
-  motor: {
-    titleRu: "Электромагнитный Узел",
-    titleEn: "Electromagnetic Coil & Core",
-    material: "Очищенная медь (класса ПЭТ-155), магнитомягкое железо",
-    specs: "Сопротивление катушки 240 Ом...1200 Ом; Класс изоляции по нагревостойкости F (+155°C)",
-    desc: "Магнитный сердечник с катушкой индуктивности создает сильное направленное магнитное поле при подаче управляющего напряжения, притягивая подвижный якорь и преодолевая сдерживающее возвратное усилие пружин."
-  },
-  springs: {
-    titleRu: "Подвижные Группы Контактов",
-    titleEn: "Beryllium Bronze Armature Springs",
-    material: "Бериллиевая бронза БрБ2, сплав Серебро-Палладий (AgPd-10)",
-    specs: "Допустимый ток перегрузки до 15 А; Термическая стабильность контактов",
-    desc: "Упругие плоские пружины с контактами из серебряно-палладиевого сплава для низкого переходного сопротивления (<50 мОм) и предотвращения микросваривания при коммутации жестких индуктивных нагрузок в авиационной бортовой сети."
-  },
-  header: {
-    titleRu: "Металлостеклянный Цоколь",
-    titleEn: "Hermetic Glass-to-Metal Seal Header",
-    material: "Конструкционная сталь 10КП, боросиликатное стекло С49-2",
-    specs: "Сопротивление изоляции > 5000 МОм; Электрическая прочность 1500 В эфф.",
-    desc: "Монолитное стальное основание с герметично вплавленными стеклянными изоляторами. На молекулярном уровне связывает сплав выводов со стальным фланцем под высоким температурным сжатием, гарантируя полную изоляцию цепей управления от силовой нагрузки."
-  }
-};
-
 // Helper to strip parentheses and descriptions from Contact Form
 const cleanContactForm = (formStr: string) => {
   return formStr.replace(/\s*\([^)]*\)/g, "").trim();
@@ -168,7 +137,7 @@ export const Catalog: React.FC<CatalogProps> = ({
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [specViewTab, setSpecViewTab] = useState<"photo" | "schematic" | "stress" | "cutaway">("photo");
+  const [specViewTab, setSpecViewTab] = useState<"photo" | "schematic" | "stress">("photo");
   const [photoAttempt, setPhotoAttempt] = useState<Record<string, "local" | "fallback" | "failed">>({});
   const [schematicAttempt, setSchematicAttempt] = useState<Record<string, "plural" | "singular" | "failed">>({});
 
@@ -178,17 +147,24 @@ export const Catalog: React.FC<CatalogProps> = ({
   const [stressTemp, setStressTemp] = useState(25);
   const [stressVibe, setStressVibe] = useState(10);
 
-  // Interactive Layered Cutaway variables
-  const [cutawayDepth, setCutawayDepth] = useState(40); // 0 (flat) to 100 (fully exploded)
-  const [selectedCutawayPart, setSelectedCutawayPart] = useState<string>("case");
-  const [cutawayActive, setCutawayActive] = useState(false);
-
   // Cyclic automated test counters
   const [isCyclicTesting, setIsCyclicTesting] = useState(false);
   const [cyclicCounter, setCyclicCounter] = useState(0);
   const [cyclicFailures, setCyclicFailures] = useState(0);
   const [cyclicWelds, setCyclicWelds] = useState(0);
   const [simRelayActive, setSimRelayActive] = useState(false);
+
+  // Monitor spec sheet opening/closing to play auditory transitions
+  const prevActiveProductRef = React.useRef<ProductRec | null>(null);
+  React.useEffect(() => {
+    if (activeSpecProduct && !prevActiveProductRef.current) {
+      playRelayClick("close");
+    } else if (!activeSpecProduct && prevActiveProductRef.current) {
+      playRelayClick("open");
+      setCoilHumActive(false);
+    }
+    prevActiveProductRef.current = activeSpecProduct;
+  }, [activeSpecProduct]);
 
   // Parse active specs limits
   const parsedLimits = useMemo(() => {
@@ -245,6 +221,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   // Toggle category fold
   const toggleCategory = (catId: string) => {
+    playTechBeep(600, 0.035);
     setCollapsedCategories((prev) => {
       const currentVal = prev[catId] ?? true;
       return {
@@ -256,6 +233,8 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   // Toggle model comparison selection
   const toggleModelCompare = (modelId: string) => {
+    const nextCheck = !comparedModels[modelId];
+    playRelayClick(nextCheck ? "close" : "open");
     setComparedModels((prev) => ({
       ...prev,
       [modelId]: !prev[modelId],
@@ -364,15 +343,15 @@ export const Catalog: React.FC<CatalogProps> = ({
     setCyclicFailures(0);
     setCyclicWelds(0);
     setSimRelayActive(false);
-    setCutawayDepth(40);
-    setSelectedCutawayPart("case");
-    setCutawayActive(false);
   };
 
   // Automated endurance cyclic testing engine
   React.useEffect(() => {
     let timer: any = null;
     if (isCyclicTesting && activeSpecProduct) {
+      // Turn on louder cyclic solenoid background hum (120Hz induction)
+      setCoilHumActive(true, 120);
+
       const stressRatioCurrent = stressCurrentPct / 100;
       const stressRatioVoltage = stressVoltagePct / 100;
       const isOverCurrent = stressCurrentPct > 100;
@@ -381,7 +360,11 @@ export const Catalog: React.FC<CatalogProps> = ({
       const isOverVibe = stressVibe > 15;
 
       timer = setInterval(() => {
-        setSimRelayActive((prev) => !prev);
+        setSimRelayActive((prev) => {
+          const nextVal = !prev;
+          playRelayClick(nextVal ? "close" : "open");
+          return nextVal;
+        });
         setCyclicCounter((prev) => prev + 1);
 
         // Probability of micro-arcs/contact jitter per switch cycle
@@ -393,6 +376,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
         if (Math.random() < failChance) {
           setCyclicFailures((prev) => prev + 1);
+          playSparkCrackle();
         }
 
         // Hard weld risk (heavy overloads)
@@ -407,10 +391,13 @@ export const Catalog: React.FC<CatalogProps> = ({
           setCyclicWelds((prev) => prev + 1);
           setIsCyclicTesting(false); // Contacts fuse/weld - stops test
           setSimRelayActive(true); // Permanently locked closed
+          playSparkCrackle();
+          playRelayClick("close");
         }
       }, 100); // 100ms switch rate
     } else {
       setSimRelayActive(false);
+      setCoilHumActive(false);
     }
     return () => {
       if (timer) clearInterval(timer);
@@ -1376,7 +1363,10 @@ export const Catalog: React.FC<CatalogProps> = ({
                   <div className="flex flex-wrap items-center justify-between gap-4 mb-4 border-b border-slate-800 pb-3">
                     <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
                       <button
-                        onClick={() => setSpecViewTab("photo")}
+                        onClick={() => {
+                          playTechBeep(1000, 0.05);
+                          setSpecViewTab("photo");
+                        }}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                           specViewTab === "photo" ? "bg-cyan-500 text-slate-950 font-bold" : "text-slate-400 hover:text-white"
                         }`}
@@ -1385,7 +1375,10 @@ export const Catalog: React.FC<CatalogProps> = ({
                         Component Photo
                       </button>
                       <button
-                        onClick={() => setSpecViewTab("schematic")}
+                        onClick={() => {
+                          playTechBeep(1100, 0.05);
+                          setSpecViewTab("schematic");
+                        }}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                           specViewTab === "schematic" ? "bg-cyan-500 text-slate-950 font-bold" : "text-slate-400 hover:text-white"
                         }`}
@@ -1394,22 +1387,16 @@ export const Catalog: React.FC<CatalogProps> = ({
                         Internal Schematic
                       </button>
                       <button
-                        onClick={() => setSpecViewTab("stress")}
+                        onClick={() => {
+                          playTechBeep(1200, 0.05);
+                          setSpecViewTab("stress");
+                        }}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                           specViewTab === "stress" ? "bg-cyan-500 text-slate-950 font-bold" : "text-slate-400 hover:text-white"
                         }`}
                       >
                         <Shuffle size={13} />
                         Stress Simulator
-                      </button>
-                      <button
-                        onClick={() => setSpecViewTab("cutaway")}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                          specViewTab === "cutaway" ? "bg-cyan-500 text-slate-950 font-bold" : "text-slate-400 hover:text-white"
-                        }`}
-                      >
-                        <Layers size={13} />
-                        Interactive Cutaway
                       </button>
                     </div>
 
@@ -1651,8 +1638,39 @@ export const Catalog: React.FC<CatalogProps> = ({
                           </svg>
                         )}
                       </div>
+
+                      {/* Manual Solenoid Excitation Controller */}
+                      <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80 w-full shrink-0">
+                        <div className="space-y-0.5 text-center sm:text-left">
+                          <p className="text-xs font-bold font-mono text-cyan-400 flex items-center gap-1.5 justify-center sm:justify-start">
+                            <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                            COIL ACTIVE FORCE ACTUATOR
+                          </p>
+                          <p className="text-[10px] text-slate-400">Click control button to manually shock the electromagnet solenoid core</p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            const nextState = !simulatedCoilOn;
+                            setSimulatedCoilOn(nextState);
+                            if (nextState) {
+                              playRelayClick("close");
+                              setCoilHumActive(true, 60);
+                            } else {
+                              playRelayClick("open");
+                              setCoilHumActive(false);
+                            }
+                          }}
+                          className={`w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-extrabold font-mono transition-all uppercase tracking-wider cursor-pointer ${
+                            simulatedCoilOn
+                              ? "bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.5)] scale-[1.02]"
+                              : "bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 border border-slate-700/80"
+                          }`}
+                        >
+                          {simulatedCoilOn ? "⚡ ACTIVE (60Hz HUM)" : "◯ DE-ENERGIZED"}
+                        </button>
+                      </div>
                     </div>
-                  ) : specViewTab === "stress" ? (
+                  ) : (
                     <div className="flex-1 flex flex-col justify-between p-5 bg-[#0a0f1d] border border-slate-800 rounded-xl relative overflow-hidden font-sans text-slate-200 min-h-[420px]">
                       {/* Stress Tester Widget */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
@@ -1869,7 +1887,11 @@ export const Catalog: React.FC<CatalogProps> = ({
                               </button>
                             ) : (
                               <button
-                                onClick={() => setIsCyclicTesting(!isCyclicTesting)}
+                                onClick={() => {
+                                  const nextState = !isCyclicTesting;
+                                  setIsCyclicTesting(nextState);
+                                  playTechBeep(nextState ? 1300 : 900, 0.07);
+                                }}
                                 className={`w-full text-center py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                                   isCyclicTesting
                                     ? "bg-rose-600 hover:bg-rose-500 text-white shadow-lg animate-pulse"
@@ -1883,325 +1905,6 @@ export const Catalog: React.FC<CatalogProps> = ({
                         </div>
                       </div>
                     </div>
-                  ) : (
-                    <div className="flex-1 flex flex-col justify-between p-5 bg-[#0a0f1d] border border-slate-800 rounded-xl relative overflow-hidden font-sans text-slate-200 min-h-[440px]">
-                      {/* Interactive Cutaway Widget */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
-                        {/* Interactive SVG Diagram on Left */}
-                        <div className="bg-[#040811] rounded-xl border border-slate-850 p-4 flex flex-col items-center justify-center relative select-none">
-                          <div className="absolute top-2 left-3 text-[9px] font-mono text-cyan-400 font-bold tracking-wider uppercase flex items-center gap-1">
-                            <Layers size={11} className="animate-pulse" /> Layered Architecture Assembly
-                          </div>
-
-                          {/* Interactive Isometric Layers Space */}
-                          <div className="w-full flex-1 flex items-center justify-center min-h-[260px] relative overflow-hidden">
-                            <svg width="280" height="280" viewBox="0 0 280 280" className="overflow-visible">
-                              {/* Definitions for gradients and drop shadows */}
-                              <defs>
-                                <linearGradient id="metallicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                  <stop offset="0%" stopColor="#334155" />
-                                  <stop offset="50%" stopColor="#64748b" />
-                                  <stop offset="100%" stopColor="#1e293b" />
-                                </linearGradient>
-                                <linearGradient id="copperGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                  <stop offset="0%" stopColor="#b45309" />
-                                  <stop offset="50%" stopColor="#ea580c" />
-                                  <stop offset="100%" stopColor="#78350f" />
-                                </linearGradient>
-                                <linearGradient id="bronzeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                  <stop offset="0%" stopColor="#b45309" />
-                                  <stop offset="100%" stopColor="#f59e0b" />
-                                </linearGradient>
-                                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                                  <feGaussianBlur stdDeviation="3" result="blur" />
-                                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                </filter>
-                              </defs>
-
-                              {/* Connective center axis guide-line */}
-                              <line x1="140" y1="20" x2="140" y2="260" stroke="#1e293b" strokeWidth="1.5" strokeDasharray="3 3" />
-
-                              {/* Layer 1: Protective Shield Case */}
-                              {(() => {
-                                const yBase = 70;
-                                const offset = -(cutawayDepth * 0.95);
-                                const isSel = selectedCutawayPart === "case";
-                                return (
-                                  <g 
-                                    className="cursor-pointer transition-transform duration-300 ease-out"
-                                    style={{ transform: `translateY(${offset}px)` }}
-                                    onClick={() => setSelectedCutawayPart("case")}
-                                  >
-                                    {/* Selection Glow Ring */}
-                                    {isSel && (
-                                      <ellipse cx="140" cy={yBase} rx="55" ry="25" fill="none" stroke="#22d3ee" strokeWidth="2.5" filter="url(#glow)" className="animate-pulse" />
-                                    )}
-                                    {/* Projection Connection Guide */}
-                                    <line x1="140" y1={yBase} x2="140" y2={yBase + 50} stroke="#334155" strokeWidth="1" strokeDasharray="2 2" />
-                                    
-                                    {/* Isometric Cup representation */}
-                                    <path d={`M 85,${yBase} C 85,${yBase - 20} 195,${yBase - 20} 195,${yBase} L 195,${yBase + 28} C 195,${yBase + 45} 85,${yBase + 45} 85,${yBase + 28} Z`} fill="url(#metallicGrad)" stroke={isSel ? "#22d3ee" : "#475569"} strokeWidth="1.5" className="transition-all" opacity="0.85" />
-                                    
-                                    {/* Top Glass window representation / welding seam */}
-                                    <ellipse cx="140" cy={yBase - 4} rx="45" ry="15" fill="#040811" stroke="#334155" opacity="0.7" />
-                                    <text x="140" y={yBase + 18} fill="#ffffff" fontSize="8" textAnchor="middle" fontWeight="bold" fontFamily="monospace" opacity="0.9">SHIELD CASE</text>
-                                  </g>
-                                );
-                              })()}
-
-                              {/* Layer 2: Core & Coil Motor Block */}
-                              {(() => {
-                                const yBase = 125;
-                                const offset = -(cutawayDepth * 0.3);
-                                const isSel = selectedCutawayPart === "motor";
-                                return (
-                                  <g 
-                                    className="cursor-pointer transition-transform duration-300 ease-out"
-                                    style={{ transform: `translateY(${offset}px)` }}
-                                    onClick={() => setSelectedCutawayPart("motor")}
-                                  >
-                                    {/* Selection Glow */}
-                                    {isSel && (
-                                      <ellipse cx="140" cy={yBase} rx="55" ry="25" fill="none" stroke="#22d3ee" strokeWidth="2.5" filter="url(#glow)" className="animate-pulse" />
-                                    )}
-                                    {/* Core Armature */}
-                                    <rect x="110" y={yBase - 15} width="60" height="30" rx="3" fill="#1e293b" stroke={isSel ? "#22d3ee" : "#334155"} strokeWidth="1.5" />
-                                    
-                                    {/* Magnetization Field Waveforms */}
-                                    {cutawayActive && (
-                                      <g className="animate-pulse" filter="url(#glow)">
-                                        <ellipse cx="140" cy={yBase} rx="45" ry="18" fill="none" stroke="#eab308" strokeWidth="1.5" strokeDasharray="3 3" />
-                                        <ellipse cx="140" cy={yBase} rx="50" ry="21" fill="none" stroke="#eab308" strokeWidth="1" strokeDasharray="4 4" />
-                                      </g>
-                                    )}
-
-                                    {/* Copper coils */}
-                                    <rect x="118" y={yBase - 10} width="16" height="20" rx="2" fill="url(#copperGrad)" stroke="#ea580c" />
-                                    <rect x="146" y={yBase - 10} width="16" height="20" rx="2" fill="url(#copperGrad)" stroke="#ea580c" />
-                                    
-                                    {/* Wire turn details */}
-                                    <line x1="122" y1={yBase - 10} x2="122" y2={yBase + 10} stroke="#f59e0b" strokeWidth="0.5" />
-                                    <line x1="126" y1={yBase - 10} x2="126" y2={yBase + 10} stroke="#f59e0b" strokeWidth="0.5" />
-                                    <line x1="130" y1={yBase - 10} x2="130" y2={yBase + 10} stroke="#f59e0b" strokeWidth="0.5" />
-                                    <line x1="150" y1={yBase - 10} x2="150" y2={yBase + 10} stroke="#f59e0b" strokeWidth="0.5" />
-                                    <line x1="154" y1={yBase - 10} x2="154" y2={yBase + 10} stroke="#f59e0b" strokeWidth="0.5" />
-                                    <line x1="158" y1={yBase - 10} x2="158" y2={yBase + 10} stroke="#f59e0b" strokeWidth="0.5" />
-
-                                    <text x="140" y={yBase + 30} fill="#64748b" fontSize="8" textAnchor="middle" fontWeight="bold" fontFamily="monospace">COIL & YOKE</text>
-                                  </g>
-                                );
-                              })()}
-
-                              {/* Layer 3: Moving Spring Switch contacts */}
-                              {(() => {
-                                const yBase = 175;
-                                const offset = (cutawayDepth * 0.3);
-                                const isSel = selectedCutawayPart === "springs";
-                                // Bending movement under solenoid current
-                                const bendAngle = cutawayActive ? 6 : 0;
-                                return (
-                                  <g 
-                                    className="cursor-pointer transition-transform duration-300 ease-out"
-                                    style={{ transform: `translateY(${offset}px)` }}
-                                    onClick={() => setSelectedCutawayPart("springs")}
-                                  >
-                                    {/* Selection Glow */}
-                                    {isSel && (
-                                      <ellipse cx="140" cy={yBase} rx="55" ry="25" fill="none" stroke="#22d3ee" strokeWidth="2.5" filter="url(#glow)" className="animate-pulse" />
-                                    )}
-                                    {/* Base mounting block */}
-                                    <rect x="100" y={yBase - 18} width="80" height="8" rx="2" fill="#1e293b" stroke="#334155" />
-                                    
-                                    {/* Contact Springs - Left */}
-                                    <path 
-                                      d={`M 115,${yBase - 10} Q 115,${yBase} ${105 - bendAngle},${yBase + 15}`}
-                                      fill="none" 
-                                      stroke="url(#bronzeGrad)" 
-                                      strokeWidth="2.5" 
-                                      className="transition-all duration-300"
-                                    />
-                                    {/* Contact point dome */}
-                                    <circle cx={105 - bendAngle} cy={yBase + 15} r="3.5" fill={cutawayActive ? "#22c55e" : "#cbd5e1"} stroke="#475569" className="transition-colors duration-300" />
-                                    
-                                    {/* Contact Springs - Right */}
-                                    <path 
-                                      d={`M 165,${yBase - 10} Q 165,${yBase} ${175 + bendAngle},${yBase + 15}`} 
-                                      fill="none" 
-                                      stroke="url(#bronzeGrad)" 
-                                      strokeWidth="2.5" 
-                                      className="transition-all duration-300"
-                                    />
-                                    {/* Contact point dome */}
-                                    <circle cx={175 + bendAngle} cy={yBase + 15} r="3.5" fill={cutawayActive ? "#22c55e" : "#cbd5e1"} stroke="#475569" className="transition-colors duration-300" />
-
-                                    <text x="140" y={yBase - 2} fill="#ea580c" fontSize="8" textAnchor="middle" fontWeight="bold" fontFamily="monospace">MOVING SPRINGS</text>
-                                  </g>
-                                );
-                              })()}
-
-                              {/* Layer 4: Glass-to-Metal Seal Base Header */}
-                              {(() => {
-                                const yBase = 225;
-                                const offset = (cutawayDepth * 0.95);
-                                const isSel = selectedCutawayPart === "header";
-                                return (
-                                  <g 
-                                    className="cursor-pointer transition-transform duration-300 ease-out"
-                                    style={{ transform: `translateY(${offset}px)` }}
-                                    onClick={() => setSelectedCutawayPart("header")}
-                                  >
-                                    {/* Selection Glow */}
-                                    {isSel && (
-                                      <ellipse cx="140" cy={yBase} rx="55" ry="25" fill="none" stroke="#22d3ee" strokeWidth="2.5" filter="url(#glow)" className="animate-pulse" />
-                                    )}
-                                    {/* Solid Steel Flange */}
-                                    <ellipse cx="140" cy={yBase} rx="50" ry="16" fill="#1e293b" stroke={isSel ? "#22d3ee" : "#334155"} strokeWidth="2" />
-                                    <ellipse cx="140" cy={yBase + 4} rx="50" ry="16" fill="#334155" />
-                                    
-                                    {/* Borosilicate glass eyes */}
-                                    <ellipse cx="115" cy={yBase} rx="8" ry="4" fill="#042f2c" stroke="#22d3ee" strokeWidth="1" />
-                                    <ellipse cx="165" cy={yBase} rx="8" ry="4" fill="#042f2c" stroke="#22d3ee" strokeWidth="1" />
-                                    
-                                    {/* Terminal pins */}
-                                    <line x1="115" y1={yBase - 10} x2="115" y2={yBase + 25} stroke="#e2e8f0" strokeWidth="3" />
-                                    <line x1="165" y1={yBase - 10} x2="165" y2={yBase + 25} stroke="#e2e8f0" strokeWidth="3" />
-                                    
-                                    {/* Spark discharges when conducting */}
-                                    {cutawayActive && (
-                                      <g filter="url(#glow)">
-                                        <line x1="115" y1={yBase - 14} x2="115" y2={yBase - 10} stroke="#22d3ee" strokeWidth="2" className="animate-bounce" />
-                                        <line x1="165" y1={yBase - 14} x2="165" y2={yBase - 10} stroke="#22d3ee" strokeWidth="2" className="animate-bounce" />
-                                      </g>
-                                    )}
-
-                                    <text x="140" y={yBase + 10} fill="#94a3b8" fontSize="8" textAnchor="middle" fontWeight="bold" fontFamily="monospace">HERMETIC HEADER</text>
-                                  </g>
-                                );
-                              })()}
-                            </svg>
-                          </div>
-
-                          {/* Legend Indicator */}
-                          <div className="text-[10px] text-slate-500 font-mono mt-1 text-center bg-slate-950/40 p-1.5 rounded-lg border border-slate-900 w-full flex justify-between">
-                            <span>Interactive Assembly Diagram</span>
-                            <span className="text-cyan-400">● Dynamic Alignment</span>
-                          </div>
-                        </div>
-
-                        {/* Control Deck and Detail Specs Panel on Right */}
-                        <div className="flex flex-col gap-4">
-                          {/* Live Mechanical Controller Card */}
-                          <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-4 space-y-4">
-                            <h5 className="text-[11px] font-bold tracking-wider text-cyan-400 font-mono uppercase flex items-center gap-1.5">
-                              <Shuffle size={11} /> Mechanical Controls
-                            </h5>
-
-                            {/* Slider: Spacer */}
-                            <div className="space-y-1.5">
-                              <div className="flex justify-between text-xs font-mono">
-                                <span className="text-slate-400">Layer Separation:</span>
-                                <span className="text-cyan-400 font-bold">{cutawayDepth}%</span>
-                              </div>
-                              <input 
-                                type="range" 
-                                min="0" 
-                                max="100" 
-                                value={cutawayDepth} 
-                                onChange={(e) => setCutawayDepth(Number(e.target.value))}
-                                className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
-                              />
-                              <div className="flex justify-between text-[9px] text-slate-500 font-mono">
-                                <span>0% (Assembled)</span>
-                                <span>100% (Exploded View)</span>
-                              </div>
-                            </div>
-
-                            {/* Switch: Current */}
-                            <div className="flex items-center justify-between pt-1 border-t border-slate-850">
-                              <div>
-                                <h6 className="text-xs font-bold text-white flex items-center gap-1.5">
-                                  <Zap size={12} className={cutawayActive ? "text-amber-400 animate-pulse" : "text-slate-500"} />
-                                  Magnetization Power
-                                </h6>
-                                <p className="text-[10px] text-slate-400 mt-0.5">Energize internal actuator coil in real-time</p>
-                              </div>
-                              <button
-                                onClick={() => setCutawayActive(!cutawayActive)}
-                                className={`px-4 py-1.5 rounded-xl text-[11px] font-mono font-bold transition-all ${
-                                  cutawayActive 
-                                    ? "bg-amber-400 text-slate-950 shadow-md shadow-amber-400/10" 
-                                    : "bg-slate-800 hover:bg-slate-755 text-slate-300"
-                                }`}
-                              >
-                                {cutawayActive ? "POWER ON" : "POWER OFF"}
-                              </button>
-                            </div>
-
-                            {/* Circuit Continuity lock */}
-                            <div className={`p-2 rounded-lg border text-center transition-all ${
-                              cutawayActive 
-                                ? "bg-emerald-950/20 border-emerald-800/60 text-emerald-400 font-bold" 
-                                : "bg-slate-950/40 border-slate-900 text-slate-500"
-                            } font-mono text-[10px] flex items-center justify-center gap-1.5`}>
-                              <div className={`h-1.5 w-1.5 rounded-full ${cutawayActive ? "bg-emerald-400 animate-ping" : "bg-slate-600"}`} />
-                              {cutawayActive ? "ELECTROMAGNET ACTIVE — Reed Armature Conducting" : "ISOLATED CIRCUIT — Actuator De-energized"}
-                            </div>
-                          </div>
-
-                          {/* Parts Navigation Tabs */}
-                          <div className="flex flex-wrap gap-1.5">
-                            {Object.keys(CUTAWAY_PARTS).map((key) => {
-                              const part = CUTAWAY_PARTS[key as keyof typeof CUTAWAY_PARTS];
-                              const isSel = selectedCutawayPart === key;
-                              return (
-                                <button
-                                  key={key}
-                                  onClick={() => setSelectedCutawayPart(key)}
-                                  className={`px-2.5 py-1 rounded-lg text-[10px] font-semibold transition-all ${
-                                    isSel 
-                                      ? "bg-blue-600 text-white" 
-                                      : "bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
-                                  }`}
-                                >
-                                  {part.titleRu.split(" ")[0]}
-                                </button>
-                              );
-                            })}
-                          </div>
-
-                          {/* Technical Inspector Card */}
-                          <div className="bg-[#040811] border border-slate-850 rounded-xl p-4 flex-1 space-y-3">
-                            {(() => {
-                              const specInfo = CUTAWAY_PARTS[selectedCutawayPart as keyof typeof CUTAWAY_PARTS];
-                              return (
-                                <>
-                                  <div className="border-b border-slate-850 pb-2.5">
-                                    <div className="text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-wider">Technical Inspector</div>
-                                    <h5 className="text-sm font-bold text-white mt-1">{specInfo.titleRu}</h5>
-                                    <div className="text-[10px] text-slate-400 font-mono italic mt-0.5">{specInfo.titleEn}</div>
-                                  </div>
-
-                                  <div className="space-y-2.5 text-xs text-slate-300">
-                                    <div className="flex flex-col gap-0.5">
-                                      <span className="text-[10px] font-bold text-slate-500 uppercase font-mono tracking-widest">Alloys & Composition</span>
-                                      <span className="font-semibold text-white">{specInfo.material}</span>
-                                    </div>
-                                    <div className="flex flex-col gap-0.5">
-                                      <span className="text-[10px] font-bold text-slate-500 uppercase font-mono tracking-widest">Testing Benchmarks</span>
-                                      <span className="font-mono text-[11px] text-blue-400 font-semibold">{specInfo.specs}</span>
-                                    </div>
-                                    <div className="flex flex-col gap-0.5">
-                                      <span className="text-[10px] font-bold text-slate-500 uppercase font-mono tracking-widest">Purpose & Integrity</span>
-                                      <p className="text-slate-400 leading-relaxed text-[11px] mt-0.5">{specInfo.desc}</p>
-                                    </div>
-                                  </div>
-                                </>
-                              );
-                            })()}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   )}
 
                   {/* Manual Sim Controllers */}
@@ -2209,11 +1912,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                     <p className="text-[10px] text-slate-500 font-mono">
                       {specViewTab === "schematic"
                         ? "Drag canvas to pan drawing area. Use plus / minus to scale."
-                        : specViewTab === "photo"
-                        ? "High-resolution package physical outline. Click 'Internal Schematic' to check active circuitry."
-                        : specViewTab === "stress"
-                        ? "Simulate currents, voltages, and thermal loads down to cyclic exhaustion."
-                        : "Adjust slider to separate assembly layers. Click layers to inspect active structural elements."}
+                        : "High-resolution package physical outline. Click 'Internal Schematic' to check active circuitry."}
                     </p>
                     <button
                       onClick={() => {
