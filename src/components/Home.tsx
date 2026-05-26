@@ -318,7 +318,7 @@ export const Home: React.FC<HomeProps> = ({
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="https://imgur.com/FATAxET.png" 
+                      src="/images/FATAxET.png" 
                       alt="Production 1" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
@@ -329,7 +329,7 @@ export const Home: React.FC<HomeProps> = ({
                   </div>
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="https://imgur.com/2eXw16n.png" 
+                      src="/images/2eXw16n.png" 
                       alt="Production 2" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
@@ -340,7 +340,7 @@ export const Home: React.FC<HomeProps> = ({
                   </div>
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="https://imgur.com/9BtVTip.png" 
+                      src="/images/9BtVTip.png" 
                       alt="Testing Laboratory" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
@@ -351,7 +351,7 @@ export const Home: React.FC<HomeProps> = ({
                   </div>
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="https://imgur.com/2AVNQD4.png" 
+                      src="/images/2AVNQD4.png" 
                       alt="Products" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
