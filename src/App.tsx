@@ -6,6 +6,7 @@ import { FeedbackRequestForm } from "./components/FeedbackRequestForm";
 import { HardDrive, HelpCircle, Mail, Phone, ExternalLink, ShieldAlert } from "lucide-react";
 import { SkySwitchLogo } from "./components/SkySwitchLogo";
 import { BackgroundPulses } from "./components/BackgroundPulses";
+import { playTechBeep, playRelayClick } from "./utils/audio";
 
 type ActiveTab = "home" | "catalog" | "about" | "contact";
 
@@ -28,15 +29,18 @@ export default function App() {
 
   const handleSelectedRequestProducts = (models: string[]) => {
     setContactFormSelectedModels(models);
+    playRelayClick("close");
     scrollSection("quotation-section");
   };
 
   const handleHeroNavigateToCatalog = () => {
+    playTechBeep(1000, 0.05);
     setActiveTab("catalog");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleHeroNavigateToContact = () => {
+    playRelayClick("close");
     scrollSection("quotation-section");
   };
 
@@ -49,7 +53,10 @@ export default function App() {
           
           {/* Logo Brand Brand mark */}
           <button 
-            onClick={() => scrollSection("hero-section")}
+            onClick={() => {
+              playTechBeep(800, 0.06);
+              scrollSection("hero-section");
+            }}
             className="flex items-center gap-3 hover:opacity-90 transition-all text-left focus:outline-none cursor-pointer group"
           >
             <SkySwitchLogo size={46} interactive={false} />
@@ -66,7 +73,10 @@ export default function App() {
           {/* Navigation selectors */}
           <nav className="hidden md:flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-900">
             <button
-              onClick={() => scrollSection("hero-section")}
+              onClick={() => {
+                playTechBeep(900, 0.05);
+                scrollSection("hero-section");
+              }}
               className={`px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all cursor-pointer ${
                 activeTab === "home" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
@@ -74,7 +84,10 @@ export default function App() {
               Enterprise Home
             </button>
             <button
-              onClick={() => setActiveTab("catalog")}
+              onClick={() => {
+                playTechBeep(1000, 0.05);
+                setActiveTab("catalog");
+              }}
               className={`px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all cursor-pointer ${
                 activeTab === "catalog" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
@@ -82,13 +95,19 @@ export default function App() {
               Component Explorer
             </button>
             <button
-              onClick={() => scrollSection("about-section")}
+              onClick={() => {
+                playTechBeep(1100, 0.05);
+                scrollSection("about-section");
+              }}
               className="px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Organization Profile
             </button>
             <button
-              onClick={() => scrollSection("quotation-section")}
+              onClick={() => {
+                playTechBeep(1200, 0.05);
+                scrollSection("quotation-section");
+              }}
               className="px-4 py-2 font-display text-sm font-semibold rounded-lg transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Quotation Desk
@@ -99,6 +118,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => {
+                playRelayClick("close");
                 setContactFormSelectedModels([]);
                 scrollSection("quotation-section");
               }}
@@ -113,7 +133,10 @@ export default function App() {
         <div className="md:hidden bg-slate-950 border-t border-slate-900 py-2.5 px-4 overflow-x-auto scrollbar-none">
           <div className="flex items-center gap-1.5 min-w-[340px]">
             <button
-              onClick={() => scrollSection("hero-section")}
+              onClick={() => {
+                playTechBeep(900, 0.05);
+                scrollSection("hero-section");
+              }}
               className={`px-3.5 py-2 text-sm font-semibold rounded-lg shrink-0 transition-all cursor-pointer ${
                 activeTab === "home" ? "bg-[#16223f] text-white" : "text-slate-400 hover:text-white"
               }`}
@@ -122,6 +145,7 @@ export default function App() {
             </button>
             <button
               onClick={() => {
+                playTechBeep(1000, 0.05);
                 setActiveTab("catalog");
                 setSearchQuery("");
               }}
@@ -132,13 +156,19 @@ export default function App() {
               Component Explorer
             </button>
             <button
-              onClick={() => scrollSection("about-section")}
+              onClick={() => {
+                playTechBeep(1100, 0.05);
+                scrollSection("about-section");
+              }}
               className="px-3.5 py-2 text-sm font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer"
             >
               Profile
             </button>
             <button
-              onClick={() => scrollSection("quotation-section")}
+              onClick={() => {
+                playTechBeep(1200, 0.05);
+                scrollSection("quotation-section");
+              }}
               className="px-3.5 py-2 text-sm font-semibold rounded-lg shrink-0 transition-all text-slate-400 hover:text-white cursor-pointer font-sans"
             >
               Quotation Desk
