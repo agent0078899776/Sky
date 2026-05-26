@@ -428,7 +428,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "10J6Z15A",
-        image: "/images/10J6Z15A.png",
+        image: "/images/10J4Z25A.png",
         dimensions: "36.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "Class I: -55 ~ 85 | II/III: -65 ~ 125",
         contactForm: "6PDT",
