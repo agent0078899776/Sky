@@ -330,7 +330,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                               <th className="py-3.5 px-3 w-[160px] text-center align-middle">Number of Output Groups</th>
                               <th className="py-3.5 px-3 w-[180px] text-center align-middle">Output Voltage / Transient Voltage</th>
                               <th className="py-3.5 px-3 w-[120px] text-center align-middle">Output Current</th>
-                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">On-Resistance</th>
+                              <th className="py-3.5 px-3 w-[120px] text-center align-middle">On-Resistance</th>
                               <th className="py-3.5 px-3 w-[225px] text-center align-middle">Panasonic and Omron Benchmarking Models</th>
                               <th className="py-3.5 px-1.5 text-center w-[95px] align-middle">Action</th>
                             </tr>
@@ -454,12 +454,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     )}
 
                                     {/* Number of Output Groups */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-mono align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
                                       {p.outputGroups || p.contactForm}
                                     </td>
 
                                     {/* Output voltage / Transient voltage */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-mono font-bold align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
                                       {p.outputVoltage || p.tempRange}
                                     </td>
 
@@ -469,7 +469,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* On-Resistance */}
-                                    <td className="py-3.5 px-3 text-slate-400 text-center font-mono align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
                                       {p.onResistance || p.vibration}
                                     </td>
 
