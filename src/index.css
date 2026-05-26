@@ -9,6 +9,25 @@
   --color-[#060a14]: #060a14;
   --color-[#0d1527]: #0d1527;
   --color-[#16223f]: #16223f;
+
+  --animate-pulse-travel: pulse-travel 15s linear infinite;
+
+  @keyframes pulse-travel {
+    0% {
+      transform: translateY(-200px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    90% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(120vh);
+      opacity: 0;
+    }
+  }
 }
 
 /* Custom scrollbar */
