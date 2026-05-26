@@ -136,9 +136,75 @@ export const Catalog: React.FC<CatalogProps> = ({
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [specViewTab, setSpecViewTab] = useState<"photo" | "schematic">("photo");
+  const [specViewTab, setSpecViewTab] = useState<"photo" | "schematic" | "stress">("photo");
   const [photoAttempt, setPhotoAttempt] = useState<Record<string, "local" | "fallback" | "failed">>({});
   const [schematicAttempt, setSchematicAttempt] = useState<Record<string, "plural" | "singular" | "failed">>({});
+
+  // Interactive Stress Simulator variables
+  const [stressCurrentPct, setStressCurrentPct] = useState(100);
+  const [stressVoltagePct, setStressVoltagePct] = useState(100);
+  const [stressTemp, setStressTemp] = useState(25);
+  const [stressVibe, setStressVibe] = useState(10);
+
+  // Cyclic automated test counters
+  const [isCyclicTesting, setIsCyclicTesting] = useState(false);
+  const [cyclicCounter, setCyclicCounter] = useState(0);
+  const [cyclicFailures, setCyclicFailures] = useState(0);
+  const [cyclicWelds, setCyclicWelds] = useState(0);
+  const [simRelayActive, setSimRelayActive] = useState(false);
+
+  // Parse active specs limits
+  const parsedLimits = useMemo(() => {
+    if (!activeSpecProduct) return { maxCurrent: 2, maxVoltage: 28, minTemp: -55, maxTemp: 85, defaultLife: 100000 };
+
+    let maxCurrent = 2;
+    let maxVoltage = 28;
+    let minTemp = -55;
+    let maxTemp = 85;
+    let defaultLife = 100000;
+
+    // Current detection
+    const loadText = activeSpecProduct.contactLoad || activeSpecProduct.outputCurrent || "";
+    const currentMatch = loadText.match(/(\d+(?:\.\d+)?)\s*A/i);
+    if (currentMatch) {
+      maxCurrent = parseFloat(currentMatch[1]);
+    } else {
+      const outCurrentMatch = (activeSpecProduct.outputCurrent || "").match(/(\d+(?:\.\d+)?)\s*(?:A|mA)/i);
+      if (outCurrentMatch) {
+        maxCurrent = parseFloat(outCurrentMatch[1]);
+        if (activeSpecProduct.outputCurrent?.toLowerCase().includes("ma")) {
+          maxCurrent /= 1000;
+        }
+      }
+    }
+
+    // Voltage detection
+    const voltageMatch = loadText.match(/(\d+(?:\.\d+)?)\s*V/i);
+    if (voltageMatch) {
+      maxVoltage = parseFloat(voltageMatch[1]);
+    } else {
+      const outVoltMatch = (activeSpecProduct.outputVoltage || "").match(/(\d+(?:\.\d+)?)\s*V/i);
+      if (outVoltMatch) {
+        maxVoltage = parseFloat(outVoltMatch[1]);
+      }
+    }
+
+    // Temperature detection
+    const tempText = activeSpecProduct.tempRange || "";
+    const tempMatch = tempText.match(/(-?\d+)\s*(?:~|to)\s*(-?\d+)/);
+    if (tempMatch) {
+      minTemp = parseInt(tempMatch[1], 10);
+      maxTemp = parseInt(tempMatch[2], 10);
+    }
+
+    // Default design life
+    const lifeMatch = loadText.match(/([\d,]+)\s*cycles/i);
+    if (lifeMatch) {
+      defaultLife = parseInt(lifeMatch[1].replace(/,/g, ""), 10);
+    }
+
+    return { maxCurrent, maxVoltage, minTemp, maxTemp, defaultLife };
+  }, [activeSpecProduct]);
 
   // Toggle category fold
   const toggleCategory = (catId: string) => {
@@ -252,7 +318,64 @@ export const Catalog: React.FC<CatalogProps> = ({
     setDragPos({ x: 0, y: 0 });
     setSimulatedCoilOn(false);
     setSpecViewTab("photo");
+    setStressCurrentPct(100);
+    setStressVoltagePct(100);
+    setStressTemp(25);
+    setStressVibe(10);
+    setIsCyclicTesting(false);
+    setCyclicCounter(0);
+    setCyclicFailures(0);
+    setCyclicWelds(0);
+    setSimRelayActive(false);
   };
+
+  // Automated endurance cyclic testing engine
+  React.useEffect(() => {
+    let timer: any = null;
+    if (isCyclicTesting && activeSpecProduct) {
+      const stressRatioCurrent = stressCurrentPct / 100;
+      const stressRatioVoltage = stressVoltagePct / 100;
+      const isOverCurrent = stressCurrentPct > 100;
+      const isOverVoltage = stressVoltagePct > 100;
+      const isOverTemp = stressTemp > parsedLimits.maxTemp || stressTemp < parsedLimits.minTemp;
+      const isOverVibe = stressVibe > 15;
+
+      timer = setInterval(() => {
+        setSimRelayActive((prev) => !prev);
+        setCyclicCounter((prev) => prev + 1);
+
+        // Probability of micro-arcs/contact jitter per switch cycle
+        let failChance = 0.005;
+        if (isOverCurrent) failChance += (stressRatioCurrent - 1) * 0.25;
+        if (isOverVoltage) failChance += (stressRatioVoltage - 1) * 0.2;
+        if (isOverTemp) failChance += 0.08;
+        if (isOverVibe) failChance += (stressVibe - 15) * 0.015;
+
+        if (Math.random() < failChance) {
+          setCyclicFailures((prev) => prev + 1);
+        }
+
+        // Hard weld risk (heavy overloads)
+        let weldChance = 0;
+        if (stressRatioCurrent >= 1.5 && stressRatioVoltage >= 1.29) {
+          weldChance = 0.06;
+        } else if (stressRatioCurrent >= 1.5) {
+          weldChance = 0.035;
+        }
+
+        if (weldChance > 0 && Math.random() < weldChance) {
+          setCyclicWelds((prev) => prev + 1);
+          setIsCyclicTesting(false); // Contacts fuse/weld - stops test
+          setSimRelayActive(true); // Permanently locked closed
+        }
+      }, 100); // 100ms switch rate
+    } else {
+      setSimRelayActive(false);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isCyclicTesting, activeSpecProduct, stressCurrentPct, stressVoltagePct, stressTemp, stressVibe, parsedLimits]);
 
   const currentModel = activeSpecProduct?.model || "";
   const currentPhotoStage = photoAttempt[currentModel] || "local";
@@ -1230,6 +1353,15 @@ export const Catalog: React.FC<CatalogProps> = ({
                         <Zap size={13} />
                         Internal Schematic
                       </button>
+                      <button
+                        onClick={() => setSpecViewTab("stress")}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                          specViewTab === "stress" ? "bg-cyan-500 text-slate-950 font-bold" : "text-slate-400 hover:text-white"
+                        }`}
+                      >
+                        <Shuffle size={13} />
+                        Stress Simulator
+                      </button>
                     </div>
 
                     {specViewTab === "schematic" && (
@@ -1296,7 +1428,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                         </p>
                       )}
                     </div>
-                  ) : (
+                  ) : specViewTab === "schematic" ? (
                     <div
                       onMouseDown={handleSchematicMouseDown}
                       onMouseMove={handleSchematicMouseMove}
@@ -1304,174 +1436,405 @@ export const Catalog: React.FC<CatalogProps> = ({
                       onMouseLeave={handleSchematicMouseUp}
                       className="relative flex-1 bg-slate-950/60 border border-slate-800/80 rounded-xl overflow-hidden flex items-center justify-center cursor-move"
                     >
-                    <div
-                      style={{
-                        transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(${zoomScale})`,
-                        transition: isDragging ? "none" : "transform 0.15s ease-out",
-                      }}
-                      className="origin-center flex items-center justify-center"
-                    >
-                      {activeSpecProduct && isSchematicImageAvailable ? (
-                        <div className="relative max-w-full max-h-[380px] rounded-lg overflow-hidden flex items-center justify-center bg-slate-950 p-2">
-                          <img
-                            src={schematicUrl}
-                            alt={`${currentModel} internal schematic`}
-                            referrerPolicy="no-referrer"
-                            className="max-h-[380px] max-w-full object-contain select-none pointer-events-none"
-                            onError={() => {
-                              setSchematicAttempt((prev) => {
-                                const stage = prev[currentModel] || "plural";
-                                if (stage === "plural") {
-                                  return { ...prev, [currentModel]: "singular" };
-                                } else {
-                                  return { ...prev, [currentModel]: "failed" };
-                                }
-                              });
-                            }}
-                          />
-                        </div>
-                      ) : (
-                        /* Let's render the exact Relay state inside vector blocks */
-                        <svg width="220" height="220" viewBox="0 0 220 220" className="select-none">
-                          {/* Box layout */}
-                          <rect x="10" y="10" width="200" height="200" rx="10" fill="#0d1527" stroke="#1e293b" strokeWidth="2" />
-                          <line x1="10" x2="210" y1="50" y2="50" stroke="#1e293b" strokeDasharray="3 3" />
-                          <text x="110" y="32" fill="#94a3b8" textAnchor="middle" fontSize="10" fontFamily="monospace" fontWeight="bold">
-                            INTERNAL SPEC SCHEMA
-                          </text>
+                      <div
+                        style={{
+                          transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(${zoomScale})`,
+                          transition: isDragging ? "none" : "transform 0.15s ease-out",
+                        }}
+                        className="origin-center flex items-center justify-center"
+                      >
+                        {activeSpecProduct && isSchematicImageAvailable ? (
+                          <div className="relative max-w-full max-h-[380px] rounded-lg overflow-hidden flex items-center justify-center bg-slate-950 p-2">
+                            <img
+                              src={schematicUrl}
+                              alt={`${currentModel} internal schematic`}
+                              referrerPolicy="no-referrer"
+                              className="max-h-[380px] max-w-full object-contain select-none pointer-events-none"
+                              onError={() => {
+                                setSchematicAttempt((prev) => {
+                                  const stage = prev[currentModel] || "plural";
+                                  if (stage === "plural") {
+                                    return { ...prev, [currentModel]: "singular" };
+                                  } else {
+                                    return { ...prev, [currentModel]: "failed" };
+                                  }
+                                });
+                              }}
+                            />
+                          </div>
+                        ) : (
+                          /* Let's render the exact Relay state inside vector blocks */
+                          <svg width="220" height="220" viewBox="0 0 220 220" className="select-none">
+                            {/* Box layout */}
+                            <rect x="10" y="10" width="200" height="200" rx="10" fill="#0d1527" stroke="#1e293b" strokeWidth="2" />
+                            <line x1="10" x2="210" y1="50" y2="50" stroke="#1e293b" strokeDasharray="3 3" />
+                            <text x="110" y="32" fill="#94a3b8" textAnchor="middle" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                              INTERNAL SPEC SCHEMA
+                            </text>
 
-                          {/* If solid state / Mos relay */}
-                          {(activeSpecProduct.model.includes("JG") || activeSpecProduct.model.startsWith("BC") || activeSpecProduct.model.startsWith("5GH")) ? (
-                            <g>
-                              {/* LED emitter side */}
-                              <circle cx="50" cy="110" r="16" fill={simulatedCoilOn ? "#0e7490" : "#1e293b"} stroke="#0891b2" strokeWidth="2" />
-                              {/* Diode triangle */}
-                              <path d="M42,118 L58,110 L42,102 Z" fill="#fff" />
-                              <line x1="58" y1="102" x2="58" y2="118" stroke="#fff" strokeWidth="2" />
-                              {/* Optical Coupling waves */}
-                              <g className={simulatedCoilOn ? "animate-pulse" : "opacity-30"}>
-                                <path d="M 80,102 Q 88,110 80,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
-                                <path d="M 94,102 Q 102,110 94,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
-                              </g>
-                              {/* MOSFET output channels */}
-                              <rect
-                                x="120"
-                                y="90"
-                                width="50"
-                                height="40"
-                                rx="4"
-                                fill={simulatedCoilOn ? "#0284c7" : "#1e293b"}
-                                stroke="#0284c7"
-                                strokeWidth="2"
-                                className="transition-colors duration-300"
-                              />
-                              {/* Output switch status wire */}
-                              <circle cx="145" cy="110" r="5" fill={simulatedCoilOn ? "#22c55e" : "#e2e8f0"} />
-                              <text x="145" y="145" fill="#e2e8f0" textAnchor="middle" fontSize="9" fontFamily="monospace">
-                                {simulatedCoilOn ? "MOS CONDUCTING" : "MOS CUTOFF"}
-                              </text>
-
-                              {/* Pins text */}
-                              <text x="25" y="113" fill="#64748b" fontSize="8">1</text>
-                              <text x="180" y="113" fill="#64748b" fontSize="8">2</text>
-                            </g>
-                          ) : activeSpecProduct.model.includes("11JP") ? (
-                            /* RF Switches / High isolation paths */
-                            <g>
-                              {/* Ground shielding plane */}
-                              <rect x="40" y="80" width="140" height="70" rx="6" fill="#16223f" stroke="#334155" />
-                              <text x="110" y="95" fill="#38bdf8" textAnchor="middle" fontSize="8" fontWeight="bold">50Ω COAX SWITCH</text>
-
-                              {/* RF input lines */}
-                              <line x1="30" y1="120" x2="70" y2="120" stroke="#f43f5e" strokeWidth="3" />
-                              <circle cx="30" cy="120" r="4" fill="#f43f5e" />
-                              <text x="30" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">IN</text>
-
-                              {/* Swivelling RF armature */}
-                              <g transform={`rotate(${simulatedCoilOn ? 25 : 0}, 70, 120)`} className="transition-transform duration-300">
-                                <line x1="70" y1="120" x2="140" y2="120" stroke="#22c55e" strokeWidth="3" />
-                                <circle cx="140" cy="120" r="4" fill="#22c55e" />
-                              </g>
-
-                              {/* Output ports */}
-                              <line x1="140" y1="120" x2="190" y2="120" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
-                              <circle cx="190" cy="120" r="4" fill="#38bdf8" />
-                              <text x="190" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT A</text>
-
-                              <line x1="140" y1="145" x2="190" y2="145" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
-                              <circle cx="190" cy="145" r="4" fill="#38bdf8" />
-                              <text x="190" y="160" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT B</text>
-
-                              <g className="opacity-90">
-                                <text x="110" y="165" fill="#f43f5e" fontSize="8" textAnchor="middle" fontWeight="bold">
-                                  {simulatedCoilOn ? "ISOLATION B: >50dB" : "ISOLATION A: >50dB"}
+                            {/* If solid state / Mos relay */}
+                            {(activeSpecProduct.model.includes("JG") || activeSpecProduct.model.startsWith("BC") || activeSpecProduct.model.startsWith("5GH")) ? (
+                              <g>
+                                {/* LED emitter side */}
+                                <circle cx="50" cy="110" r="16" fill={simulatedCoilOn ? "#0e7490" : "#1e293b"} stroke="#0891b2" strokeWidth="2" />
+                                {/* Diode triangle */}
+                                <path d="M42,118 L58,110 L42,102 Z" fill="#fff" />
+                                <line x1="58" y1="102" x2="58" y2="118" stroke="#fff" strokeWidth="2" />
+                                {/* Optical Coupling waves */}
+                                <g className={simulatedCoilOn ? "animate-pulse" : "opacity-30"}>
+                                  <path d="M 80,102 Q 88,110 80,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
+                                  <path d="M 94,102 Q 102,110 94,118" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="2 2" />
+                                </g>
+                                {/* MOSFET output channels */}
+                                <rect
+                                  x="120"
+                                  y="90"
+                                  width="50"
+                                  height="40"
+                                  rx="4"
+                                  fill={simulatedCoilOn ? "#0284c7" : "#1e293b"}
+                                  stroke="#0284c7"
+                                  strokeWidth="2"
+                                  className="transition-colors duration-300"
+                                />
+                                {/* Output switch status wire */}
+                                <circle cx="145" cy="110" r="5" fill={simulatedCoilOn ? "#22c55e" : "#e2e8f0"} />
+                                <text x="145" y="145" fill="#e2e8f0" textAnchor="middle" fontSize="9" fontFamily="monospace">
+                                  {simulatedCoilOn ? "MOS CONDUCTING" : "MOS CUTOFF"}
                                 </text>
+
+                                {/* Pins text */}
+                                <text x="25" y="113" fill="#64748b" fontSize="8">1</text>
+                                <text x="180" y="113" fill="#64748b" fontSize="8">2</text>
                               </g>
-                            </g>
-                          ) : (
-                            /* Standard Coil Relay / Contactor configuration */
-                            <g>
-                              {/* Coil component */}
-                              <g transform="translate(45, 95)">
-                                <rect x="0" y="0" width="30" height="50" rx="3" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
-                                <path d="M 0,10 L 30,15 M 0,20 L 30,25 M 0,30 L 30,35 M 0,40 L 30,45" stroke="#f59e0b" strokeWidth="1.5" />
-                                <text x="15" y="-5" fill="#64748b" fontSize="8" textAnchor="middle">COIL</text>
-                                {simulatedCoilOn && (
-                                  <circle cx="15" cy="25" r="8" fill="#eab308" className="animate-ping opacity-25" />
-                                )}
+                            ) : activeSpecProduct.model.includes("11JP") ? (
+                              /* RF Switches / High isolation paths */
+                              <g>
+                                {/* Ground shielding plane */}
+                                <rect x="40" y="80" width="140" height="70" rx="6" fill="#16223f" stroke="#334155" />
+                                <text x="110" y="95" fill="#38bdf8" textAnchor="middle" fontSize="8" fontWeight="bold">50Ω COAX SWITCH</text>
+
+                                {/* RF input lines */}
+                                <line x1="30" y1="120" x2="70" y2="120" stroke="#f43f5e" strokeWidth="3" />
+                                <circle cx="30" cy="120" r="4" fill="#f43f5e" />
+                                <text x="30" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">IN</text>
+
+                                {/* Swivelling RF armature */}
+                                <g transform={`rotate(${simulatedCoilOn ? 25 : 0}, 70, 120)`} className="transition-transform duration-300">
+                                  <line x1="70" y1="120" x2="140" y2="120" stroke="#22c55e" strokeWidth="3" />
+                                  <circle cx="140" cy="120" r="4" fill="#22c55e" />
+                                </g>
+
+                                {/* Output ports */}
+                                <line x1="140" y1="120" x2="190" y2="120" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
+                                <circle cx="190" cy="120" r="4" fill="#38bdf8" />
+                                <text x="190" y="135" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT A</text>
+
+                                <line x1="140" y1="145" x2="190" y2="145" stroke="#38bdf8" strokeWidth="2" strokeDasharray="2 2" />
+                                <circle cx="190" cy="145" r="4" fill="#38bdf8" />
+                                <text x="190" y="160" fill="#94a3b8" fontSize="8" textAnchor="middle">OUT B</text>
+
+                                <g className="opacity-90">
+                                  <text x="110" y="165" fill="#f43f5e" fontSize="8" textAnchor="middle" fontWeight="bold">
+                                    {simulatedCoilOn ? "ISOLATION B: >50dB" : "ISOLATION A: >50dB"}
+                                  </text>
+                                </g>
                               </g>
+                            ) : (
+                              /* Standard Coil Relay / Contactor configuration */
+                              <g>
+                                {/* Coil component */}
+                                <g transform="translate(45, 95)">
+                                  <rect x="0" y="0" width="30" height="50" rx="3" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
+                                  <path d="M 0,10 L 30,15 M 0,20 L 30,25 M 0,30 L 30,35 M 0,40 L 30,45" stroke="#f59e0b" strokeWidth="1.5" />
+                                  <text x="15" y="-5" fill="#64748b" fontSize="8" textAnchor="middle">COIL</text>
+                                  {simulatedCoilOn && (
+                                    <circle cx="15" cy="25" r="8" fill="#eab308" className="animate-ping opacity-25" />
+                                  )}
+                                </g>
 
-                              {/* Connection coil wires to inputs */}
-                              <line x1="25" y1="105" x2="45" y2="105" stroke="#64748b" strokeWidth="1.5" />
-                              <line x1="25" y1="135" x2="45" y2="135" stroke="#64748b" strokeWidth="1.5" />
-                              <circle cx="25" cy="105" r="3" fill="#64748b" />
-                              <circle cx="25" cy="135" r="3" fill="#64748b" />
-                              <text x="18" y="108" fill="#94a3b8" fontSize="8">X1</text>
-                              <text x="18" y="138" fill="#94a3b8" fontSize="8">X2</text>
+                                {/* Connection coil wires to inputs */}
+                                <line x1="25" y1="105" x2="45" y2="105" stroke="#64748b" strokeWidth="1.5" />
+                                <line x1="25" y1="135" x2="45" y2="135" stroke="#64748b" strokeWidth="1.5" />
+                                <circle cx="25" cy="105" r="3" fill="#64748b" />
+                                <circle cx="25" cy="135" r="3" fill="#64748b" />
+                                <text x="18" y="108" fill="#94a3b8" fontSize="8">X1</text>
+                                <text x="18" y="138" fill="#94a3b8" fontSize="8">X2</text>
 
-                              {/* Armature linkage dashed line */}
-                              <line
-                                x1="75"
-                                y1="120"
-                                x2="135"
-                                y2="120"
-                                stroke={simulatedCoilOn ? "#eab308" : "#475569"}
-                                strokeWidth="1.5"
-                                strokeDasharray="3 3"
-                              />
+                                {/* Armature linkage dashed line */}
+                                <line
+                                  x1="75"
+                                  y1="120"
+                                  x2="135"
+                                  y2="120"
+                                  stroke={simulatedCoilOn ? "#eab308" : "#475569"}
+                                  strokeWidth="1.5"
+                                  strokeDasharray="3 3"
+                                />
 
-                              {/* Switch Armature Logic */}
-                              <circle cx="135" cy="120" r="3" fill="#3b82f6" />
-                              {/* Swing arm */}
-                              <g
-                                transform={`rotate(${simulatedCoilOn ? 18 : 0}, 135, 120)`}
-                                className="transition-transform duration-300 origin-[135px_120px]"
-                              >
-                                <line x1="135" y1="120" x2="175" y2="120" stroke="#f1f5f9" strokeWidth="3" />
-                                <circle cx="175" cy="120" r="4" fill="#f1f5f9" />
+                                {/* Switch Armature Logic */}
+                                <circle cx="135" cy="120" r="3" fill="#3b82f6" />
+                                {/* Swing arm */}
+                                <g
+                                  transform={`rotate(${simulatedCoilOn ? 18 : 0}, 135, 120)`}
+                                  className="transition-transform duration-300 origin-[135px_120px]"
+                                >
+                                  <line x1="135" y1="120" x2="175" y2="120" stroke="#f1f5f9" strokeWidth="3" />
+                                  <circle cx="175" cy="120" r="4" fill="#f1f5f9" />
+                                </g>
+
+                                {/* NC Terminal */}
+                                <circle cx="175" cy="105" r="4.5" fill={simulatedCoilOn ? "#1e293b" : "#22c55e"} stroke="#475569" />
+                                <line x1="175" y1="105" x2="195" y2="105" stroke="#64748b" strokeWidth="1.5" />
+                                <text x="188" y="100" fill="#94a3b8" fontSize="8">NC</text>
+
+                                {/* NO Terminal */}
+                                <circle cx="179" cy="132" r="4.5" fill={simulatedCoilOn ? "#22c55e" : "#1e293b"} stroke="#475569" />
+                                <line x1="179" y1="132" x2="195" y2="132" stroke="#64748b" strokeWidth="1.5" />
+                                <text x="188" y="142" fill="#94a3b8" fontSize="8">NO</text>
+
+                                {/* COM Terminal */}
+                                <line x1="115" y1="120" x2="135" y2="120" stroke="#64748b" strokeWidth="1.5" />
+                                <circle cx="115" cy="120" r="3" fill="#64748b" />
+                                <text x="115" y="112" fill="#94a3b8" fontSize="8">COM</text>
                               </g>
-
-                              {/* NC Terminal */}
-                              <circle cx="175" cy="105" r="4.5" fill={simulatedCoilOn ? "#1e293b" : "#22c55e"} stroke="#475569" />
-                              <line x1="175" y1="105" x2="195" y2="105" stroke="#64748b" strokeWidth="1.5" />
-                              <text x="188" y="100" fill="#94a3b8" fontSize="8">NC</text>
-
-                              {/* NO Terminal */}
-                              <circle cx="179" cy="132" r="4.5" fill={simulatedCoilOn ? "#22c55e" : "#1e293b"} stroke="#475569" />
-                              <line x1="179" y1="132" x2="195" y2="132" stroke="#64748b" strokeWidth="1.5" />
-                              <text x="188" y="142" fill="#94a3b8" fontSize="8">NO</text>
-
-                              {/* COM Terminal */}
-                              <line x1="115" y1="120" x2="135" y2="120" stroke="#64748b" strokeWidth="1.5" />
-                              <circle cx="115" cy="120" r="3" fill="#64748b" />
-                              <text x="115" y="112" fill="#94a3b8" fontSize="8">COM</text>
-                            </g>
-                          )}
-                        </svg>
-                      )}
+                            )}
+                          </svg>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  ) : (
+                    <div className="flex-1 flex flex-col justify-between p-5 bg-[#0a0f1d] border border-slate-800 rounded-xl relative overflow-hidden font-sans text-slate-200 min-h-[420px]">
+                      {/* Stress Tester Widget */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
+                        {/* Sliders Area */}
+                        <div className="space-y-4 bg-slate-900/40 p-4 rounded-xl border border-slate-800/80">
+                          <h5 className="text-[11px] font-bold tracking-wider text-cyan-400 font-mono uppercase flex items-center gap-1">
+                            <Zap size={11} /> Load Configuration
+                          </h5>
+                          
+                          {/* Current Slider */}
+                          <div className="space-y-1.5">
+                            <div className="flex justify-between text-xs font-mono">
+                              <span className="text-slate-400">Load Current:</span>
+                              <span className={stressCurrentPct > 120 ? "text-red-400 font-bold" : stressCurrentPct > 100 ? "text-yellow-400 font-semibold" : "text-emerald-400"}>
+                                {((stressCurrentPct / 100) * parsedLimits.maxCurrent).toFixed(2)} A ({stressCurrentPct}%)
+                              </span>
+                            </div>
+                            <input
+                              type="range"
+                              min="10"
+                              max="175"
+                              value={stressCurrentPct}
+                              onChange={(e) => setStressCurrentPct(parseInt(e.target.value, 10))}
+                              className="w-full h-1 bg-[#16223f] rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                            />
+                            <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                              <span>Min (0.1x)</span>
+                              <span>Nominal ({parsedLimits.maxCurrent}A)</span>
+                              <span>Overload (1.75x)</span>
+                            </div>
+                          </div>
+
+                          {/* Voltage Slider */}
+                          <div className="space-y-1.5">
+                            <div className="flex justify-between text-xs font-mono">
+                              <span className="text-slate-400">Path Voltage:</span>
+                              <span className={stressVoltagePct > 120 ? "text-rose-400 font-bold" : stressVoltagePct > 100 ? "text-amber-400 font-semibold" : "text-emerald-400"}>
+                                {((stressVoltagePct / 100) * parsedLimits.maxVoltage).toFixed(1)} V ({stressVoltagePct}%)
+                              </span>
+                            </div>
+                            <input
+                              type="range"
+                              min="10"
+                              max="175"
+                              value={stressVoltagePct}
+                              onChange={(e) => setStressVoltagePct(parseInt(e.target.value, 10))}
+                              className="w-full h-1 bg-[#16223f] rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                            />
+                            <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                              <span>Min</span>
+                              <span>Nominal ({parsedLimits.maxVoltage}V)</span>
+                              <span>Overload</span>
+                            </div>
+                          </div>
+
+                          {/* Temperature Slider */}
+                          <div className="space-y-1.5">
+                            <div className="flex justify-between text-xs font-mono">
+                              <span className="text-slate-400">Ambient Temp:</span>
+                              <span className={(stressTemp > parsedLimits.maxTemp || stressTemp < parsedLimits.minTemp) ? "text-red-400 font-bold" : "text-emerald-400"}>
+                                {stressTemp} °C
+                              </span>
+                            </div>
+                            <input
+                              type="range"
+                              min="-75"
+                              max="150"
+                              value={stressTemp}
+                              onChange={(e) => setStressTemp(parseInt(e.target.value, 10))}
+                              className="w-full h-1 bg-[#16223f] rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                            />
+                            <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                              <span>Extreme Cold (-75°C)</span>
+                              <span>Room (25°C)</span>
+                              <span>Extreme Heat (150°C)</span>
+                            </div>
+                          </div>
+
+                          {/* Vibration Slider */}
+                          <div className="space-y-1.5">
+                            <div className="flex justify-between text-xs font-mono">
+                              <span className="text-slate-400">Mechanical Vibration:</span>
+                              <span className={stressVibe > 25 ? "text-red-400 font-bold" : stressVibe > 15 ? "text-yellow-400 font-semibold" : "text-emerald-400"}>
+                                {stressVibe} G
+                              </span>
+                            </div>
+                            <input
+                              type="range"
+                              min="0"
+                              max="45"
+                              value={stressVibe}
+                              onChange={(e) => setStressVibe(parseInt(e.target.value, 10))}
+                              className="w-full h-1 bg-[#16223f] rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                            />
+                            <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                              <span>0G (Static)</span>
+                              <span>15G (MIL standard)</span>
+                              <span>45G (Shock bounds)</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Diagnostics & Display Results Area */}
+                        <div className="space-y-4 bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col justify-between">
+                          <div className="space-y-3">
+                            <h5 className="text-[11px] font-bold tracking-wider text-cyan-400 font-mono uppercase flex items-center gap-1">
+                              <Eye size={11} /> Real-time Diagnostics
+                            </h5>
+
+                            {/* Status State Badge */}
+                            <div className="flex items-center gap-2 bg-[#060a14] p-2.5 rounded-lg border border-slate-800 shadow-inner">
+                              <span className="text-[10px] uppercase font-mono font-bold text-slate-400">Relay State:</span>
+                              {cyclicWelds > 0 ? (
+                                <span className="text-xs font-mono font-bold text-red-500 animate-pulse flex items-center gap-1">
+                                  ● 💀 FAULT: CONTACTS WELDED
+                                </span>
+                              ) : (stressCurrentPct > 125 || stressVoltagePct > 125) ? (
+                                <span className="text-xs font-mono font-bold text-rose-400 animate-pulse flex items-center gap-1">
+                                  ● ⚠️ EXTREME OVERLOAD LIMIT
+                                </span>
+                              ) : (stressCurrentPct > 100 || stressVoltagePct > 100 || stressTemp > parsedLimits.maxTemp || stressTemp < parsedLimits.minTemp) ? (
+                                <span className="text-xs font-mono font-bold text-yellow-400 flex items-center gap-1">
+                                  ● 🟡 HIGH COMPONENT DEGRADATION
+                                </span>
+                              ) : (
+                                <span className="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1">
+                                  ● 🟢 NOMINAL AEROSPACE RUN
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Self-Heating and Expected Lifetime Stats */}
+                            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                              <div className="bg-[#060a14] p-2 rounded-lg border border-slate-850">
+                                <p className="text-slate-500 text-[9px] uppercase tracking-wider">Joule Heating</p>
+                                <p className="text-slate-200 mt-0.5 font-bold">
+                                  +{( (stressCurrentPct/100) * (parsedLimits.maxCurrent) * (stressCurrentPct/100) * (parsedLimits.maxCurrent) * 0.15 ).toFixed(2)}°C
+                                </p>
+                              </div>
+                              <div className="bg-[#060a14] p-2 rounded-lg border border-slate-850">
+                                <p className="text-slate-500 text-[9px] uppercase tracking-wider">Est. MTBF Life</p>
+                                <p className="text-cyan-400 mt-0.5 font-bold">
+                                  {(() => {
+                                    let factor = 1.0;
+                                    if (stressCurrentPct > 100) factor *= Math.pow(stressCurrentPct/100, 3.5);
+                                    if (stressVoltagePct > 100) factor *= Math.pow(stressVoltagePct/100, 2.5);
+                                    if (stressTemp > parsedLimits.maxTemp) factor *= 2.2;
+                                    if (stressTemp < parsedLimits.minTemp) factor *= 1.4;
+                                    if (stressVibe > 15) factor *= 1.8;
+                                    const expected = Math.max(12, Math.round(parsedLimits.defaultLife / factor));
+                                    return expected.toLocaleString() + " cycles";
+                                  })()}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Miniature Oscilloscope Visualizer */}
+                            <div className="h-16 bg-[#040811] rounded-lg border border-slate-800 shadow-inner overflow-hidden relative flex flex-col justify-center">
+                              <div className="absolute top-1 left-2 text-[8px] text-emerald-500/80 font-mono font-bold flex items-center gap-1">
+                                <div className="h-1 w-1 rounded-full bg-emerald-500 animate-ping" /> SIGNAL INTEGRITY OSCILLOSCOPE
+                              </div>
+                              <svg viewBox="0 0 300 40" className="w-full h-8" preserveAspectRatio="none">
+                                <defs>
+                                  <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.08" />
+                                  </pattern>
+                                </defs>
+                                <rect width="300" height="40" fill="url(#grid)" />
+                                {cyclicWelds > 0 ? (
+                                  /* Permanent active high flatline (welded closed) */
+                                  <line x1="0" y1="12" x2="300" y2="12" stroke="#ef4444" strokeWidth="1.5" />
+                                ) : !isCyclicTesting ? (
+                                  /* Perfect stationary line status */
+                                  <path d="M 0,30 L 120,30 L 120,15 L 180,15 L 180,30 L 300,30" fill="none" stroke="#22c55e" strokeWidth="1.5" />
+                                ) : (
+                                  /* Heavy fluctuating active square wave */
+                                  <motion.path
+                                    animate={{
+                                      d: [
+                                        `M 0,30 L 20,30 L 20,${15 + (stressVibe > 15 ? Math.random() * 6 - 3 : 0)} L 60,${15 + (stressVibe > 15 ? Math.random() * 6 - 3 : 0)} L 60,30 L 100,30 L 100,15 L 140,15 L 140,30 L 180,30 L 180,15 L 220,15 L 220,30 L 260,30 L 260,15 L 300,15`,
+                                        `M 0,15 L 40,15 L 40,30 L 80,30 L 80,${15 + (stressVibe > 15 ? Math.random() * 6 - 3 : 0)} L 120,${15 + (stressVibe > 15 ? Math.random() * 6 - 3 : 0)} L 120,30 L 160,30 L 160,15 L 200,15 L 200,30 L 240,30 L 240,15 L 280,15 L 280,30 L 300,30`
+                                      ]
+                                    }}
+                                    transition={{ repeat: Infinity, duration: 0.15, ease: "linear" }}
+                                    fill="none"
+                                    stroke={stressCurrentPct > 120 ? "#eab308" : "#22c55e"}
+                                    strokeWidth="1.5"
+                                  />
+                                )}
+                              </svg>
+                            </div>
+                          </div>
+
+                          {/* Cyclic Test Dashboard Section */}
+                          <div className="bg-[#060a14] p-3 rounded-lg border border-slate-800 space-y-2">
+                            <div className="flex justify-between text-[10px] font-mono text-slate-400">
+                              <span>Cycles Tested: <strong className="text-white">{cyclicCounter.toLocaleString()}</strong></span>
+                              <span>Micro-Arcs: <strong className="text-amber-400">{cyclicFailures.toLocaleString()}</strong></span>
+                              <span>Structural Welds: <strong className={cyclicWelds > 0 ? "text-red-500 font-bold" : "text-white"}>{cyclicWelds}</strong></span>
+                            </div>
+
+                            {cyclicWelds > 0 ? (
+                              <button
+                                onClick={() => {
+                                  setCyclicCounter(0);
+                                  setCyclicFailures(0);
+                                  setCyclicWelds(0);
+                                  setIsCyclicTesting(false);
+                                  setSimRelayActive(false);
+                                }}
+                                className="w-full text-center py-2 bg-red-950/50 hover:bg-red-900/60 border border-red-800/80 rounded-xl text-xs font-mono font-bold text-red-400 transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                              >
+                                💀 CONTACTS FUSED CLOSED. CLICK TO RESET CORES.
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => setIsCyclicTesting(!isCyclicTesting)}
+                                className={`w-full text-center py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                                  isCyclicTesting
+                                    ? "bg-rose-600 hover:bg-rose-500 text-white shadow-lg animate-pulse"
+                                    : "bg-cyan-500 hover:bg-cyan-400 text-slate-950"
+                                }`}
+                              >
+                                {isCyclicTesting ? "🛑 STOP CYCLIC ENDURANCE SIMULATOR" : "⚡ RUN AUTOMATED CYCLIC ENDURANCE TEST (10Hz)"}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Manual Sim Controllers */}
                   <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
