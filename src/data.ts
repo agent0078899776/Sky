@@ -198,7 +198,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "6J1Z15A",
-        image: "/images/6J1Z15A.png",
+        image: "/images/6J1Z10A.png",
         dimensions: "20.6 x 10.5 x 17.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
@@ -348,7 +348,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "8J4Z20A",
-        image: "/images/xx8J4Z20Ax.png",
+        image: "/images/8J4Z20A.png",
         dimensions: "26.0 x 26.0 x 26.0 Laser sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "4PDT",
@@ -592,7 +592,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "9JPK1D",
-        image: "/images/9JPK1D.png",
+        image: "/images/9JPK1H.png",
         dimensions: "Φ16.5 x 55.4 Closed type",
         tempRange: "-65 ~ 125",
         contactForm: "SPST 1D",
@@ -1103,7 +1103,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     products: [
       {
         model: "4JG1H80-6A",
-        image: "/images/4JG1H80-6A.png",
+        image: "/images/4JG1.png",
         dimensions: "11.0 x 10.0 x 8.2 Metal seal",
         tempRange: "-55 ~ 125",
         contactForm: "1 Form A",
@@ -1273,7 +1273,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
       },
       {
         model: "9JG1H60-25A",
-        image: "/images/9JG1H60-25A.png",
+        image: "/images/9JG1H270-10A.png",
         dimensions: "56.0 x 34.0 x 10.4 Metal seal",
         tempRange: "-55 ~ 105",
         contactForm: "1 Form A",
