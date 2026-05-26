@@ -1992,7 +1992,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         tempRange: "-55 ~ 85",
         contactForm: "2 Form A",
         vibration: "Sinusoidal: 147m/s² 10~2000Hz",
-        contactLoad: "1A, 28Vd.c. | 2A, 28Vd.c. (100,000 cycles), (20,000 cycles)",
+        contactLoad: "1A, 28Vd.c. (100,000 cycles) | 2A, 28Vd.c. (20,000 cycles)",
         benchmarking: "—"
       },
       {
