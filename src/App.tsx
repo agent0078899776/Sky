@@ -5,6 +5,7 @@ import { AboutUs } from "./components/AboutUs";
 import { FeedbackRequestForm } from "./components/FeedbackRequestForm";
 import { HardDrive, HelpCircle, Mail, Phone, ExternalLink, ShieldAlert } from "lucide-react";
 import { SkySwitchLogo } from "./components/SkySwitchLogo";
+import { BackgroundPulses } from "./components/BackgroundPulses";
 
 type ActiveTab = "home" | "catalog" | "about" | "contact";
 
@@ -40,7 +41,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#060a14] text-slate-300 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900">
+    <div className="relative min-h-screen bg-[#060a14] text-slate-300 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900 overflow-x-hidden">
+      <BackgroundPulses />
       {/* Sleek corporate Header */}
       <header className="sticky top-0 z-30 bg-[#060a14]/80 backdrop-blur-xl border-b border-slate-900 shadow-md">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
@@ -50,7 +52,7 @@ export default function App() {
             onClick={() => scrollSection("hero-section")}
             className="flex items-center gap-3 hover:opacity-90 transition-all text-left focus:outline-none cursor-pointer group"
           >
-            <SkySwitchLogo size={64} interactive={false} />
+            <SkySwitchLogo size={46} interactive={false} />
             <div>
               <h1 className="text-white text-xl sm:text-2xl font-extrabold font-display tracking-tight leading-none group-hover:text-cyan-400 transition-colors">
                 SkySwitch
