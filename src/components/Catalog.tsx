@@ -320,7 +320,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                       transition={{ duration: 0.2 }}
                       className="overflow-x-auto border-t border-slate-800/80"
                     >
-                      <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" || category.id === "time_relays" || category.id === "sealed_optocouplers" ? "min-w-[1240px]" : "min-w-[1070px]"}`}>
+                      <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" || category.id === "time_relays" || category.id === "sealed_optocouplers" ? "min-w-[1240px]" : "min-w-[1100px]"}`}>
                         <thead>
                           {category.id === "plastic_photorelay" ? (
                             <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
@@ -365,11 +365,11 @@ export const Catalog: React.FC<CatalogProps> = ({
                               </th>
                               <th className="py-3.5 px-3 w-[115px] text-center align-middle">Product Model</th>
                               <th className="py-3.5 px-3 w-[130px] text-center align-middle">Dimensions (mm)</th>
-                              <th className="py-3.5 px-3 w-[115px] text-center align-middle">Temperature range (℃)</th>
-                              <th className="py-3.5 px-3 w-[80px] text-center align-middle">Contact Form</th>
-                              <th className="py-3.5 px-3 w-[230px] text-center align-middle">Vibration</th>
-                              <th className="py-3.5 px-3 w-[150px] text-center align-middle">Contact Load & Lifetime</th>
-                              <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
+                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">Temperature range (℃)</th>
+                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Contact Form</th>
+                              <th className="py-3.5 px-3 w-[200px] text-center align-middle">Vibration</th>
+                              <th className="py-3.5 px-3 w-[155px] text-center align-middle">Contact Load & Lifetime</th>
+                              <th className="py-3.5 px-3 w-[115px] text-center align-middle">Benchmarking Model</th>
                               <th className="py-3.5 px-1.5 text-center w-[90px] align-middle">Action</th>
                             </tr>
                           )}
@@ -767,8 +767,14 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   </td>
 
                                   {/* Contact configuration */}
-                                  <td className="py-3.5 px-3 text-slate-200 text-sm font-semibold whitespace-nowrap align-middle text-center">
-                                    {cleanContactForm(p.contactForm)}
+                                  <td className="py-3.5 px-3 text-slate-200 text-xs md:text-sm font-semibold align-middle text-center leading-normal">
+                                    <div className="flex flex-col gap-0.5 justify-center items-center">
+                                      {cleanContactForm(p.contactForm).split(/,\s*/).map((part, pIdx) => (
+                                        <span key={pIdx} className="block whitespace-nowrap">
+                                          {part}
+                                        </span>
+                                      ))}
+                                    </div>
                                   </td>
 
                                   {/* Shocks & Vibration */}
