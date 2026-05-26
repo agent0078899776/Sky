@@ -5,6 +5,17 @@ import { motion, AnimatePresence } from "motion/react";
 import { RussianJet } from "./RussianJet";
 import { FeedbackRequestForm } from "./FeedbackRequestForm";
 
+const resolveImagePath = (src: string) => {
+  if (!src) return "";
+  if (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("data:")) {
+    return src; 
+  }
+  const base = (import.meta as any).env?.BASE_URL || "/Sky/";
+  const cleanSrc = src.startsWith("/") ? src.slice(1) : src;
+  const cleanBase = base.endsWith("/") ? base : `${base}/`;
+  return `${cleanBase}${cleanSrc}`;
+};
+
 interface HomeProps {
   onNavigateToCatalog: () => void;
   onNavigateToContact: () => void;
@@ -318,7 +329,7 @@ export const Home: React.FC<HomeProps> = ({
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="/images/FATAxET.png" 
+                      src={resolveImagePath("/images/FATAxET.png")} 
                       alt="Production 1" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
@@ -329,7 +340,7 @@ export const Home: React.FC<HomeProps> = ({
                   </div>
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="/images/2eXw16n.png" 
+                      src={resolveImagePath("/images/2eXw16n.png")} 
                       alt="Production 2" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
@@ -340,7 +351,7 @@ export const Home: React.FC<HomeProps> = ({
                   </div>
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="/images/9BtVTip.png" 
+                      src={resolveImagePath("/images/9BtVTip.png")} 
                       alt="Testing Laboratory" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
@@ -351,7 +362,7 @@ export const Home: React.FC<HomeProps> = ({
                   </div>
                   <div className="group relative rounded-xl overflow-hidden border border-slate-800/90 aspect-[4/3] bg-slate-900">
                     <img 
-                      src="/images/2AVNQD4.png" 
+                      src={resolveImagePath("/images/2AVNQD4.png")} 
                       alt="Products" 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-90 hover:brightness-100"
@@ -455,7 +466,7 @@ export const Home: React.FC<HomeProps> = ({
                     {/* Physical component photo display */}
                     <div className="relative h-44 sm:h-48 md:h-52 rounded-xl overflow-hidden border border-slate-800">
                       <img
-                        src={area.image}
+                        src={resolveImagePath(area.image)}
                         alt={area.title}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover filter brightness-[0.95] group-hover:brightness-100 group-hover:scale-[1.03] transition-all duration-500"
