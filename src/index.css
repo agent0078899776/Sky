@@ -1,14 +1,190 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
+:root {
+  --color-bg-base: #060a14;
+  --color-bg-card: #0d1527;
+  --color-bg-card-sub: #0a0f1d;
+  --color-bg-panel: #111c34;
+  --color-bg-button: #16223f;
+  --color-bg-button-hover: #1a2b52;
+  
+  --color-text-title: #ffffff;
+  --color-text-body: #cbd5e1; /* slate-300 */
+  --color-text-muted: #94a3b8; /* slate-400 */
+  --color-text-low: #64748b; /* slate-500 */
+  
+  --color-border-main: #0f172a; /* slate-900 */
+  --color-border-hover: #1e293b; /* slate-800 */
+}
+
+/* Custom Light-Theme Adaptive Overrides */
+.light-theme {
+  --color-bg-base: #f8fafc; /* Light slate background */
+  --color-bg-card: #ffffff; /* Pure white cards */
+  --color-bg-card-sub: #f1f5f9; /* Soft gray-blue background */
+  --color-bg-panel: #e2e8f0; /* Recessed list / group colors */
+  --color-bg-button: #cbd5e1; /* Clear gray buttons */
+  --color-bg-button-hover: #b4c6dc;
+  
+  --color-text-title: #0f172a; /* Deep slate-900 */
+  --color-text-body: #334155; /* Slate-700 */
+  --color-text-muted: #475569; /* Slate-600 */
+  --color-text-low: #64748b; /* Slate-500 */
+  
+  --color-border-main: #cbd5e1; /* Level 1 card border */
+  --color-border-hover: #94a3b8; /* Level 2 active border */
+}
+
+/* Smooth transitions for theme transitions */
+.relative,
+div,
+header,
+section,
+table,
+tr,
+th,
+td,
+span,
+h1,
+h2,
+h3,
+p,
+button,
+input,
+textarea {
+  transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
+/* CSS-Only Adaptive Mappers when Light Theme is enabled */
+.light-theme {
+  background-color: var(--color-bg-base) !important;
+  color: var(--color-text-body) !important;
+}
+
+/* Background mappings */
+.light-theme .bg-\[\#060a14\],
+.light-theme .bg-slate-950 {
+  background-color: var(--color-bg-base) !important;
+}
+.light-theme .bg-\[\#060a14\]\/80 {
+  background-color: rgba(248, 250, 252, 0.8) !important;
+}
+.light-theme .bg-\[\#0d1527\] {
+  background-color: var(--color-bg-card) !important;
+}
+.light-theme .bg-\[\#0a0f1d\],
+.light-theme .bg-slate-900,
+.light-theme .bg-slate-900\/60,
+.light-theme .bg-slate-900\/90,
+.light-theme .bg-\[\#0b1226\]\/80 {
+  background-color: var(--color-bg-card-sub) !important;
+}
+.light-theme .bg-\[\#111c34\]\/40,
+.light-theme .bg-\[\#111c34\]\/30,
+.light-theme .bg-\[\#111c34\]\/70,
+.light-theme .bg-\[\#111c34\],
+.light-theme .bg-\[\#0b1021\] {
+  background-color: var(--color-bg-card) !important;
+  border-color: var(--color-border-main) !important;
+}
+.light-theme .bg-\[\#16223f\],
+.light-theme .bg-\[\#16223f\]\/80 {
+  background-color: var(--color-bg-button) !important;
+}
+.light-theme .hover\:bg-\[\#1a2b52\]:hover {
+  background-color: var(--color-bg-button-hover) !important;
+}
+
+/* Text mappings with strict target selection to protect buttons and accents */
+.light-theme h1,
+.light-theme h2,
+.light-theme h3,
+.light-theme h4,
+.light-theme .text-white {
+  color: var(--color-text-title) !important;
+}
+
+/* Keep standard button text white if the button stays dark colored (like primary blue/cyan/indigo cta buttons) */
+.light-theme button.bg-blue-600,
+.light-theme button.bg-blue-500,
+.light-theme button.bg-cyan-500,
+.light-theme button[class*="bg-blue-"],
+.light-theme button[class*="bg-cyan-"],
+.light-theme button[class*="bg-gradient-"],
+.keep-white {
+  color: #ffffff !important;
+}
+
+/* Adaptive secondary text standard utilities */
+.light-theme .text-slate-200 {
+  color: var(--color-text-body) !important;
+}
+.light-theme .text-slate-300 {
+  color: var(--color-text-body) !important;
+}
+.light-theme .text-slate-350 {
+  color: var(--color-text-muted) !important;
+}
+.light-theme .text-slate-400 {
+  color: var(--color-text-muted) !important;
+}
+.light-theme .text-slate-500 {
+  color: var(--color-text-low) !important;
+}
+
+/* Enhanced contrast brand colors for readability over light mode */
+.light-theme .text-cyan-400 {
+  color: #0284c7 !important; /* Sky Blue 600 */
+}
+.light-theme .bg-cyan-400\/10 {
+  background-color: rgba(2, 132, 199, 0.08) !important;
+}
+.light-theme svg.text-cyan-400 {
+  stroke: #0284c7 !important;
+}
+
+/* Border adaptations mapping */
+.light-theme .border-slate-800,
+.light-theme .border-slate-900,
+.light-theme .border-slate-850,
+.light-theme .border-slate-850\/80,
+.light-theme .border-slate-800\/90,
+.light-theme .border-slate-800\/80,
+.light-theme .border-slate-700,
+.light-theme .border-slate-700\/60,
+.light-theme .border-cyan-400\/20,
+.light-theme .border-cyan-500\/30 {
+  border-color: var(--color-border-main) !important;
+}
+
+/* Canvas & background pulse dimming to maximize light usability */
+.light-theme svg {
+  opacity: 0.35 !important;
+}
+.light-theme .animate-pulse-travel {
+  opacity: 0.25 !important;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  --color-[#060a14]: #060a14;
-  --color-[#0d1527]: #0d1527;
-  --color-[#16223f]: #16223f;
+  --color-bg-base: var(--color-bg-base);
+  --color-bg-card: var(--color-bg-card);
+  --color-bg-card-sub: var(--color-bg-card-sub);
+  --color-bg-panel: var(--color-bg-panel);
+  --color-bg-button: var(--color-bg-button);
+  --color-bg-button-hover: var(--color-bg-button-hover);
+  
+  --color-text-title: var(--color-text-title);
+  --color-text-body: var(--color-text-body);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-low: var(--color-text-low);
+  
+  --color-border-main: var(--color-border-main);
+  --color-border-hover: var(--color-border-hover);
 
   --animate-pulse-travel: pulse-travel 15s linear infinite;
 
@@ -30,18 +206,18 @@
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar matching active theme */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #060a14;
+  background: var(--color-bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: var(--color-bg-button);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: var(--color-bg-button-hover);
 }
