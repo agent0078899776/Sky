@@ -19,6 +19,24 @@ const formatDimensions = (dimStr: string) => {
   }
   return { size: "", desc: cleaned };
 };
+const renderDimValue = (val: string) => {
+  if (!val) return "";
+  const parts = val.split(/(x)/i);
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (part.toLowerCase() === "x") {
+          return (
+            <span key={index} className="font-light text-slate-400/80 mx-[1px] select-none text-[11px] inline-block">
+              x
+            </span>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </>
+  );
+};
 const resolveImagePath = (src: string) => {
   if (!src) return "";
   if (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("data:")) {
@@ -712,7 +730,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
                                     {/* Package */}
                                     <td className="py-3.5 px-3 text-slate-300 font-mono text-center align-middle">
-                                      {p.packageStyle || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : "")}
+                                      {renderDimValue(p.packageStyle || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : ""))}
                                     </td>
 
                                     {/* Dynamic RowSpan Product Images */}
@@ -823,7 +841,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                         const { size, desc } = formatDimensions(p.dimensions || "");
                                         return (
                                           <div className="flex flex-col items-center text-center">
-                                            <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || p.dimensions}</span>
+                                            <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{renderDimValue(size || p.dimensions)}</span>
                                             {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                           </div>
                                         );
@@ -923,7 +941,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                         const { size, desc } = formatDimensions(p.dimensions || "");
                                         return (
                                           <div className="flex flex-col items-center text-center">
-                                            <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || p.dimensions}</span>
+                                            <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{renderDimValue(size || p.dimensions)}</span>
                                             {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                           </div>
                                         );
@@ -1029,7 +1047,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                       const { size, desc } = formatDimensions(p.dimensions);
                                       return (
                                         <div className="flex flex-col items-center text-center">
-                                          <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : "")}</span>
+                                          <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{renderDimValue(size || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : ""))}</span>
                                           {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                         </div>
                                       );
@@ -1230,7 +1248,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   isMismatched ? "text-amber-400 font-bold" : "text-white"
                                 }`}
                               >
-                                {p.packageStyle || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : "")}
+                                {renderDimValue(p.packageStyle || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : ""))}
                               </td>
                             );
                           })}
@@ -1435,7 +1453,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "Package" : "Housing details"}
                             </div>
-                            <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.packageStyle || (activeSpecProduct.dimensions ? activeSpecProduct.dimensions.replace(/\s*x\s*/gi, "x") : "")}</div>
+                            <div className="text-xs text-white leading-relaxed font-semibold">{renderDimValue(activeSpecProduct.packageStyle || (activeSpecProduct.dimensions ? activeSpecProduct.dimensions.replace(/\s*x\s*/gi, "x") : ""))}</div>
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
