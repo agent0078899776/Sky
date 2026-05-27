@@ -222,30 +222,50 @@ export default function App() {
             {/* Links Block */}
             <div className="md:col-span-3 space-y-4">
               <h4 className="text-white text-sm font-bold uppercase tracking-wider font-mono">Component Navigator</h4>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-1.5 text-sm">
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery(""); }} className="hover:text-white transition-colors text-slate-400">
-                    Electromagnetic Relays
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Sealed Electromagnetic"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Sealed Electromagnetic Relays
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("latching"); }} className="hover:text-white transition-colors text-slate-400">
-                    Magnetic Holding Latching
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Sealed Magnetic Holding"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Sealed Magnetic Holding Relays
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("radio"); }} className="hover:text-white transition-colors text-slate-400">
-                    RF Coaxial Switches
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Radio Frequency"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Radio Frequency Relays
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("contactor"); }} className="hover:text-white transition-colors text-slate-400">
-                    Heavy Duty Power Contactors
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Contactors"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Contactors
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("solid"); }} className="hover:text-white transition-colors text-slate-400">
-                    Optoelectronic Solid State
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Solid State Relays"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Solid State Relays
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Metal encapsulated"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Metal Encapsulated Solid State Relays
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Plastic photorelays"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Plastic Photorelays (PhotoMOS)
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Time Relays"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Time Relays
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => { setActiveTab("catalog"); setSearchQuery("Sealed Optocouplers"); }} className="hover:text-white transition-colors text-slate-400 text-left">
+                    Sealed Optocouplers
                   </button>
                 </li>
               </ul>
