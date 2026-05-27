@@ -6,6 +6,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { playRelayClick, playTechBeep, playSparkCrackle, setCoilHumActive } from "../utils/audio";
 import { SmartWizard } from "./SmartWizard";
 
+// ==========================================
+// НАСТРОЙКА РАЗМЕРА ИЗОБРАЖЕНИЯ РЕЛЕ В VIEW SPECS
+// Вы можете быстро изменить это число (в пикселях), чтобы настроить размер картинок реле в спецификациях.
+// Например: 150, 180, 220, 300 и т.д. Меньше значение — картинка чётче, больше значение — картинка крупнее.
+export const VIEW_SPECS_PHOTO_SIZE = 180;
+// ==========================================
+
 // Helper to separate physical dimensions from mounting description
 const formatDimensions = (dimStr: string) => {
   if (!dimStr) return { size: "", desc: "" };
@@ -1675,7 +1682,13 @@ export const Catalog: React.FC<CatalogProps> = ({
                   {specViewTab === "photo" ? (
                     <div className="flex-1 flex flex-col items-center justify-center p-4 bg-slate-950/40 rounded-xl border border-slate-800/60 min-h-[300px]">
                       {isPhotoAvailable ? (
-                        <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[420px] aspect-square rounded-xl overflow-hidden flex items-center justify-center shadow-lg bg-slate-900 border border-slate-800 p-6 md:p-10">
+                        <div 
+                          className="relative w-full aspect-square rounded-xl overflow-hidden flex items-center justify-center shadow-lg bg-slate-900 border border-slate-800 p-4 transition-all duration-300"
+                          style={{
+                            maxWidth: `${VIEW_SPECS_PHOTO_SIZE}px`,
+                            maxHeight: `${VIEW_SPECS_PHOTO_SIZE}px`
+                          }}
+                        >
                           <img
                             src={productPhotoUrl}
                             alt={`${activeSpecProduct.model} components view`}
