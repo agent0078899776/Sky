@@ -254,6 +254,8 @@ export const Catalog: React.FC<CatalogProps> = ({
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [touchStartDist, setTouchStartDist] = useState<number | null>(null);
+  const [touchStartScale, setTouchStartScale] = useState<number>(1);
   const [specViewTab, setSpecViewTab] = useState<"photo" | "schematic" | "stress">("photo");
   const [photoAttempt, setPhotoAttempt] = useState<Record<string, "local" | "fallback" | "failed">>({});
   const [schematicUrlIndex, setSchematicUrlIndex] = useState<Record<string, number>>({});
@@ -428,7 +430,7 @@ export const Catalog: React.FC<CatalogProps> = ({
     return mismatches;
   }, [selectedProductsForComparison]);
 
-  const handleSchematicMouseDown = (e: React.MouseEvent) => {
+   const handleSchematicMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsDragging(true);
     setDragStart({ x: e.clientX - dragPos.x, y: e.clientY - dragPos.y });
@@ -446,9 +448,56 @@ export const Catalog: React.FC<CatalogProps> = ({
     setIsDragging(false);
   };
 
+  const handleSchematicTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      setIsDragging(true);
+      setDragStart({ x: touch.clientX - dragPos.x, y: touch.clientY - dragPos.y });
+      setTouchStartDist(null);
+    } else if (e.touches.length === 2) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const dist = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+      setTouchStartDist(dist);
+      setTouchStartScale(zoomScale);
+      setIsDragging(false);
+    }
+  };
+
+  const handleSchematicTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && isDragging) {
+      const touch = e.touches[0];
+      setDragPos({
+        x: touch.clientX - dragStart.x,
+        y: touch.clientY - dragStart.y,
+      });
+    } else if (e.touches.length === 2 && touchStartDist !== null) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const dist = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+      const ratio = dist / touchStartDist;
+      const newScale = Math.max(0.5, Math.min(2.5, touchStartScale * ratio));
+      setZoomScale(newScale);
+    }
+  };
+
+  const handleSchematicTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length === 0) {
+      setIsDragging(false);
+      setTouchStartDist(null);
+    } else if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      setIsDragging(true);
+      setDragStart({ x: touch.clientX - dragPos.x, y: touch.clientY - dragPos.y });
+      setTouchStartDist(null);
+    }
+  };
+
   const resetZoomAndDrag = () => {
     setZoomScale(1);
     setDragPos({ x: 0, y: 0 });
+    setTouchStartDist(null);
+    setTouchStartScale(1);
     setSimulatedCoilOn(false);
     setSpecViewTab("photo");
     setStressCurrentPct(100);
@@ -1662,12 +1711,15 @@ export const Catalog: React.FC<CatalogProps> = ({
                       onMouseMove={handleSchematicMouseMove}
                       onMouseUp={handleSchematicMouseUp}
                       onMouseLeave={handleSchematicMouseUp}
-                      className="relative flex-1 bg-slate-950/60 border border-slate-800/80 rounded-xl overflow-hidden flex items-center justify-center cursor-move font-mono text-xs text-slate-500"
+                      onTouchStart={handleSchematicTouchStart}
+                      onTouchMove={handleSchematicTouchMove}
+                      onTouchEnd={handleSchematicTouchEnd}
+                      className="relative flex-1 bg-slate-950/60 border border-slate-800/80 rounded-xl overflow-hidden flex items-center justify-center cursor-move font-mono text-xs text-slate-500 touch-none select-none"
                     >
                       <div
                         style={{
                           transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(${zoomScale})`,
-                          transition: isDragging ? "none" : "transform 0.15s ease-out",
+                          transition: (isDragging || touchStartDist !== null) ? "none" : "transform 0.15s ease-out",
                         }}
                         className="origin-center flex items-center justify-center"
                       >
