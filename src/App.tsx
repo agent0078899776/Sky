@@ -214,6 +214,31 @@ export default function App() {
             </button>
           </div>
         </div>
+
+        {/* Mobile Control Toolbar (Theme Slider and Volume Button) */}
+        <div className="md:hidden flex items-center justify-between px-5 py-2.5 bg-slate-950 border-t border-slate-900/80">
+          <ThemeToggle 
+            variant="horizontal" 
+            theme={theme} 
+            onToggle={() => {
+              setTheme((prev) => {
+                const next = prev === "dark" ? "light" : "dark";
+                try {
+                  localStorage.setItem("theme", next);
+                } catch (e) {
+                  console.warn("Storage failed:", e);
+                }
+                return next;
+              });
+            }} 
+          />
+          <SoundToggle
+            variant="inline"
+            theme={theme}
+            isMuted={isMuted}
+            onToggle={setIsMuted}
+          />
+        </div>
       </header>
 
       {/* Main Page Layout Container */}
