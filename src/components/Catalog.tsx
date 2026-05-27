@@ -47,6 +47,62 @@ const resolveImagePath = (src: string) => {
   const cleanBase = base.endsWith("/") ? base : `${base}/`;
   return `${cleanBase}${cleanSrc}`;
 };
+const getPossibleSchematics = (product: ProductRec): string[] => {
+  const model = product.model;
+  const list: string[] = [];
+
+  // 1. If product explicitly has a schematic property
+  if (product.schematic) {
+    list.push(product.schematic);
+  }
+
+  // 2. The exact model name itself
+  list.push(model);
+
+  // 3. For multiple-word/slash models (e.g. "BC3223 / BC5223")
+  if (model.includes("/")) {
+    const parts = model.split("/").map(s => s.trim());
+    parts.forEach(p => {
+      if (p && !list.includes(p)) list.push(p);
+    });
+  }
+
+  // Plastic photorelay (BCY, BCV, BCW, BCS, etc.)
+  const photoMatch = model.match(/^(BC[YVWS]\d{3})/i);
+  if (photoMatch) {
+    const core = photoMatch[1].toUpperCase();
+    if (!list.includes(core)) {
+      list.push(core);
+    }
+  }
+
+  // Electro-magnetic relays (e.g., matching digit then J, ending with A or H)
+  const electroMatch = model.match(/^(\d+J\w+?[AH])/i);
+  if (electroMatch) {
+    const core = electroMatch[1].toUpperCase();
+    if (!list.includes(core)) {
+      list.push(core);
+    }
+  }
+
+  // Fallback: strip standard trailing prefixes
+  const strippedGeneric = model.replace(/(?:FGD|AFD|FGD|FG|FD|GD|AD|AD1|D|G|T|I)$/i, "");
+  if (strippedGeneric && strippedGeneric !== model && !list.includes(strippedGeneric)) {
+    list.push(strippedGeneric);
+  }
+
+  return list;
+};
+
+const getSchematicUrls = (product: ProductRec): string[] => {
+  const names = getPossibleSchematics(product);
+  const urls: string[] = [];
+  for (const name of names) {
+    urls.push(resolveImagePath(`/schematics/${name}.webp`));
+    urls.push(resolveImagePath(`/schematic/${name}.webp`));
+  }
+  return urls;
+};
 // Helper to separate contact rating from electrical life cycles
 const formatContactLoad = (loadStr: string) => {
   const match = loadStr.match(/^(.*?)\s*\((.*?)\)$/);
@@ -200,7 +256,7 @@ export const Catalog: React.FC<CatalogProps> = ({
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [specViewTab, setSpecViewTab] = useState<"photo" | "schematic" | "stress">("photo");
   const [photoAttempt, setPhotoAttempt] = useState<Record<string, "local" | "fallback" | "failed">>({});
-  const [schematicAttempt, setSchematicAttempt] = useState<Record<string, "plural" | "singular" | "failed">>({});
+  const [schematicUrlIndex, setSchematicUrlIndex] = useState<Record<string, number>>({});
 
   // Interactive Stress Simulator variables
   const [stressCurrentPct, setStressCurrentPct] = useState(100);
@@ -477,16 +533,10 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   const isPhotoAvailable = activeSpecProduct ? (currentPhotoStage !== "failed" && (currentPhotoStage !== "fallback" || !!activeSpecProduct.image)) : false;
 
-  const currentSchematicStage = schematicAttempt[currentModel] || "plural";
-
-  let schematicUrl = "";
-  if (currentSchematicStage === "plural") {
-    schematicUrl = resolveImagePath(`/schematics/${currentModel}.webp`);
-  } else if (currentSchematicStage === "singular") {
-    schematicUrl = resolveImagePath(`/schematic/${currentModel}.webp`);
-  }
-
-  const isSchematicImageAvailable = activeSpecProduct ? (currentSchematicStage !== "failed") : false;
+  const schematicUrls = activeSpecProduct ? getSchematicUrls(activeSpecProduct) : [];
+  const currentSchematicUrlIdx = schematicUrlIndex[currentModel] || 0;
+  const isSchematicImageAvailable = activeSpecProduct ? (currentSchematicUrlIdx < schematicUrls.length) : false;
+  const schematicUrl = isSchematicImageAvailable ? schematicUrls[currentSchematicUrlIdx] : "";
 
   return (
     <div className="space-y-8">
@@ -1629,14 +1679,10 @@ export const Catalog: React.FC<CatalogProps> = ({
                               referrerPolicy="no-referrer"
                               className="max-h-[380px] max-w-full object-contain select-none pointer-events-none"
                               onError={() => {
-                                setSchematicAttempt((prev) => {
-                                  const stage = prev[currentModel] || "plural";
-                                  if (stage === "plural") {
-                                    return { ...prev, [currentModel]: "singular" };
-                                  } else {
-                                    return { ...prev, [currentModel]: "failed" };
-                                  }
-                                });
+                                setSchematicUrlIndex((prev) => ({
+                                  ...prev,
+                                  [currentModel]: (prev[currentModel] || 0) + 1,
+                                }));
                               }}
                             />
                           </div>
