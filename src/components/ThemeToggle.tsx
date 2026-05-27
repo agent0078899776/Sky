@@ -42,7 +42,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, onToggle }) => 
       {/* Industrial switch console */}
       <div 
         onClick={handleToggleClick}
-        className={`relative w-11 h-24 rounded-full border p-1 cursor-pointer select-none transition-all duration-500 shadow-2xl flex flex-col justify-between items-center ${
+        className={`relative w-10 h-24 rounded-full border p-1 cursor-pointer select-none transition-all duration-500 shadow-2xl flex flex-col justify-between items-center ${
           isDark 
             ? "bg-slate-950/90 border-slate-800/80 shadow-black/80" 
             : "bg-slate-100/95 border-slate-300/90 shadow-slate-300/40"
@@ -51,27 +51,27 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, onToggle }) => 
         {/* Inner track recess */}
         <div className="absolute inset-1 rounded-full pointer-events-none bg-black/20" />
 
-        {/* Icon: Sun (Light) at the top */}
-        <div className={`relative z-10 w-7 h-7 flex items-center justify-center transition-colors duration-300 ${isDark ? "text-slate-600 hover:text-slate-400" : "text-amber-500"}`}>
-          <Sun size={15} className={`w-3.5 h-3.5 ${!isDark ? "animate-spin-slow" : ""}`} />
+        {/* Icon: Sun (Light) at the top, visible only when in dark mode (as an off-indicator) */}
+        <div className={`relative z-10 w-8 h-8 flex items-center justify-center transition-all duration-300 ${isDark ? "text-slate-600 hover:text-slate-400 opacity-100 scale-100" : "opacity-0 scale-75 pointer-events-none"}`}>
+          <Sun size={14} className="w-3.5 h-3.5" />
         </div>
 
-        {/* Icon: Moon (Dark) at the bottom */}
-        <div className={`relative z-10 w-7 h-7 flex items-center justify-center transition-colors duration-300 ${isDark ? "text-cyan-400" : "text-slate-400 hover:text-slate-600"}`}>
-          <Moon size={14} className="w-3.5 h-3.5" />
+        {/* Icon: Moon (Dark) at the bottom, visible only when in light mode (as an off-indicator) */}
+        <div className={`relative z-10 w-8 h-8 flex items-center justify-center transition-all duration-300 ${!isDark ? "text-slate-500 hover:text-slate-700 opacity-100 scale-100" : "opacity-0 scale-75 pointer-events-none"}`}>
+          <Moon size={13} className="w-3.5 h-3.5" />
         </div>
 
         {/* Advanced tactile sliding armature thumb */}
         <motion.div
           animate={{
-            y: isDark ? 42 : 0,
+            y: isDark ? 56 : 0,
           }}
           transition={{
             type: "spring",
-            stiffness: 280,
-            damping: 24,
+            stiffness: 300,
+            damping: 22,
           }}
-          className={`absolute left-[5px] top-[5px] w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-350 shadow-md ${
+          className={`absolute left-[3px] top-[3px] w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-350 shadow-md ${
             isDark 
               ? "bg-slate-900 border-slate-700 shadow-black/80 text-cyan-400" 
               : "bg-gradient-to-b from-amber-400 to-amber-500 border-amber-300 text-slate-950 shadow-amber-500/30"
