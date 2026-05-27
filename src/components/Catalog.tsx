@@ -546,7 +546,7 @@ export const Catalog: React.FC<CatalogProps> = ({
           </div>
         ) : (
           filteredCategories.map((category) => {
-            const isFolded = collapsedCategories[category.id] ?? true;
+            const isFolded = collapsedCategories[category.id] ?? (activeSearchQuery.trim() ? false : true);
             return (
               <div
                 key={category.id}
