@@ -446,27 +446,66 @@ export const Catalog: React.FC<CatalogProps> = ({
             Search our extensive catalog of mil-std relays, latching mechanisms, RF switches, and solid-state MOSFET contactors. Compare metrics and view dynamic schematic simulations instantly.
           </p>
 
-          {/* Search box block */}
-          <div className="relative max-w-lg mt-4">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-            <input
-              type="text"
-              value={activeSearchQuery}
-              onChange={(e) => setActiveSearchQuery(e.target.value)}
-              placeholder="Filter by model, contact load, benchmark cross-reference, packaging..."
-              className="w-full bg-[#16223f] text-white placeholder-slate-400 pl-11 pr-10 py-3 rounded-xl border border-slate-700/60 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-sm transition-all shadow-inner"
-            />
-            {activeSearchQuery && (
-              <button
-                onClick={() => setActiveSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
-              >
-                <X size={16} />
-              </button>
-            )}
+          {/* Action Row */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+            {/* Search box block */}
+            <div className="relative flex-1 max-w-lg">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                type="text"
+                value={activeSearchQuery}
+                onChange={(e) => setActiveSearchQuery(e.target.value)}
+                placeholder="Filter by model, contact load, benchmark cross-reference, packaging..."
+                className="w-full bg-[#16223f]/80 text-white placeholder-slate-400 pl-11 pr-10 py-3 rounded-xl border border-slate-700/60 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-sm transition-all shadow-inner"
+              />
+              {activeSearchQuery && (
+                <button
+                  onClick={() => setActiveSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+
+            {/* Smart Wizard Toggle Button */}
+            <button
+              onClick={() => {
+                playTechBeep(850, 0.05);
+                setIsWizardOpen(prev => !prev);
+              }}
+              className={`px-5 py-3 rounded-xl font-bold font-display text-sm transition-all flex items-center justify-center gap-2 border shadow-sm shrink-0 cursor-pointer ${
+                isWizardOpen 
+                  ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-cyan-400 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.15)]"
+                  : "bg-[#111a30] hover:bg-[#16223f] border-slate-700 text-slate-350 hover:text-white hover:border-slate-600"
+              }`}
+            >
+              <Sparkles size={16} className={isWizardOpen ? "animate-pulse" : ""} />
+              {isWizardOpen ? "Hide Filter Wizard" : "Smart Parametric Wizard"}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Smart Parametric Wizard Block */}
+      <AnimatePresence>
+        {isWizardOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, scale: 0.98 }}
+            animate={{ opacity: 1, height: "auto", scale: 1 }}
+            exit={{ opacity: 0, height: 0, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <SmartWizard
+              onSelectProduct={setActiveSpecProduct}
+              comparedModels={comparedModels}
+              onToggleCompare={toggleModelCompare}
+              onCloseWizard={() => setIsWizardOpen(false)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Categories listing */}
       <div className="space-y-6">
