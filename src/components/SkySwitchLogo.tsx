@@ -256,15 +256,15 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
         />
 
         {/* Hologram core inner pins */}
-        <circle cx="100" cy="66" r="3.2" fill="#38bdf8" opacity="0.9" />
-        <circle cx="100" cy="134" r="3.2" fill="#38bdf8" opacity="0.9" />
+        <circle cx="100" cy="66" r="3.2" fill="var(--color-logo-grad-2, #38bdf8)" opacity="0.9" />
+        <circle cx="100" cy="134" r="3.2" fill="var(--color-logo-grad-2, #38bdf8)" opacity="0.9" />
 
         {/* --- DYNAMIC GLOWING MOTION CURRENT FLOWS (LASER ELECTRON STREAMS) --- */}
         
         {/* Upper S-Curve Current Pulse (mirrored) */}
         <motion.path
           d="M 122,44 H 88 A 22,22 0 0,0 66,66 V 92 A 22,22 0 0,0 88,114 H 116 A 22,22 0 0,1 138,136 A 22,22 0 0,1 116,158 H 82"
-          stroke="#38bdf8"
+          stroke="var(--color-logo-grad-2, #38bdf8)"
           strokeWidth="5.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -276,13 +276,13 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
             repeat: Infinity,
             ease: "linear"
           }}
-          style={{ filter: "drop-shadow(0 0 4px #38bdf8)", mixBlendMode: "screen" }}
+          style={{ filter: "drop-shadow(0 0 4px var(--color-logo-grad-2, #38bdf8))", mixBlendMode: "var(--logo-blend-mode, screen)" as any }}
         />
 
         {/* Lower S-Curve Current Pulse (mirrored) */}
         <motion.path
           d="M 78,156 H 112 A 22,22 0 0,0 134,134 V 108 A 22,22 0 0,0 112,86 H 84 A 22,22 0 0,1 62,64 A 22,22 0 0,1 84,42 H 118"
-          stroke="#38bdf8"
+          stroke="var(--color-logo-grad-2, #38bdf8)"
           strokeWidth="5.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -294,13 +294,13 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
             repeat: Infinity,
             ease: "linear"
           }}
-          style={{ filter: "drop-shadow(0 0 4px #38bdf8)", mixBlendMode: "screen" }}
+          style={{ filter: "drop-shadow(0 0 4px var(--color-logo-grad-2, #38bdf8))", mixBlendMode: "var(--logo-blend-mode, screen)" as any }}
         />
 
         {/* Left Stem Current Pulse (mirrored, y=66) */}
         <motion.path
           d="M 79,66 H 42"
-          stroke="#38bdf8"
+          stroke="var(--color-logo-grad-2, #38bdf8)"
           strokeWidth="5.5"
           strokeLinecap="round"
           fill="none"
@@ -311,13 +311,13 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
             repeat: Infinity,
             ease: "linear"
           }}
-          style={{ filter: "drop-shadow(0 0 3px #38bdf8)", mixBlendMode: "screen" }}
+          style={{ filter: "drop-shadow(0 0 3px var(--color-logo-grad-2, #38bdf8))", mixBlendMode: "var(--logo-blend-mode, screen)" as any }}
         />
 
         {/* Right Stem Current Pulse (mirrored, y=134) */}
         <motion.path
           d="M 121,134 H 158"
-          stroke="#38bdf8"
+          stroke="var(--color-logo-grad-2, #38bdf8)"
           strokeWidth="5.5"
           strokeLinecap="round"
           fill="none"
@@ -328,7 +328,7 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
             repeat: Infinity,
             ease: "linear"
           }}
-          style={{ filter: "drop-shadow(0 0 3px #38bdf8)", mixBlendMode: "screen" }}
+          style={{ filter: "drop-shadow(0 0 3px var(--color-logo-grad-2, #38bdf8))", mixBlendMode: "var(--logo-blend-mode, screen)" as any }}
         />
       </g>
 
