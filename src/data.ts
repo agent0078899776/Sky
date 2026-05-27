@@ -1385,7 +1385,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.8Ω",
         outputCurrent: "500mA",
         benchmarking: "AQY212S, G3VM-61G2",
-        schematic: "BCY212S1"
+        schematic: "BCY211S"
       },
       {
         model: "BCY212G1S",
@@ -1396,7 +1396,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.22Ω",
         outputCurrent: "800mA",
         benchmarking: "—"
-        schematic: "BCY212S1"
       },
       {
         model: "BCY212G2S",
@@ -1407,7 +1406,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.15Ω",
         outputCurrent: "1.3A",
         benchmarking: "—"
-        schematic: "BCY212G2S"
       },
       {
         model: "BCY212GS",
@@ -1418,7 +1416,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.07Ω",
         outputCurrent: "2A",
         benchmarking: "—"
-        schematic: "BCY212G2S"
       },
       {
         model: "BCY215S",
@@ -1429,7 +1426,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.15Ω",
         outputCurrent: "1.25A",
         benchmarking: "AQY225R1S, G3VM-81G1"
-        schematic: "BCY215S"
       },
       {
         model: "BCY217S",
@@ -1440,7 +1436,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "5Ω",
         outputCurrent: "180mA",
         benchmarking: "—"
-        schematic: "BCY217S"
       },
       {
         model: "BCY217GS",
@@ -1451,7 +1446,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "1.25Ω",
         outputCurrent: "400mA",
         benchmarking: "—"
-        schematic: "BCY217S"
       },
       {
         model: "BCY214S",
@@ -1462,7 +1456,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "14Ω",
         outputCurrent: "120mA",
         benchmarking: "AQY214S, G3VM-401G"
-        schematic: "BCY214S"
       },
       {
         model: "BCY214GS",
@@ -1473,7 +1466,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "9Ω",
         outputCurrent: "180mA",
         benchmarking: "—"
-        schematic: "BCY214S"
       },
       {
         model: "BCY216S",
@@ -1484,7 +1476,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "28Ω",
         outputCurrent: "80mA",
         benchmarking: "—"
-        schematic: "BCY216S"
       },
       {
         model: "BCY412S",
@@ -1495,7 +1486,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "2Ω",
         outputCurrent: "500mA",
         benchmarking: "AQY412S, G3VM-63G"
-        schematic: "BCY412S"
       },
       {
         model: "BCY414S",
@@ -1506,7 +1496,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "20Ω",
         outputCurrent: "100mA",
         benchmarking: "AQY414S"
-        schematic: "BCY412S"
       },
       {
         model: "BCY212E",
@@ -1517,7 +1506,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "2Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
-        schematic: "BCY212E"
       },
       {
         model: "BCY212",
@@ -1528,7 +1516,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "1Ω",
         outputCurrent: "500mA",
         benchmarking: "AQY212EH",
-        schematic: "BCY212E"
+        schematic: "BCY216"
       },
       {
         model: "BCY211G",
@@ -1550,7 +1538,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.27Ω",
         outputCurrent: "1.1A",
         benchmarking: "AQY212GH"
-        schematic: "BCY252"
       },
       {
         model: "BCY252G",
@@ -1561,7 +1548,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.15Ω",
         outputCurrent: "1.3A",
         benchmarking: "—"
-        schematic: "BCY252"
       },
       {
         model: "BCY217",
@@ -1572,7 +1558,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "5Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
-        schematic: "BCY217"
       },
       {
         model: "BCY214",
@@ -1583,7 +1568,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "14Ω",
         outputCurrent: "140mA",
         benchmarking: "AQY214EH, G3VM-401A, G3VM-401D"
-        schematic: "BCY217"
       },
       {
         model: "BCY216",
@@ -1594,7 +1578,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "28Ω",
         outputCurrent: "80mA",
         benchmarking: "AQY216EH"
-        schematic: "BCY216"
       },
       {
         model: "BCY412",
@@ -1605,7 +1588,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "2Ω",
         outputCurrent: "500mA",
         benchmarking: "—"
-        schematic: "BCY412"
       },
       {
         model: "BCY414",
@@ -1616,7 +1598,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "20Ω",
         outputCurrent: "120mA",
         benchmarking: "—"
-        schematic: "BCY412"
       },
       {
         model: "BCV211G4",
@@ -1649,7 +1630,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.27Ω",
         outputCurrent: "1.3A",
         benchmarking: "—"
-        schematic: "BCV212"
       },
       {
         model: "BCV215",
@@ -1660,7 +1640,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.27Ω",
         outputCurrent: "500mA",
         benchmarking: "—"
-        schematic: "BCV215"
       },
       {
         model: "BCV215G1",
@@ -1671,7 +1650,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.15Ω",
         outputCurrent: "1.3A",
         benchmarking: "—"
-        schematic: "BCV215"
       },
       {
         model: "BCV215G2",
@@ -1682,7 +1660,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.15Ω",
         outputCurrent: "2A",
         benchmarking: "AQV215"
-        schematic: "BCV215"
       },
       {
         model: "BCV217",
@@ -1693,7 +1670,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "5Ω",
         outputCurrent: "200mA",
         benchmarking: "AQV257"
-        schematic: "BCV217"
       },
       {
         model: "BCV214",
@@ -1704,7 +1680,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "14Ω",
         outputCurrent: "140mA",
         benchmarking: "AQV214"
-        schematic: "BCV214"
       },
       {
         model: "BCV216",
@@ -1715,7 +1690,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "35Ω",
         outputCurrent: "80mA",
         benchmarking: "AQV216"
-        schematic: "BCV214"
       },
       {
         model: "BCV258",
@@ -1726,7 +1700,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "14Ω",
         outputCurrent: "45mA",
         benchmarking: "AQV258"
-        schematic: "BCV258"
       },
       {
         model: "BCV412",
@@ -1737,7 +1710,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "2Ω",
         outputCurrent: "500mA",
         benchmarking: "AQV412EH"
-        schematic: "BCV412"
       },
       {
         model: "BCV414",
@@ -1748,7 +1720,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "20Ω",
         outputCurrent: "100mA",
         benchmarking: "AQV414"
-        schematic: "BCV412"
       },
       {
         model: "BCV278",
@@ -1792,7 +1763,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "2Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
-        schematic: "BCW212E"
       },
       {
         model: "BCW212",
@@ -1803,7 +1773,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "1Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW212EH, G3VM-62C1, G3VM-62F1"
-        schematic: "BCW212E"
       },
       {
         model: "BCW252",
@@ -1814,7 +1783,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.27Ω",
         outputCurrent: "1.1A",
         benchmarking: "AQW212"
-        schematic: "BCW252"
       },
       {
         model: "BCW252G",
@@ -1825,7 +1793,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.07Ω",
         outputCurrent: "2A",
         benchmarking: "—"
-        schematic: "BCW252"
       },
       {
         model: "BCW215",
@@ -1836,7 +1803,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.27Ω",
         outputCurrent: "500mA",
         benchmarking: "—"
-        schematic: "BCW215"
       },
       {
         model: "BCW255",
@@ -1847,7 +1813,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.27Ω",
         outputCurrent: "1.1A",
         benchmarking: "—"
-        schematic: "BCW215"
       },
       {
         model: "BCW217",
@@ -1858,7 +1823,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "5Ω",
         outputCurrent: "180mA",
         benchmarking: "AQW217"
-        schematic: "BCW217"
       },
       {
         model: "BCW214",
@@ -1869,7 +1833,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "14Ω",
         outputCurrent: "140mA",
         benchmarking: "AQW214, G3VM-402C, G3VM-402F"
-        schematic: "BCW217"
       },
       {
         model: "BCW216",
@@ -1880,7 +1843,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "28Ω",
         outputCurrent: "80mA",
         benchmarking: "AQW216"
-        schematic: "BCW217"
       },
       {
         model: "BCW211GS",
@@ -1902,7 +1864,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "2Ω",
         outputCurrent: "200mA",
         benchmarking: "—"
-        schematic: "BCW212S1"
       },
       {
         model: "BCW212S",
@@ -1913,7 +1874,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.8Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW212S"
-        schematic: "BCW212S1"
       },
       {
         model: "BCW212GS",
@@ -1924,7 +1884,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.15Ω",
         outputCurrent: "1.1A",
         benchmarking: "—"
-        schematic: "BCW212S1"
       },
       {
         model: "BCW215S",
@@ -1935,7 +1894,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.15Ω",
         outputCurrent: "1.1A",
         benchmarking: "—"
-        schematic: "BCW215S"
       },
       {
         model: "BCW217S",
@@ -1946,7 +1904,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "5Ω",
         outputCurrent: "180mA",
         benchmarking: "—"
-        schematic: "BCW215S"
       },
       {
         model: "BCW214S",
@@ -1957,7 +1914,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "13Ω",
         outputCurrent: "120mA",
         benchmarking: "AQW214S"
-        schematic: "BCW215S"
       },
       {
         model: "BCW216S",
@@ -1968,7 +1924,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "28Ω",
         outputCurrent: "80mA",
         benchmarking: "—"
-        schematic: "BCW216S"
       },
       {
         model: "BCW412S",
@@ -1979,8 +1934,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "2Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW412S"
-        schematic: "BCW412S"
-        
       },
       {
         model: "BCW414S",
@@ -1991,7 +1944,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "20Ω",
         outputCurrent: "100mA",
         benchmarking: "AQW414S"
-        schematic: "BCW412S"
       },
       {
         model: "BCW612S",
@@ -2002,7 +1954,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "1Ω",
         outputCurrent: "500mA",
         benchmarking: "AQW612S"
-        schematic: "BCW612S"
       },
       {
         model: "BCW614S",
@@ -2013,7 +1964,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "20Ω",
         outputCurrent: "100mA",
         benchmarking: "AQW614S"
-        schematic: "BCW612S"
       },
       {
         model: "BCS225S",
@@ -2024,7 +1974,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         onResistance: "0.3Ω",
         outputCurrent: "100mA",
         benchmarking: "AQS225R2S",
-        schematic: "BCS225S"
         schematic: "BCS225S"
       }
     ]
