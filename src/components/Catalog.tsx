@@ -40,7 +40,7 @@ const formatContactLoad = (loadStr: string) => {
 };
 
 // Helper to render contact loads cleanly and handle both single and multiple load/life mappings
-const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignment = "items-center text-center") => {
+const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignment = "items-center text-center", textColorClass = "text-slate-200") => {
   if (!loadStr) return null;
 
   const parts = loadStr.split(/\s*\|\s*/);
@@ -65,7 +65,7 @@ const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignme
     return (
       <div className={`flex flex-col gap-0.5 ${alignment} max-w-full leading-tight`}>
         {parsedParts.map((p, idx) => (
-          <span key={idx} className={`font-sans ${textClass} text-slate-200 font-semibold block`}>
+          <span key={idx} className={`font-sans ${textClass} ${textColorClass} font-semibold block`}>
             {p.load}
           </span>
         ))}
@@ -78,7 +78,7 @@ const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignme
     <div className={`flex flex-col gap-2 ${alignment} max-w-full`}>
       {parsedParts.map((p, idx) => (
         <div key={idx} className={`flex flex-col gap-0.5 ${alignment} leading-tight`}>
-          <span className={`font-sans ${textClass} text-slate-200 font-semibold block`}>
+          <span className={`font-sans ${textClass} ${textColorClass} font-semibold block`}>
             {p.load}
           </span>
           {p.life && (
@@ -96,7 +96,7 @@ const cleanContactForm = (formStr: string) => {
 };
 
 // Helper to render temperature range with support for splitting "Class: range" into two lines
-const renderTempRange = (tempStr: string) => {
+const renderTempRange = (tempStr: string, textColorClass = "text-slate-200") => {
   if (tempStr.includes(":")) {
     const parts = tempStr.split(":");
     const label = parts[0].trim();
@@ -104,11 +104,34 @@ const renderTempRange = (tempStr: string) => {
     return (
       <div className="flex flex-col gap-0.5 leading-tight items-center text-center">
         <span className="text-xs tracking-wider text-slate-400 font-sans truncate w-full" title={label}>{label}:</span>
-        <span className="font-mono text-sm text-slate-200 font-medium whitespace-nowrap">{val}</span>
+        <span className={`font-mono text-sm ${textColorClass} font-medium whitespace-nowrap`}>{val}</span>
       </div>
     );
   }
-  return <span className="font-mono text-sm text-slate-200 font-medium whitespace-nowrap text-center block w-full">{tempStr}</span>;
+  return <span className={`font-mono text-sm ${textColorClass} font-medium whitespace-nowrap text-center block w-full`}>{tempStr}</span>;
+};
+
+// Helper to detect if a specific cell value is a mismatch (an outlier / different from the majority) among compared cells.
+// If all values are identical, no cells are mismatching.
+// If there is a majority baseline, only non-majority values are mismatching.
+// If there is no majority (all are unique), all are mismatching.
+const isCellValMismatch = (val: string, allVals: string[]) => {
+  const cleanVals = allVals.map(v => (v || "").trim().toLowerCase());
+  const cleanVal = (val || "").trim().toLowerCase();
+  
+  const uniqueVals = new Set(cleanVals);
+  if (uniqueVals.size <= 1) return false;
+
+  const freqs: Record<string, number> = {};
+  cleanVals.forEach((v) => {
+    freqs[v] = (freqs[v] || 0) + 1;
+  });
+
+  const maxFreq = Math.max(...Object.values(freqs));
+  if (maxFreq > 1) {
+    return freqs[cleanVal] < maxFreq;
+  }
+  return true;
 };
 
 interface CatalogProps {
@@ -1140,6 +1163,16 @@ export const Catalog: React.FC<CatalogProps> = ({
                     (p) => CATALOG_CATEGORIES.find(c => c.products.some(pr => pr.model === p.model))?.id === "plastic_photorelay"
                   );
 
+                  // Collect value lists for individual cell-level mismatch detection
+                  const allDimensionsVals = selectedProductsForComparison.map((p) => p.packageStyle || p.dimensions || "");
+                  const allTempRangeVals = selectedProductsForComparison.map((p) => p.outputVoltage || p.tempRange || "");
+                  const allContactFormVals = selectedProductsForComparison.map((p) => 
+                    isComparingPhotoRelays ? (p.outputGroups || p.contactForm || "") : cleanContactForm(p.contactForm || "")
+                  );
+                  const allVibrationVals = selectedProductsForComparison.map((p) => p.onResistance || p.vibration || "");
+                  const allContactLoadVals = selectedProductsForComparison.map((p) => p.outputCurrent || p.contactLoad || "");
+                  const allBenchmarkingVals = selectedProductsForComparison.map((p) => p.benchmarking || "");
+
                   return (
                     <table className="w-full border-collapse border border-slate-800/90 font-sans text-sm table-fixed">
                       <thead>
@@ -1165,16 +1198,20 @@ export const Catalog: React.FC<CatalogProps> = ({
                           <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
                             {isComparingPhotoRelays ? "Package Style" : "Package & Dimensions"}
                           </td>
-                          {selectedProductsForComparison.map((p) => (
-                            <td
-                              key={p.model}
-                              className={`p-4 border-r border-slate-800 font-mono leading-relaxed text-center align-middle ${
-                                mismatchKeys.dimensions ? "text-amber-400 font-bold" : "text-white"
-                              }`}
-                            >
-                              {p.packageStyle || p.dimensions}
-                            </td>
-                          ))}
+                          {selectedProductsForComparison.map((p) => {
+                            const val = p.packageStyle || p.dimensions || "";
+                            const isMismatched = isCellValMismatch(val, allDimensionsVals);
+                            return (
+                              <td
+                                key={p.model}
+                                className={`p-4 border-r border-slate-800 font-mono leading-relaxed text-center align-middle ${
+                                  isMismatched ? "text-amber-400 font-bold" : "text-white"
+                                }`}
+                              >
+                                {p.packageStyle || p.dimensions}
+                              </td>
+                            );
+                          })}
                         </tr>
 
                         {/* Temp range / Output Voltage */}
@@ -1182,20 +1219,24 @@ export const Catalog: React.FC<CatalogProps> = ({
                           <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
                             {isComparingPhotoRelays ? "Output Voltage / Transient Voltage" : "Operating Temperature"}
                           </td>
-                          {selectedProductsForComparison.map((p) => (
-                            <td
-                              key={p.model}
-                              className={`p-4 border-r border-slate-800 text-center align-middle ${
-                                mismatchKeys.tempRange ? "text-amber-400 font-bold" : "text-white"
-                              }`}
-                            >
-                              {isComparingPhotoRelays ? (
-                                <span className="font-mono font-bold text-center block text-sm">{p.outputVoltage || p.tempRange}</span>
-                              ) : (
-                                renderTempRange(p.tempRange || "")
-                              )}
-                            </td>
-                          ))}
+                          {selectedProductsForComparison.map((p) => {
+                            const val = p.outputVoltage || p.tempRange || "";
+                            const isMismatched = isCellValMismatch(val, allTempRangeVals);
+                            return (
+                              <td
+                                key={p.model}
+                                className={`p-4 border-r border-slate-800 text-center align-middle ${
+                                  isMismatched ? "text-amber-400 font-bold" : "text-white"
+                                }`}
+                              >
+                                {isComparingPhotoRelays ? (
+                                  <span className={`font-mono font-bold text-center block text-sm ${isMismatched ? "text-amber-400 font-bold" : "text-white"}`}>{p.outputVoltage || p.tempRange}</span>
+                                ) : (
+                                  renderTempRange(p.tempRange || "", isMismatched ? "text-amber-400 font-bold" : "text-slate-200")
+                                )}
+                              </td>
+                            );
+                          })}
                         </tr>
 
                         {/* Contact Form / Groups */}
@@ -1203,16 +1244,20 @@ export const Catalog: React.FC<CatalogProps> = ({
                           <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
                             {isComparingPhotoRelays ? "Number of Output Groups" : "Contact Configuration"}
                           </td>
-                          {selectedProductsForComparison.map((p) => (
-                            <td
-                              key={p.model}
-                              className={`p-4 border-r border-slate-800 font-semibold text-center align-middle ${
-                                mismatchKeys.contactForm ? "text-amber-400 font-bold" : "text-white"
-                              }`}
-                            >
-                              {isComparingPhotoRelays ? (p.outputGroups || p.contactForm) : cleanContactForm(p.contactForm || "")}
-                            </td>
-                          ))}
+                          {selectedProductsForComparison.map((p) => {
+                            const val = isComparingPhotoRelays ? (p.outputGroups || p.contactForm || "") : cleanContactForm(p.contactForm || "");
+                            const isMismatched = isCellValMismatch(val, allContactFormVals);
+                            return (
+                              <td
+                                key={p.model}
+                                className={`p-4 border-r border-slate-800 font-semibold text-center align-middle ${
+                                  isMismatched ? "text-amber-400 font-bold" : "text-white"
+                                }`}
+                              >
+                                {isComparingPhotoRelays ? (p.outputGroups || p.contactForm) : cleanContactForm(p.contactForm || "")}
+                              </td>
+                            );
+                          })}
                         </tr>
 
                         {/* Vibration / On-Resistance */}
@@ -1220,22 +1265,26 @@ export const Catalog: React.FC<CatalogProps> = ({
                           <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
                             {isComparingPhotoRelays ? "On-Resistance" : "Vibration Tolerance"}
                           </td>
-                          {selectedProductsForComparison.map((p) => (
-                            <td
-                              key={p.model}
-                              className={`p-4 border-r border-slate-800 leading-relaxed text-center align-middle ${
-                                mismatchKeys.vibration ? "text-amber-400 font-bold" : "text-slate-300"
-                              }`}
-                            >
-                              <div className="flex flex-col items-center justify-center text-center gap-1">
-                                {(p.onResistance || p.vibration || "").split(/\s*\|\s*/).map((vPart, idx) => (
-                                  <span key={idx} className="block text-xs leading-tight">
-                                    {vPart}
-                                  </span>
-                                ))}
-                              </div>
-                            </td>
-                          ))}
+                          {selectedProductsForComparison.map((p) => {
+                            const val = p.onResistance || p.vibration || "";
+                            const isMismatched = isCellValMismatch(val, allVibrationVals);
+                            return (
+                              <td
+                                key={p.model}
+                                className={`p-4 border-r border-slate-800 leading-relaxed text-center align-middle ${
+                                  isMismatched ? "text-amber-400 font-bold" : "text-slate-300"
+                                }`}
+                              >
+                                <div className="flex flex-col items-center justify-center text-center gap-1">
+                                  {(p.onResistance || p.vibration || "").split(/\s*\|\s*/).map((vPart, idx) => (
+                                    <span key={idx} className="block text-xs leading-tight">
+                                      {vPart}
+                                    </span>
+                                  ))}
+                                </div>
+                              </td>
+                            );
+                          })}
                         </tr>
 
                         {/* Load rating / Output Current */}
@@ -1244,17 +1293,24 @@ export const Catalog: React.FC<CatalogProps> = ({
                             {isComparingPhotoRelays ? "Output Current" : "Contact Rating & Life"}
                           </td>
                           {selectedProductsForComparison.map((p) => {
+                            const val = p.outputCurrent || p.contactLoad || "";
+                            const isMismatched = isCellValMismatch(val, allContactLoadVals);
                             return (
                               <td
                                 key={p.model}
                                 className={`p-4 border-r border-slate-800 text-center align-middle ${
-                                  mismatchKeys.contactLoad ? "text-amber-400 font-bold" : "text-white"
+                                  isMismatched ? "text-amber-400 font-bold" : "text-white"
                                 }`}
                               >
                                 {isComparingPhotoRelays ? (
-                                  <span className="font-semibold block">{p.outputCurrent || p.contactLoad}</span>
+                                  <span className={`font-semibold block ${isMismatched ? "text-amber-400" : "text-white"}`}>{p.outputCurrent || p.contactLoad}</span>
                                 ) : (
-                                  renderContactLoadHelper(p.outputCurrent || p.contactLoad || "")
+                                  renderContactLoadHelper(
+                                    p.outputCurrent || p.contactLoad || "",
+                                    "text-sm",
+                                    "items-center text-center",
+                                    isMismatched ? "text-amber-400" : "text-slate-200"
+                                  )
                                 )}
                               </td>
                             );
@@ -1266,16 +1322,20 @@ export const Catalog: React.FC<CatalogProps> = ({
                           <td className="p-4 border-r border-slate-800 font-semibold text-slate-400 text-center align-middle">
                             {isComparingPhotoRelays ? "Panasonic and Omron Benchmarking Models" : "Cross-reference Analogs"}
                           </td>
-                          {selectedProductsForComparison.map((p) => (
-                            <td
-                              key={p.model}
-                              className={`p-4 border-r border-slate-800 italic text-center align-middle ${
-                                mismatchKeys.benchmarking ? "text-amber-400 font-bold" : "text-slate-300"
-                              }`}
-                            >
-                              {p.benchmarking}
-                            </td>
-                          ))}
+                          {selectedProductsForComparison.map((p) => {
+                            const val = p.benchmarking || "";
+                            const isMismatched = isCellValMismatch(val, allBenchmarkingVals);
+                            return (
+                              <td
+                                key={p.model}
+                                className={`p-4 border-r border-slate-800 italic text-center align-middle ${
+                                  isMismatched ? "text-amber-400 font-bold" : "text-slate-300"
+                                }`}
+                              >
+                                {p.benchmarking}
+                              </td>
+                            );
+                          })}
                         </tr>
                       </tbody>
                     </table>
