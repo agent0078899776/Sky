@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { CATALOG_CATEGORIES } from "../data";
 import { ProductRec, CatalogCategory } from "../types";
-import { Search, ChevronDown, ChevronRight, X, Shuffle, CheckCircle, ZoomIn, ZoomOut, Zap, Eye, HelpCircle, CornerDownRight } from "lucide-react";
+import { Search, ChevronDown, ChevronRight, X, Shuffle, CheckCircle, ZoomIn, ZoomOut, Zap, Eye, HelpCircle, CornerDownRight, Sliders, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { playRelayClick, playTechBeep, playSparkCrackle, setCoilHumActive } from "../utils/audio";
+import { SmartWizard } from "./SmartWizard";
 
 // Helper to separate physical dimensions from mounting description
 const formatDimensions = (dimStr: string) => {
@@ -123,6 +124,8 @@ export const Catalog: React.FC<CatalogProps> = ({
 }) => {
   // Collapsed categories state. Initially let categories be collapsed by default
   const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
+  // Toggles the high-density parametric smart wizard view
+  const [isWizardOpen, setIsWizardOpen] = useState(false);
   // Selected models for comparison
   const [comparedModels, setComparedModels] = useState<Record<string, boolean>>({});
   // Active selected product for Spec Modal Detailed View
