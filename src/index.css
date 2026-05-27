@@ -16,6 +16,19 @@
   
   --color-border-main: #0f172a; /* slate-900 */
   --color-border-hover: #1e293b; /* slate-800 */
+
+  /* Logo variables dark theme defaults */
+  --color-logo-bg: #060b18;
+  --color-logo-shadow-color: #020617;
+  --color-logo-shadow-opacity: 0.5;
+  --color-logo-glass-shadow: #000000;
+  --color-logo-plate-glow-color: #38bdf8;
+  --color-logo-plate-glow-opacity: 0.12;
+  --color-logo-plate-glow-end: #000000;
+  --color-logo-grad-1: #7dd3fc;
+  --color-logo-grad-2: #38bdf8;
+  --color-logo-grad-3: #0284c7;
+  --color-logo-grad-4: #0c4a6e;
 }
 
 /* Custom Light-Theme Adaptive Overrides */
@@ -34,6 +47,19 @@
   
   --color-border-main: #cbd5e1; /* Level 1 card border */
   --color-border-hover: #94a3b8; /* Level 2 active border */
+
+  /* Logo variables light theme overrides - beautiful white plate with high contrast cyan/blue gradient chrome */
+  --color-logo-bg: #ffffff;
+  --color-logo-shadow-color: #cbd5e1;
+  --color-logo-shadow-opacity: 0.35;
+  --color-logo-glass-shadow: #cbd5e1;
+  --color-logo-plate-glow-color: #0284c7;
+  --color-logo-plate-glow-opacity: 0.05;
+  --color-logo-plate-glow-end: #ffffff;
+  --color-logo-grad-1: #0ea5e9; /* Sky 500 */
+  --color-logo-grad-2: #0284c7; /* Sky 600 */
+  --color-logo-grad-3: #0369a1; /* Sky 700 */
+  --color-logo-grad-4: #0c4a6e; /* Sky 900 retains contrast depth */
 }
 
 /* Smooth transitions for theme transitions */
@@ -81,7 +107,53 @@ table td {
   word-break: break-word !important;
 }
 
-/* Background mappings and depth layers */
+/* Fail-safe attribute-selector background overrides for Light Theme */
+.light-theme [class*="bg-[#060a14]"] {
+  background-color: var(--color-bg-base) !important;
+}
+.light-theme [class*="bg-[#060a14]"][class*="/80"],
+.light-theme header {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+}
+.light-theme [class*="bg-[#0d1527]"] {
+  background-color: var(--color-bg-card) !important;
+}
+.light-theme [class*="bg-[#0a0f1d]"] {
+  background-color: var(--color-bg-card-sub) !important;
+}
+.light-theme [class*="bg-[#0b0f1d]"] {
+  background-color: var(--color-bg-card-sub) !important;
+}
+.light-theme [class*="bg-[#111c34]"] {
+  background-color: var(--color-bg-panel) !important;
+}
+.light-theme [class*="bg-[#111a30]"] {
+  background-color: var(--color-bg-panel) !important;
+}
+.light-theme [class*="bg-[#16223f]"] {
+  background-color: var(--color-bg-button) !important;
+}
+.light-theme [class*="bg-[#1a2b52]"] {
+  background-color: var(--color-bg-button-hover) !important;
+}
+.light-theme [class*="bg-[#0b1021]"] {
+  background-color: var(--color-bg-card) !important;
+}
+.light-theme [class*="bg-[#0b1226]"] {
+  background-color: var(--color-bg-card-sub) !important;
+}
+.light-theme [class*="bg-[#040811]"] {
+  background-color: var(--color-bg-panel) !important;
+}
+.light-theme [class*="bg-slate-950"] {
+  background-color: var(--color-bg-base) !important;
+}
+.light-theme [class*="bg-slate-900"] {
+  background-color: var(--color-bg-card-sub) !important;
+}
+
+/* Standard mapped class list overrides for backward compatibility */
 .light-theme .bg-\[\#060a14\],
 .light-theme .bg-slate-950 {
   background-color: var(--color-bg-base) !important;
