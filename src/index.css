@@ -29,6 +29,7 @@
   --color-logo-grad-2: #38bdf8;
   --color-logo-grad-3: #0284c7;
   --color-logo-grad-4: #0c4a6e;
+  --logo-blend-mode: screen;
 }
 
 /* Custom Light-Theme Adaptive Overrides */
@@ -60,6 +61,7 @@
   --color-logo-grad-2: #0284c7; /* Sky 600 */
   --color-logo-grad-3: #0369a1; /* Sky 700 */
   --color-logo-grad-4: #0c4a6e; /* Sky 900 retains contrast depth */
+  --logo-blend-mode: normal;
 }
 
 /* Smooth transitions for theme transitions */
@@ -230,6 +232,34 @@ table td {
 }
 .light-theme .bg-cyan-950\/20 {
   background-color: rgba(2, 132, 199, 0.08) !important;
+}
+
+/* Fail-safe overrides for general block elements retaining dark backgrounds under Light-theme */
+.light-theme .bg-slate-800,
+.light-theme [class*="bg-slate-800"] {
+  background-color: var(--color-bg-panel) !important;
+  color: var(--color-text-title) !important;
+}
+.light-theme .bg-slate-800\/80 {
+  background-color: var(--color-bg-panel) !important;
+}
+.light-theme .hover\:bg-slate-800:hover,
+.light-theme .hover\:bg-slate-800\/80:hover {
+  background-color: var(--color-bg-button-hover) !important;
+  color: var(--color-text-title) !important;
+}
+
+.light-theme .bg-slate-940,
+.light-theme .bg-slate-950,
+.light-theme [class*="bg-slate-940"],
+.light-theme [class*="bg-slate-950"] {
+  background-color: var(--color-bg-base) !important;
+  border-color: var(--color-border-main) !important;
+}
+
+.light-theme .peer-checked\:bg-cyan-500:checked,
+.light-theme .peer-checked\:bg-cyan-500 {
+  background-color: #0284c7 !important; /* Sky Blue 600 */
 }
 
 /* Text forms high-contrast rules */
