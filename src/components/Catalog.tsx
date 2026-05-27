@@ -1675,12 +1675,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                   {specViewTab === "photo" ? (
                     <div className="flex-1 flex flex-col items-center justify-center p-4 bg-slate-950/40 rounded-xl border border-slate-800/60 min-h-[300px]">
                       {isPhotoAvailable ? (
-                        <div className="relative max-w-full max-h-[380px] rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-900 border border-slate-800">
+                        <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[420px] aspect-square rounded-xl overflow-hidden flex items-center justify-center shadow-lg bg-slate-900 border border-slate-800 p-6 md:p-10">
                           <img
                             src={productPhotoUrl}
                             alt={`${activeSpecProduct.model} components view`}
                             referrerPolicy="no-referrer"
-                            className="max-h-[380px] max-w-full object-contain transition-transform duration-300 hover:scale-105"
+                            className="w-full h-full object-contain transition-transform duration-300 hover:scale-110 filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]"
                             onError={() => {
                               setPhotoAttempt((prev) => {
                                 const stage = prev[currentModel] || "local";
