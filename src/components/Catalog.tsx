@@ -1470,7 +1470,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                       onMouseMove={handleSchematicMouseMove}
                       onMouseUp={handleSchematicMouseUp}
                       onMouseLeave={handleSchematicMouseUp}
-                      className="relative flex-1 bg-slate-950/60 border border-slate-800/80 rounded-xl overflow-hidden flex items-center justify-center cursor-move"
+                      className="relative flex-1 bg-slate-950/60 border border-slate-800/80 rounded-xl overflow-hidden flex items-center justify-center cursor-move font-mono text-xs text-slate-500"
                     >
                       <div
                         style={{
@@ -1637,37 +1637,6 @@ export const Catalog: React.FC<CatalogProps> = ({
                             )}
                           </svg>
                         )}
-                      </div>
-
-                      {/* Manual Solenoid Excitation Controller */}
-                      <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80 w-full shrink-0">
-                        <div className="space-y-0.5 text-center sm:text-left">
-                          <p className="text-xs font-bold font-mono text-cyan-400 flex items-center gap-1.5 justify-center sm:justify-start">
-                            <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                            COIL ACTIVE FORCE ACTUATOR
-                          </p>
-                          <p className="text-[10px] text-slate-400">Click control button to manually shock the electromagnet solenoid core</p>
-                        </div>
-                        <button
-                          onClick={() => {
-                            const nextState = !simulatedCoilOn;
-                            setSimulatedCoilOn(nextState);
-                            if (nextState) {
-                              playRelayClick("close");
-                              setCoilHumActive(true, 60);
-                            } else {
-                              playRelayClick("open");
-                              setCoilHumActive(false);
-                            }
-                          }}
-                          className={`w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-extrabold font-mono transition-all uppercase tracking-wider cursor-pointer ${
-                            simulatedCoilOn
-                              ? "bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.5)] scale-[1.02]"
-                              : "bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 border border-slate-700/80"
-                          }`}
-                        >
-                          {simulatedCoilOn ? "⚡ ACTIVE (60Hz HUM)" : "◯ DE-ENERGIZED"}
-                        </button>
                       </div>
                     </div>
                   ) : (
