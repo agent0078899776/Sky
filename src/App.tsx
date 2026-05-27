@@ -7,10 +7,18 @@ import { HardDrive, HelpCircle, Mail, Phone, ExternalLink, ShieldAlert } from "l
 import { SkySwitchLogo } from "./components/SkySwitchLogo";
 import { BackgroundPulses } from "./components/BackgroundPulses";
 import { playTechBeep, playRelayClick } from "./utils/audio";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 type ActiveTab = "home" | "catalog" | "about" | "contact";
 
 export default function App() {
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    try {
+      return (localStorage.getItem("theme") as "dark" | "light") || "dark";
+    } catch {
+      return "dark";
+    }
+  });
   const [activeTab, setActiveTab] = useState<ActiveTab>("home");
   const [contactFormSelectedModels, setContactFormSelectedModels] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,8 +53,24 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#060a14] text-slate-300 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900 overflow-x-hidden">
+    <div className={`relative min-h-screen bg-[#060a14] text-slate-300 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900 overflow-x-hidden ${theme === "light" ? "light-theme" : ""}`}>
       <BackgroundPulses />
+      
+      {/* Tactical Theme Toggle Switcher */}
+      <ThemeToggle 
+        theme={theme} 
+        onToggle={() => {
+          setTheme((prev) => {
+            const next = prev === "dark" ? "light" : "dark";
+            try {
+              localStorage.setItem("theme", next);
+            } catch (e) {
+              console.warn("Storage failed:", e);
+            }
+            return next;
+          });
+        }} 
+      />
       {/* Sleek corporate Header */}
       <header className="sticky top-0 z-30 bg-[#060a14]/80 backdrop-blur-xl border-b border-slate-900 shadow-md">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
