@@ -59,7 +59,15 @@ const getPossibleSchematics = (product: ProductRec): string[] => {
   // 2. The exact model name itself
   list.push(model);
 
-    // Plastic photorelay (BCY, BCV, BCW, BCS, etc.)
+  // 3. For multiple-word/slash models (e.g. "BC3223 / BC5223")
+  if (model.includes("/")) {
+    const parts = model.split("/").map(s => s.trim());
+    parts.forEach(p => {
+      if (p && !list.includes(p)) list.push(p);
+    });
+  }
+
+  // Plastic photorelay (BCY, BCV, BCW, BCS, etc.)
   const photoMatch = model.match(/^(BC[YVWS]\d{3})/i);
   if (photoMatch) {
     const core = photoMatch[1].toUpperCase();
