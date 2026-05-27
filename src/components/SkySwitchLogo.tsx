@@ -57,44 +57,44 @@ export const SkySwitchLogo: React.FC<SkySwitchLogoProps> = ({
       <defs>
         {/* SkySwitch Royal Sky Blue metallic chrome gradient */}
         <linearGradient id="skySwitchCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#7dd3fc" /> {/* Sky 300 */}
-          <stop offset="45%" stopColor="#38bdf8" /> {/* Sky 400 (Exact core color in image) */}
-          <stop offset="80%" stopColor="#0284c7" /> {/* Sky 600 */}
-          <stop offset="100%" stopColor="#0c4a6e" /> {/* Sky 900 */}
+          <stop offset="0%" stopColor="var(--color-logo-grad-1, #7dd3fc)" /> {/* Sky 300 / Sky 500 adapt */}
+          <stop offset="45%" stopColor="var(--color-logo-grad-2, #38bdf8)" /> {/* Sky 400 / Sky 600 adapt */}
+          <stop offset="80%" stopColor="var(--color-logo-grad-3, #0284c7)" /> {/* Sky 600 / Sky 700 adapt */}
+          <stop offset="100%" stopColor="var(--color-logo-grad-4, #0c4a6e)" /> {/* Sky 900 / Sky 850 adapt */}
         </linearGradient>
 
         {/* Outer concentric neon glow gradient */}
         <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--color-logo-grad-2, #38bdf8)" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="var(--color-logo-grad-3, #0284c7)" stopOpacity="0" />
         </linearGradient>
 
         {/* Glossy overlay for physical 3D glass dome look */}
         <radialGradient id="glassSphereGrad" cx="35%" cy="30%" r="65%">
           <stop offset="0%" stopColor="#ffffff" stopOpacity="0.28" />
           <stop offset="40%" stopColor="#ffffff" stopOpacity="0.04" />
-          <stop offset="70%" stopColor="#000000" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#000000" stopOpacity="0.6" />
+          <stop offset="70%" stopColor="var(--color-logo-glass-shadow, #000000)" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="var(--color-logo-glass-shadow, #000000)" stopOpacity="0.6" />
         </radialGradient>
 
         {/* Underlying active plate glow */}
         <radialGradient id="cyberPlateSphere" cx="50%" cy="50%" r="50%">
-          <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.12" />
-          <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+          <stop offset="50%" stopColor="var(--color-logo-plate-glow-color, #38bdf8)" stopOpacity="var(--color-logo-plate-glow-opacity, 0.12)" />
+          <stop offset="100%" stopColor="var(--color-logo-plate-glow-end, #000000)" stopOpacity="0" />
         </radialGradient>
 
         {/* Dropshadow filter to simulate physical depth profile */}
         <filter id="traceDepthShadow" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="1.5" dy="3.5" stdDeviation="2" floodColor="#020617" floodOpacity="0.75" />
+          <feDropShadow dx="1.5" dy="3.5" stdDeviation="2" floodColor="var(--color-logo-shadow-color, #020617)" floodOpacity="var(--color-logo-shadow-opacity, 0.75)" />
         </filter>
       </defs>
 
       {/* 3D Ambient shadow sphere */}
-      <circle cx="100" cy="103" r="92" fill="#020617" opacity="0.5" />
+      <circle cx="100" cy="103" r="92" fill="var(--color-logo-shadow-color, #020617)" opacity="var(--color-logo-shadow-opacity, 0.5)" />
       <circle cx="100" cy="100" r="92" fill="url(#cyberPlateSphere)" />
 
       {/* Glass Base platter */}
-      <circle cx="100" cy="100" r="90" fill="#060b18" stroke="url(#skySwitchCyanGrad)" strokeWidth="1" />
+      <circle cx="100" cy="100" r="90" fill="var(--color-logo-bg, #060b18)" stroke="url(#skySwitchCyanGrad)" strokeWidth="1" />
 
       {/* --- RECREATED ORIGINAL GEOMETRY DESIGN (100% FAITHFUL TO THE LOGO VECTOR SEEN IN THE IMAGE) --- */}
       
