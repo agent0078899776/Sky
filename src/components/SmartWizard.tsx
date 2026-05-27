@@ -70,11 +70,8 @@ export const SmartWizard: React.FC<SmartWizardProps> = ({
     const list: ProductRec[] = [];
     CATALOG_CATEGORIES.forEach(cat => {
       // Step 1: Filter on category
-      if (category !== "all") {
-        if (category === "electromagnetic" && cat.id !== "sealed_electromagnetic") return;
-        if (category === "latching" && cat.id !== "sealed_latching") return;
-        if (category === "photorelay" && cat.id !== "plastic_photorelay") return;
-        if (category === "specialized" && cat.id !== "sealed_optocouplers" && cat.id !== "time_relays") return;
+      if (category !== "all" && cat.id !== category) {
+        return;
       }
 
       cat.products.forEach(p => {
@@ -82,9 +79,9 @@ export const SmartWizard: React.FC<SmartWizardProps> = ({
         if (contactForm !== "all") {
           const formText = (p.contactForm || p.outputGroups || "").toLowerCase();
           if (contactForm === "1pdt") {
-            if (!formText.includes("1") && !formText.includes("spst") && !formText.includes("1pd")) return;
+            if (!formText.includes("1") && !formText.includes("spst") && !formText.includes("1pd") && !formText.includes("single channel")) return;
           } else if (contactForm === "2pdt") {
-            if (!formText.includes("2") && !formText.includes("dpdt") && !formText.includes("2pd")) return;
+            if (!formText.includes("2") && !formText.includes("dpdt") && !formText.includes("2pd") && !formText.includes("dual channel") && !formText.includes("two channel")) return;
           } else if (contactForm === "4pdt") {
             if (!formText.includes("4") && !formText.includes("4pdt") && !formText.includes("4pd")) return;
           }
@@ -255,13 +252,18 @@ export const SmartWizard: React.FC<SmartWizardProps> = ({
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 max-h-[350px] overflow-y-auto pr-1">
                   {[
-                    { id: "all", title: "Comprehensive Lineup", desc: "No specific family filter. Search across all electromagnetic and semiconductor lines." },
-                    { id: "electromagnetic", title: "Sealed Electromagnetic Relays", desc: "Hermetic high-reliability relays for aviation, spaceflight platforms & military environments." },
-                    { id: "latching", title: "Magnetic Latching Relays", desc: "Zero standby consumption. Magnetic hold state stays secure without excitation active." },
-                    { id: "photorelay", title: "Semiconductor PhotoMOS Relays", desc: "High-voltage solid-state relays in lightweight plastic housings. Silent & extreme frequency life." },
-                    { id: "specialized", title: "Delays & Optocouplers", desc: "Military Time-Delay switches and metal-ceramic heavy sealed active phototransistor couplers." }
+                    { id: "all", title: "Comprehensive Lineup", desc: "No specific category filter. Search across all electromagnetic and semiconductor lines." },
+                    { id: "sealed_electromagnetic", title: "Sealed Electromagnetic Relays", desc: "Hermetic high-reliability relays for aviation, spaceflight platforms & military environments." },
+                    { id: "sealed_magnetic_holding", title: "Sealed Magnetic Holding Relays", desc: "Zero standby consumption. Magnetic hold state stays secure without excitation active." },
+                    { id: "radio_frequency", title: "Radio Frequency Relays", desc: "RF coaxial switches designed for high-frequency signal integrity and minimal isolation coupling loss." },
+                    { id: "contactors", title: "Heavy Duty Contactors", desc: "High-power and heavy-current switching contactors for extreme mechanical power routing." },
+                    { id: "solid_state", title: "Solid State Relays", desc: "Traditional semiconductor isolated switches with high-speed bounce-free execution." },
+                    { id: "metal_solid_state", title: "Metal Encapsulated SSRs", desc: "Heavy industrial/aerospace grade metallic-cased heat-sinkable solid state relays." },
+                    { id: "plastic_photorelay", title: "Plastic PhotoMOS Relays", desc: "Miniature semiconductor PhotoMOS optorelays in DIP/SMD plastic housings." },
+                    { id: "time_relays", title: "Precision Time Relays", desc: "Hermetically sealed military delay timers with high-accuracy calibration." },
+                    { id: "sealed_optocouplers", title: "Sealed Optocouplers", desc: "Ceramic multi-channel high isolation optoelectronic signal isolators." }
                   ].map((opt) => (
                     <button
                       key={opt.id}
