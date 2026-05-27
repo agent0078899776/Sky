@@ -7,9 +7,7 @@ import { playRelayClick, playTechBeep, playSparkCrackle, setCoilHumActive } from
 import { SmartWizard } from "./SmartWizard";
 
 // ==========================================
-// НАСТРОЙКА РАЗМЕРА ИЗОБРАЖЕНИЯ РЕЛЕ В VIEW SPECS
-// Вы можете быстро изменить это число (в пикселях), чтобы настроить размер картинок реле в спецификациях.
-// Например: 150, 180, 220, 300 и т.д. Меньше значение — картинка чётче, больше значение — картинка крупнее.
+// SETTING THE RELAY IMAGE SIZE IN VIEW SPECS
 export const VIEW_SPECS_PHOTO_SIZE = 180;
 // ==========================================
 
