@@ -8,6 +8,7 @@ import { SkySwitchLogo } from "./components/SkySwitchLogo";
 import { BackgroundPulses } from "./components/BackgroundPulses";
 import { playTechBeep, playRelayClick } from "./utils/audio";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { SoundToggle } from "./components/SoundToggle";
 
 type ActiveTab = "home" | "catalog" | "about" | "contact";
 
@@ -17,6 +18,13 @@ export default function App() {
       return (localStorage.getItem("theme") as "dark" | "light") || "dark";
     } catch {
       return "dark";
+    }
+  });
+  const [isMuted, setIsMuted] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem("audio_muted") === "true";
+    } catch {
+      return false;
     }
   });
   const [activeTab, setActiveTab] = useState<ActiveTab>("home");
@@ -55,6 +63,13 @@ export default function App() {
   return (
     <div className={`relative min-h-screen bg-[#060a14] text-slate-300 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900 overflow-x-hidden ${theme === "light" ? "light-theme" : ""}`}>
       <BackgroundPulses />
+      
+      {/* Tactical Sound Feedback Toggle */}
+      <SoundToggle
+        theme={theme}
+        isMuted={isMuted}
+        onToggle={setIsMuted}
+      />
       
       {/* Tactical Theme Toggle Switcher */}
       <ThemeToggle 

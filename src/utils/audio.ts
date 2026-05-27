@@ -4,6 +4,32 @@
 let audioCtx: AudioContext | null = null;
 let coilHumOsc: OscillatorNode | null = null;
 let coilHumGain: GainNode | null = null;
+let isMutedGlobal = false;
+
+// Initialize mute state safely in browser context
+try {
+  if (typeof window !== "undefined") {
+    isMutedGlobal = localStorage.getItem("audio_muted") === "true";
+  }
+} catch (e) {
+  console.warn("Could not read sound preferences", e);
+}
+
+export const getMuteState = (): boolean => isMutedGlobal;
+
+export const setMuteState = (muted: boolean) => {
+  isMutedGlobal = muted;
+  try {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("audio_muted", String(muted));
+    }
+  } catch (e) {}
+  
+  // If muted, immediately cut off any active hums
+  if (muted) {
+    setCoilHumActive(false);
+  }
+};
 
 const getAudioContext = (): AudioContext | null => {
   if (typeof window === "undefined") return null;
@@ -26,11 +52,12 @@ const getAudioContext = (): AudioContext | null => {
  * @param type 'close' (energized) or 'open' (released)
  */
 export const playRelayClick = (type: "close" | "open" = "close") => {
+  if (isMutedGlobal) return;
   const ctx = getAudioContext();
   if (!ctx) return;
-
+  
   const now = ctx.currentTime;
-
+  
   // 1. Core impact - sharp metallic transient envelope
   const impactOsc = ctx.createOscillator();
   const impactGain = ctx.createGain();
@@ -81,6 +108,7 @@ export const playRelayClick = (type: "close" | "open" = "close") => {
  * Premium technological micro-beep chime for buttons/tab changes.
  */
 export const playTechBeep = (freq = 1200, duration = 0.06) => {
+  if (isMutedGlobal) return;
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -105,6 +133,7 @@ export const playTechBeep = (freq = 1200, duration = 0.06) => {
  * Synthesizes an overload spark crackle when contact failures occur.
  */
 export const playSparkCrackle = () => {
+  if (isMutedGlobal) return;
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -139,6 +168,7 @@ export const playSparkCrackle = () => {
  * @param frequency Base hum frequency, e.g., 50Hz, 120Hz
  */
 export const setCoilHumActive = (state: boolean, frequency = 60) => {
+  if (state && isMutedGlobal) return;
   const ctx = getAudioContext();
   if (!ctx) return;
 
