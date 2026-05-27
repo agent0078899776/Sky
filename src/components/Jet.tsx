@@ -1,11 +1,11 @@
 import React from "react";
 
-interface ChineseJetProps {
+interface JetProps {
   rotation?: number; // Tilt of the jet (roll/banking)
   activeScroll?: boolean; // If scrolling is active, increase afterburner flames
 }
 
-export const ChineseJet: React.FC<ChineseJetProps> = ({ rotation = 0, activeScroll = false }) => {
+export const Jet: React.FC<JetProps> = ({ rotation = 0, activeScroll = false }) => {
   return (
     <div
       className="relative transition-transform duration-300 ease-out"
