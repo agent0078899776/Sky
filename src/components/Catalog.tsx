@@ -8,14 +8,16 @@ import { SmartWizard } from "./SmartWizard";
 
 // Helper to separate physical dimensions from mounting description
 const formatDimensions = (dimStr: string) => {
-  const match = dimStr.match(/^([^\d\s]*\s*\d+(?:\.\d+)?\s*x\s*\d+(?:\.\d+)?(?:\s*x\s*\d+(?:\.\d+)?)?)\s*(.*)$/i);
+  if (!dimStr) return { size: "", desc: "" };
+  const cleaned = dimStr.replace(/\s*x\s*/gi, "x");
+  const match = cleaned.match(/^([^\d\s]*\s*\d+(?:\.\d+)?x\d+(?:\.\d+)?(?:x\d+(?:\.\d+)?)?)\s*(.*)$/i);
   if (match) {
     return {
       size: match[1].trim(),
       desc: match[2].trim()
     };
   }
-  return { size: "", desc: dimStr };
+  return { size: "", desc: cleaned };
 };
 const resolveImagePath = (src: string) => {
   if (!src) return "";
@@ -95,20 +97,35 @@ const cleanContactForm = (formStr: string) => {
   return formStr.replace(/\s*\([^)]*\)/g, "").trim();
 };
 
-// Helper to render temperature range with support for splitting "Class: range" into two lines
+// Helper to render temperature range with support for splitting "Class: range" and multiclass delimiters into multiple lines
 const renderTempRange = (tempStr: string, textColorClass = "text-slate-200") => {
-  if (tempStr.includes(":")) {
-    const parts = tempStr.split(":");
-    const label = parts[0].trim();
-    const val = parts.slice(1).join(":").trim();
-    return (
-      <div className="flex flex-col gap-0.5 leading-tight items-center text-center">
-        <span className="text-xs tracking-wider text-slate-400 font-sans truncate w-full" title={label}>{label}:</span>
-        <span className={`font-mono text-xs sm:text-sm ${textColorClass} font-medium tracking-tight whitespace-normal break-words`}>{val}</span>
-      </div>
-    );
-  }
-  return <span className={`font-mono text-xs sm:text-sm ${textColorClass} font-medium tracking-tight whitespace-normal break-words text-center block w-full`}>{tempStr}</span>;
+  if (!tempStr) return null;
+  
+  // Split by '|' to separate multiple classifications or groups nicely
+  const segments = tempStr.split(/\s*\|\s*/);
+  
+  return (
+    <div className="flex flex-col gap-1 items-center text-center">
+      {segments.map((segment, sIdx) => {
+        if (segment.includes(":")) {
+          const parts = segment.split(":");
+          const label = parts[0].trim();
+          const val = parts.slice(1).join(":").trim();
+          return (
+            <div key={sIdx} className="flex flex-col items-center">
+              <span className="text-[10px] tracking-wider text-slate-400 font-sans uppercase font-bold">{label}:</span>
+              <span className={`font-mono text-xs ${textColorClass} font-semibold whitespace-nowrap`}>{val}</span>
+            </div>
+          );
+        }
+        return (
+          <span key={sIdx} className={`font-mono text-xs ${textColorClass} font-semibold whitespace-nowrap block w-full`}>
+            {segment}
+          </span>
+        );
+      })}
+    </div>
+  );
 };
 
 // Helper to detect if a specific cell value is a mismatch (an outlier / different from the majority) among compared cells.
@@ -695,7 +712,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
                                     {/* Package */}
                                     <td className="py-3.5 px-3 text-slate-300 font-mono text-center align-middle">
-                                      {p.packageStyle || p.dimensions}
+                                      {p.packageStyle || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : "")}
                                     </td>
 
                                     {/* Dynamic RowSpan Product Images */}
@@ -1012,7 +1029,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                       const { size, desc } = formatDimensions(p.dimensions);
                                       return (
                                         <div className="flex flex-col items-center text-center">
-                                          <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || p.dimensions}</span>
+                                          <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{size || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : "")}</span>
                                           {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                         </div>
                                       );
@@ -1213,7 +1230,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   isMismatched ? "text-amber-400 font-bold" : "text-white"
                                 }`}
                               >
-                                {p.packageStyle || p.dimensions}
+                                {p.packageStyle || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : "")}
                               </td>
                             );
                           })}
@@ -1418,7 +1435,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
                               {isPhotoRelay ? "Package" : "Housing details"}
                             </div>
-                            <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.packageStyle || activeSpecProduct.dimensions}</div>
+                            <div className="text-xs text-white leading-relaxed font-semibold">{activeSpecProduct.packageStyle || (activeSpecProduct.dimensions ? activeSpecProduct.dimensions.replace(/\s*x\s*/gi, "x") : "")}</div>
                           </div>
                           <div className="py-3 flex flex-col items-center justify-center text-center gap-1">
                             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
@@ -1747,7 +1764,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                       </div>
                     </div>
                   ) : (
-                    <div className="flex-1 flex flex-col justify-between p-5 bg-[#0a0f1d] border border-slate-800 rounded-xl relative overflow-hidden font-sans text-slate-200 min-h-[420px]">
+                    <div className="flex-1 flex flex-col justify-between p-5 bg-[#0a0f1d] border border-slate-800 rounded-xl relative overflow-visible md:overflow-hidden font-sans text-slate-200 h-auto md:min-h-[420px]">
                       {/* Stress Tester Widget */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
                         {/* Sliders Area */}
