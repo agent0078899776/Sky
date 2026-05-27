@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { WHY_SKY_SWITCH, APPLICATION_AREAS } from "../data";
 import { ArrowRight, Star, Shield, HardDrive, Compass, Mail, Award, CheckCircle2, Zap, ShieldEllipsis, Navigation } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { RussianJet } from "./RussianJet";
+import { ChineseJet } from "./ChineseJet";
 import { FeedbackRequestForm } from "./FeedbackRequestForm";
 
 const resolveImagePath = (src: string) => {
@@ -185,8 +185,8 @@ export const Home: React.FC<HomeProps> = ({
 
           {/* Dynamic Glowing Combat Radar Target indicator */}
           <div className="relative z-10 flex items-center justify-center">
-            {/* Su-57 Vector Jet representation */}
-            <RussianJet rotation={tilt} activeScroll={activeScroll} />
+            {/* J-20 Vector Jet representation */}
+            <ChineseJet rotation={tilt} activeScroll={activeScroll} />
 
             {/* Wingtip vortex vapors */}
             <div 
@@ -216,7 +216,7 @@ export const Home: React.FC<HomeProps> = ({
             <div className="space-y-0.5 text-slate-300">
               <p className="flex justify-between">
                 <span>MODEL:</span> 
-                <span className="text-cyan-400 font-bold">SU-57 FELON</span>
+                <span className="text-cyan-400 font-bold">J-20 DRAGON</span>
               </p>
               <p className="flex justify-between">
                 <span>ALTITUDE:</span> 
