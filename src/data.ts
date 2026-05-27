@@ -12,7 +12,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         dimensions: "Φ8.5 x 7.1 Resistance sealing welding",
         tempRange: "-65 ~ 125",
         contactForm: "1PDT",
-        vibration: "Sinusoidal: 196m/s² 10~2000Hz | Random: 169.1m/s² 20(m/s²)²/Hz",
+        vibration: "Sinusoidal: 196m/s² (10~2000Hz) | Random: 169.1m/s² 20(m/s²)²/Hz",
         contactLoad: "1A, 28Vd.c. (100,000 cycles)",
         benchmarking: "Teledyne (411)",
       },
@@ -22,7 +22,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         dimensions: "Φ8.5 x 7.1 Resistance sealing welding",
         tempRange: "-55 ~ 85",
         contactForm: "2PDT",
-        vibration: "Sinusoidal: 196m/s² 10~2000Hz",
+        vibration: "Sinusoidal: 196m/s² (10~2000Hz)",
         contactLoad: "1A, 28Vd.c. (100,000 cycles)",
         benchmarking: "Teledyne (412), Tyco (MA)",
       },
@@ -1296,7 +1296,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "0.9A",
-        benchmarking: "AQH2213(A)"
+        benchmarking: "AQH2213(A)",
+        schematic: "BC2213"
       },
       {
         model: "BC3213",
@@ -1306,7 +1307,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "1.2A",
-        benchmarking: "AQH3213(A)"
+        benchmarking: "AQH3213(A)",
+        schematic: "BC2213"
       },
       {
         model: "BC5213",
@@ -1316,7 +1318,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "2A",
-        benchmarking: "—"
+        benchmarking: "—",
+        schematic: "BC2213"
       },
       {
         model: "BC2223",
@@ -1326,7 +1329,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "0.9A",
-        benchmarking: "AQH2223(A)"
+        benchmarking: "AQH2223(A)",
+        schematic: "BC2223"
       },
       {
         model: "BC3223 / BC5223",
@@ -1336,7 +1340,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "—",
         outputCurrent: "1.2A / 2A",
-        benchmarking: "AQH3223(A)"
+        benchmarking: "AQH3223(A)",
+        schematic: "BC2223"
       },
       {
         model: "BCY211S",
@@ -1346,7 +1351,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "0.06Ω",
         outputCurrent: "2A",
-        benchmarking: "AQY211G2S, G3VM-41GR8"
+        benchmarking: "AQY211G2S, G3VM-41GR8",
+        schematic: "BCY211S"
       },
       {
         model: "BCY212S1",
@@ -1356,7 +1362,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "2Ω",
         outputCurrent: "200mA",
-        benchmarking: "—"
+        benchmarking: "—",
+        schematic: "BCY212S1"
       },
       {
         model: "BCY212S",
@@ -1366,7 +1373,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "0.8Ω",
         outputCurrent: "500mA",
-        benchmarking: "AQY212S, G3VM-61G2"
+        benchmarking: "AQY212S, G3VM-61G2",
+        schematic: "BCY211S"
       },
       {
         model: "BCY212G1S",
@@ -1496,7 +1504,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "1Ω",
         outputCurrent: "500mA",
-        benchmarking: "AQY212EH"
+        benchmarking: "AQY212EH",
+        schematic: "BCY216"
       },
       {
         model: "BCY211G",
@@ -1506,7 +1515,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "0.04Ω",
         outputCurrent: "3A",
-        benchmarking: "—"
+        benchmarking: "—",
+        schematic: "BCY211G"
       },
       {
         model: "BCY252",
@@ -1586,7 +1596,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "0.033Ω",
         outputCurrent: "4.5A",
-        benchmarking: "AQV101"
+        benchmarking: "AQV101",
+        schematic: "BCV211G4"
       },
       {
         model: "BCV212",
@@ -1596,7 +1607,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "1Ω",
         outputCurrent: "500mA",
-        benchmarking: "AQV212"
+        benchmarking: "AQV212",
+        schematic: "BCV212"
       },
       {
         model: "BCV212G",
@@ -1706,7 +1718,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "1 Form A",
         onResistance: "200Ω",
         outputCurrent: "30mA",
-        benchmarking: "—"
+        benchmarking: "—",
+        schematic: "BCV278"
       },
       {
         model: "BCW251",
@@ -1716,7 +1729,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "2 Form A",
         onResistance: "0.06Ω",
         outputCurrent: "2A",
-        benchmarking: "—"
+        benchmarking: "—",
+        schematic: "BCW251"
       },
       {
         model: "BCW251G",
@@ -1726,7 +1740,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "2 Form A",
         onResistance: "0.05Ω",
         outputCurrent: "2.5A",
-        benchmarking: "—"
+        benchmarking: "—",
+        schematic: "BCW251"
       },
       {
         model: "BCW212E",
@@ -1826,7 +1841,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "2 Form A",
         onResistance: "0.06Ω",
         outputCurrent: "2A",
-        benchmarking: "—"
+        benchmarking: "—",
+        schematic: "BCW211GS"
       },
       {
         model: "BCW212S1",
@@ -1946,7 +1962,8 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         outputGroups: "4 Form A",
         onResistance: "0.3Ω",
         outputCurrent: "100mA",
-        benchmarking: "AQS225R2S"
+        benchmarking: "AQS225R2S",
+        schematic: "BCS225S"
       }
     ]
   },
