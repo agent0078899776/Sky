@@ -529,7 +529,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         dimensions: "26.0 x 13.5 x 26.0",
         tempRange: "-65 ~ 125",
         contactForm: "2PDT",
-        vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/H",
+        vibration: "Sinusoidal: 294m/s² 10~3000Hz | Random: 239.1m/s² 40(m/s²)²/Hz",
         contactLoad: "10A, 28Vd.c. (50,000 cycles)",
         benchmarking: "Leach US (JL), Leach EU (M302)",
       },
