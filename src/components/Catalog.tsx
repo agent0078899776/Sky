@@ -725,11 +725,11 @@ export const Catalog: React.FC<CatalogProps> = ({
                       transition={{ duration: 0.2 }}
                       className="overflow-x-auto border-t border-slate-800/80"
                     >
-                      <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" || category.id === "time_relays" || category.id === "sealed_optocouplers" ? "min-w-[1240px]" : "min-w-[1100px]"}`}>
+                      <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" || category.id === "time_relays" || category.id === "sealed_optocouplers" ? "min-w-[1340px]" : "min-w-[1220px]"}`}>
                         <thead className="font-sans">
                           {category.id === "plastic_photorelay" ? (
                             <tr className="bg-slate-900/90 border-b-2 border-slate-800 text-white text-[14px] font-bold tracking-wide font-sans">
-                              <th className="py-4 px-3 w-[160px] text-center align-middle">Model</th>
+                              <th className="py-4 px-3 w-[210px] text-center align-middle">Model</th>
                               <th className="py-4 px-3 w-[110px] text-center align-middle">Package</th>
                               <th className="py-4 px-3 w-[130px] text-center align-middle">Product Image</th>
                               <th className="py-4 px-3 w-[160px] text-center align-middle">Number of Output Groups</th>
@@ -741,7 +741,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                             </tr>
                           ) : category.id === "time_relays" ? (
                             <tr className="bg-slate-900/90 border-b-2 border-slate-800 text-white text-[14px] font-bold tracking-wide font-sans">
-                              <th className="py-4 px-3 w-[150px] text-center align-middle">Product Model</th>
+                              <th className="py-4 px-3 w-[200px] text-center align-middle">Product Model</th>
                               <th className="py-4 px-3 w-[120px] text-center align-middle">Product Picture</th>
                               <th className="py-4 px-3 w-[180px] text-center align-middle">Dimensions (mm) and Package</th>
                               <th className="py-4 px-3 w-[130px] text-center align-middle">Temperature Range (℃)</th>
@@ -753,7 +753,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                             </tr>
                           ) : category.id === "sealed_optocouplers" ? (
                             <tr className="bg-slate-900/90 border-b-2 border-slate-800 text-white text-[14px] font-bold tracking-wide font-sans">
-                              <th className="py-4 px-3 w-[150px] text-center align-middle">Product Model</th>
+                              <th className="py-4 px-3 w-[200px] text-center align-middle">Product Model</th>
                               <th className="py-4 px-3 w-[120px] text-center align-middle">Product Picture</th>
                               <th className="py-4 px-3 w-[180px] text-center align-middle">Dimensions (mm) and Package</th>
                               <th className="py-4 px-3 w-[130px] text-center align-middle">Temperature Range (℃)</th>
@@ -768,7 +768,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                               <th className="py-4 px-1.5 w-[36px] text-center align-middle" title="Compare">
                                 <Shuffle size={12} className="mx-auto opacity-80" />
                               </th>
-                              <th className="py-4 px-3 w-[115px] text-center align-middle">Product Model</th>
+                              <th className="py-4 px-3 w-[180px] text-center align-middle">Product Model</th>
                               <th className="py-4 px-3 w-[130px] text-center align-middle">Dimensions (mm)</th>
                               <th className="py-4 px-3 w-[110px] text-center align-middle">Temperature range (℃)</th>
                               <th className="py-4 px-3 w-[130px] text-center align-middle">Contact Form</th>
@@ -826,7 +826,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                             {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
                                           </div>
                                         </label>
-                                        <span className="font-sans font-bold text-cyan-400 select-all whitespace-normal break-words leading-tight text-[13px]">
+                                        <span className="font-sans font-bold text-cyan-400 select-all whitespace-nowrap leading-tight text-[13px]">
                                           {p.model}
                                         </span>
                                       </div>
@@ -921,7 +921,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                             {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
                                           </div>
                                         </label>
-                                        <span className="text-[13px] font-sans font-bold select-all whitespace-normal break-words leading-tight">{p.model}</span>
+                                        <span className="text-[13px] font-sans font-bold select-all whitespace-nowrap leading-tight">{p.model}</span>
                                       </div>
                                     </td>
 
@@ -1021,7 +1021,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                             {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
                                           </div>
                                         </label>
-                                        <span className="text-[13px] font-sans font-bold select-all whitespace-normal break-words leading-tight">{p.model}</span>
+                                        <span className="text-[13px] font-sans font-bold select-all whitespace-nowrap leading-tight">{p.model}</span>
                                       </div>
                                     </td>
 
@@ -1141,7 +1141,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                           />
                                         </div>
                                       )}
-                                      <span className="text-[13px] font-sans font-bold">{p.model}</span>
+                                      <span className="text-[13px] font-sans font-bold whitespace-nowrap">{p.model}</span>
                                     </div>
                                   </td>
 
