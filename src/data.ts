@@ -656,7 +656,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         dimensions: "32.0 x 28.0 x 12.0xial Closed type",
         tempRange: "-55 ~ 85",
         contactForm: "1PDT",
-        vibration: "Coaxial RF standard 98m/s² 10~2000Hz",
+        vibration: "98m/s² 10~2000Hz",
         contactLoad: "24W @ 500MHz (1,000,000 cycles)",
         benchmarking: "PΠB5/7-PC4.521.326",
       },
