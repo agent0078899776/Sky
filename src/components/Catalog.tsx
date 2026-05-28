@@ -7,7 +7,9 @@ import { playRelayClick, playTechBeep, playSparkCrackle, setCoilHumActive } from
 import { SmartWizard } from "./SmartWizard";
 
 // ==========================================
-// SETTING THE RELAY IMAGE SIZE IN VIEW SPECS
+// НАСТРОЙКА РАЗМЕРА ИЗОБРАЖЕНИЯ РЕЛЕ В VIEW SPECS
+// Вы можете быстро изменить это число (в пикселях), чтобы настроить размер картинок реле в спецификациях.
+// Например: 150, 180, 220, 300 и т.д. Меньше значение — картинка чётче, больше значение — картинка крупнее.
 export const VIEW_SPECS_PHOTO_SIZE = 180;
 // ==========================================
 
@@ -121,7 +123,7 @@ const formatContactLoad = (loadStr: string) => {
 };
 
 // Helper to render contact loads cleanly and handle both single and multiple load/life mappings
-const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignment = "items-center text-center", textColorClass = "text-slate-200") => {
+const renderContactLoadHelper = (loadStr: string, textClass = "text-[13px]", alignment = "items-center text-center", textColorClass = "text-slate-200") => {
   if (!loadStr) return null;
 
   const parts = loadStr.split(/\s*\|\s*/);
@@ -144,26 +146,26 @@ const renderContactLoadHelper = (loadStr: string, textClass = "text-sm", alignme
   if (onlyLastHasLife) {
     const commonLife = parsedParts[parsedParts.length - 1].life;
     return (
-      <div className={`flex flex-col gap-0.5 ${alignment} max-w-full leading-tight`}>
+      <div className={`flex flex-col gap-0.5 ${alignment} max-w-full leading-tight font-sans`}>
         {parsedParts.map((p, idx) => (
           <span key={idx} className={`font-sans ${textClass} ${textColorClass} font-semibold block`}>
             {p.load}
           </span>
         ))}
-        <span className="text-xs text-slate-400 mt-1 font-mono leading-tight block">({commonLife})</span>
+        <span className="text-[11px] text-slate-400 mt-1 font-sans leading-tight block">({commonLife})</span>
       </div>
     );
   }
 
   return (
-    <div className={`flex flex-col gap-2 ${alignment} max-w-full`}>
+    <div className={`flex flex-col gap-2 ${alignment} max-w-full font-sans`}>
       {parsedParts.map((p, idx) => (
         <div key={idx} className={`flex flex-col gap-0.5 ${alignment} leading-tight`}>
           <span className={`font-sans ${textClass} ${textColorClass} font-semibold block`}>
             {p.load}
           </span>
           {p.life && (
-            <span className="text-xs text-slate-400 mt-0.5 font-mono leading-tight block">({p.life})</span>
+            <span className="text-[11px] text-slate-400 mt-0.5 font-sans leading-tight block">({p.life})</span>
           )}
         </div>
       ))}
@@ -184,21 +186,21 @@ const renderTempRange = (tempStr: string, textColorClass = "text-slate-200") => 
   const segments = tempStr.split(/\s*\|\s*/);
   
   return (
-    <div className="flex flex-col gap-1 items-center text-center">
+    <div className="flex flex-col gap-1 items-center text-center font-sans">
       {segments.map((segment, sIdx) => {
         if (segment.includes(":")) {
           const parts = segment.split(":");
           const label = parts[0].trim();
           const val = parts.slice(1).join(":").trim();
           return (
-            <div key={sIdx} className="flex flex-col items-center">
+            <div key={sIdx} className="flex flex-col items-center font-sans">
               <span className="text-[10px] tracking-wider text-slate-400 font-sans uppercase font-bold">{label}:</span>
-              <span className={`font-mono text-xs ${textColorClass} font-semibold whitespace-nowrap`}>{val}</span>
+              <span className={`font-sans text-[13px] ${textColorClass} font-semibold whitespace-nowrap`}>{val}</span>
             </div>
           );
         }
         return (
-          <span key={sIdx} className={`font-mono text-xs ${textColorClass} font-semibold whitespace-nowrap block w-full`}>
+          <span key={sIdx} className={`font-sans text-[13px] ${textColorClass} font-semibold whitespace-nowrap block w-full`}>
             {segment}
           </span>
         );
@@ -726,56 +728,56 @@ export const Catalog: React.FC<CatalogProps> = ({
                       className="overflow-x-auto border-t border-slate-800/80"
                     >
                       <table className={`w-full text-left border-collapse table-fixed ${category.id === "plastic_photorelay" || category.id === "time_relays" || category.id === "sealed_optocouplers" ? "min-w-[1240px]" : "min-w-[1100px]"}`}>
-                        <thead>
+                        <thead className="font-sans">
                           {category.id === "plastic_photorelay" ? (
-                            <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
-                              <th className="py-3.5 px-3 w-[160px] text-center align-middle">Model</th>
-                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">Package</th>
-                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Product Image</th>
-                              <th className="py-3.5 px-3 w-[160px] text-center align-middle">Number of Output Groups</th>
-                              <th className="py-3.5 px-3 w-[180px] text-center align-middle">Output Voltage / Transient Voltage</th>
-                              <th className="py-3.5 px-3 w-[120px] text-center align-middle">Output Current</th>
-                              <th className="py-3.5 px-3 w-[120px] text-center align-middle">On-Resistance</th>
-                              <th className="py-3.5 px-3 w-[225px] text-center align-middle">Panasonic and Omron Benchmarking Models</th>
-                              <th className="py-3.5 px-1.5 text-center w-[95px] align-middle">Action</th>
+                            <tr className="bg-slate-900/90 border-b-2 border-slate-800 text-white text-[14px] font-bold tracking-wide font-sans">
+                              <th className="py-4 px-3 w-[160px] text-center align-middle">Model</th>
+                              <th className="py-4 px-3 w-[110px] text-center align-middle">Package</th>
+                              <th className="py-4 px-3 w-[130px] text-center align-middle">Product Image</th>
+                              <th className="py-4 px-3 w-[160px] text-center align-middle">Number of Output Groups</th>
+                              <th className="py-4 px-3 w-[180px] text-center align-middle">Output Voltage / Transient Voltage</th>
+                              <th className="py-4 px-3 w-[120px] text-center align-middle">Output Current</th>
+                              <th className="py-4 px-3 w-[120px] text-center align-middle">On-Resistance</th>
+                              <th className="py-4 px-3 w-[225px] text-center align-middle">Panasonic and Omron Benchmarking Models</th>
+                              <th className="py-4 px-1.5 text-center w-[95px] align-middle">Action</th>
                             </tr>
                           ) : category.id === "time_relays" ? (
-                            <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
-                              <th className="py-3.5 px-3 w-[150px] text-center align-middle">Product Model</th>
-                              <th className="py-3.5 px-3 w-[120px] text-center align-middle">Product Picture</th>
-                              <th className="py-3.5 px-3 w-[180px] text-center align-middle">Dimensions (mm) and Package</th>
-                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Temperature Range (℃)</th>
-                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">Number of Output Groups</th>
-                              <th className="py-3.5 px-3 w-[230px] text-center align-middle">Vibration</th>
-                              <th className="py-3.5 px-3 w-[170px] text-center align-middle">Contact Load and Lifetime</th>
-                              <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
-                              <th className="py-3.5 px-1.5 text-center w-[95px] align-middle">Action</th>
+                            <tr className="bg-slate-900/90 border-b-2 border-slate-800 text-white text-[14px] font-bold tracking-wide font-sans">
+                              <th className="py-4 px-3 w-[150px] text-center align-middle">Product Model</th>
+                              <th className="py-4 px-3 w-[120px] text-center align-middle">Product Picture</th>
+                              <th className="py-4 px-3 w-[180px] text-center align-middle">Dimensions (mm) and Package</th>
+                              <th className="py-4 px-3 w-[130px] text-center align-middle">Temperature Range (℃)</th>
+                              <th className="py-4 px-3 w-[110px] text-center align-middle">Number of Output Groups</th>
+                              <th className="py-4 px-3 w-[230px] text-center align-middle">Vibration</th>
+                              <th className="py-4 px-3 w-[170px] text-center align-middle">Contact Load and Lifetime</th>
+                              <th className="py-4 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
+                              <th className="py-4 px-1.5 text-center w-[95px] align-middle">Action</th>
                             </tr>
                           ) : category.id === "sealed_optocouplers" ? (
-                            <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
-                              <th className="py-3.5 px-3 w-[150px] text-center align-middle">Product Model</th>
-                              <th className="py-3.5 px-3 w-[120px] text-center align-middle">Product Picture</th>
-                              <th className="py-3.5 px-3 w-[180px] text-center align-middle">Dimensions (mm) and Package</th>
-                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Temperature Range (℃)</th>
-                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">Number of Output Groups</th>
-                              <th className="py-3.5 px-3 w-[200px] text-center align-middle">Vibration</th>
-                              <th className="py-3.5 px-3 w-[200px] text-center align-middle">Main Parameters</th>
-                              <th className="py-3.5 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
-                              <th className="py-3.5 px-1.5 text-center w-[95px] align-middle">Action</th>
+                            <tr className="bg-slate-900/90 border-b-2 border-slate-800 text-white text-[14px] font-bold tracking-wide font-sans">
+                              <th className="py-4 px-3 w-[150px] text-center align-middle">Product Model</th>
+                              <th className="py-4 px-3 w-[120px] text-center align-middle">Product Picture</th>
+                              <th className="py-4 px-3 w-[180px] text-center align-middle">Dimensions (mm) and Package</th>
+                              <th className="py-4 px-3 w-[130px] text-center align-middle">Temperature Range (℃)</th>
+                              <th className="py-4 px-3 w-[110px] text-center align-middle">Number of Output Groups</th>
+                              <th className="py-4 px-3 w-[200px] text-center align-middle">Vibration</th>
+                              <th className="py-4 px-3 w-[200px] text-center align-middle">Main Parameters</th>
+                              <th className="py-4 px-3 w-[125px] text-center align-middle">Benchmarking Model</th>
+                              <th className="py-4 px-1.5 text-center w-[95px] align-middle">Action</th>
                             </tr>
                           ) : (
-                            <tr className="bg-slate-900/60 border-b border-slate-800 text-slate-300 text-sm font-semibold tracking-wider">
-                              <th className="py-3.5 px-1.5 w-[36px] text-center align-middle" title="Compare">
+                            <tr className="bg-slate-900/90 border-b-2 border-slate-800 text-white text-[14px] font-bold tracking-wide font-sans">
+                              <th className="py-4 px-1.5 w-[36px] text-center align-middle" title="Compare">
                                 <Shuffle size={12} className="mx-auto opacity-80" />
                               </th>
-                              <th className="py-3.5 px-3 w-[115px] text-center align-middle">Product Model</th>
-                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Dimensions (mm)</th>
-                              <th className="py-3.5 px-3 w-[110px] text-center align-middle">Temperature range (℃)</th>
-                              <th className="py-3.5 px-3 w-[130px] text-center align-middle">Contact Form</th>
-                              <th className="py-3.5 px-3 w-[200px] text-center align-middle">Vibration</th>
-                              <th className="py-3.5 px-3 w-[155px] text-center align-middle">Contact Load & Lifetime</th>
-                              <th className="py-3.5 px-3 w-[115px] text-center align-middle">Benchmarking Model</th>
-                              <th className="py-3.5 px-1.5 text-center w-[90px] align-middle">Action</th>
+                              <th className="py-4 px-3 w-[115px] text-center align-middle">Product Model</th>
+                              <th className="py-4 px-3 w-[130px] text-center align-middle">Dimensions (mm)</th>
+                              <th className="py-4 px-3 w-[110px] text-center align-middle">Temperature range (℃)</th>
+                              <th className="py-4 px-3 w-[130px] text-center align-middle">Contact Form</th>
+                              <th className="py-4 px-3 w-[200px] text-center align-middle">Vibration</th>
+                              <th className="py-4 px-3 w-[155px] text-center align-middle">Contact Load & Lifetime</th>
+                              <th className="py-4 px-3 w-[115px] text-center align-middle">Benchmarking Model</th>
+                              <th className="py-4 px-1.5 text-center w-[90px] align-middle">Action</th>
                             </tr>
                           )}
                         </thead>
@@ -813,8 +815,8 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     }`}
                                   >
                                     {/* Model identifier with internal checkbox */}
-                                    <td className="py-3.5 px-3 align-middle text-left">
-                                      <div className="flex items-center gap-3 justify-start pl-1">
+                                    <td className="py-3.5 px-3 align-middle text-left font-sans">
+                                      <div className="flex items-center gap-3 justify-start pl-1 font-sans">
                                         <label className="relative inline-flex items-center justify-center cursor-pointer h-5 w-5 shrink-0">
                                           <input
                                             type="checkbox"
@@ -826,14 +828,14 @@ export const Catalog: React.FC<CatalogProps> = ({
                                             {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
                                           </div>
                                         </label>
-                                        <span className="font-mono font-bold text-cyan-400 select-all whitespace-normal break-words leading-tight text-sm">
+                                        <span className="font-sans font-bold text-cyan-400 select-all whitespace-normal break-words leading-tight text-[13px]">
                                           {p.model}
                                         </span>
                                       </div>
                                     </td>
 
                                     {/* Package */}
-                                    <td className="py-3.5 px-3 text-slate-300 font-mono text-center align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 font-sans text-center align-middle text-[13px]">
                                       {renderDimValue(p.packageStyle || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : ""))}
                                     </td>
 
@@ -859,27 +861,27 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     )}
 
                                     {/* Number of Output Groups */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-bold font-sans align-middle text-[13px]">
                                       {p.outputGroups || p.contactForm}
                                     </td>
 
                                     {/* Output voltage / Transient voltage */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-bold font-sans align-middle text-[13px]">
                                       {p.outputVoltage || p.tempRange}
                                     </td>
 
                                     {/* Output Current */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-bold font-sans align-middle text-[13px]">
                                       {p.outputCurrent || p.contactLoad}
                                     </td>
 
                                     {/* On-Resistance */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-semibold align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-bold font-sans align-middle text-[13px]">
                                       {p.onResistance || p.vibration}
                                     </td>
 
                                     {/* Panasonic & Omron Benchmarking */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle text-[13px]">
                                       {p.benchmarking}
                                     </td>
 
@@ -908,8 +910,8 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     }`}
                                   >
                                     {/* Product Model Column with Checkbox inside */}
-                                    <td className="py-3.5 px-3 align-middle text-left font-mono font-bold text-cyan-400">
-                                      <div className="flex items-center gap-3 justify-start pl-1">
+                                    <td className="py-3.5 px-3 align-middle text-left font-sans font-bold text-cyan-400">
+                                      <div className="flex items-center gap-3 justify-start pl-1 font-sans">
                                         <label className="relative inline-flex items-center justify-center cursor-pointer h-5 w-5 shrink-0">
                                           <input
                                             type="checkbox"
@@ -921,7 +923,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                             {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
                                           </div>
                                         </label>
-                                        <span className="text-sm select-all whitespace-normal break-words leading-tight">{p.model}</span>
+                                        <span className="text-[13px] font-sans font-bold select-all whitespace-normal break-words leading-tight">{p.model}</span>
                                       </div>
                                     </td>
 
@@ -940,12 +942,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Dimensions and Package */}
-                                    <td className="py-3.5 px-3 align-middle text-center">
+                                    <td className="py-3.5 px-3 align-middle text-center font-sans">
                                       {(() => {
                                         const { size, desc } = formatDimensions(p.dimensions || "");
                                         return (
-                                          <div className="flex flex-col items-center text-center">
-                                            <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{renderDimValue(size || p.dimensions)}</span>
+                                          <div className="flex flex-col items-center text-center font-sans">
+                                            <span className="font-sans font-bold text-white text-[13px] whitespace-nowrap">{renderDimValue(size || p.dimensions)}</span>
                                             {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                           </div>
                                         );
@@ -953,20 +955,20 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Temperature range (℃) */}
-                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
+                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center font-sans">
                                       {renderTempRange(p.tempRange || "")}
                                     </td>
 
                                     {/* Number of Output Groups */}
-                                    <td className="py-3.5 px-3 text-slate-200 text-sm font-semibold whitespace-nowrap align-middle text-center font-mono">
+                                    <td className="py-3.5 px-3 text-slate-200 text-[13px] font-semibold whitespace-nowrap align-middle text-center font-sans">
                                       {p.contactForm}
                                     </td>
 
                                     {/* Vibration */}
-                                    <td className="py-3.5 px-3 align-middle text-center">
-                                      <div className="flex flex-col gap-1 items-center text-center max-w-full">
+                                    <td className="py-3.5 px-3 align-middle text-center font-sans">
+                                      <div className="flex flex-col gap-1 items-center text-center max-w-full font-sans">
                                         {(p.vibration || "").split(/\s*\|\s*/).map((vPart, idx) => (
-                                          <span key={idx} className="text-xs sm:text-xs text-slate-300 leading-tight font-sans block">
+                                          <span key={idx} className="text-[13px] text-slate-300 leading-tight font-sans block">
                                             {vPart}
                                           </span>
                                         ))}
@@ -974,12 +976,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Contact Load and Lifetime */}
-                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
+                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center font-sans">
                                       {renderContactLoadHelper(p.contactLoad || "")}
                                     </td>
 
                                     {/* Benchmarking Model */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle text-[13px]">
                                       {p.benchmarking}
                                     </td>
 
@@ -1008,8 +1010,8 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     }`}
                                   >
                                     {/* Product Model Column with Checkbox inside */}
-                                    <td className="py-3.5 px-3 align-middle text-left font-mono font-bold text-cyan-400">
-                                      <div className="flex items-center gap-3 justify-start pl-1">
+                                    <td className="py-3.5 px-3 align-middle text-left font-sans font-bold text-cyan-400">
+                                      <div className="flex items-center gap-3 justify-start pl-1 font-sans">
                                         <label className="relative inline-flex items-center justify-center cursor-pointer h-5 w-5 shrink-0">
                                           <input
                                             type="checkbox"
@@ -1021,7 +1023,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                             {isChecked && <div className="w-1.5 h-2 border-r-2 border-b-2 border-black rotate-45 transform -translate-y-[1px]" />}
                                           </div>
                                         </label>
-                                        <span className="text-sm select-all whitespace-normal break-words leading-tight">{p.model}</span>
+                                        <span className="text-[13px] font-sans font-bold select-all whitespace-normal break-words leading-tight">{p.model}</span>
                                       </div>
                                     </td>
 
@@ -1040,12 +1042,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Dimensions and Package */}
-                                    <td className="py-3.5 px-3 align-middle text-center">
+                                    <td className="py-3.5 px-3 align-middle text-center font-sans">
                                       {(() => {
                                         const { size, desc } = formatDimensions(p.dimensions || "");
                                         return (
-                                          <div className="flex flex-col items-center text-center">
-                                            <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{renderDimValue(size || p.dimensions)}</span>
+                                          <div className="flex flex-col items-center text-center font-sans">
+                                            <span className="font-sans font-bold text-white text-[13px] whitespace-nowrap">{renderDimValue(size || p.dimensions)}</span>
                                             {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                           </div>
                                         );
@@ -1053,20 +1055,20 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Temperature range (℃) */}
-                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
+                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center font-sans">
                                       {renderTempRange(p.tempRange || "")}
                                     </td>
 
                                     {/* Number of Output Groups */}
-                                    <td className="py-3.5 px-3 text-slate-200 text-sm font-semibold whitespace-nowrap align-middle text-center font-mono">
+                                    <td className="py-3.5 px-3 text-slate-200 text-[13px] font-semibold whitespace-nowrap align-middle text-center font-sans">
                                       {p.contactForm}
                                     </td>
 
                                     {/* Vibration */}
-                                    <td className="py-3.5 px-3 align-middle text-center">
-                                      <div className="flex flex-col gap-1 items-center text-center max-w-full">
+                                    <td className="py-3.5 px-3 align-middle text-center font-sans">
+                                      <div className="flex flex-col gap-1 items-center text-center max-w-full font-sans">
                                         {(p.vibration || "").split(/\s*\|\s*/).map((vPart, idx) => (
-                                          <span key={idx} className="text-xs sm:text-xs text-slate-300 leading-tight font-sans block">
+                                          <span key={idx} className="text-[13px] text-slate-300 leading-tight font-sans block">
                                             {vPart}
                                           </span>
                                         ))}
@@ -1074,10 +1076,10 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Main Parameters */}
-                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
-                                      <div className="flex flex-col gap-1 items-center text-center max-w-full leading-tight">
+                                    <td className="py-3.5 px-3 text-slate-300 align-middle text-center font-sans">
+                                      <div className="flex flex-col gap-1 items-center text-center max-w-full leading-tight font-sans">
                                         {(p.contactLoad || "").split(/\s*;\s*/).map((paramPart, idx) => (
-                                          <span key={idx} className="font-sans text-xs text-slate-100 font-medium block">
+                                          <span key={idx} className="font-sans text-[13px] text-slate-100 font-medium block">
                                             {paramPart}
                                           </span>
                                         ))}
@@ -1085,7 +1087,7 @@ export const Catalog: React.FC<CatalogProps> = ({
                                     </td>
 
                                     {/* Benchmarking Model */}
-                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle">
+                                    <td className="py-3.5 px-3 text-slate-300 text-center font-sans italic align-middle text-[13px]">
                                       {p.benchmarking}
                                     </td>
 
@@ -1129,8 +1131,8 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   </td>
 
                                   {/* Model identifier */}
-                                  <td className="py-3.5 px-3 font-mono font-bold text-cyan-400 select-all align-middle">
-                                    <div className="flex items-center justify-center gap-1.5">
+                                  <td className="py-3.5 px-3 font-sans font-bold text-cyan-400 select-all align-middle">
+                                    <div className="flex items-center justify-center gap-1.5 font-sans">
                                       {p.image && (
                                         <div className="h-8 w-8 rounded bg-slate-900 border border-slate-850 overflow-hidden flex items-center justify-center shrink-0">
                                           <img
@@ -1141,17 +1143,17 @@ export const Catalog: React.FC<CatalogProps> = ({
                                           />
                                         </div>
                                       )}
-                                      <span className="text-sm">{p.model}</span>
+                                      <span className="text-[13px] font-sans font-bold">{p.model}</span>
                                     </div>
                                   </td>
 
                                   {/* Package designators */}
-                                  <td className="py-3.5 px-3 align-middle text-center">
+                                  <td className="py-3.5 px-3 align-middle text-center font-sans">
                                     {(() => {
                                       const { size, desc } = formatDimensions(p.dimensions);
                                       return (
-                                        <div className="flex flex-col items-center text-center">
-                                          <span className="font-mono font-bold text-white text-sm whitespace-nowrap">{renderDimValue(size || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : ""))}</span>
+                                        <div className="flex flex-col items-center text-center font-sans">
+                                          <span className="font-sans font-bold text-white text-[13px] whitespace-nowrap">{renderDimValue(size || (p.dimensions ? p.dimensions.replace(/\s*x\s*/gi, "x") : ""))}</span>
                                           {size && <span className="text-xs text-slate-400 mt-0.5 leading-tight font-sans max-w-full block">{desc}</span>}
                                         </div>
                                       );
@@ -1159,13 +1161,13 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   </td>
 
                                   {/* Heat specs */}
-                                  <td className="py-3.5 px-3 text-slate-300 align-middle text-center">
+                                  <td className="py-3.5 px-3 text-slate-300 align-middle text-center font-sans">
                                     {renderTempRange(p.tempRange)}
                                   </td>
 
                                   {/* Contact configuration */}
-                                  <td className="py-3.5 px-3 text-slate-200 text-xs md:text-sm font-semibold align-middle text-center leading-normal">
-                                    <div className="flex flex-col gap-0.5 justify-center items-center">
+                                  <td className="py-3.5 px-3 text-slate-200 text-[13px] font-semibold align-middle text-center leading-normal font-sans">
+                                    <div className="flex flex-col gap-0.5 justify-center items-center font-sans">
                                       {cleanContactForm(p.contactForm).split(/,\s*/).map((part, pIdx) => (
                                         <span key={pIdx} className="block whitespace-nowrap">
                                           {part}
@@ -1175,10 +1177,10 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   </td>
 
                                   {/* Shocks & Vibration */}
-                                  <td className="py-3.5 px-3 align-middle text-center">
-                                    <div className="flex flex-col gap-1 items-center text-center max-w-full">
+                                  <td className="py-3.5 px-3 align-middle text-center font-sans">
+                                    <div className="flex flex-col gap-1 items-center text-center max-w-full font-sans">
                                       {p.vibration.split(/\s*\|\s*/).map((vPart, idx) => (
-                                        <span key={idx} className="text-xs sm:text-sm text-slate-300 leading-tight font-sans block">
+                                        <span key={idx} className="text-[13px] text-slate-300 leading-tight font-sans block">
                                           {vPart}
                                         </span>
                                       ))}
@@ -1186,12 +1188,12 @@ export const Catalog: React.FC<CatalogProps> = ({
                                   </td>
 
                                   {/* Rated power profile */}
-                                  <td className="py-3.5 px-3 align-middle text-center">
+                                  <td className="py-3.5 px-3 align-middle text-center font-sans">
                                     {renderContactLoadHelper(p.contactLoad)}
                                   </td>
 
                                   {/* Benchmarking crosses */}
-                                  <td className="py-3.5 px-3 text-slate-300 text-sm italic font-sans align-middle text-center" title={p.benchmarking}>
+                                  <td className="py-3.5 px-3 text-slate-300 text-[13px] italic font-sans align-middle text-center" title={p.benchmarking}>
                                     {p.benchmarking}
                                   </td>
 
