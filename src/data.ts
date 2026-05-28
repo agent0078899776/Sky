@@ -621,16 +621,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
         benchmarking: "Radiall: 570413000, Teledyne: CCS-33S, Dowkey: 401T-20802",
       },
       {
-        model: "11JPT-SPDT50S",
-        image: "/images/11JPT-SPDT50S.png",
-        dimensions: "34.0 x 12.7 x 34.3 Closed type",
-        tempRange: "-55 ~ 85",
-        contactForm: "1PDT",
-        vibration: "Power rating up to 98m/s² (10~2000Hz)",
-        contactLoad: "100W @ 1GHz (1,000,000 cycles)",
-        benchmarking: "Radiall: 570413000, Teledyne: CCS-33S, Dowkey: 401T-20802",
-      },
-      {
         model: "11JPT-DPDT50S",
         image: "/images/11JPT-DPDT50S.png",
         dimensions: "33.0 x 33.0 x 48.0 Closed type",
